@@ -33,7 +33,7 @@ public class ValidateCodeController {
 
 	private int x = 15;
 	// 字体高度
-	private int fontHeight = 20;
+	private int fontHeight = 35;
 	private int codeY = 45;
 
 	char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',

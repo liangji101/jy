@@ -26,7 +26,7 @@ import com.renren.ntc.video.utils.BaseUtil;
 import com.renren.ntc.video.utils.Constants;
 import com.renren.ntc.video.utils.login.NetUtils;
 
-@Path("register")
+@Path("regist")
 public class RegisterController implements NtcConstants {
 
 	@Autowired
@@ -94,10 +94,11 @@ public class RegisterController implements NtcConstants {
 	public String register(Invocation inv, @Param("email") String email, @Param("passwd") String passwd,
 			@Param("name") String name, @Param("phoneNumber") String phoneNumber) {
 
-		String ucode = inv.getParameter("ucode");
-		String code = (String) inv.getRequest().getAttribute(Constants.VALIDATECODE);
+		String ucode = inv.getParameter("vcode");
+		String code = (String) inv.getRequest().getSession().getAttribute(Constants.VALIDATECODE);
 
 		if (!Check(code, ucode)) {
+			System.out.println(String.format("umatch vcode %s  %s", code,ucode));
 			inv.addModel("msg", "提交的验证码不正确");
 			return "regist";
 		}

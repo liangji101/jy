@@ -14,15 +14,11 @@ import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
 import net.paoding.rose.web.annotation.rest.Post;
-import net.sf.json.JSONObject;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +35,7 @@ public class LoginController implements NtcConstants {
 	private UserService userService;
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
-	
+
 	@Get("")
 	public String newRegister(Invocation inv) {
 		User user = hostHolder.getUser();
@@ -48,11 +44,10 @@ public class LoginController implements NtcConstants {
 		}
 		return "login";
 	}
-	
 
 	@Post("")
-	public String login(Invocation inv, @Param("origURL") String origURL,
-			@Param("email") String email, @Param("passwd") String passwd) {
+	public String login(Invocation inv, @Param("origURL") String origURL, @Param("email") String email,
+			@Param("passwd") String passwd) {
 		User user = hostHolder.getUser();
 		if (user != null) {
 			if (StringUtils.isNotEmpty(origURL)) {
@@ -88,39 +83,33 @@ public class LoginController implements NtcConstants {
 			}
 		}
 		user = userService.CheckUserPassport(email, passwd);
-		if (user == null){
+		if (user == null) {
 			inv.addModel("msg", "用户名或密码不正确");
 			inv.addModel("origURL", origURL);
 			return "login";
-			
+
 		}
-			hostHolder.setUser(user);
-			UserToken oldUserToken = userTokenService.getToken(user.getId());
-			if (oldUserToken == null) {
-				AccessToken at = AccessTokenManager.getInstance().getAccessToken(
-						user.getId());
-				oldUserToken = new UserToken();
-				oldUserToken.setUserId(user.getId());
-				oldUserToken.setToken(at.getSessionKey());
+		hostHolder.setUser(user);
+		UserToken oldUserToken = userTokenService.getToken(user.getId());
+		if (oldUserToken == null) {
+			AccessToken at = AccessTokenManager.getInstance().getAccessToken(user.getId());
+			oldUserToken = new UserToken();
+			oldUserToken.setUserId(user.getId());
+			oldUserToken.setToken(at.getSessionKey());
+		}
+		oldUserToken.setExpiredTime(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(MAX_LOGIN_DAYS)));
+		userTokenService.setToken(oldUserToken);// 更新Token
+		NetUtils.setUserTokenToCookie(inv.getResponse(), oldUserToken);
+		if (StringUtils.isNotEmpty(origURL)) {
+			try {
+				return "r:" + URLDecoder.decode(origURL, "UTF-8");
+			} catch (Exception e) {
+				logger.info("跳转失败：" + origURL, e);
+				inv.addModel("origURL", origURL);
+				return "r:/";
 			}
-			oldUserToken.setExpiredTime(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(MAX_LOGIN_DAYS)));
-			userTokenService.setToken(oldUserToken);// 更新Token
-			NetUtils.setUserTokenToCookie(inv.getResponse(), oldUserToken);
-			if (StringUtils.isNotEmpty(origURL)) {
-				try {
-					return "r:" + URLDecoder.decode(origURL, "UTF-8");
-				} catch (Exception e) {
-					logger.info("跳转失败：" + origURL, e);
-					inv.addModel("origURL", origURL);
-					return "r:/";
-				}
-			}
+		}
 		return "r:/";
 	}
-	
-
-
-  
-
 
 }
