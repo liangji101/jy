@@ -1,0 +1,118 @@
+package com.renren.ntc.video.utils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+public class PageUtils {
+	
+	private final static Logger logger = LoggerFactory.getLogger(PageUtils.class);
+	
+	//分页
+	/**
+	 * 获取分页条
+	 * 显示样式(1/4页)首页上一页1234下一页尾页
+	 * 
+	 * @param totalNum
+	 *            记录数量
+	 * @param currentPage
+	 * 			  当前页
+	 * @param pageNumPerPage
+	 * 			  每页显示记录数
+	 * @param barTermNum
+	 * 			  如"首页上一页1234下一页尾页"这里有只显示出1-4页,barTermNum就是四,可见的的分页项下标数
+	 * @return
+	 */
+	public static String getPageBar(int totalNum, int currentPage , int pageNumPerPage , int barTermNum) {
+		StringBuffer sb = new StringBuffer();
+		
+		int pageCount = 0; // 页数
+	
+		if(pageNumPerPage < 1){
+			return null;
+		}
+
+		sb.append("<input id=\"page\" name=\"page\" type=\"hidden\" />");
+		sb.append("<input id=\"pageNum\" name=\"pageNum\" type=\"hidden\" />");
+		sb.append("<script>" + "function fenye(i,j){"
+				+ " document.getElementById('page').value = i;"
+				+ " document.getElementById('pageNum').value = j;"
+				+ " for(var i=0;;i++){"
+				+ "  if(document.forms[i].page != null){"
+				+ "    document.forms[i].submit();" + "    break;" + "  }"
+				+ " }" + "}" + "</script>");
+		
+		// 计算分页总数
+		pageCount = totalNum / pageNumPerPage + (totalNum % pageNumPerPage == 0 ? 0 : 1);
+		// 当前页出局,跳转到首页
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		else if(currentPage > pageCount){//尾页
+			currentPage = pageCount;
+		}
+
+		// 显示形如:(1/4页)
+		sb.append("<span>(" + currentPage + "/" + pageCount + "页)</span>");
+
+		// 显示-首页
+		if (currentPage == 1) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('1','"
+					+ pageNumPerPage + "');\">首页</a>");
+		}
+
+		// 显示-上一页
+		if (currentPage == 1) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('1','"
+					+ pageNumPerPage + "');\">上一页</a>");
+		} else {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+					+ (currentPage - 1) + "','" + pageNumPerPage + "');\">上一页</a>");
+		}
+		
+		// 显示-1234
+		int half = barTermNum / 2;//为了让点击的页码尽量显示在中间
+		int i = currentPage - half > 0 ? currentPage - half : 1;
+		
+		for (int j = 1; j <= barTermNum && i <= pageCount; i++, j++) {
+			
+			if (currentPage == i) {//使用on显示当前所处的页码
+				sb.append("<a class=\"on\" href=\"javascript:void(0);\" onclick=\"fenye('"
+								+ i + "','" + pageNumPerPage + "');\" >" + i + "</a>&nbsp;");
+			} else {
+				sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+						+ i + "','" + pageNumPerPage + "');\">" + i + "</a>&nbsp;");
+			}
+		}
+		
+		// 显示-下一页
+		if (pageCount <= 1) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('1','"
+					+ pageNumPerPage + "');\">下一页</a>");
+		} else if (currentPage == pageCount) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+					+ (pageCount) + "','" + pageNumPerPage + "');\">下一页</a>");
+		} else {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+					+ (currentPage + 1) + "','" + pageNumPerPage + "');\">下一页</a>");
+		}
+		// 显示-尾页
+		if (pageCount <= 1) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('1','"
+					+ pageNumPerPage + "');\">尾页</a>");
+		} else if (currentPage == pageCount) {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+					+ (pageCount) + "','" + pageNumPerPage + "');\">尾页</a>");
+		} else {
+			sb.append("<a href=\"javascript:void(0);\" onclick=\"fenye('"
+					+ (pageCount) + "','" + pageNumPerPage + "');\">尾页</a>");
+		}
+		
+		return sb.toString();
+	}
+	
+	public static String getInputPageBar(String path){
+		String str = "<form action=" + path + ">跳转到第<input name='page' style='width:40px'/>页&nbsp;<input type='submit' value='Go'/></form>";
+		return str;
+	}
+}

@@ -1,0 +1,48 @@
+package com.renren.ntc.video.controllers.api;
+
+import com.renren.ntc.video.utils.JsonResponse;
+import net.paoding.rose.web.annotation.Path;
+import net.paoding.rose.web.annotation.rest.Post;
+import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.renren.ntc.video.utils.MemcachedUtil;
+import com.renren.ntc.video.biz.dao.CustomDAO;
+/**
+ * User: 帅伟良
+ * Mail: weiliang.shuai@renren-inc.com
+ * Date: 12-11-2
+ * Time: 下午1:37
+ */
+@Path("custom")
+public class CustomController {
+
+    @Autowired
+    private CustomDAO customDAO;
+    @Post("banner")
+    public String banner() {
+
+        JSONObject json = new JSONObject();
+        /*json.put("notice_type", 3);
+        json.put("notice_type_version", 12);
+        json.put("notice_type_image_url", "http://123.125.47.143:8080/happy.png");
+        json.put("notice_type_goto_url", "http://www.uume.com/event");*/
+
+        MemcachedUtil memcachedUtil = MemcachedUtil.getInstance();
+        long customId =  memcachedUtil.getActiveBannerCustomId();
+        json.put("notice_type", customDAO.getTypeById(customId));
+        json.put("notice_type_version",memcachedUtil.getActiveBannerVersionId());
+        json.put("notice_type_image_url",customDAO.getImgUrlById(customId));
+        json.put("notice_type_goto_url",customDAO.getHrefById(customId));
+
+        return "@" + JsonResponse.formComplexResponse(json);
+    }
+
+    @Post("welcome")
+    public String welcomeImage() {
+        JSONObject json = new JSONObject();
+        //json.put("welcome_image_url", "");
+        json.put("welcome_image_url",customDAO.getImgUrlById(MemcachedUtil.getInstance().getActiveWelcomeCustomId()));
+        return "@" + JsonResponse.formComplexResponse(json);
+    }
+}

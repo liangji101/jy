@@ -1,0 +1,92 @@
+package com.renren.ntc.video.biz.dao;
+
+import com.renren.ntc.video.biz.model.Feed;
+import com.renren.ntc.video.utils.Constants;
+import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
+import net.paoding.rose.jade.annotation.SQL;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 12-5-2
+ * Time: 下午6:59
+ * To change this template use File | Settings | File Templates.
+ */
+@DAO(catalog = Constants.DB_FEED)
+public interface FeedDAO {
+	
+	final String SELECT_FILEDS = "id, uid ,content , feed_type, " +
+			" comment_count ,comment_index ,create_time," +
+			"fcomment_id,fcontent ,fcomment_owner, fcomment_time ," +
+			"lcomment_id, lcontent ,lcomment_owner  ,lcomment_time ";
+    
+	final String INSERT_FILEDS = "uid,content,feed_type,comment_index";
+	
+	@SQL("select " + SELECT_FILEDS +
+            " from feed where id in (:1) order by create_time desc")
+    public List<Feed> getFeedByIds(Collection<Long> feedIds);
+
+    @SQL("select " + SELECT_FILEDS +
+            " from feed where id =:1")
+    public Feed getFeedById(long feedId);
+    
+    @SQL("select " + "DISTINCT uid" +
+            " from feed")
+    public List<Integer> getFeedUids();
+
+    @SQL("select " + SELECT_FILEDS +
+            " from feed where id in (:1)")
+    public Map<Integer, Feed> getFeedMap(List<Integer> repostFeedIds);
+
+    @ReturnGeneratedKeys
+    @SQL("insert into feed(" +INSERT_FILEDS +  ")" + 
+            " values(:1, :2, :3,:4)")
+    public int post(int uid, String content, byte feedType, String commentindex);
+
+    @SQL("update feed set content=:3,uid=:2 where id=:1")
+    public void updateContent(long feedId, int uid, String content);
+
+    @SQL("delete from feed where id=:1")
+    int deleteFeed(long feedId);
+    
+    
+    @SQL("update feed set comment_index=:2 where id=:1")
+	public void updateCommentIndex(long feedId, String commentindex);
+
+    @SQL("update feed set comment_count=comment_count+1 where id=:1")
+	public void commCountInc(long id);
+    @SQL("update feed set comment_count=comment_count-1 where id=:1 and comment_count > 0")
+	public void commCountDec(long id);
+
+    @SQL("update feed set fcomment_id=:2,  fcontent=:4 ,fcomment_owner=:3 ,fcomment_time=:5" +
+    		" where id=:1")
+	public int addFComment(long id, long comment_id, int uid, String content,
+                           Date date);
+
+    @SQL("update feed set lcomment_id=:2,  lcontent=:4 ,lcomment_owner=:3 ,lcomment_time=:5" +
+	" where id=:1")
+	public int addLComment(long id, long comment_id, int uid, String content,
+                           Date date);
+
+    
+    @SQL("update feed set content=:2" +
+	" where id=:1")
+	public void updateFeedContent(long feedId, String content);
+    
+    @SQL("update feed set content=:2,create_time=now() " +
+	" where id=:1")
+	public void updateFeedContentWithTime(long feedId, String content);
+    
+    
+    @SQL("update feed set content=:2" +
+    		" where comment_index=:1")
+    public void updateFeedContentByCommentIndex(String commentIndex, String content);
+
+}
+

@@ -1,0 +1,536 @@
+package com.renren.ntc.video.utils;
+
+import com.renren.ntc.video.biz.model.InfiniteSk;
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.biz.model.UserToken;
+import com.renren.ntc.video.constants.MessageType;
+import com.renren.ntc.video.entity.Sharement;
+import com.renren.ntc.video.formbean.EntityOpCount;
+import com.renren.ntc.video.formbean.Version;
+import net.sf.json.JSONArray;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import xce.tripod.TripodException;
+import xce.tripod.client.EntryType;
+import xce.tripod.client.TripodCacheClient;
+import xce.tripod.client.TripodCacheClientFactory;
+
+import java.util.List;
+
+public class MemcachedUtil {
+
+	private TripodCacheClient cacheClient = TripodCacheClientFactory.getClient(EntryType.BIZ_NTC_GUANG_YING_DV);
+
+	public static final int DAY = 60 * 60 * 24;
+
+	private static final int WEEK = 7 * DAY;
+
+	private final int HOUR = 60 * 60;
+
+    private final int INFINITE = 0;
+
+	static Log logger = LogFactory.getLog(MemcachedUtil.class);
+
+	private static MemcachedUtil memcachedUtil = new MemcachedUtil();
+
+
+	private MemcachedUtil() {
+
+	}
+
+	public static MemcachedUtil getInstance() {
+		return memcachedUtil;
+	}
+
+	public void cacheUser(User user) {
+		try {
+			cacheClient.set(getUserKey(user.getId()), user, WEEK);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public User getUser(int uid) {
+		Object user = null;
+		try {
+			user = cacheClient.get(getUserKey(uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return user == null ? null : (User) user;
+	}
+
+	public void cacheHashCode(int uid, int msgHashCode) {
+		int TEN_MINUTE = 60 * 10;
+		try {
+			cacheClient.setLong(getHashKey(msgHashCode, uid), 1, TEN_MINUTE);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheHashCode(int uid, int msgHashCode, int seconds) {
+		try {
+			cacheClient.setLong(getHashKey(msgHashCode, uid), 1, seconds);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheBanHashCode(int uid, String msgHashCode, int value) {
+		try {
+			cacheClient.setLong(getBanKey(msgHashCode, uid), value, DAY * 30);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+	
+	public void cacheFeedType(long value) {
+		try {
+			cacheClient.setLong(Constants.FEEDTYPE, value, WEEK);
+			logger.info("###"+value);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public boolean isHashCodeCached(int uid, int hashCode) {
+		long cachedValue = 0;
+		try {
+			cachedValue = cacheClient.getLong(getHashKey(hashCode, uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return cachedValue == 1l;
+	}
+
+    /**
+     * 是否能发送好友消息，能发送消息，置好友消息数为1
+     * 不能，说明好友消息数已经为1
+     * @param uid
+     * @return
+     */
+	public boolean canSendFriendsMsg(int uid) {
+		long cachedValue = 0;
+		try {
+			cachedValue = cacheClient.getLong(getHashKey(MessageType.FRIENDS.getMongoDBCollectionName().hashCode(), uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+
+		if (cachedValue == 0) {
+			cacheHashCode(uid, MessageType.FRIENDS.getMongoDBCollectionName().hashCode(), WEEK);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+    public int getFriendBadge(int uid) {
+        try {
+            return (int) cacheClient.getLong(getHashKey(MessageType.FRIENDS.getMongoDBCollectionName().hashCode(), uid));
+        } catch (TripodException e) {
+            return 0;
+        }
+    }
+
+	public int addOrIncrBadge(int uid) {
+		return Long.valueOf(addOrIncr(getBadgeKey(uid), 1l, WEEK)).intValue();
+	}
+
+    public int getMyBadge(int uid) {
+        try {
+            long cachedValue = cacheClient.getLong(getBadgeKey(uid));
+            if(cachedValue < 0 ) {
+                return 0;
+            } else {
+                return Long.valueOf(cachedValue).intValue();
+            }
+        } catch (TripodException e) {
+            logger.warn("", e);
+            return 0;
+        }
+    }
+
+	public void resetMyBadge(int uid) {
+		try {
+			cacheClient.setLong(getBadgeKey(uid), 0l, WEEK);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+    public void resetFriendBadge(int uid) {
+        try{
+            cacheClient.setLong(getHashKey(MessageType.FRIENDS.getMongoDBCollectionName().hashCode(), uid), 0l, WEEK);
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+    }
+
+	public void cacheUserToken(UserToken userToken) {
+		try {
+			cacheClient.set(getUserTokenKey(userToken.getUserId()), userToken, HOUR);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheCodeToken(String key, String value) {
+		try {
+			cacheClient.set(key, value, 60);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheVersion(Version version) {
+		try {
+			cacheClient.set("_version_", version, DAY * 30);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheFeed(String key, List<Long> Feed) {
+		try {
+			cacheClient.set(key, Feed, DAY * 30);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public void cacheNewestShares(List<Sharement> shares) {
+		try {
+			cacheClient.set(NEWEST_SHARES, shares, HOUR / 2);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public boolean isNewestSharesCached() {
+		Object shares = null;
+		try {
+			shares = cacheClient.get(NEWEST_SHARES);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return shares != null;
+	}
+
+	public List<Sharement> getNewestShares() {
+		Object obj = null;
+		try {
+			obj = cacheClient.get(NEWEST_SHARES);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		if (obj == null) {
+			return null;
+		} else {
+			return (List<Sharement>) obj;
+		}
+	}
+
+	public void cacheDeviceToken(String deviceToken, int seconds) {
+		try {
+			cacheClient.setLong(getDeviceTokenKey(deviceToken), 1, seconds);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public boolean isDeviceTokenCached(String deviceToken) {
+		try {
+			long cachedValue = cacheClient.getLong(getDeviceTokenKey(deviceToken));
+			return cachedValue == 1;
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return false;
+	}
+
+	private static final String NTC_EVENT = "ntc_event";
+
+	public List<EntityOpCount> getYesterdayEntityOpCount() {
+		Object obj = null;
+		try {
+			obj = cacheClient.get(NTC_EVENT);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return obj == null ? null : (List<EntityOpCount>) obj;
+	}
+
+	public void cacheYesterdayEntityOpCount(List<EntityOpCount> entityOpCounts) {
+		try {
+			cacheClient.set(NTC_EVENT, entityOpCounts, DateUtil.fromNowTo24InSecond());
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public Version getVersion() {
+		Object version = null;
+		try {
+			version = cacheClient.get("_version_");
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return version == null ? null : (Version) version;
+	}
+
+	public long getBan(int uid) {
+		long isBan = 0;
+		try {
+			isBan = cacheClient.getLong(getBanKey(Constants.BAN, uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return isBan;
+	}
+	
+	public long getFeedType() {
+		long feedType = 0;
+		try {
+			feedType = cacheClient.getLong(Constants.FEEDTYPE);
+			logger.info(feedType+"  %%feedType");
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return feedType;
+	}
+
+	public String getCode(String hashCode) {
+		String code = null;
+		try {
+			code = (String) cacheClient.get(hashCode);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return code;
+	}
+
+	public UserToken getUserToken(int uid) {
+		Object userToken = null;
+		try {
+			userToken = cacheClient.get(getUserTokenKey(uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return userToken == null ? null : (UserToken) userToken;
+	}
+
+	public void cacheInfiniteSK(InfiniteSk infiniteSk) {
+		try {
+			cacheClient.set(getInfiniteSessionKeyKey(infiniteSk.getUserId()), infiniteSk, HOUR);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+	public InfiniteSk getInfiniteSK(int uid) {
+		Object infiniteSK = null;
+		try {
+			infiniteSK = cacheClient.get(getInfiniteSessionKeyKey(uid));
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return infiniteSK == null ? null : (InfiniteSk) infiniteSK;
+	}
+
+	private static final String BADGE_KEY_PREFIX = "_ntc_badge_";
+
+	private static final String FRIENDS_BADGE_KEY_PREFIX = "_ntc_f_badge_";
+
+	private static final String USER_KEY_PREFIX = "_ntc_user_";
+
+	private static final String MSG_HASH_KEY_PREFIX = "_ntc_msg_";
+
+	private static final String MSG_USER_TOKEN_KEY_PREFIX = "_ntc_token_";
+
+	private static final String MSG_INFINITE_SESSION_KEY_PREFIX = "_ntc_isk_";
+
+	private static final String BROWSE_RR_KEY_PREFIX = "_ntc_browse_rr_";
+
+	private static final String NEWEST_SHARES = "newest_shares";
+
+	private static final String DEVICE_TOKEN_PREFIX = "dt_";
+
+	private String getDeviceTokenKey(String deviceToken) {
+		return DEVICE_TOKEN_PREFIX + deviceToken;
+	}
+
+	private String getBrowseRRKey(long shareId, long uid) {
+		return BROWSE_RR_KEY_PREFIX + shareId + "_" + uid;
+	}
+
+	private String getBadgeKey(int uid) {
+		return BADGE_KEY_PREFIX + uid;
+	}
+
+	private String getFriendsBadgeKey(int uid) {
+		return FRIENDS_BADGE_KEY_PREFIX + uid;
+	}
+
+	private String getUserKey(int uid) {
+		return USER_KEY_PREFIX + uid;
+	}
+
+	private String getBanKey(String hashCode, int uid) {
+		return hashCode + uid;
+	}
+
+	private String getHashKey(int hashCode, int uid) {
+		return MSG_HASH_KEY_PREFIX + (hashCode + "_" + uid);
+	}
+
+	private String getUserTokenKey(int uid) {
+		return MSG_USER_TOKEN_KEY_PREFIX + uid;
+	}
+
+	private String getInfiniteSessionKeyKey(int uid) {
+		return MSG_INFINITE_SESSION_KEY_PREFIX + uid;
+	}
+
+	private long addOrIncr(String key, long step, int expiredTime) {
+		logger.info("add or inc read badge: " + key);
+		try {
+			long cachedValue = cacheClient.getLong(key);
+			if (cachedValue == -1) {
+				return resetAndIncr(key, expiredTime);
+			} else {
+				return cacheClient.incLong(key, step);
+			}
+		} catch (Exception e) {
+			logger.error(e.getClass() + e.getMessage());
+			return resetAndIncr(key, expiredTime);
+		}
+
+	}
+
+	private long resetAndIncr(String key, int expiredTime) {
+		try {
+			cacheClient.setLong(key, 1l, expiredTime);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+		return 1l;
+	}
+
+	public void cacheNoCheckVideo(JSONArray shareArray) {
+		try {
+			cacheClient.set("successVideoWithNoCheck", shareArray, HOUR);
+		} catch (TripodException e) {
+			logger.warn(e);
+		}
+	}
+
+    public void  cacheActiveWelcomeVersionId(long versionId){
+        try {
+            cacheClient.setLong("active_welcome_version", versionId ,WEEK);
+        }  catch (TripodException e) {
+            logger.warn(e);
+        }
+    }
+
+    public void cacheActiveBannerVersionId(long versionId) {
+        try {
+            cacheClient.setLong("active_banner_version",versionId,WEEK);
+        }  catch (TripodException e) {
+            logger.warn(e);
+        }
+    }
+
+    public void cacheActiveWelcomeCustomId(long customId) {
+        try {
+            cacheClient.setLong("active_welcome_custom", customId,WEEK);
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+    }
+
+    public void cacheActiveBannerCustomId(long customId) {
+        try {
+            cacheClient.setLong("active_banner_custom",customId,WEEK);
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+    }
+
+    public long getActiveWelcomeVersionId() {
+        long versionId = 0;
+        try {
+            versionId = cacheClient.getLong("active_welcome_version");
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+        return versionId;
+    }
+
+    public long getActiveWelcomeCustomId() {
+        long customId = 0;
+        try {
+            customId = cacheClient.getLong("active_welcome_custom");
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+        return  customId;
+    }
+
+    public long getActiveBannerVersionId() {
+        long versionId = 0;
+        try {
+            versionId = cacheClient.getLong("active_banner_version");
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+        return versionId;
+    }
+
+    public long getActiveBannerCustomId() {
+        long customId = 0;
+        try {
+            customId = cacheClient.getLong("active_banner_custom");
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+        return customId;
+    }
+
+	public void cacheLastTime(long lastTime) {
+		 try {
+	            cacheClient.setLong("active_last_time", lastTime,0);
+	        } catch (TripodException e) {
+	            logger.warn(e);
+	        }
+	}
+
+	public long getLastTime() {
+		 long lastTime = System.currentTimeMillis()-5000;
+	        try {
+	        	lastTime = cacheClient.getLong("active_last_time");
+	        } catch (TripodException e) {
+	            logger.warn(e);
+	        }
+	        return lastTime;
+	}
+
+	public long getActiveHeaderVideo() {
+		long activeHeader = 25745;
+        try {
+        	activeHeader = cacheClient.getLong("active_head_share");
+        } catch (TripodException e) {
+            logger.warn(e);
+        }
+        return activeHeader;
+	}
+	
+	public void cacheActiveHeaderVideo(long activeHeader) {
+		 try {
+	            cacheClient.setLong("active_head_share", activeHeader,0);
+	        } catch (TripodException e) {
+	            logger.warn(e);
+	        }
+	}
+}

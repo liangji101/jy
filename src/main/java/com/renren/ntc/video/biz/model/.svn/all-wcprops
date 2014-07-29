@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/ntc_projects/!svn/ver/15455/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model
+END
+PendingRecShare.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/ntc_projects/!svn/ver/12695/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/PendingRecShare.java
+END
+AccessToken.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/AccessToken.java
+END
+Feed.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/ntc_projects/!svn/ver/15455/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Feed.java
+END
+FeedCounter.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/FeedCounter.java
+END
+InfiniteSk.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/InfiniteSk.java
+END
+Video.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Video.java
+END
+SessionKeyValidationResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/SessionKeyValidationResult.java
+END
+VideoExMobileInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/VideoExMobileInfo.java
+END
+VideoBasic.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/VideoBasic.java
+END
+SessionKeyInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/SessionKeyInfo.java
+END
+Content.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Content.java
+END
+Custom.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/ntc_projects/!svn/ver/14391/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Custom.java
+END
+VideoUpload.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/VideoUpload.java
+END
+Entity.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Entity.java
+END
+CommentInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/15102/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/CommentInfo.java
+END
+UploadWorker.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/UploadWorker.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/ntc_projects/!svn/ver/14233/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/User.java
+END
+UserToken.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/UserToken.java
+END
+VideoInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/VideoInfo.java
+END
+VideoLbsInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/VideoLbsInfo.java
+END
+FeedParam.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/ntc_projects/!svn/ver/15204/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/FeedParam.java
+END
+FeedModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/FeedModel.java
+END
+SkEncryptionKeys.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/SkEncryptionKeys.java
+END
+MapsBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/MapsBean.java
+END
+FileUploadVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/FileUploadVO.java
+END
+CommentIndex.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/CommentIndex.java
+END
+Reply.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/Reply.java
+END
+FeedContent.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/model/FeedContent.java
+END

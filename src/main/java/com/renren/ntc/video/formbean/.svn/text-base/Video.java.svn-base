@@ -1,0 +1,82 @@
+package com.renren.ntc.video.formbean;
+
+public class Video {
+	private String playUrl;
+	private String cover;
+	private String input;
+	private String title;
+	private long en_id;
+	private int en_type;
+    private String desc;
+    private String video_md5;
+    private int cover_width;
+    private int cover_height;
+    private String url;
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getPlayUrl() {
+		return playUrl;
+	}
+	public void setPlayUrl(String playUrl) {
+		this.playUrl = playUrl;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public String getInput() {
+		return input;
+	}
+	public void setInput(String input) {
+		this.input = input;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public long getEn_id() {
+		return en_id;
+	}
+	public void setEn_id(long en_id) {
+		this.en_id = en_id;
+	}
+	public int getEn_type() {
+		return en_type;
+	}
+	public void setEn_type(int en_type) {
+		this.en_type = en_type;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public String getVideo_md5() {
+		return video_md5;
+	}
+	public void setVideo_md5(String video_md5) {
+		this.video_md5 = video_md5;
+	}
+	public int getCover_width() {
+		return cover_width;
+	}
+	public void setCover_width(int cover_width) {
+		this.cover_width = cover_width;
+	}
+	public int getCover_height() {
+		return cover_height;
+	}
+	public void setCover_height(int cover_height) {
+		this.cover_height = cover_height;
+	}
+    
+}

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception
+END
+ContentProhibitedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/ContentProhibitedException.java
+END
+PublishException.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/PublishException.java
+END
+AntiSpamValidationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/AntiSpamValidationException.java
+END
+UserNameDuplicateException.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/UserNameDuplicateException.java
+END
+FavException.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/FavException.java
+END
+PushException.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/exception/PushException.java
+END

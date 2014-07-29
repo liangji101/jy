@@ -1,0 +1,69 @@
+package com.renren.ntc.video.biz.dao;
+
+import com.renren.ntc.video.biz.model.Custom;
+import com.renren.ntc.video.utils.Constants;
+import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.SQL;
+
+import java.util.List;
+
+/**
+ * User: 帅伟良
+ * Mail: weiliang.shuai@renren-inc.com
+ * Date: 12-11-5
+ * Time: 下午4:08
+ */
+@DAO(catalog = Constants.DB_TOKEN)
+public interface CustomDAO {
+
+    final static String ALL_FIELDS = "id,type,position,img_url,href,create_time,update_time";
+    final static String FIELDS = "id,type,position,img_url,href";
+    final static String INSERT_FIELDS = "type,position,img_url,href";
+
+    @SQL("select * from customs where id = :1")
+    public Custom query(long id);
+
+    @SQL("insert into customs (type, position, img_url, href) values (:1.type, :1.position, :1.imgUrl, :1.href)")
+    public int add(Custom custom);
+
+    @SQL("delete * from customs where id = :1")
+    public int delete(long id);
+
+    @SQL("insert into customs (" + INSERT_FIELDS + ")" + "values(:1.type, :1.position, :1.imgUrl, :1.href)")
+    public int addCustom(Custom custom);
+
+    @SQL("delete from customs where id=:1")
+    public int delCustomById(long id);
+
+    @SQL("update customs set type=:1.type, position=:1.position,img_url=:1.img_url,href=:1.href where id=:1.id")
+    public int editCustomById(Custom custom);
+
+    @SQL("select " + FIELDS + " from customs order by id desc limit :1,:2 ")
+    public List<Custom> showCustoms(int start,int offset);
+
+    @SQL("select " + FIELDS + " from customs where id=:1")
+    public Custom showTheCustom(long id);
+
+    @SQL("select * from customs where type=:1")
+    public List<Custom> showCustomsByType(int type);
+
+    @SQL("select * from customs where position=:1")
+    public List<Custom> showCustomsByPosition(int position);
+
+    @SQL("select count(id) from customs")
+    public int getCustomsCount();
+
+    @SQL("select position from customs where id=:1")
+    public int getPositionById(long id);
+
+    @SQL("select type from customs where id=:1")
+    public int getTypeById(long id);
+
+    @SQL("select img_url from customs where id=:1")
+    public String getImgUrlById(long id);
+
+    @SQL("select href from customs where id=:1")
+    public String getHrefById(long id);
+    
+
+}

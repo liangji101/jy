@@ -1,0 +1,108 @@
+package com.renren.ntc.video.controllers;
+
+import java.util.Set;
+
+import net.paoding.rose.web.annotation.Path;
+import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.renren.ad.jedis.Tuple;
+import com.renren.ntc.video.entity.Sharement;
+import com.renren.ntc.video.service.EntityUserService;
+import com.renren.ntc.video.service.ShareService;
+import com.renren.ntc.video.utils.Constants;
+import com.renren.ntc.video.utils.ImageSizeUtil;
+import com.renren.ntc.video.utils.ImageSizeUtil.ImageSize;
+import com.renren.ntc.video.utils.MemcachedUtil;
+import com.renren.ntc.video.utils.RedisUtil;
+
+
+@Path("")
+public class ActivityController {
+
+	@Autowired 
+	private EntityUserService entityUserService;
+	
+	@Autowired 
+	private ShareService shareService;
+	
+	
+	@Get("activity")
+	public String getAction(){
+		Set<Tuple> actions = RedisUtil.getInstance().getZRangeListByScore(Constants.EVENT,-1,Double.POSITIVE_INFINITY);
+		JSONArray jsarr = new JSONArray();
+		for(Tuple action : actions){
+			JSONObject act = new JSONObject();
+			act = JSONObject.fromObject(action.getElement());
+			jsarr.add(act);
+		}
+		return "@" + jsarr;
+	}
+	
+	@Get("get56Show")
+	@Post("get56Show")
+	public String get56Show(){
+		Set<Tuple> shows = RedisUtil.getInstance().getZRangeListByScore(Constants.SHOW56, -1,Double.POSITIVE_INFINITY);
+		JSONArray jsarr = getResult(shows);
+		return "@" + jsarr;
+	}
+	
+	@Get("getGodShow")
+	@Post("getGodShow")
+	public String getGodShow(){
+		Set<Tuple> shows = RedisUtil.getInstance().getZRangeListByScore(Constants.GODSHOW, -1,Double.POSITIVE_INFINITY);
+		JSONArray jsarr = getResult(shows);
+		return "@" + jsarr;
+	}
+	
+	@Get("getVariousShow")
+	@Post("getVariousShow")
+	public String getVariousShow(){
+		Set<Tuple> shows = RedisUtil.getInstance().getZRangeListByScore(Constants.VARIOUSSHOW, -1,Double.POSITIVE_INFINITY);
+		JSONArray jsarr = getResult(shows);
+		return "@" + jsarr;
+	}
+	
+	@Get("getMyselfShow")
+	@Post("getMyselfShow")
+	public String getMyselfShow(){
+		Set<Tuple> shows = RedisUtil.getInstance().getZRangeListByScore(Constants.MYSELFSHOW, -1,Double.POSITIVE_INFINITY);
+		JSONArray jsarr = getResult(shows);
+		return "@" + jsarr;
+	}
+	
+	private JSONArray getResult(Set<Tuple> shows){
+		JSONArray jsarr = new JSONArray();
+		for(Tuple show : shows){
+			JSONObject act = new JSONObject();
+			int shareId = Integer.valueOf(show.getElement());
+			int likeCount = entityUserService.getLikeCount(shareId, 1);
+			Sharement share = shareService.getShareByShareId(shareId);
+			if (share == null){
+				continue;
+			}
+			String cover = share.getVideo().getCover();
+			act.put("shareId", shareId);
+			act.put("likeCount", likeCount);
+			act.put("image", cover);
+			ImageSize size = ImageSizeUtil.getRealSize(share.getVideo().getCover());
+			int watchCount = entityUserService.getWatchCount(shareId, 1);
+			act.put("watchCount", watchCount);
+			act.put("width", size.getWidth());
+			act.put("height", size.getHeight());
+			jsarr.add(act);
+		}
+		return jsarr;
+	}
+	
+	public static void main(String[] args) {
+		Set<Tuple> shows = RedisUtil.getInstance().getZRangeListByScore(Constants.GODSHOW, -1,Double.POSITIVE_INFINITY);
+		for(Tuple show:shows){
+			System.out.println(show.getElement());
+		}
+	}
+}

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/ntc_projects/!svn/ver/23214/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers
+END
+ReplyTestController.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/ntc_projects/!svn/ver/15793/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/ReplyTestController.java
+END
+ActivityController.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/ntc_projects/!svn/ver/16990/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/ActivityController.java
+END
+ChangeChkTypeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/ntc_projects/!svn/ver/14718/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/ChangeChkTypeController.java
+END
+UserController.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/ntc_projects/!svn/ver/15167/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/UserController.java
+END
+RenRenLoginController.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/ntc_projects/!svn/ver/17899/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/RenRenLoginController.java
+END
+SinaLoginController.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/ntc_projects/!svn/ver/23214/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/SinaLoginController.java
+END
+ThirdSynController.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/ThirdSynController.java
+END
+RegisterController.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/ntc_projects/!svn/ver/14697/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/RegisterController.java
+END
+LikeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/ntc_projects/!svn/ver/15709/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/LikeController.java
+END
+AttentionController.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/ntc_projects/!svn/ver/15793/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/AttentionController.java
+END
+LoginController.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/LoginController.java
+END
+HomeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/ntc_projects/!svn/ver/18986/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/HomeController.java
+END
+LogoutController.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/web/src/main/java/com/renren/ntc/video/controllers/LogoutController.java
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/ntc_projects/!svn/ver/15195/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity
+END
+DeviceToken.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/DeviceToken.java
+END
+Message.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/Message.java
+END
+Sharement.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/ntc_projects/!svn/ver/15195/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/Sharement.java
+END
+SnsSycment.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/SnsSycment.java
+END
+ThirdUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/ntc_projects/!svn/ver/9737/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/ThirdUser.java
+END
+Videoment.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/entity/Videoment.java
+END

@@ -1,0 +1,203 @@
+package com.renren.ntc.video.formbean;
+
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.entity.Sharement;
+import com.renren.ntc.video.utils.Constants;
+import com.renren.ntc.video.utils.ImageSizeUtil.ImageSize;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
+
+
+public class VideoInfo {
+
+	private Sharement video;
+
+	private int likeCount;
+
+	private boolean privacy;
+	private int privacyValue;
+
+	private String title;
+
+	private String cover;
+
+	private String playurl;
+
+	private String author;
+
+	private int authorId;
+
+	private ImageSize showSize;
+
+	private ImageSize smallShowSize;
+
+	private int isLike;
+
+    private List<User> likingUsers;
+
+    private List<User> markingUsers;
+   
+    
+    private String createTime;
+    private int watcherCount;
+    
+    
+    public int getWatcherCount() {
+		return watcherCount;
+	}
+
+	public void setWatcherCount(int watcherCount) {
+		this.watcherCount = watcherCount;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	private String time;
+    
+    private int markCount;
+
+    public int getMarkCount() {
+        return markCount;
+    }
+
+    public void setMarkCount(int markCount) {
+        this.markCount = markCount;
+    }
+
+    public int getIsLike() {
+		return isLike;
+	}
+
+	public void setIsLike(int isLike) {
+		this.isLike = isLike;
+	}
+
+	public ImageSize getShowSize() {
+		return showSize;
+	}
+
+	public void setShowSize(ImageSize showSize) {
+		this.showSize = showSize;
+	}
+	
+	
+
+	public ImageSize getSmallShowSize() {
+		return smallShowSize;
+	}
+
+	public void setSmallShowSize(ImageSize smallShowSize) {
+		this.smallShowSize = smallShowSize;
+	}
+	
+	public VideoInfo(Sharement video, int likecount) {
+
+		this.likeCount=likecount;
+		this.setVideo(video);
+		this.setCover(video.getVideo().getCover());
+		this.setPlayurl(video.getVideo().getPlayUrl());
+		this.setTitle(video.getVideo().getTitle());
+		// TODO Auto-generated constructor stub
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public String getTitle() {
+		if(StringUtils.isEmpty(title)){
+			return Constants.DEFAULT_VIDEO_TITLE;
+		}
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public boolean getPrivacy() {
+		return privacy;
+	}
+	public void setPrivacy(boolean privacy) {
+		this.privacy = privacy;
+	}
+	public Sharement getVideo() {
+		return video;
+	}
+	public void setVideo(Sharement video) {
+		this.video = video;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public String getPlayurl() {
+		return playurl;
+	}
+	public void setPlayurl(String playurl) {
+		this.playurl = playurl;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public int getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}
+
+    public int getLike() {
+        return isLike;
+    }
+
+    public void setLike(int like) {
+        isLike = like;
+    }
+
+    public List<User> getLikingUsers() {
+        return likingUsers;
+    }
+
+    public void setLikingUsers(List<User> likingUsers) {
+        this.likingUsers = likingUsers;
+    }
+
+    public List<User> getMarkingUsers() {
+        return markingUsers;
+    }
+
+    public void setMarkingUsers(List<User> markingUsers) {
+        this.markingUsers = markingUsers;
+    }
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public int getPrivacyValue() {
+		return privacyValue;
+	}
+
+	public void setPrivacyValue(int privacyValue) {
+		this.privacyValue = privacyValue;
+	}
+    
+    
+}

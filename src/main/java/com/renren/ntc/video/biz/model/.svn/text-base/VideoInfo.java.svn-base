@@ -1,0 +1,132 @@
+package com.renren.ntc.video.biz.model;
+
+
+/**
+* @author zhancheng.deng
+* @since 2011.08.15 20:06:00
+* 
+* <br>视频信息类
+* <br>用于视频的相关信息(与用户无关)
+*/
+public class VideoInfo {
+	
+	/**
+	 *  视频的 sequence id
+	 */
+	private long id;
+	
+	/**
+	 * 较验码，是md5码，并且是在数据库中是唯一的 
+	 * <br>以{@linkplain checksum} 进行散表
+	 */
+	private String checksum; 
+	
+	/**
+	 * 上传的状态 
+	 */
+	private int status;
+	
+	/**
+	 * 视频总时间
+	 */
+	private int totalTime;
+	/**
+	 * 视频源的地址
+	 * <br>上传时为上传地址，转码成功后是视频的最终地址
+	 */
+	private String srcAddr;
+	/**
+	 * flv地址
+	 * <br>可以是目录，也可以是有规则的正则表达式地址，也可以为多段地址
+	 */
+	private String flvAddr;
+	/**
+	 * image地址
+	 * <br>将来可以是目录，也可以是有规则的正则表达式地址，也可以为多段地址
+	 */
+	private String picAddr;
+	
+	/**
+	 * 用来备注
+	 */
+	private String comment;
+	
+	/**
+	 * 默认构造器
+	 */
+	public VideoInfo(){
+		
+	}
+	
+	/**
+	 * 用于保存 一条{@linkplain VideoInfo}记录时，用的构造器
+	 * @param checksum
+	 * @param status
+	 */
+	public VideoInfo(long id, String checksum, int status){
+		this.id = id;
+		this.checksum = checksum;
+		this.status = status;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
+	}
+	
+	public String getChecksum() {
+		return checksum;
+	}
+	public void setChecksum(String checksum) {
+		this.checksum = checksum;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getTotalTime() {
+		return totalTime;
+	}
+	public void setTotalTime(int totalTime) {
+		this.totalTime = totalTime;
+	}
+	
+	public String getSrcAddr() {
+		return srcAddr;
+	}
+
+	public void setSrcAddr(String srcAddr) {
+		this.srcAddr = srcAddr;
+	}
+
+	public String getFlvAddr() {
+		return flvAddr;
+	}
+
+	public void setFlvAddr(String flvAddr) {
+		this.flvAddr = flvAddr;
+	}
+
+	public String getPicAddr() {
+		return picAddr;
+	}
+
+	public void setPicAddr(String picAddr) {
+		this.picAddr = picAddr;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	
+}

@@ -1,0 +1,24 @@
+package com.renren.ntc.video.utils;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 12-5-3
+ * Time: 下午2:55
+ * To change this template use File | Settings | File Templates.
+ */
+public enum FeedType {
+    COMMON ((byte) 0),
+    VIDEO ((byte) 1);
+    //普通
+    
+    private byte type;
+
+    private FeedType(byte type) {
+        this.type = type;
+    }
+
+    public byte val() {
+        return type;
+    }
+}

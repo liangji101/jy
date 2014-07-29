@@ -1,0 +1,116 @@
+package com.renren.ntc.video.interceptors;
+
+import com.renren.ntc.video.annotations.ValidationRule;
+import com.renren.ntc.video.biz.exception.AntiSpamValidationException;
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.interceptors.access.NtcHostHolder;
+import com.xiaonei.antispam.AntiSpamAdapter;
+import com.xiaonei.antispam.model.CheckResult;
+import com.xiaonei.antispam.model.CheckResultMap;
+import com.xiaonei.antispam.model.CheckType;
+import net.paoding.rose.web.ControllerInterceptorAdapter;
+import net.paoding.rose.web.Invocation;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class AntispamInterceptor extends ControllerInterceptorAdapter {
+
+	
+	protected Log logger = LogFactory.getLog(AntispamInterceptor.class);
+	
+	@Autowired
+	private NtcHostHolder hostHolder;
+	
+	
+	public AntispamInterceptor() {
+		setPriority(100);
+	}
+
+	@Override
+	public Class<? extends Annotation> getRequiredAnnotationClass() {
+		return ValidationRule.class;
+	}
+	@Override
+	public List<Class<? extends Annotation>> getRequiredAnnotationClasses() {
+		Class clazz = ValidationRule.class;
+		List<Class<? extends Annotation>> list = new ArrayList<Class<? extends Annotation>>(
+				1);
+		list.add(clazz);
+		return list;
+	}
+
+	
+	/*
+	 * @ValidationRule("[" +
+			"{'name':'redirect_uri', 'antispam':'true'}," +
+			"{'name':'target_id', 'required':'true', 'type':'number'}," +
+			"{'name':'app_id', 'required':'true', 'type':'number'}" +
+		"]")
+	 * @see net.paoding.rose.web.ControllerInterceptorAdapter#before(net.paoding.rose.web.Invocation)
+	 */
+	@Override
+	public Object before(Invocation inv) throws Exception {
+
+		ValidationRule rulesAnnotation = inv.getControllerClass().getAnnotation(ValidationRule.class);
+		if (null == rulesAnnotation ){
+		      rulesAnnotation = inv.getMethod().getAnnotation(ValidationRule.class);
+		}
+		String rulesString = rulesAnnotation.value();
+		if(logger.isInfoEnabled()){
+		   logger.info(" spamKey = " + rulesString);
+		}
+		JSONArray ob = JSONArray.fromObject(rulesString);
+		validateAllAntispam(ob,inv.getRequest());
+		
+		return true;
+	}
+
+	private void validateAllAntispam(JSONArray rules, HttpServletRequest request) throws AntiSpamValidationException {
+		//antispam集中处理，提高性能
+		HashMap<String, String> antispamMap = new HashMap<String, String>();
+		for (int i = 0; i < rules.size(); i++) {
+			JSONObject rule = (JSONObject) rules.get(i);
+			try {
+				String key = (String) rule.getString("name");
+				String antispam = null;
+				if (key == null)
+					continue;
+				String param = request.getParameter(key);
+				if (param == null)
+					continue;
+				antispam = rule.getString("antispam");
+				Boolean need = (antispam != null && "true".equals(antispam)) ? true
+						: false;
+				if (need) {
+					antispamMap.put(key, param);
+				}
+			} catch (Exception e) {
+				// do nothing ;
+			}
+		}
+		int userId = 0;
+		User user = hostHolder.getUser();
+        if( user != null){
+            userId = user.getId();
+        }
+        //to do 
+        
+        CheckResultMap checkResultMap = AntiSpamAdapter.getInstance().checkAndFilter(0, CheckType.DV_VIDEO_COMMENT, antispamMap);
+		if(checkResultMap.getFlag() != CheckResult.SAFE) {
+			throw new AntiSpamValidationException("发布内容中含有违禁词，请重新输入");
+		}
+//        CheckResultMap cr = com.xiaonei.antispam.AntiSpamAdapter.antispamFilter(userId, CheckType.CONNECT_PURE,antispamMap);
+//        if(cr.getFlag() != CheckResult.SAFE) {
+//			throw new AntiSpamValidationException("发布内容中含有违禁词，请重新输入");
+//		}
+	}
+}

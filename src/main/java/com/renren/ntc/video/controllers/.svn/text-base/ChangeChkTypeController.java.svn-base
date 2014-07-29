@@ -1,0 +1,25 @@
+package com.renren.ntc.video.controllers;
+
+import net.paoding.rose.web.Invocation;
+import net.paoding.rose.web.annotation.Param;
+import net.paoding.rose.web.annotation.Path;
+import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.renren.ntc.video.service.ShareService;
+
+@Path("")
+public class ChangeChkTypeController {
+	@Autowired
+    private ShareService shareService;
+	
+	@Post("changeChk")
+	@Get("changeChk")
+	public String ChangeChk(Invocation inv,@Param("vid") long vid ,@Param("chk") String chk){
+		shareService.updateChk(vid, chk);
+		return "@success";
+	}
+	
+}

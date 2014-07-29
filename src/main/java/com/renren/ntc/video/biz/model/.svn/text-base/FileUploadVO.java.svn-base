@@ -1,0 +1,83 @@
+package com.renren.ntc.video.biz.model;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+
+public class FileUploadVO {
+	
+	
+	/**
+	 * 文件名
+	 */
+	private String name;
+	
+	/**
+	 * 文档类型
+	 */
+	private String contentType;
+	
+	/**
+	 * nginx的临时文件存储路径 
+	 */
+	private String path;
+	
+	/**
+	 * 文件 的 md5
+	 */
+	private String md5;
+	
+	/**
+	 * 文件 大小 
+	 */
+	private String size;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getMd5() {
+		return md5;
+	}
+
+	public void setMd5(String md5) {
+		this.md5 = md5;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public boolean isValid() {
+		if(StringUtils.isBlank(name) || StringUtils.isBlank(path) || StringUtils.isBlank(md5) || ! NumberUtils.isNumber(size)){
+			return false;
+		}
+		return true;
+	}
+
+	
+
+}

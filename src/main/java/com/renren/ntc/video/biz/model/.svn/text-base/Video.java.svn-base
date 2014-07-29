@@ -1,0 +1,291 @@
+package com.renren.ntc.video.biz.model;
+
+import java.util.Date;
+
+public class Video extends VideoBasic implements java.io.Serializable{
+
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1938948651291747600L;
+
+    /**
+	 * 视频标题
+	 */
+	private String title;
+
+	/**
+	 * 视频Tag，多个tag用;分开
+	 */
+	private String tags;
+
+	/**
+	 * 视频简介
+	 */
+
+	private String description;
+
+	/**
+	 * 视频状态，1为待审核
+	 */
+	private int status;
+
+	/**
+	 * 视频被评论的次数
+	 */
+	private int commentTimes;
+
+	/**
+	 * 视频被查看的次数
+	 */
+	private int viewTimes;
+
+	/**
+	 * 视频隐私，默认0,为所有人所见。
+	 */
+	private int privacy;
+
+	/**
+	 * 视频缩略图
+	 */
+	private String picUrl;
+
+	/**
+	 * 视频时长
+	 */
+	private int totalTime;
+
+	/**
+	 * 视频分类。默认原创
+	 */
+	private int channelId;
+
+	/**
+	 * 视频的flash播放地址
+	 */
+	private String outerPlayerUrl;
+
+	/**
+	 * 视频点击过去土豆播放的地址
+	 */
+	private String itemUrl;
+
+	/**
+	 * 视频类型
+	 */
+	private int mediaType;
+
+	/**
+	 * 视频是否加密
+	 */
+	private int secret;
+
+	
+	/**
+	 * 该视频是否是参与线上活动的视频，例如毕业季活动
+	 * 默认为不参加活动，则isActivity = 0
+	 */
+	private int isActivity;
+	
+	/**
+	 * 通过什么途径上传（Web,phone,other）
+	 */
+	private int wap;
+	/**
+	 * 来源平台链接，用于新鲜事显示
+	 */
+	private String sourceLink;
+	/**
+	 * 来源平台名称，用于新鲜事显示
+	 */
+	private String sourceName;
+	/**
+	 * 一些可选项，用json保存
+	 */
+	private String options;
+	/**
+	 * 备注
+	 */
+	private String comment;
+	
+	
+	/**
+	 * 视频 发布时间
+	 */
+	private Date pubTime;
+
+	public int getCommentTimes() {
+		return commentTimes;
+	}
+
+	public void setCommentTimes(int commentTimes) {
+		this.commentTimes = commentTimes;
+	}
+
+	public int getViewTimes() {
+		return viewTimes;
+	}
+
+	public void setViewTimes(int viewTimes) {
+		this.viewTimes = viewTimes;
+	}
+
+	public int getPrivacy() {
+		return privacy;
+	}
+
+	public void setPrivacy(int privacy) {
+		this.privacy = privacy;
+	}
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+
+	public int getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(int totalTime) {
+		this.totalTime = totalTime;
+	}
+
+	public int getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
+	}
+
+	public String getOuterPlayerUrl() {
+		return outerPlayerUrl;
+	}
+
+	public void setOuterPlayerUrl(String outerPlayerUrl) {
+		this.outerPlayerUrl = outerPlayerUrl;
+	}
+
+	public String getItemUrl() {
+		return itemUrl;
+	}
+
+	public void setItemUrl(String itemUrl) {
+		this.itemUrl = itemUrl;
+	}
+
+	public int getMediaType() {
+		return mediaType;
+	}
+
+	public void setMediaType(int mediaType) {
+		this.mediaType = mediaType;
+	}
+
+	public int getSecret() {
+		return secret;
+	}
+
+	public void setSecret(int secret) {
+		this.secret = secret;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @param pubTime
+	 *            the pubTime to set
+	 */
+	public void setPubTime(Date pubTime) {
+		this.pubTime = pubTime;
+	}
+
+	/**
+	 * @return the pubTime
+	 */
+	public Date getPubTime() {
+		return pubTime;
+	}
+
+	public void setIsActivity(int isActivity) {
+		this.isActivity = isActivity;
+	}
+
+	public int getIsActivity() {
+		return isActivity;
+	}
+
+	public void setWap(int wap) {
+		this.wap = wap;
+	}
+
+	public int getWap() {
+		return wap;
+	}
+
+	public void setSourceLink(String sourceLink) {
+		this.sourceLink = sourceLink;
+	}
+
+	public String getSourceLink() {
+		return sourceLink;
+	}
+
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
+	}
+
+	public String getSourceName() {
+		return sourceName;
+	}
+
+	public void setOptions(String options) {
+		this.options = options;
+	}
+
+	public String getOptions() {
+		return options;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+}

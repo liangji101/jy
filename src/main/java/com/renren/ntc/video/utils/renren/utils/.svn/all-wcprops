@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/ntc_projects/!svn/ver/9711/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils
+END
+ConfigUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/ntc_projects/!svn/ver/9711/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/ConfigUtil.java
+END
+HttpURLUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/HttpURLUtils.java
+END
+Parameters.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/Parameters.java
+END
+Md5Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/Md5Utils.java
+END
+EmailHashUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/EmailHashUtil.java
+END
+JsonUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/utils/renren/utils/JsonUtils.java
+END

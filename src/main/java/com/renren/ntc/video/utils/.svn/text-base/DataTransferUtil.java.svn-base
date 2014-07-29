@@ -1,0 +1,27 @@
+package com.renren.ntc.video.utils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.renren.ntc.video.entity.Sharement;
+
+public class DataTransferUtil {
+	public static String tranfer(String msg){
+		try {
+			msg = URLEncoder.encode(msg, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			msg = "";
+		}
+		return msg;
+	}
+	
+	public static List<String> transferToString(List<Sharement> sharements){
+		List<String> strs = new ArrayList<String>();
+		for(Sharement sharement:sharements){
+			strs.add(sharement.getContent());
+		}
+		return strs;
+	}
+}

@@ -1,0 +1,15 @@
+package com.renren.ntc.video.utils;
+
+/**
+ * Author: Weiliang Shuai
+ * Contact: weiliang.shuai@renren-inc.com
+ * Date: 12-7-27
+ * Time: 下午7:27
+ */
+public enum PageNumber {
+    VIDEO,
+    HOT,
+    RECORD,
+    FRIEND,
+    MESSAGE;
+}

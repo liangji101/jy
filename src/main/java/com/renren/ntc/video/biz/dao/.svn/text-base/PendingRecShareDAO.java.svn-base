@@ -1,0 +1,41 @@
+package com.renren.ntc.video.biz.dao;
+
+import java.util.List;
+
+import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.SQL;
+
+import com.renren.ntc.video.biz.model.PendingRecShare;
+import com.renren.ntc.video.utils.Constants;
+
+
+@DAO(catalog = Constants.DB_TOKEN)
+public interface PendingRecShareDAO {
+	static final String ALL_FIELDS = "id,share_id,op_time,result,create_time";
+	@SQL("insert into pending_recshare(share_id,op_time) values(:1,:2)")
+	public int addPendingShare(long shareId,String opTime);
+	
+	@SQL("delete from pending_recshare where share_id=:1")
+	public int delPending(long shareId);
+	
+	@SQL("update pending_recshare set result=1 where share_id=:1")
+	public int updateResultToFail(long shareId);
+	
+	@SQL("update pending_recshare set result=2 where share_id=:1")
+	public int updateResultToSuccess(long shareId);
+	
+	@SQL("update pending_recshare set op_time=:2 where share_id=:1")
+	public int updateOpTime(long shareId,String opTime);
+	
+	@SQL("select " + ALL_FIELDS + " from pending_recshare where result=0 and op_time like :1")
+	public List<PendingRecShare> getPendingRecShareIds(String opTime);
+	
+	@SQL("select " + ALL_FIELDS + " from pending_recshare where result=0 order by op_time asc limit :1,:2")
+	public List<PendingRecShare> getAllPendingRecShareIds(int offset,int count);
+	
+	@SQL("select count(id) from pending_recshare where result=0")
+	public int countPendingRecShares();
+	
+	@SQL("select " + ALL_FIELDS + " from pending_recshare where result=0 and share_id=:1")
+	public PendingRecShare getPendingRecShareByShareId(long shareId);
+}

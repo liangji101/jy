@@ -1,0 +1,79 @@
+package com.renren.ntc.video.biz.dao;
+
+import com.renren.ntc.video.entity.Videoment;
+import com.renren.ntc.video.utils.Constants;
+import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.SQL;
+
+import java.util.List;
+
+
+@DAO(catalog = Constants.DB_TOKEN)
+public interface VideoDAO {
+
+	final static String FIELDS = "vid,playUrl,ext_name,src_file_size,sc_uid," +
+			"video_type,v_file,upload_url," +
+			"trans_type,md5,title,"
+			+ "description,long_gps,lat_gps," +
+					"rotate,privacy,status,forbid,transform,chk,cover,pic_heigth,pic_width";
+
+	final static String TABLENAME = "video";
+
+	@SQL("insert into "
+			+ TABLENAME
+			+ "("
+			+ FIELDS
+			+ ") values (:1.vid,:1.playUrl,:1.extName,:1.srcFileSize,:1.scUid," +
+					":1.videoType,:1.vFile,:1.uploadUrl,:1.transType,:1.md5,:1.title"
+			+ ",:1.description,:1.longGps,:1.latGps,:1.rotate," +
+					":1.privacy,:1.status,:1.forbid,:1.transform," +
+					":1.chk,:1.cover,:1.picHeigth,:1.picWidth)")
+	public int addVideo(Videoment Video);
+
+	@SQL("update video set privacy=:2 where vid=:3")
+	public int update(int Vprivacy, int Vid);
+
+	@SQL("update video set title=:2,description=:3 where vid=:1")
+	public int updateVideo(long vid, String title, String des);
+	
+	
+	@SQL("update video set transform=:1 where vid=:2")
+	public int updateTsfm(String transform, long vid);
+	
+	
+	@SQL("update video set chk=:1,privacy=:2 where vid=:3")
+	public int updateChk(String chk, int Vprivacy, long vid);
+
+	@SQL("delete from " + TABLENAME + " where vid=:1")
+	public int deleteVideo(int Vid);
+
+	@SQL("select count(id) from " + TABLENAME + " where vid=:1 and chk=:2")
+	public int query(long vid, String chk);
+	
+	
+	@SQL("select " + FIELDS + " from " + TABLENAME + " where scu_id=:1")
+	public List<Videoment> query(int uid);
+	
+	@SQL("select " + FIELDS + " from " + TABLENAME + " where vid=:1")
+	public Videoment getVideoByVid(long vid);
+
+	@SQL("select count(id) from " + TABLENAME + " where vid=:1 and transform=:2")
+	public int queryTsf(long vid, String tsf);
+
+	@SQL("select privacy from " + TABLENAME + " where vid=:1")
+	public int queryprivacy(long vid);
+	
+	@SQL("select " + FIELDS + " from " + TABLENAME + " where  chk = 'y'  limit 40")
+	public  List <Videoment> queryHots();
+	
+	@SQL("select " + "title" + " from " + TABLENAME + " where  vid = :1")
+	public  String getTitle(long vid);
+
+	@SQL("select " + "cover" + " from " + TABLENAME + " where  vid = :1")
+	public String getCover(long vid);
+	
+	@SQL("select " + "playurl" + " from " + TABLENAME + " where  vid = :1")
+	public String getPlayurl(long vid);
+		
+}
+

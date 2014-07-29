@@ -1,0 +1,139 @@
+package com.renren.ntc.video.biz.model;
+
+/**
+ * 视频LBS信息
+ * 
+ * @author gaofeng@renren-inc.com @since 2012-3-31
+ */
+public class VideoLbsInfo {
+
+    /** pid 地点id，如果为地址的话为空 **/
+    private String pid;
+
+    /** 手机上传的经度 **/
+    private long lonGps;
+
+    /** 手机上传的纬度 **/
+    private long latGps;
+
+    /** 视频上传的城市 **/
+    private String city;
+
+    /** 上传地点 **/
+    private String location;
+
+    /** 视频录制时的角度 **/
+    private String rotate;
+
+    /** 来源，常量参照LbsDataDef.SOURCE_TYPE_XXX **/
+    private int sourceType;
+
+    /** locateType 定位方式，常量参照LbsDataDef.LOCATE_TYPE_XXX **/
+    private int locateType;
+
+    /** 是否需要偏转 **/
+    private boolean needToDeflect;
+
+    public VideoLbsInfo(String pid, long lonGps, long latGps, String city, String location, String rotate, int sourceType, int locateType,
+            boolean needToDeflect) {
+        super();
+        this.pid = pid;
+        this.lonGps = lonGps;
+        this.latGps = latGps;
+        this.city = city;
+        this.location = location;
+        this.rotate = rotate;
+        this.sourceType = sourceType;
+        this.locateType = locateType;
+        this.needToDeflect = needToDeflect;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public long getLonGps() {
+        return lonGps;
+    }
+
+    public void setLonGps(long lonGps) {
+        this.lonGps = lonGps;
+    }
+
+    public long getLatGps() {
+        return latGps;
+    }
+
+    public void setLatGps(long latGps) {
+        this.latGps = latGps;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getRotate() {
+        return rotate;
+    }
+
+    public void setRotate(String rotate) {
+        this.rotate = rotate;
+    }
+
+    public int getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(int sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public int getLocateType() {
+        return locateType;
+    }
+
+    public void setLocateType(int locateType) {
+        this.locateType = locateType;
+    }
+
+    public boolean isNeedToDeflect() {
+        return needToDeflect;
+    }
+
+    public void setNeedToDeflect(boolean needToDeflect) {
+        this.needToDeflect = needToDeflect;
+    }
+
+    /**
+     * Constructs a <code>String</code> with all attributes in name = value
+     * format.
+     * 
+     * @return a <code>String</code> representation of this object.
+     */
+    public String toString() {
+        final String TAB = "    ";
+        String retValue = "";
+        retValue = "VideoLbsInfo ( " + super.toString() + TAB + "pid = " + this.pid + TAB + "lonGps = " + this.lonGps + TAB + "latGps = "
+                + this.latGps + TAB + "city = " + this.city + TAB + "location = " + this.location + TAB + "rotate = " + this.rotate + TAB
+                + "sourceType = " + this.sourceType + TAB + "locateType = " + this.locateType + TAB + "needToDeflect = " + this.needToDeflect + TAB
+                + " )";
+        return retValue;
+    }
+
+}

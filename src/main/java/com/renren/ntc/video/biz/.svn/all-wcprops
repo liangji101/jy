@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/ntc_projects/!svn/ver/17545/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz
+END
+NtcConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/NtcConstants.java
+END
+VideoExceptin.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/VideoExceptin.java
+END
+VideoReTryExceptin.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/9495/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/biz/VideoReTryExceptin.java
+END

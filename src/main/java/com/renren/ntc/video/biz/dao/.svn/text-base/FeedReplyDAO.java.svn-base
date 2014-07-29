@@ -1,0 +1,52 @@
+package com.renren.ntc.video.biz.dao;
+
+import com.renren.ntc.video.biz.model.Reply;
+import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
+import net.paoding.rose.jade.annotation.SQL;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 12-5-3
+ * Time: 上午10:15
+ * To change this template use File | Settings | File Templates.
+ */
+@DAO(catalog = "rr_zhaopin")
+public interface FeedReplyDAO {
+
+    /**
+     * @param source
+     * @return
+     */
+    @SQL("select id, uid, content, reply_time ctime from feed_reply where feed_id=:1 order by reply_time desc")
+    public List<Reply> replysByPage(int source);
+
+    @ReturnGeneratedKeys
+    @SQL("insert into feed_reply(uid, feed_id, content, reply_id, reply_to) values(:1, :2, :3, :4, :5)")
+    public int newReply(int uid, int sourceId, String content, int replyId, int replyTo);
+
+    @SQL("select uid from feed_reply where id=:1 and feed_id=:2")
+    public Integer replyBase(int replyId, int feedId);
+
+    @SQL("delete from feed_reply where id=:2 and feed_id=:1")
+    public int deleteFeedReply(int sourceId, int replyId);
+
+    @SQL("delete from feed_reply where id=:1")
+    public int deleteFeedReplyById(int id);
+
+    @SQL("select uid from feed_reply where id=:2 and feed_id=:1")
+    public Integer getReplyUser(int sourceId, int replyId);
+
+    @SQL("select content, reply_time ctime, feed_id source, reply_id from feed_reply where uid=:1 order by reply_time desc limit :2, :3")
+    public List<Reply> getReplyOutbox(int uid, int startId, int replyPageSize);
+
+    @SQL("select id, uid, content from feed_reply where id in (:1)")
+    public Map<Integer, Reply> getReplys(List<Integer> replyIds);
+
+    @SQL("select feed_id from feed_reply where id=:1")
+    public Integer getReplyFeedId(int id);
+}

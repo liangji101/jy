@@ -1,0 +1,121 @@
+package com.renren.ntc.video.interceptors;
+
+import com.ibm.icu.text.SimpleDateFormat;
+import com.renren.ntc.video.annotations.DenyCommonAccess;
+import com.renren.ntc.video.biz.logic.UserService;
+import com.renren.ntc.video.biz.logic.UserTokenService;
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.biz.model.UserToken;
+import com.renren.ntc.video.entity.ThirdUser;
+import com.renren.ntc.video.interceptors.access.NtcHostHolder;
+import com.renren.ntc.video.service.SnsSycService;
+import com.renren.ntc.video.service.ThirdUserService;
+import com.renren.ntc.video.utils.Constants;
+import com.renren.ntc.video.utils.JsonResponse;
+import com.renren.ntc.video.utils.MemcachedUtil;
+import com.renren.ntc.video.utils.login.CookieManager;
+import com.renren.ntc.video.utils.login.NetUtils;
+import net.paoding.rose.web.ControllerInterceptorAdapter;
+import net.paoding.rose.web.Invocation;
+import net.paoding.rose.web.annotation.Interceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.lang.annotation.Annotation;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+
+@Interceptor(oncePerRequest = true)
+public class AccessCommonInterceptor extends ControllerInterceptorAdapter {
+
+    @Autowired
+    private NtcHostHolder hostHolder;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserTokenService userTokenService;
+
+    @Autowired
+    private ThirdUserService thirdUserService;
+
+    @Autowired
+    private SnsSycService snsSycService;
+    
+    private static final Logger logger = LoggerFactory.getLogger(AccessCommonInterceptor.class);
+
+    public AccessCommonInterceptor(){
+    	setPriority(10000);
+    }
+    
+    protected Class<? extends Annotation> getDenyAnnotationClass() {
+        return DenyCommonAccess.class;
+    }
+
+    @Override
+    protected Object before(Invocation inv) throws Exception {
+    	String path = inv.getRequest().getRequestURI() ;
+    	if(path.startsWith("/api")){
+            logger.info(String.format("iphone user: %s; mac: %s; visit path: %s", inv.getParameter(Constants.TOKEN), inv.getParameter(Constants.CLIENT_MAC), path));
+    		String app_id = inv.getParameter(Constants.APP_ID);
+    		if (!"11520".equals(app_id) ) {
+    			return "@" + JsonResponse.formFailResponse(Constants.ErrorCode.APP_ID_INVALID);
+    		}
+    		return true;
+    	}
+
+
+        if(path.startsWith("/iphone/dev")){
+            return true;
+        }
+
+        String userAgent = inv.getRequest().getHeader("user-agent");
+        
+        
+        if(userAgent!= null && userAgent.contains("iPhone")) {
+        	 if(!path.startsWith("/video")){
+                return "r:http://itunes.apple.com/cn/app/guang-yingdv/id552718710";
+        	 }
+        }
+        User user = null;
+        UserToken requestToken = NetUtils.getUserTokenFromCookie(inv.getRequest());
+        int userId = requestToken.getUserId();
+        if (userId > 0 && userTokenService.isValid(requestToken)) {
+            user = userService.query(userId);// 登录成功
+        }
+
+        if(user != null) {
+            hostHolder.setUser(user);
+        }
+        return true;
+	}
+    
+    protected Object after(Invocation inv, Object instruction) throws Exception {
+    	String path = inv.getRequest().getRequestURI() ;
+    	if(path.startsWith("/api")){
+    	   inv.getResponse().setHeader("Content-Type", "text/json; charset=UTF-8");
+    	   return instruction;
+    	}
+        if(hostHolder.getUser() != null) {
+            inv.addModel(Constants.WEB_CURRENT_USER, userService.query(hostHolder.getUser().getId()));
+            ThirdUser thirdUser = thirdUserService.getThirdUserByUid(hostHolder.getUser().getId());
+            if(thirdUser != null) {
+                inv.addModel(Constants.WEB_RENREN_STATE_DISPLAY, thirdUser.getRr_uid() > 0 ? "display" : "none");
+                inv.addModel(Constants.WEB_SINA_STATE_DISPLAY, thirdUser.getSina_uid() > 0 ? "display" : "none");
+                inv.addModel(Constants.WEB_SYN_TYPE, snsSycService.isWatchOpened(hostHolder.getUser().getSycType()) ? 1 : 0);
+                if(!MemcachedUtil.getInstance().isHashCodeCached(hostHolder.getUser().getId(), "visited".hashCode())) {
+                    CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.WEB_FIRST_VISIT, "true");
+                    MemcachedUtil.getInstance().cacheHashCode(hostHolder.getUser().getId(), "visited".hashCode(), MemcachedUtil.DAY * 30);
+                }
+            } else {
+                inv.addModel(Constants.WEB_RENREN_STATE_DISPLAY, "none");
+                inv.addModel(Constants.WEB_SINA_STATE_DISPLAY, "none");
+            }
+        }
+        return instruction;
+    }
+
+}

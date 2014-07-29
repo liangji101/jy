@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/ntc_projects/!svn/ver/14430/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants
+END
+CustomPosition.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/ntc_projects/!svn/ver/14387/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/CustomPosition.java
+END
+AttentionPrivacy.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/ntc_projects/!svn/ver/11527/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/AttentionPrivacy.java
+END
+VideoPrivacy.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/ntc_projects/!svn/ver/14430/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/VideoPrivacy.java
+END
+MessageType.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/ntc_projects/!svn/ver/13057/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/MessageType.java
+END
+AttentionStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/ntc_projects/!svn/ver/11522/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/AttentionStatus.java
+END
+SynType.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/ntc_projects/!svn/ver/14404/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/SynType.java
+END
+CustomType.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/ntc_projects/!svn/ver/14387/web/video/trunk/ntc-socialcam/socialcam/trunk/basic/src/main/java/com/renren/ntc/video/constants/CustomType.java
+END

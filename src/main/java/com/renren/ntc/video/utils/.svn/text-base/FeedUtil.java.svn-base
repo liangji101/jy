@@ -1,0 +1,260 @@
+package com.renren.ntc.video.utils;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.renren.ntc.video.biz.model.FeedParam;
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.entity.Sharement;
+import com.renren.ntc.video.entity.SnsSycment;
+import com.renren.ntc.video.entity.ThirdUser;
+import com.renren.ntc.video.renren.feedbuild.BasicFeed;
+import com.renren.ntc.video.renren.feedbuild.FeedBuilderFactory;
+import com.renren.ntc.video.utils.ImageSizeUtil.ImageSize;
+import com.renren.ntc.video.utils.renren.RenrenApiClient;
+import com.renren.ntc.video.utils.renren.param.impl.AccessToken;
+import com.renren.ntc.video.utils.sina.weibo4j.Status;
+import com.renren.ntc.video.utils.sina.weibo4j.Weibo;
+
+/**
+ * 
+ * @author dapeng.zhou
+ *发新鲜事的时候根据用户的sycType的状态决定发送哪种新鲜事,目前的策略是低四位作为总开关(目前只有sina和rr的，但是预留了2位),往上每6位作为对应的小开关(预留了3位),顺序为喜欢，评论，拍摄
+ *         ^^^111                       ^^^111                            ^^11
+ *      sina的小开关                   rr的小开关                总开关（最低位是人人，次低位是sina）
+ *      小开关说明：预留|预留|预留|喜欢|评论|拍摄
+ *      大开关说明：预留|预留|sina|rr
+ */ 
+public class FeedUtil {
+	
+	private static final Logger logger = LoggerFactory.getLogger(FeedUtil.class);
+	
+	private static final int SINA_LIKE = 0x1000;
+	private static final int SINA_COMMENT = 0x800;
+	private static final int SINA_UPLOAD = 0x400;
+	
+	private static final int RR_LIKE = 0x40;
+	private static final int RR_COMMENT = 0x20;
+	private static final int RR_UPLOAD = 0x10;
+	
+	// 发送新鲜事到人人
+	public static boolean syncRR(User user, Sharement sharement, User ownerUser, SnsSycment syc, ThirdUser thirdUser) {
+		int suid = user.getId();
+		try {
+			long rrUid = thirdUser.getRr_uid();
+			String rr = thirdUser.getRr_token();
+			if (rrUid == 0 || rr == null || rr.equals("")) {
+				return false;
+			}
+			JSONArray array = new JSONArray();
+			try {
+				AccessToken auth = new AccessToken(rr);
+				RenrenApiClient apiclient = RenrenApiClient.getInstance();
+				com.renren.ntc.video.utils.renren.services.UserService rrUserService = apiclient.getUserService();
+				array = rrUserService.getInfo(rrUid + "", auth);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			if (array.size() == 0) {
+				return false;
+			}
+			JSONObject obj = (JSONObject) array.getJSONObject(0);
+			long from_id = obj.getLong("uid");
+			String video_cover = sharement.getVideo().getCover();
+			Object desc_obj = JSONObject.fromObject(syc.getContent()).get("syc_info");
+			Object comment_obj = JSONObject.fromObject(syc.getContent()).get("content");
+			ImageSize size = ImageSizeUtil.getRealSize(video_cover);
+			if (size == null) {
+				return false;
+			}
+			String video_coverType = "h";
+			int cover_height = size.getHeight();
+			int cover_width = size.getWidth();
+			if (cover_height >= cover_width) {
+				video_coverType = "v";
+			} 
+			FeedParam params = new FeedParam();
+			params.setFrom_id(obj.getLong("uid"));
+			params.setFrom_name(obj.getString("name"));
+			params.setFrom_tinyimg(obj.getString("tinyurl"));
+			params.setFrom_url("http://www.renren.com/" + from_id + "/profile");
+			params.setOrigin_title("光影DV");
+			params.setOrigin_url("http://www.uume.com");
+			params.setTime(System.currentTimeMillis());
+			params.setVideo_comment(comment_obj == null ? "" : (String) comment_obj);
+			params.setVideo_cover(sharement.getVideo().getCover());
+			params.setVideo_coverType(video_coverType);
+			params.setVideo_desc(desc_obj == null ? "" : (String) desc_obj);
+			params.setVideo_fromName(ownerUser.getName());
+			params.setVideo_fromUrl("http://www.uume.com/" + ownerUser.getId());
+			params.setVideo_height(size.getHeight());
+			params.setVideo_id(sharement.getShareId());
+			params.setVideo_title(sharement.getVideo().getTitle());
+			params.setVideo_url(sharement.getVideo().getUrl() + "?refer=renren");
+			params.setVideo_width(size.getWidth());
+			logger.info(String.format("send type of %s,the uid is %d,and the shareId is %d", syc.getType(),suid,sharement.getShareId()));
+			BasicFeed basicFeed = FeedBuilderFactory.getFeed(syc.getType());
+			if (basicFeed == null){
+				return false;
+			}
+			basicFeed.initByFeedParam(params);
+			basicFeed.DispatchFeed();
+		} catch (Exception e) {
+			logger.error(String.format("// Error syc rr    uid %d  syc_type %s  :%s ", suid, syc.getType(), e.getMessage()));
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	//发送新鲜事到新浪
+	public static boolean syncSina(ThirdUser thirdUser, User user, SnsSycment syc, Sharement sharement) {
+		int suid = user.getId();
+		if (Constants.SYC_RRPENDING == syc.getFlag()) {
+			logger.info(String.format("// sina syc already done on mobile  uid %d , %s syc_type %s ", suid, sharement.getId(), syc.getType()));
+			return true;
+		}
+
+		if (Constants.SYC_WEB_SINA_BLOCK == syc.getFlag() && syc.getType() == Constants.SYC_BROWSE) {
+			logger.info(String.format("// sina browse  skip uid %d , %s syc_type %s ", suid, sharement.getId(), syc.getType()));
+			return false;
+		}
+		String sina = thirdUser.getSina_token();
+		if (!BaseUtil.islegal(sina)) {
+			return false;
+		}
+		Weibo weibo = new Weibo();
+		logger.info("sina token is " + sina);
+		weibo.setToken(sina);
+		try {
+			Status status = new Status();
+			String text_content = BaseUtil.getContent(sharement, syc);
+			if (null == text_content) {
+				if (logger.isInfoEnabled()) {
+					logger.info(String.format(
+							"//  syc sina error: content is null, share id %s   uid %d  syc_type %s ", sharement.getId(), suid, syc.getType()));
+				}
+				return false;
+			}
+			String picUrl = BaseUtil.getJSONValue(sharement.getContent(), "cover");
+			status.update_url_text(text_content, picUrl);
+			logger.info(String.format("//DONE   syc sina    uid %d , share id %s syc_type %s ", suid,
+					sharement.getId(), syc.getType()));
+		} catch (Exception e) {
+			logger.error(String.format("// Error syc sina    uid %d  syc_type %s error :%s ", suid, syc.getType(), e.getMessage()));
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	//检查人人的大开关
+	public static boolean isRROpened(User user){
+		return checkSycType(user,Constants.SYC_RR);
+	}
+	
+	//检查新浪的大开关
+	public static boolean isSinaOpened(User user){
+		return checkSycType(user,Constants.SYC_SINA);
+	}
+	
+	//在发新鲜事之前要检测一下是否能发新鲜事到新浪
+	public static boolean canSendSina(User user,SnsSycment syc){
+		if (isCommentType(syc)){
+			return isSinaCommentOpened(user);
+		}
+		if (isLikeType(syc)){
+			return isSinaLikeOpened(user);
+		}
+		if (isUploadType(syc)){
+			return isSinaUploadOpened(user);
+		}
+		return false;
+	}
+	
+	//判断小开关在往asyncJob里面写数据时需要判断，故这里也设置为public
+	public static boolean isSinaCommentOpened(User user){
+		return isSinaOpened(user) && checkSycType(user,SINA_COMMENT);
+	}
+	
+	public static boolean isSinaLikeOpened(User user){
+		return isSinaOpened(user) && checkSycType(user,SINA_LIKE);
+	}
+	
+	public static boolean isSinaUploadOpened(User user){
+		return isSinaOpened(user) && checkSycType(user,SINA_UPLOAD);
+	}
+	
+	//在发新鲜事之前要检测一下是否能发新鲜事到人人
+	public static boolean canSendRR(User user,SnsSycment syc){
+		if (isLikeType(syc)){
+			return isRRLikeOpened(user);
+		}
+		if (isCommentType(syc)){
+			return isRRCommentOpened(user);
+		}
+		if (isUploadType(syc)){
+			return isRRUploadOpened(user);
+		}
+		return false;
+	}
+	
+	//判断小开关在往asyncJob里面写数据时需要判断，故这里也设置为public
+	public static boolean isRRCommentOpened(User user){
+		return isRROpened(user) && checkSycType(user,RR_COMMENT);
+	}
+	
+	public static boolean isRRLikeOpened(User user){
+		return isRROpened(user) && checkSycType(user,RR_LIKE);
+	}
+	
+	public static boolean isRRUploadOpened(User user){
+		return isRROpened(user) && checkSycType(user,RR_UPLOAD);
+	}
+	
+	public static boolean isCommentType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_COMMENT);
+	}
+	
+	public  static boolean isLikeType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_LIKE);
+	}
+	
+	public static boolean isUploadType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_UPLOAD);
+	}
+	
+	public static boolean isBrowseType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_BROWSE);
+	}
+	
+	public static boolean isRRShareType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_RR_SHARE);
+	}
+	
+	public static boolean isSinaShareType(SnsSycment syc){
+		return checkFeedType(syc,Constants.SYC_SINA_SHARE);
+	}
+	
+	//检查小开关的状态
+	private static boolean checkSycType(User user,int type){
+		boolean flag = false;
+		if(0 != (user.getSycType() & type)){
+			flag = true;
+		}
+		return flag;
+	}
+	
+	//检查新鲜事的类型
+	private static boolean checkFeedType(SnsSycment syc,String type){
+		boolean flag = false;
+		if (syc.getType().equals(type)){
+			flag = true;
+		}
+		return flag;
+	}
+}

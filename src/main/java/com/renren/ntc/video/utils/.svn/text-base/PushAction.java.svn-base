@@ -1,0 +1,157 @@
+package com.renren.ntc.video.utils;
+
+import com.renren.ntc.video.biz.logic.UserService;
+import com.renren.ntc.video.biz.model.User;
+import com.renren.ntc.video.entity.Message;
+import com.renren.ntc.video.entity.Sharement;
+import javapns.notification.Payload;
+import javapns.notification.PushNotificationPayload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Author: Weiliang Shuai
+ * Contact: weiliang.shuai@renren-inc.com
+ * Date: 12-7-27
+ * Time: 下午7:28
+ */
+public enum PushAction {
+    REQ_ATT("申请关注你", "", 4, false),
+    ATTENTION("关注了你", "关注了", 4, false),
+    COMMENT("评论了你的视频", "评论了这个视频", 8, true),
+    LIKE("喜欢了你的视频", "喜欢了这个视频", 1, true),
+    REPLY_COMMENT("在视频中回复了你","",8,true),
+    MARK("在Ta的视频中圈出了你", "在这个视频中被圈出来了", 2, true),
+    CHECK("你的视频处理完毕，可以观看了", "[%s] 上传了一个视频 [%s]，快去观看吧！", 16, true),
+    UPGRADE("升级提醒", "", 32, false),
+    CONFIRM_ATT("的请求被你确认了", "关注了", 64, false);
+
+    private String myAction;
+
+    private String friendAction;
+
+    /**
+     * 消息类别，用来和user的pushType做与运算用的
+     */
+    private int msgPushType;
+
+    private boolean containsVideo;
+
+    private static final Logger logger = LoggerFactory.getLogger(PushAction.class);
+
+    private PushAction(String myAction, String friendAction, int msgPushType, boolean containsVideo) {
+        this.friendAction = friendAction;
+        this.msgPushType = msgPushType;
+        this.myAction = myAction;
+        this.containsVideo = containsVideo;
+    }
+
+    public String getFriendAction() {
+        return friendAction;
+    }
+
+    public String getFriendAction(String... values) {
+        if(values != null && values.length > 0) {
+            return String.format(friendAction, values);
+        } else {
+            return friendAction;
+        }
+    }
+
+    public int getMsgPushType() {
+        return msgPushType;
+    }
+
+    public String getMyAction() {
+        return myAction;
+    }
+
+    public boolean isContainsVideo() {
+        return containsVideo;
+    }
+
+    /**
+     * 获取push的payload
+     * @param pushDesUid 需要push到的目标用户
+     * @param message 需要push的消息
+     * @return push的payload
+     */
+    public Payload getPushPayload(int pushDesUid, Message message, UserService userService) {
+
+        //TODO 验证message
+
+        if(pushDesUid == message.getDesUid() || (message.getSrcUid().equals(message.getDesUid()) && pushDesUid != message.getSrcUid() && message.getType().equals(PushAction.MARK.ordinal()))) {
+            //TODO 右边的表达式表示mark的我的消息，左右用户相等，这里需要重构
+            //重构目标，每个action绑定一个对pushPayload生成器
+            User user = userService.query(message.getSrcUid());
+            String strMsg = user.getName() + PushAction.values()[message.getType()].getMyAction();
+            return PushNotificationFactory.getAlert(strMsg, pushDesUid);
+        } else {
+            User srcUser = userService.query(message.getSrcUid());
+            User desUser = userService.query(message.getDesUid());
+            if(srcUser == null || desUser == null) {
+                return null;
+            }
+            return PushNotificationFactory.getIncrBadge(pushDesUid);
+        }
+    }
+
+    public Payload getMyPushPayload(int pushDesUid, String srcUserName) {
+        String strMsg = srcUserName + myAction;
+        logger.debug(strMsg);
+        return PushNotificationFactory.getAlert(strMsg, pushDesUid);
+    }
+
+    public Payload getFriendPushPayload(int pushDesUid) {
+        return PushNotificationPayload.badge(MemcachedUtil.getInstance().getFriendBadge(pushDesUid) + MemcachedUtil.getInstance().getMyBadge(pushDesUid));
+    }
+
+    public static Payload getCheckedPushPayload(User user, Sharement share, int mineOrFriends) {
+        return PushNotificationFactory.getIncrBadge(user.getId());
+//        String action = mineOrFriends == Constants.MSG_MINE ? CHECK.getMyAction() : CHECK.getFriendAction(user.getName(), share.getVideo().getTitle());
+//        PushNotificationPayload payload = PushNotificationPayload.alert(action);
+//        try {
+//            payload.addSound("default");
+//            //跳转到ios的好友消息页面,只有我的消息需要alert的通知，最开始的1表示需要刷新，第二个1表示是ios第一个view，第三个0代表第一个tab
+//            payload.addCustomDictionary("msg_info_page_num", "110");
+//            payload.addCustomDictionary("en_id", String.valueOf(share.getShareId()));
+//            logger.info("审核push" + payload.toString());
+//        } catch (JSONException ignored) {
+//        }
+//        return payload;
+    }
+
+    private static class PushNotificationFactory {
+
+        private static final Logger logger = LoggerFactory.getLogger(PushNotificationFactory.class);
+
+        /**
+         * alert通知
+         * @return
+         */
+        public static PushNotificationPayload getAlert(String msg, int uid) {
+            return getIncrBadge(uid);
+//            PushNotificationPayload payload = PushNotificationPayload.alert(msg);
+//            try {
+//                payload.addSound("default");
+//                payload.addBadge(MemcachedUtil.getInstance().addOrIncrBadge(uid));
+//                //跳转到ios的好友消息页面,只有我的消息需要alert的通知
+//                payload.addCustomDictionary("msg_info_page_num", "40");
+//            } catch (JSONException e) {
+//                logger.warn(e.getMessage());
+//            }
+//
+//            return payload;
+        }
+
+        /**
+         * badge通知
+         * @return
+         */
+        public static PushNotificationPayload getIncrBadge(int uid) {
+            return PushNotificationPayload.badge(MemcachedUtil.getInstance().addOrIncrBadge(uid));
+        }
+
+    }
+
+}

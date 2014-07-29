@@ -1,0 +1,11 @@
+package com.renren.ntc.video.utils;
+
+import com.xiaonei.xce.feed.FeedLogicAdapter;
+
+public class DeleteRRFeedUtil {
+	//此处的type为新鲜事的类型id，9601为观看，9602为分享，9603为拍摄，9604为评论，9605为喜欢
+	public static void delUploadFeed(long shareId,int type){
+		FeedLogicAdapter adapter = FeedLogicAdapter.getInstance();
+		adapter.removeFeedBySourceHS(shareId, type);
+	}
+}

@@ -1,0 +1,117 @@
+package com.renren.ntc.video.biz.model;
+
+import java.util.Date;
+
+public class VideoBasic implements java.io.Serializable{
+	
+	/**
+     * 
+     */
+    private static final long serialVersionUID = -8088147422507094838L;
+
+    /**
+	 * 视频 ID
+	 */
+	private long id; 
+	
+	/**
+	 * 视频的itemCode，由土豆方提供
+	 */
+    private String itemCode;
+    
+    /**
+     * 上传都ID
+     */
+    private int uid;
+    
+    private String uname;
+    
+    private String tinyUrl;
+    
+    /**
+     * 视频类型
+     */
+    private int channelId;
+    
+    /**
+     * 视频创建时间
+     */
+    private Date createTime;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	public int getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
+	}
+
+	/**
+	 * @param createTime the createTime to set
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	/**
+	 * @return the createTime
+	 */
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	/**
+	 * @param uname the uname to set
+	 */
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	/**
+	 * @return the uname
+	 */
+	public String getUname() {
+		return uname;
+	}
+
+	/**
+	 * @param tinyUrl the tinyUrl to set
+	 */
+	public void setTinyUrl(String tinyUrl) {
+		this.tinyUrl = tinyUrl;
+	}
+
+	/**
+	 * @return the tinyUrl
+	 */
+	public String getTinyUrl() {
+		return tinyUrl;
+	}
+    
+    
+
+}

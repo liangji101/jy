@@ -1,0 +1,26 @@
+package com.renren.ntc.video.biz.exception;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 12-5-3
+ * Time: 下午3:24
+ * To change this template use File | Settings | File Templates.
+ */
+public class AntiSpamValidationException extends Exception {
+
+    public AntiSpamValidationException() {
+    }
+
+    public AntiSpamValidationException(String message) {
+        super(message);
+    }
+
+    public AntiSpamValidationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public AntiSpamValidationException(Throwable cause) {
+        super(cause);
+    }
+}
