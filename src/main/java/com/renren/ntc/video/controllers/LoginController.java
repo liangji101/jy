@@ -88,7 +88,12 @@ public class LoginController implements NtcConstants {
 			}
 		}
 		user = userService.CheckUserPassport(email, passwd);
-		if (user != null) {
+		if (user == null){
+			inv.addModel("msg", "用户名或密码不正确");
+			inv.addModel("origURL", origURL);
+			return "login";
+			
+		}
 			hostHolder.setUser(user);
 			UserToken oldUserToken = userTokenService.getToken(user.getId());
 			if (oldUserToken == null) {
@@ -110,11 +115,6 @@ public class LoginController implements NtcConstants {
 					return "r:/";
 				}
 			}
-		} else {
-			inv.addModel("msg", "用户名或密码不正确");
-			inv.addModel("origURL", origURL);
-			return "login";
-		}
 		return "r:/";
 	}
 	
