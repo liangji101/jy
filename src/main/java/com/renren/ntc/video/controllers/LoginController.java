@@ -39,11 +39,20 @@ public class LoginController implements NtcConstants {
 	private UserService userService;
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
+	
+	@Get("")
+	public String newRegister(Invocation inv) {
+		User user = hostHolder.getUser();
+		if (user != null) {
+			return "r:/";
+		}
+		return "login";
+	}
+	
 
-
-	@Post
+	@Post("")
 	public String login(Invocation inv, @Param("origURL") String origURL,
-			@Param("phoneNumber") String phoneNumber, @Param("passwd") String passwd) {
+			@Param("email") String email, @Param("passwd") String passwd) {
 		User user = hostHolder.getUser();
 		if (user != null) {
 			if (StringUtils.isNotEmpty(origURL)) {
@@ -56,7 +65,7 @@ public class LoginController implements NtcConstants {
 				}
 			}
 		}
-		if (StringUtils.isEmpty(phoneNumber) || StringUtils.isEmpty(passwd)) {
+		if (StringUtils.isEmpty(email) || StringUtils.isEmpty(passwd)) {
 			inv.addModel("msg", " 用户名字或密码为空 ");
 			inv.addModel("origURL", origURL);
 			return "login";
@@ -78,7 +87,7 @@ public class LoginController implements NtcConstants {
 				}
 			}
 		}
-		user = userService.CheckUserPassport(phoneNumber, passwd);
+		user = userService.CheckUserPassport(email, passwd);
 		if (user != null) {
 			hostHolder.setUser(user);
 			UserToken oldUserToken = userTokenService.getToken(user.getId());
