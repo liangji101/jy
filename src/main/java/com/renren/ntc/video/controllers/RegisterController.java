@@ -98,7 +98,7 @@ public class RegisterController implements NtcConstants {
 		String code = (String) inv.getRequest().getSession().getAttribute(Constants.VALIDATECODE);
 
 		if (!Check(code, ucode)) {
-			System.out.println(String.format("umatch vcode %s  %s", code,ucode));
+			System.out.println(String.format("umatch vcode %s , ucode %s", code,ucode));
 			inv.addModel("msg", "提交的验证码不正确");
 			return "regist";
 		}
