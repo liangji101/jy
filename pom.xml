@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 	<name>jy</name>
 	<properties>
-		<project_root>d:\workspace\jy\</project_root>
+		<project_root>/home/allen/workspace/jy2</project_root>
 	</properties>
 	 <dependencyManagement>
      <dependencies>
@@ -144,21 +144,11 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.qunar.base</groupId>
-			<artifactId>meerkat-cache</artifactId>
-			<version>2.1.0</version>
-		</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>1.5</version>
 			</dependency>
-		<dependency>
-			<groupId>com.qunar.flight</groupId>
-			<artifactId>qmonitor</artifactId>
-			<version>1.0.3</version>
-		</dependency>
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
@@ -193,11 +183,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge</groupId>
-            <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
         </dependency>
 	</dependencies>
     <build>
