@@ -30,7 +30,7 @@ public class MemcachedUtil {
 
 	private MemcachedUtil() {
 		 try {
-			cacheClient = new XMemcachedClientBuilder (AddrUtil.getAddresses("192.168.237.94:12000")).build();
+			cacheClient = new XMemcachedClientBuilder (AddrUtil.getAddresses("127.0.0.1:11211")).build();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
