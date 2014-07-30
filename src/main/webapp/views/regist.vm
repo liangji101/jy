@@ -33,18 +33,19 @@
 
     <div class="container">
 
-      <form class="form-signin" role="form">
+      <form class="form-signin" role="form" method="post" action="regist">
         <h2 class="form-signin-heading">Regist </h2>
          $!msg
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
+        <input id="email" name="email" type="email" class="form-control" placeholder="Email address" value="$!email" required autofocus>
         <br/>
-        <input type="password" class="form-control" placeholder="Password" >
+        <input id="passwd" name="passwd" type="password" class="form-control" placeholder="Password"  >
         <br/>
         <input type="password" class="form-control" placeholder="Password" required>
         <div>
-        <input name="valicode" id="valicode" type="text" maxlength="4" class="form-control" style="display:inline;width:50%" placeholder="请输入验证码" title="请输入验证码">
+        <input name="vcode" id="vcode" type="text" maxlength="4" class="form-control" style="display:inline;width:50%" placeholder="请输入验证码" title="请输入验证码">
             <img id="imageCode" src="validate/get" alt="点击刷新"  style="display:inline;width:25%" onclick="this.src='validate/get?t=' + Math.random();">
         </div>
+        <br/>
         <button class="btn btn-primary " type="submit">Sign in</button>
       </form>
 

@@ -97,15 +97,16 @@ public class RegisterController implements NtcConstants {
 		String ucode = inv.getParameter("vcode");
 		String code = (String) inv.getRequest().getSession().getAttribute(Constants.VALIDATECODE);
 
+        inv.addModel("email", email);
+
 		if (!Check(code, ucode)) {
-			System.out.println(String.format("umatch vcode %s , ucode %s", code,ucode));
 			inv.addModel("msg", "提交的验证码不正确");
 			return "regist";
 		}
 
 		email = StringUtils.trimToNull(email);
-		passwd = StringUtils.trimToNull(passwd);
-		name = name.trim().replaceAll(" ", "");
+		passwd = StringUtils.trimToNull(passwd); 
+        name=email;
 		// 后台校验，防止恶意用户不通过浏览器提交表单
 		String regEmail = "^[a-zA-Z0-9_-]{1,}@" + "([a-zA-Z0-9_-]{1,}\\.)+[a-zA-Z]{1,}$";
 		if (!email.matches(regEmail) || email.length() > MAX_EMAIL_LENGTH) {
@@ -147,7 +148,17 @@ public class RegisterController implements NtcConstants {
 	}
 
 	private boolean Check(String code, String ucode) {
-		return StringUtils.equals(code, ucode);
+        System.out.println(String.format("umatch vcode #%s# , ucode #%s#", code,ucode));
+        if(ucode==null){
+            return false;
+        }
+        ucode = ucode.trim();
+		return StringUtils.equalsIgnoreCase(code, ucode);
 	}
 
+    public static void main(String [] args){
+
+        System.out.println(!StringUtils.equalsIgnoreCase("FJDJ", "fjdj"));
+
+    }
 }
