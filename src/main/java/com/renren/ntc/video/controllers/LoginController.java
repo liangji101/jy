@@ -39,6 +39,10 @@ public class LoginController implements NtcConstants {
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
 
+    @Get
+    public String test(Invocation inv){
+          return "test";
+    }
 
 	@Post
 	public String login(Invocation inv, @Param("origURL") String origURL,
