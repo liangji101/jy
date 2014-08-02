@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 	<name>jy</name>
 	<properties>
-		<project_root>/home/allen/workspace/jy2</project_root>
+		<project_root>D:/workspace/jy</project_root>
 	</properties>
 	 <dependencyManagement>
      <dependencies>

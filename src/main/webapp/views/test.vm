@@ -28,6 +28,36 @@
 
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
+
+    <style type="text/css">
+     #wrapper {
+        position: relative;
+        width: 100%;
+        z-index: 0;
+        overflow: hidden;
+     }
+
+     #MapInfoCon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        z-index: 50;
+        overflow: hidden;
+        padding-top: 32px;
+     }
+     #mapView{
+       position:relative;
+       height:500px;
+       width:100%;
+     }
+     .item{
+         display:inline;
+         width:48px;
+         height:70px;
+     }
+
+ </style>
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -62,23 +92,24 @@
         </div>
       </div>
     </div>
-   <div id="myCarousel" class="carousel slide" data-ride="carousel">
-         <!-- Indicators -->
-         <ol class="carousel-indicators">
-           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-           <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-           <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-         </ol>
-         <div class="carousel-inner">
-           <div class="item active">
-             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-             <div class="container">
-               <div class="carousel-caption">
-                 <h1>桂林山水甲天下</h1>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
+   <div id="wrapper"  >
+      <div id="MapHolder" style="height: 1388px; overflow: hidden; position: relative; text-align: left; background-image: url(http://webmap0.map.bdimg.com/image/api/bg.png);">
+
+        <div id="platform" style="overflow: visible; position: absolute; z-index: 0; left: 0px; top: 100px; cursor: url(http://webmap0.map.bdimg.com/image/api/openhand.cur) 8 8, default;">
+            <div id="MapInfoCon">
+              <ul>
+                 <li class="item"><a>XXXXXXXX</a>
+                 </li>
+                 <li class="item"><a>XXXXXXXX</a>
+                 </li>
+                 <li class="item"><a>XXXXXXXX</a>
+                 </li>
+             </ul>
+            </div>
+           <div id="mapView">
+           <img stype="height: 700px;width: 800px;"src=" http://gd4.alicdn.com/imgextra/i4/1956824124/T2Zo.lXN4XXXXXXXXX-1956824124.jpg" >
+          </div>
+      </div>   
+   </div>
   </body>
 </html>
