@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -29,87 +29,60 @@
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
 
-    <style type="text/css">
-     #wrapper {
-        position: relative;
-        width: 100%;
-        z-index: 0;
-        overflow: hidden;
-     }
-
-     #MapInfoCon {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 3px;
-        z-index: 50;
-        overflow: hidden;
-        padding-top: 32px;
-     }
-     #mapView{
-       position:relative;
-       height:500px;
-       width:100%;
-     }
-     .item{
-         display:inline;
-         width:48px;
-         height:70px;
-     }
-
- </style>
   </head>
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
-      <div class="container">
-        <div class="navbar navbar-inverse navbar-static-top" style="background-color: #D6C7C7;" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">石头人</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                  <div style="margin-top:10px">
-                   <div class="col-lg-6">
-                     <div class="input-group">
-                       <input type="text" class="form-control">
-                       <span class="input-group-btn">
-                         <button class="btn btn-default" type="button">Go!</button>
-                       </span>
-                     </div><!-- /input-group -->
-                   </div><!-- /.col-lg-6 -->
-                   </div><!-- /.row -->
-                 </div>
-            </div>
+<div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
           </div>
-        </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default</a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </div>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
+        </p>
       </div>
     </div>
-   <div id="wrapper"  >
-      <div id="MapHolder" style="height: 1388px; overflow: hidden; position: relative; text-align: left; background-image: url(http://webmap0.map.bdimg.com/image/api/bg.png);">
-
-        <div id="platform" style="overflow: visible; position: absolute; z-index: 0; left: 0px; top: 100px; cursor: url(http://webmap0.map.bdimg.com/image/api/openhand.cur) 8 8, default;">
-            <div id="MapInfoCon">
-              <ul>
-                 <li class="item"><a>XXXXXXXX</a>
-                 </li>
-                 <li class="item"><a>XXXXXXXX</a>
-                 </li>
-                 <li class="item"><a>XXXXXXXX</a>
-                 </li>
-             </ul>
-            </div>
-           <div id="mapView">
-           <img stype="height: 700px;width: 800px;"src=" http://gd4.alicdn.com/imgextra/i4/1956824124/T2Zo.lXN4XXXXXXXXX-1956824124.jpg" >
-          </div>
-      </div>   
-   </div>
+  <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
