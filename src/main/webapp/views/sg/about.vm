@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="喵喵鲜果,微信商城,粉丝营销,微信商城运营">
+    <meta name="description" content="喵喵鲜果">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <title>
+        喵喵一下，鲜果到家- 喵喵鲜果
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="http://kdt-static.qiniudn.com/v2/build_css/stylesheets/wap/base_c3573ac4ca.css"
+          onerror="_cdnFallback(this)">
+    <link rel="stylesheet" href="http://kdt-static.qiniudn.com/v2/build_css/stylesheets/wap/projects/showcase_admin_ebe3d70784.css"
+          onerror="_cdnFallback(this)">
+</head>
+
+<body class=" ">
+<!-- container -->
+<div class="container ">
+    <div class="js-mp-info share-mp-info">
+        <a class="page-mp-info" href="http://wap.koudaitong.com/v2/showcase/homepage?kdt_id=389162">
+            <!--<img class="mp-image" width="24" height="24" src="http://imgqn.koudaitong.com/upload_files/2014/10/26/FvaQ9twVeX2rYjATCGwpakMMZHE2.png!60x60.jpg">-->
+            <i class="mp-nickname">
+                喵喵一下，鲜果到家
+            </i>
+        </a>
+        <div class="links">
+            <a class="mp-homepage" href="http://wap.koudaitong.com/v2/showcase/usercenter?kdt_id=389162">
+                我的记录
+            </a>
+            <a class="js-open-fav follow-mp" href="javascript:;">
+                收藏
+            </a>
+        </div>
+    </div>
+    <div class="content js-mini-height">
+        <div class="content-body">
+            <div class="tpl-shop js-tpl-shop">
+                <div class="tpl-shop-header" style="">
+                    <div style="position: absolute;bottom: -10px;left: 100px;font-size: 16px;text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                        喵喵一下，鲜果到家
+                    </div>
+                    <div class="tpl-shop-avatar">
+                        <img src="http://imgqn.koudaitong.com/upload_files/2014/10/26/FvaQ9twVeX2rYjATCGwpakMMZHE2.png!100x100+2x.jpg"
+                             alt="头像">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback" style="position: absolute;top: 200px;left :450px;font-size: 16px;>
+
+             <form   name="feedback"   method="post"  action="feedback">
+             <span style="display:block"  >反馈问题</span>
+             <input  name="feedback"  style="display:block;height:60px;width:280px;margin-top:5px">
+             <div style="margin-top:10px">
+             <span>联系方式：</span><input >
+             </div>
+             <div style="margin-top:10px">
+             <a  style="display:block;height:25px;width:50px;float:right;background-color:#ffa800;border-radius:3px;line-height:30px;text-align:center;border-bottom:2px solid #ff8a00;font-size:10px"  onclick="submit()">提交</a>
+              </div>
+             </form>
+    </div>
+</div>
+<div class="js-footer" style="min-height: 1px;">
+    <div class="footer">
+        <div class="footer">
+        </div>
+    </div>
+</div>
+<script text="java">
+<div id="js-fuck-taobao" class="fullscreen-guide fuck-taobao hide">
+            <span class="js-close-taobao guide-close">
+                ×
+            </span>
+            <span class="guide-arrow">
+            </span>
+    <div class="guide-inner">
+        <div class="step step-1">
+        </div>
+        <div class="js-step-2 step">
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
