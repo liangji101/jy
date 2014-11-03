@@ -1,0 +1,39 @@
+
+#### 本地调试环境的资源路径
+
+#set($versionMap = "")
+#set($staticpath = "http://clientdev.wap.cn6.qunar.com/prd/")
+#set($staticimgpath1 = "http://clientdev.wap.cn6.qunar.com/image/")
+#set($staticimgpath2 = "http://clientdev.wap.cn6.qunar.com/image/")
+#set($staticimgpath3 = "http://clientdev.wap.cn6.qunar.com/image/")
+#set($staticimgpath4 = "http://clientdev.wap.cn6.qunar.com/image/")
+
+
+
+#### 发布到测试环境资源路径
+#*
+#set($staticpath = "http://qzzwap.dev.qunar.com/mobile_wise/prd/")
+#set($staticimgpath1 = "http://simg1.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath2 = "http://simg2.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath3 = "http://simg3.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath4 = "http://simg4.qunarzz.com/site/images/wap/wise/")
+*#
+
+#### 发布到beta环境的资源路径
+#*
+#set($staticpath = "http://mobileqzz.beta.qunar.com/mobile_wise/prd/")
+#set($staticimgpath1 = "http://simg1.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath2 = "http://simg2.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath3 = "http://simg3.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath4 = "http://simg4.qunarzz.com/site/images/wap/wise/")
+*#
+
+#### 发布到线上prod环境的资源路径
+#*
+#set($staticpath = "http://qunarzz.com/mobile_wise/prd/")
+#set($staticimgpath1 = "http://simg1.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath2 = "http://simg2.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath3 = "http://simg3.qunarzz.com/site/images/wap/wise/")
+#set($staticimgpath4 = "http://simg4.qunarzz.com/site/images/wap/wise/")
+*#
+
