@@ -17,6 +17,9 @@ public interface WPOrderDAO {
 	
 	@SQL("select order_id, info from "  + TABLE_NAME + " where status =1")
 	public List<OrderInfo> getSMSNo();
+
+    @SQL("select id, order_id, info from "  + TABLE_NAME + " where status = 1")
+    public List<OrderInfo> getPrintNo();
 	
 	@SQL("insert into " + TABLE_NAME + "(" + INSERT_FIELDS +" ) values"  + " (:1.shop_id,:1.order_id,:1.status,:1.info,:1.updatetime)")
 	public int insert (OrderInfo o);

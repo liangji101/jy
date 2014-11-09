@@ -1,11 +1,14 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.CookieHepler;
 
 public class HttpClient {
 	private static final int CONN_TIMEOUT = 10000;
@@ -39,8 +42,9 @@ public class HttpClient {
 	}
 
 	private static String _GetCookie() {
-		return "KDTSESSIONID=pqpaoav724sdebgj9cq4cr62g3; CNZZDATA5351147=cnzz_eid%3D823593287-1414036180-http%253A%252F%252Fcn.bing.com%252F%26ntime%3D1414062506; captcha_invalid_count=1; captcha_response=dca4ab3dfb7687eb980d5c08dbda608b38f7a948; captcha_valid_count=1; user_id=881361; user_weixin=13581861097; user_nickname=%E5%B8%85%E7%82%9C; kdtnote_fans_id=0; login_auth_key=9a4e82076efbeefc7eac9d4db035aa45; check_time=1414062544; Hm_lvt_61f180f659535f6bde14d3b908c3a7d0=1414036181,1414062507; Hm_lpvt_61f180f659535f6bde14d3b908c3a7d0=1414062545; kdt_id=389162; team_auth_key=3987cc57f9a528c9fbb4950cb7396ecc";
-	}
+//		return "KDTSESSIONID=pqpaoav724sdebgj9cq4cr62g3; CNZZDATA5351147=cnzz_eid%3D823593287-1414036180-http%253A%252F%252Fcn.bing.com%252F%26ntime%3D1414062506; captcha_invalid_count=1; captcha_response=dca4ab3dfb7687eb980d5c08dbda608b38f7a948; captcha_valid_count=1; user_id=881361; user_weixin=13581861097; user_nickname=%E5%B8%85%E7%82%9C; kdtnote_fans_id=0; login_auth_key=9a4e82076efbeefc7eac9d4db035aa45; check_time=1414062544; Hm_lvt_61f180f659535f6bde14d3b908c3a7d0=1414036181,1414062507; Hm_lpvt_61f180f659535f6bde14d3b908c3a7d0=1414062545; kdt_id=389162; team_auth_key=3987cc57f9a528c9fbb4950cb7396ecc";
+        return CookieHepler.getInstance().getCookie("sg");
+    }
 
 	
 	
@@ -57,7 +61,7 @@ public class HttpClient {
 				c.setReadTimeout(READ_TIMEOUT);
 				c.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 				c.setRequestProperty("User-Agent",
-						"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0");
+                        "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0");
 				c.setRequestProperty("Host", host);
 				c.setRequestProperty("Cookie", HttpClient._GetCookie());
 				c.setDoOutput(true);
@@ -72,5 +76,25 @@ public class HttpClient {
 		}
 		return b;
 	}
+
+
+    public static byte[]  sendPostRequest(String url,String postParam) {
+
+        org.apache.commons.httpclient.HttpClient client = new org.apache.commons.httpclient.HttpClient();
+        client.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET,"utf-8");
+
+        // Create a method instance.
+        PostMethod method = new PostMethod(url);
+        method.setParameter("data",postParam );
+        try {
+            client.executeMethod(method);
+            byte[] responseBody = method.getResponseBody();
+
+            return responseBody;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
