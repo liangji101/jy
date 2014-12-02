@@ -4,8 +4,7 @@ import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.Set;
 
-import com.renren.ntc.sg.utils.Constants;
-import net.sf.json.JSONArray;
+import com.renren.ntc.sg.util.Constants;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

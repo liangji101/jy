@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.dao;
 
 import com.renren.ntc.sg.bean.Device;
+import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 
 /**
@@ -10,6 +11,7 @@ import net.paoding.rose.jade.annotation.SQL;
  * Time: 下午1:10
  * To change this template use File | Settings | File Templates.
  */
+@DAO(catalog = "ABC")
 public interface DeviceDAO {
     static final String TABLE_NAME= "device";
     static final String FIELDS = "id, name,owner_phone,head_url,shop_url,lng,lat" ;

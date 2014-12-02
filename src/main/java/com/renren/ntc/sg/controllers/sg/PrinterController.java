@@ -43,29 +43,29 @@ public class PrinterController {
 	public String get( Invocation inv,@Param("pid") long  pid ,@Param("token")String token )  {
         // 验证
         if ( 0 > pid) {
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+            LoggerUtils.getInstance().log(String.format("pid illegal error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
         Device dev  = deviceDAO.getDev(pid);
         if(null == dev){
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+            LoggerUtils.getInstance().log(String.format("dev is null error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
-        if (dev.getToken() !=  token){
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+        if (!dev.getToken().equals(token)){
+            LoggerUtils.getInstance().log(String.format("token illegal error param  %d ,%s ,%s ", pid, token ,dev.getToken() ) );
             return "@" + Constants.PARATERERROR;
         }
 
          List<OrderInfo> orderinfo = swpOrderDAO.getOrder2Print();
         JSONObject jb =  new JSONObject() ;
         jb.put("code" ,0);
-        jb.put("date" , SUtils.from(orderinfo));
+        jb.put("data" , SUtils.from(orderinfo));
         return "@" + jb.toJSONString();
 	}
 
-    @Get("ack")
-    @Post("ack")
-    public String get( Invocation inv,@Param("pid") long  pid , @Param("token")String token, @Param("order_id")String orderId, @Param("status") int status )  {
+    @Get("fb")
+    @Post("fb")
+    public String fb( Invocation inv,@Param("pid") long  pid , @Param("token")String token, @Param("orderId")String orderId, @Param("re") String re, @Param("msg") String msg )  {
         // 验证
         if ( 0 > pid) {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
@@ -76,12 +76,15 @@ public class PrinterController {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
-        if (dev.getToken() !=  token){
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+        if (!dev.getToken().equals(token)){
+            LoggerUtils.getInstance().log(String.format("token illegal error param  %d ,%s ,%s ", pid, token ,dev.getToken() ) );
             return "@" + Constants.PARATERERROR;
         }
-        int re = swpOrderDAO.update(status,orderId);
-        if (re != 1){
+        int r = 0 ;
+        if("true".equals(re)) {
+          r = swpOrderDAO.update(3,orderId);
+        }
+        if (r != 1){
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
@@ -101,8 +104,8 @@ public class PrinterController {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
-        if (dev.getToken() !=  token){
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+        if (!dev.getToken().equals(token)){
+            LoggerUtils.getInstance().log(String.format("token illegal error param  %d ,%s ,%s ", pid, token ,dev.getToken() ) );
             return "@" + Constants.PARATERERROR;
         }
         deviceDAO.update(pid,status) ;
