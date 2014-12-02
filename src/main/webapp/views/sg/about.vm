@@ -1,90 +1,64 @@
+
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="喵喵鲜果,微信商城,粉丝营销,微信商城运营">
-    <meta name="description" content="喵喵鲜果">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="cleartype" content="on">
-    <title>
-        喵喵一下，鲜果到家- 喵喵鲜果
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="http://kdt-static.qiniudn.com/v2/build_css/stylesheets/wap/base_c3573ac4ca.css"
-          onerror="_cdnFallback(this)">
-    <link rel="stylesheet" href="http://kdt-static.qiniudn.com/v2/build_css/stylesheets/wap/projects/showcase_admin_ebe3d70784.css"
-          onerror="_cdnFallback(this)">
+<meta charset="utf-8">
+<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+<meta content="telephone=no" name="format-detection" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="360-site-verification" content="54794129ab3852e0b7f92693b70ef408" />
+<link href="http://vdian.com/weidian_offical_H5/css/common/base.css" type="text/css" rel="stylesheet"><title>喵喵鲜果</title>
+<link href="http://vdian.com/weidian_offical_H5/css/index/index.css" type="text/css" rel="stylesheet">
 </head>
 
-<body class=" ">
-<!-- container -->
-<div class="container ">
-    <div class="js-mp-info share-mp-info">
-        <a class="page-mp-info" href="http://wap.koudaitong.com/v2/showcase/homepage?kdt_id=389162">
-            <!--<img class="mp-image" width="24" height="24" src="http://imgqn.koudaitong.com/upload_files/2014/10/26/FvaQ9twVeX2rYjATCGwpakMMZHE2.png!60x60.jpg">-->
-            <i class="mp-nickname">
-                喵喵一下，鲜果到家
-            </i>
-        </a>
-        <div class="links">
-            <a class="mp-homepage" href="http://wap.koudaitong.com/v2/showcase/usercenter?kdt_id=389162">
-                我的记录
-            </a>
-            <a class="js-open-fav follow-mp" href="javascript:;">
-                收藏
-            </a>
-        </div>
+<body>
+
+<header id="comm_hd" style="border-bottom:0px solid">
+	<h1 id="logo" class="left">
+    	<a id="logo_a"  class="comm_p24 block t_hide" style="height: 82px;background-image: url(http://imgqn.koudaitong.com/upload_files/2014/10/26/FvaQ9twVeX2rYjATCGwpakMMZHE2.png!60x60.jpg);background-size:45px 45px">喵喵鲜果</a>
+    
+    </h1>
+    <nav id="comm_nav" class="right" style="float: left;margin-left:-10px;margin-top:10px">
+    <span style="font-weight:bold;font-size:14px" >喵喵一下，鲜果到家</span >
+    
+    </nav>
+</header>
+<section id="" style="height:208px;">
+	<div id="kv_inner" class="margin_auto rel">
+    	
+    <img style="margin-top:5px;width:100%" src="/jy-1/images/fruit+tray.jpg">
     </div>
-    <div class="content js-mini-height">
-        <div class="content-body">
-            <div class="tpl-shop js-tpl-shop">
-                <div class="tpl-shop-header" style="">
-                    <div style="position: absolute;bottom: -10px;left: 100px;font-size: 16px;text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
-                        喵喵一下，鲜果到家
-                    </div>
-                    <div class="tpl-shop-avatar">
-                        <img src="http://imgqn.koudaitong.com/upload_files/2014/10/26/FvaQ9twVeX2rYjATCGwpakMMZHE2.png!100x100+2x.jpg"
-                             alt="头像">
-                    </div>
-                </div>
+</section>
+<div class="feedback" style="position: relative;top: 20px;width:95%;margin: auto;font-size: 16px;">
+        <form id = "feedback"  name="feedback"   method="post"  action="feedback">
+            <!--<span style="display:block"  >反馈问题</span>-->
+            <textarea id ="ftext" rows="5" cols="20"  name="feedback" placeholder="您的问题和建议" style="-webkit-appearance: none;border-radius:0px;border: 1px solid #eee;text-indent: 5px;display:block;width: 100%;height:120px;margin-top:5px;font-size:18px"></textarea>
+            <div style="margin-top:10px">
+                <input id="contact" name="contact"  placeholder="手机/微信/QQ" style="-webkit-appearance: none;border-radius:0px;text-indent:5px;height:40px;font-size:18px;border: 1px solid #eee;float:right;width:100%" >
             </div>
-        </div>
-    </div>
-    <div class="feedback" style="position: absolute;top: 200px;left :450px;font-size: 16px;>
-
-             <form   name="feedback"   method="post"  action="feedback">
-             <span style="display:block"  >反馈问题</span>
-             <input  name="feedback"  style="display:block;height:60px;width:280px;margin-top:5px">
-             <div style="margin-top:10px">
-             <span>联系方式：</span><input >
-             </div>
-             <div style="margin-top:10px">
-             <a  style="display:block;height:25px;width:50px;float:right;background-color:#ffa800;border-radius:3px;line-height:30px;text-align:center;border-bottom:2px solid #ff8a00;font-size:10px"  onclick="submit()">提交</a>
-              </div>
-             </form>
+            <div style="margin-top:10px">
+                <a  style="display:block;padding-top:6px;height:40px;width:100%;float:right;margin-top: 10px;background: -webkit-linear-gradient(top,#f5f5f5,#dfdfdf);border-radius:3px;line-height:30px;text-align:center;font-size:18px"  onclick="return s()">提交</a>
+            </div>
+        </form>
     </div>
 </div>
-<div class="js-footer" style="min-height: 1px;">
-    <div class="footer">
-        <div class="footer">
-        </div>
-    </div>
-</div>
-<script text="java">
-<div id="js-fuck-taobao" class="fullscreen-guide fuck-taobao hide">
-            <span class="js-close-taobao guide-close">
-                ×
-            </span>
-            <span class="guide-arrow">
-            </span>
-    <div class="guide-inner">
-        <div class="step step-1">
-        </div>
-        <div class="js-step-2 step">
-        </div>
-    </div>
-</div>
+<script  type="text/javascript" >
+    function   s(){
+     var f = document.getElementById("feedback");
+    var xmlhttp = new XMLHttpRequest();;
+    if (xmlhttp==null){
+        return;
+    }
+    var feedback = document.getElementById("ftext").value ;
+    var contact = document.getElementById("contact").value ;
+    var url="feedback?feedback=" +escape(feedback) + "&contact="+escape(contact)
+    xmlhttp.open("GET",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send();
+    window.location.href="http://123.57.38.234/jy-1/sg/redirect";
+    }
+</script>
 </body>
-
 </html>

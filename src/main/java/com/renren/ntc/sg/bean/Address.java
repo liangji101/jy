@@ -9,42 +9,95 @@ import java.util.Date;
  * Time: 下午2:13
  * To change this template use File | Settings | File Templates.
 */
+/*
+CREATE TABLE `address` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `shop_id` bigint(20) NOT NULL DEFAULT 0,
+  `user_id` bigint(20) NOT NULL DEFAULT 0,
+  `city` varchar(24) NOT NULL DEFAULT '' ,
+  `province` varchar(24) NOT NULL DEFAULT '' ,
+  `district` varchar(24) NOT NULL DEFAULT '' ,
+  `address`  varchar(245) NOT NULL DEFAULT '' ,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`),
+   KEY shop_id (`shop_id`),
+   KEY user_id (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ */
+
 public class Address {
-    private  String name = "";
-    private  String  shop_url  = "";
-    private Date create_time ;
-    private  Date  updatetime;
-    private  String  owner_phone   = "";
-    private  String  head_url   = "";
 
-    public String getName() {
-        return name;
+
+    private  String id = "";
+    private  String  shop_id  = "";
+    private  String  user_id   = "";
+    private  String  city   = "";
+    private  String  province   = "";
+    private  String  district   = "";
+    private  String  address   = "";
+    private  Date  create_time  ;
+    private  Date  update_time  ;
+
+
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getShop_id() {
+        return shop_id;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setShop_id(String shop_id) {
+        this.shop_id = shop_id;
     }
 
-    private  String owner   = "";
-
-    public Date getUpdatetime() {
-        return updatetime;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getCreate_time() {
-
         return create_time;
     }
 
@@ -52,31 +105,17 @@ public class Address {
         this.create_time = create_time;
     }
 
-    public String getShop_url() {
-
-        return shop_url;
+    public Date getUpdate_time() {
+        return update_time;
     }
 
-    public void setShop_url(String shop_url) {
-        this.shop_url = shop_url;
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 
-    public String getOwner_phone() {
 
-        return owner_phone;
-    }
 
-    public void setOwner_phone(String owner_phone) {
-        this.owner_phone = owner_phone;
-    }
 
-    public String getHead_url() {
-        return head_url;
-    }
-
-    public void setHead_url(String head_url) {
-        this.head_url = head_url;
-    }
 
 
 }

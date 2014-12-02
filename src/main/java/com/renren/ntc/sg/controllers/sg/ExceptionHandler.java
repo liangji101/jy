@@ -13,6 +13,7 @@ public class ExceptionHandler implements ControllerErrorHandler {
 	
 	public Object onError(Invocation inv, Throwable ex) throws Throwable {
 		  inv.getRequest().setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE , null);
+          ex.printStackTrace();
 		  logger.error("unknow exception ",ex);
 		  return "error";
 	}
