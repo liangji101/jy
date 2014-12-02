@@ -29,37 +29,7 @@ public class HomeController {
 	 * 用于处理用户喜欢和不喜欢的ajax请求，成功返回1，失败返回0
 	 * @return
 	 */
-    @Get("")
-	@Post("")
-	public String index( Invocation inv,@Param("lat")double lat,@Param("lng") double lng )  {
-
-        String  Url ="http://wap.koudaitong.com/v2/showcase/homepage?alias=rqh6lz6o" ;
-        if(lat ==0  || lng == 0){
-            Shop s = shopDAO.getShop(1);
-            Url =  s.getShop_url();
-        }
-        System.out.println(String.format("------------------------"));
-        double scope =  3000 / 100000.0;
-        double maxLat = lat + scope;
-        double minLat = lat - scope;
-        double maxLng = lng + scope;
-        double minLng = lng - scope;
-        List<Shop> s  = shopDAO.getShop(maxLat,minLat,maxLng,minLng);
-        System.out.println(String.format("get Shop size %s " ,s.size()));
-        if (null == s || 0 == s.size())
-        {
-            System.out.println(String.format("Access default ,url %s ",Url));
-            return "r:" + Url ;
-        }
-        int k = s.size();
-        Random r =  new Random();
-        int t = r.nextInt(k);
-        t = (t >= k)?k-1:t;
-        Shop ss = s.get(t);
-        System.out.println(String.format("Access %s ,url %s ",t,ss.getShop_url()));
-        return "r:" + ss.getShop_url() ;
-
-	}
+//
 
     @Get("item")
     @Post("item")
