@@ -1,1 +1,0 @@
-rule=<table><tr><td>.*?</td><td>${status}</td></tr><tr><td>.*?</td><td><strongclass="price-color">${price}</strong>.*?</td></tr><tr><td>${user}</td><td>.*?</td></tr><tr><td>.*?</td><td>${type}</td></tr><tr><td>.*?</td><td>.*?</td></tr><tr><td>.*?</td><td>${address}</td></tr></table>
