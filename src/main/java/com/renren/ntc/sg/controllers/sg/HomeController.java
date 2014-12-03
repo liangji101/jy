@@ -40,8 +40,8 @@ public class HomeController {
 	 */
     @Get("")
     @Post("")
-    public String index( Invocation inv,  @Param("itemID")long id) {
-           return "home";
+    public String index( Invocation inv) {
+           return "minShop";
     }
 
     @Get("item")
