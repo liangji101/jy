@@ -36,7 +36,7 @@ public interface SWPOrderDAO {
     public List<OrderInfo> getOrder2Print();
 
 
-    @SQL("select order_id , status ,info from "  + TABLE_NAME + " order by  create_time desc limit 10")
+    @SQL("select order_id , status ,info from "  + TABLE_NAME + " order by  create_time desc limit 20")
     public List<OrderInfo> get10Orders();
 
 
