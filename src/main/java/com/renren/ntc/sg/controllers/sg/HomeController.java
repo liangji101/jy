@@ -38,7 +38,11 @@ public class HomeController {
 	 * 用于处理用户喜欢和不喜欢的ajax请求，成功返回1，失败返回0
 	 * @return
 	 */
-//
+    @Get("")
+    @Post("")
+    public String index( Invocation inv,  @Param("itemID")long id) {
+           return "home";
+    }
 
     @Get("item")
     @Post("item")
