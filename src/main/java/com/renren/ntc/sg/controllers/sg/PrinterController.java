@@ -63,7 +63,7 @@ public class PrinterController {
     @Post("fb")
     public String fb( Invocation inv,@Param("pid") long  pid , @Param("token")String token, @Param("orderId")String orderId, @Param("re") String re, @Param("msg") String msg )  {
         // 验证
-        LoggerUtils.getInstance().log(String.format("error param  %d ,%s  ,re: %s , msg : %s ", pid, token  , re, msg ) );
+        LoggerUtils.getInstance().log(String.format("fb request param  %d ,%s  ,re: %s , msg : %s ", pid, token  , re, msg ) );
         if ( 0 > pid) {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
@@ -82,8 +82,7 @@ public class PrinterController {
           r = swpOrderDAO.update(3,orderId);
         }
         if (r != 1){
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
-            return "@" + Constants.PARATERERROR;
+            LoggerUtils.getInstance().log(String.format("update order %s  pid  %d  token %s",orderId, pid, token  ) );
         }
         return "@" + Constants.DONE;
     }
