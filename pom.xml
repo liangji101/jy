@@ -5,9 +5,6 @@
 	<version>1</version>
 	<packaging>war</packaging>
 	<name>jy</name>
-	<properties>
-		<project_root>D:/workspace/jy</project_root>
-	</properties>
 	 <dependencyManagement>
      <dependencies>
      	<dependency>
@@ -28,55 +25,7 @@
 	 </dependencies>
 	</dependencyManagement>
 	  <dependencies>
-	    <dependency>
-	        <groupId>mailapi</groupId>
-	        <artifactId>mailapi</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/mailapi.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>dsn</groupId>
-	        <artifactId>dsn</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/dsn.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>imap</groupId>
-	        <artifactId>imap</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/imap.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>mailapi</groupId>
-	        <artifactId>mailapi</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/mailapi.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>pop3</groupId>
-	        <artifactId>pop3</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/pop3.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>smtp</groupId>
-	        <artifactId>smtp</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/smtp.jar</systemPath>
-        </dependency>
-        <dependency>
-	        <groupId>dsn</groupId>
-	        <artifactId>dsn</artifactId>
-	        <version>1.0.0</version>
-	        <scope>system</scope>
-	        <systemPath>${project_root}/lib/dsn.jar</systemPath>
-        </dependency>
+
 		<dependency>
 		    <groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
