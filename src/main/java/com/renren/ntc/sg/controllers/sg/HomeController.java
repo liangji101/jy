@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Device;
 import com.renren.ntc.sg.bean.Item;
-import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.dao.DeviceDAO;
 import com.renren.ntc.sg.dao.ItemsDAO;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 @Path("")
 public class HomeController {
@@ -26,7 +24,7 @@ public class HomeController {
     private static int DEFAULT_SHOP_ID = 1;
 
     @Autowired
-    public  ShopDAO  shopDAO;
+    public ShopDAO shopDAO;
     @Autowired
     public ItemsDAO  itemsDAO;
 

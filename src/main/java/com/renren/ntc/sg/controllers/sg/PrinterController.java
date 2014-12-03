@@ -2,13 +2,9 @@ package com.renren.ntc.sg.controllers.sg;
 
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Device;
-import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.OrderInfo;
-import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.dao.DeviceDAO;
-import com.renren.ntc.sg.dao.ItemsDAO;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
-import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.SUtils;
@@ -19,9 +15,7 @@ import net.paoding.rose.web.annotation.rest.Get;
 import net.paoding.rose.web.annotation.rest.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 @Path("p")
 public class PrinterController {
