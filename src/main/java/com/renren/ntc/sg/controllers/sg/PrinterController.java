@@ -56,7 +56,9 @@ public class PrinterController {
             return "@" + Constants.PARATERERROR;
         }
 
-         List<OrderInfo> orderinfo = swpOrderDAO.getOrder2Print();
+        List<OrderInfo> orderinfo = swpOrderDAO.getOrder2Print();
+
+        deviceDAO.update(pid,"looping") ;
         JSONObject jb =  new JSONObject() ;
         jb.put("code" ,0);
         jb.put("data" , SUtils.from(orderinfo));
@@ -67,6 +69,7 @@ public class PrinterController {
     @Post("fb")
     public String fb( Invocation inv,@Param("pid") long  pid , @Param("token")String token, @Param("orderId")String orderId, @Param("re") String re, @Param("msg") String msg )  {
         // 验证
+        LoggerUtils.getInstance().log(String.format("error param  %d ,%s  ,re: %s , msg : %s ", pid, token  , re, msg ) );
         if ( 0 > pid) {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
@@ -88,12 +91,12 @@ public class PrinterController {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
             return "@" + Constants.PARATERERROR;
         }
-        return Constants.DONE;
+        return "@" + Constants.DONE;
     }
 
     @Get("update")
     @Post("update")
-    public String update( Invocation inv,@Param("pid") long pid , @Param("token")String token, int status)  {
+    public String update( Invocation inv,@Param("pid") long pid , @Param("token")String token,  @Param("status") String status)  {
         // 验证
         if ( 0 > pid) {
             LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
@@ -109,7 +112,29 @@ public class PrinterController {
             return "@" + Constants.PARATERERROR;
         }
         deviceDAO.update(pid,status) ;
-        return Constants.DONE;
+        return  "@" +Constants.DONE;
     }
+
+    @Get("rp")
+    @Post("rp")
+    public String rp( Invocation inv,@Param("pid") long pid , @Param("token")String token,  @Param("status") String status)  {
+        // 验证
+        if ( 0 > pid) {
+            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+            return "@" + Constants.PARATERERROR;
+        }
+        Device dev  = deviceDAO.getDev(pid);
+        if(null == dev){
+            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token  ) );
+            return "@" + Constants.PARATERERROR;
+        }
+        if (!dev.getToken().equals(token)){
+            LoggerUtils.getInstance().log(String.format("token illegal error param  %d ,%s ,%s ", pid, token ,dev.getToken() ) );
+            return "@" + Constants.PARATERERROR;
+        }
+        LoggerUtils.getInstance().log(String.format("pinter %d  , fb :%s , ",pid,status));
+        return  "@" + Constants.DONE;
+    }
+
 
 }

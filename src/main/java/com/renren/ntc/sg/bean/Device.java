@@ -13,7 +13,7 @@ public class Device {
     private long  id   ;
     private long shop_id   ;
     private int  type;
-    private int  status;
+    private String  status;
     private String  token  ;
     private String  secret_key  ;
     private Date create_time  ;
@@ -44,11 +44,11 @@ public class Device {
         this.type = type;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

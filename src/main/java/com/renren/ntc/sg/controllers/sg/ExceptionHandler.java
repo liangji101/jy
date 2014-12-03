@@ -15,7 +15,7 @@ public class ExceptionHandler implements ControllerErrorHandler {
 		  inv.getRequest().setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE , null);
           ex.printStackTrace();
 		  logger.error("unknow exception ",ex);
-		  return "error";
+		  return "{\"code\":500,\"msg\":\"uk error\"}";
 	}
 
 }
