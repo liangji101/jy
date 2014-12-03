@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Device;
 import com.renren.ntc.sg.bean.Item;
+import com.renren.ntc.sg.bean.OrderInfo;
 import com.renren.ntc.sg.dao.DeviceDAO;
 import com.renren.ntc.sg.dao.ItemsDAO;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
@@ -26,7 +27,7 @@ public class HomeController {
     @Autowired
     public ShopDAO shopDAO;
     @Autowired
-    public ItemsDAO  itemsDAO;
+    public SWPOrderDAO  orderDAO;
 
     @Autowired
     public DeviceDAO deviceDAO;
@@ -44,34 +45,9 @@ public class HomeController {
            return "minShop";
     }
 
-    @Get("item")
-    @Post("item")
-    public String item( Invocation inv,  @Param("itemID")long id) {
 
-        if (id <= 0 ){
-            id = DEFAULT_SHOP_ID;
-        }
-        Item item = itemsDAO.getItem(id);
-        if(null == item ){
-            inv.addModel("errmsg","error");
-            return "miniDetail";
-        }
-        inv.addModel("item",item );
-        return "miniDetail";
-    }
 
-    @Get("cart")
-    @Post("cart")
-    public String cart( Invocation inv) {
-        List <Long> itemids =  getCartInfo(inv);
-        List <Item> items = itemsDAO.getItems(itemids);
-        if(null == items ){
-            inv.addModel("errmsg","error");
-            return "cart";
-        }
-        inv.addModel("items",items );
-        return "cart";
-    }
+
 
     private  List <Long>  getCartInfo( Invocation inv){
            return Collections.emptyList();
@@ -110,6 +86,15 @@ public class HomeController {
             jb.put(d.getId()+ "" ,d.getStatus() + "_" + d.getUpdate_time());
             jarr.add(jb);
         }
+        }
+
+        if ("order".equals(chn)){
+            List<OrderInfo>  ls = orderDAO.get10Orders();
+            for (OrderInfo o :ls ){
+                JSONObject jb =   new JSONObject();
+                jb.put( o.getOrder_id() ,o.getStatus() + o.getInfo());
+                jarr.add(jb);
+             }
         }
         return "@" + jarr.toJSONString();
     }
