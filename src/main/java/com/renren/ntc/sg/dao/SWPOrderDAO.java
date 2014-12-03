@@ -32,7 +32,7 @@ public interface SWPOrderDAO {
 	public int updateinfo(String info, String order_id);
 
 
-    @SQL("select order_id, info from "  + TABLE_NAME + " where status = 2")
+    @SQL("select order_id, info ,create_time from "  + TABLE_NAME + " where status = 2")
     public List<OrderInfo> getOrder2Print();
 
 
