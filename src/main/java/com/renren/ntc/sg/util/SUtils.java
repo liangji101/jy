@@ -74,6 +74,7 @@ public class SUtils {
             JSONObject jb = new JSONObject ();
             jb.put( "order_id" , o.getOrder_id());
             jb.put( "info" ,o.getInfo());
+            jb.put( "create_time",o.getCreate_time());
             jarry.add(jb);
         }
         return jarry;
