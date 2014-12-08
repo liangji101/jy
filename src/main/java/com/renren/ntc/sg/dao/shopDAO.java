@@ -16,7 +16,7 @@ public interface ShopDAO {
 	public List<Shop> getShop(double lat2, double lng1, double lng2);
 	
 	@SQL("select " +FIELDS  + "  from "  + TABLE_NAME + " where  id = :1 ")
-	public Shop getShop(int id);
+	public Shop getShop(long id);
 	
 	
 	@SQL("insert into " + TABLE_NAME + "(" + FIELDS +" ) values"  + " (:1.name,:1.owner_phone,:1.head_url,:1.shop_url,:1.lng,:1,lat)")

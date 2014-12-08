@@ -27,7 +27,8 @@ CREATE TABLE `items` (
 @DAO(catalog = "ABC")
 public interface ItemsDAO {
     static final String TABLE_NAME= "items";
-    static final String FIELDS = "id, shop_id,name,count,head_url,create_time,updatetime" ;
+    static final String FIELDS = "id, shop_id,name,category_id,category_sub_id,score ,price,price_new ,count,pic_url,create_time,update_time" ;
+    static final String INSERT_FIELDS = "shop_id,name,category_id,category_sub_id,score, price,price_new,count,pic_url,create_time,update_time" ;
 
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
 	public List<Item> getItems(long shop_id);
@@ -36,6 +37,9 @@ public interface ItemsDAO {
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
     public Item getItem(long shop_id);
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
-    public List<Item> getItems(List <Long> items);
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 and category_id=:2 order by score asc limit :3 , :4")
+    public List<Item> getItems(long shop_id, int category_id ,int from, int offset );
+
+
+
 }

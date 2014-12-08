@@ -1,0 +1,31 @@
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+ </head>
+ <body >
+ <p>$shop.Id</p>
+ <p>$shop.name</p>
+
+
+ #foreach($category in $categoryls)
+   $category.id
+   $category.name
+   $category.score   </br>
+ #end
+
+ ======================item ===   </br>
+ #foreach($item in  $items)
+ $item.id
+ $item.name
+ $item.shop_id
+ $item.pic_url
+ $item.price
+ #end
+
+ <li>
+     <a id="moduleId_${li.get('articleId')}" href="${li.get('href')}">${li.get('name')}</a>
+ </li>
+
+ </body>
+</html>
