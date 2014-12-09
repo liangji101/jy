@@ -30,16 +30,23 @@ public interface ItemsDAO {
     static final String FIELDS = "id, shop_id,name,category_id,category_sub_id,score ,price,price_new ,count,pic_url,create_time,update_time" ;
     static final String INSERT_FIELDS = "shop_id,name,category_id,category_sub_id,score, price,price_new,count,pic_url,create_time,update_time" ;
 
-	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
-	public List<Item> getItems(long shop_id);
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
+    public List<Item> getItems(long shop_id);
 
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
-    public Item getItem(long shop_id);
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:2")
+    public  Item getItem(long shop_id, long id );
 
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 and category_id=:2 order by score asc limit :3 , :4")
     public List<Item> getItems(long shop_id, int category_id ,int from, int offset );
 
+    @SQL("update " + TABLE_NAME + " set count = count-:3  where id =:2")
+    public void decr(long s_id, long i_id, int count);
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where  shop_id=:1  order by score  desc limit :2,:3")
+    public  List<Item> hot(long shop_id, int flag ,int offset );
 
 
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where  shop_id=:1 and name like =:2")
+    public  List<Item> search(long shop_id, String key);
 }

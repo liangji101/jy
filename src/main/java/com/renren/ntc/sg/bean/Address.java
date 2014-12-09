@@ -30,38 +30,62 @@ CREATE TABLE `address` (
 public class Address {
 
 
-    private  String id = "";
-    private  String  shop_id  = "";
-    private  String  user_id   = "";
+    private  long id = 0 ;
+
+
+
+    private  int  type = 0 ;
+    private  long  user_id   = 0;
     private  String  city   = "";
     private  String  province   = "";
     private  String  district   = "";
+
+
+
+    private  String  phone   = "";
+    private  String  name   = "";
+
     private  String  address   = "";
     private  Date  create_time  ;
     private  Date  update_time  ;
 
+    public String getPhone() {
+        return phone;
+    }
 
-    public String getId() {
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getShop_id() {
-        return shop_id;
-    }
 
-    public void setShop_id(String shop_id) {
-        this.shop_id = shop_id;
-    }
-
-    public String getUser_id() {
+    public long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(long user_id) {
         this.user_id = user_id;
     }
 

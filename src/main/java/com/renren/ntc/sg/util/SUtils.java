@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.OrderInfo;
-import org.apache.commons.codec.binary.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -78,5 +81,56 @@ public class SUtils {
             jarry.add(jb);
         }
         return jarry;
+    }
+
+    public static String getOrderId() {
+
+        StringBuffer sb  = new StringBuffer();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String nowdate  = sdf.format(new Date());
+        Random r = new Random();
+        int abc = r.nextInt(1000000);
+        sb.append("C").append(nowdate).append(pad(abc + ""));
+        return sb.toString();
+    }
+
+    private static String pad(String abc) {
+        StringBuffer sb  = new StringBuffer();
+        int l = abc.length();
+        for (int i =0 ;i < 7-l; i++  ){
+          sb.append("0");
+        }
+        sb.append(abc);
+        return sb.toString();
+    }
+
+    public static boolean islegal(String order_id) {
+        if (StringUtils.isBlank(order_id) || !order_id.startsWith("C")|| order_id.length()!= 22){
+            return false;
+        }
+        return true;
+    }
+
+    public static  void  main (String [] args) {
+           System.out.println(getOrderId());
+    }
+
+
+    public static String generName() {
+        StringBuffer sb  = new StringBuffer();
+        String ref = System.currentTimeMillis() + "";
+        Random r = new Random();
+        int abc = r.nextInt(10000);
+        sb.append("cat_").append(ref).append(pad(abc + ""));
+        return sb.toString();
+
+    }
+
+    public static String wrap(String key) {
+        StringBuffer sb = new StringBuffer()   ;
+        sb.append("%") ;
+        sb.append(key) ;
+        sb.append("%") ;
+        return sb.toString();
     }
 }

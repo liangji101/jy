@@ -23,9 +23,6 @@
  $item.price
  #end
 
- <li>
-     <a id="moduleId_${li.get('articleId')}" href="${li.get('href')}">${li.get('name')}</a>
- </li>
 
  </body>
 </html>

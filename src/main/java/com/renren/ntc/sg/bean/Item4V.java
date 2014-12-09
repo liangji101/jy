@@ -25,12 +25,11 @@ CREATE TABLE `items` (
 
  */
 
-public class Item {
+public class Item4V {
 
-    private  long id = 0;
-    private  long  shop_id  = 0;
+    private  long id = 0 ;
+    private  long   shop_id  = 0;
     private  String  name   = "";
-
 
 
     private int  category_id;

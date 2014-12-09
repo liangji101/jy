@@ -1,7 +1,7 @@
 package com.renren.ntc.sg.dao;
 
-import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Order;
+import com.renren.ntc.sg.bean.User;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 
@@ -25,17 +25,14 @@ CREATE TABLE `items` (
 
 
 @DAO(catalog = "ABC")
-public interface OrdersDAODAO {
-    static final String TABLE_NAME= "orders";
-    static final String FIELDS = "id, order_id,shop_id,user_id,phone,address_id,remarks ,snapshot,status,price,create_time,update_time" ;
-    static final String INSERT_FIELDS = " order_id,shop_id,user_id,phone,address_id,remarks ,snapshot,status,price,create_time,update_time" ;
+public interface UserDAO {
+    static final String TABLE_NAME= "user";
+    static final String FIELDS = "id, name,enable,type,pwd ,create_time,update_time" ;
+    static final String INSERT_FIELDS = "name,enable,type,pwd " ;
 
-	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1")
-	public List<Order> getOrder(long user_id);
+	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
+	public User getUser(long user_id);
 
-
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
-    public List<Order> getOrderByShop(long shop_id);
-
-
+    @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.name,:1.enable,:1,type,1:pwd)")
+    public long  createUser(User user);
 }
