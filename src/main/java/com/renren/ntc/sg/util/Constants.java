@@ -29,6 +29,8 @@ public class Constants {
 
     public static  final String PARATERERROR = "{\"code\":1,\"msg\":\"paramter error\"}";
     public static  final String DONE = "{\"code\":0,\"msg\":\"done\"}";
+
+    public static  final String ALLREADYNEW = "{\"code\":0,\"msg\":\"allready new version\"}";
     public static final int DEFAULT_SHOP = 10010 ;
     public static final String DOMAIN = "miaomiao.com" ;
     public static final String COOKIE_KEY_USER ="cat_p" ;
