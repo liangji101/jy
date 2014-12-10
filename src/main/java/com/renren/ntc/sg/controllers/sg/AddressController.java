@@ -69,7 +69,6 @@ public class AddressController {
         Address add = new Address();
         add.setUser_id(u.getId());
         add.setAddress(address);
-        add.setName(name);
         add.setPhone(phone);
         addressService.addAddress(add) ;
 
@@ -87,7 +86,6 @@ public class AddressController {
         add.setId(address_id);
         add.setUser_id(u.getId());
         add.setAddress(address);
-        add.setName(name);
         add.setPhone(phone);
         addressService.updateAddress(add) ;
         return Constants.DONE;

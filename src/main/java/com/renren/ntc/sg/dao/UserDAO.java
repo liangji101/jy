@@ -3,6 +3,7 @@ package com.renren.ntc.sg.dao;
 import com.renren.ntc.sg.bean.Order;
 import com.renren.ntc.sg.bean.User;
 import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
 import net.paoding.rose.jade.annotation.SQL;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public interface UserDAO {
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
 	public User getUser(long user_id);
 
-    @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.name,:1.enable,:1,type,1:pwd)")
+    @ReturnGeneratedKeys
+    @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1.enable,:1.type,:1.pwd)")
     public long  createUser(User user);
 }

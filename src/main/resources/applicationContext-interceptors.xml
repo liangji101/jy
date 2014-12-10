@@ -12,7 +12,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
 	default-autowire="byName" default-lazy-init="false">
 
-<<context:component-scan base-package="com.renren.ntc.sg.interceptors">
+<context:component-scan base-package="com.renren.ntc.sg.interceptors">
 		<context:include-filter type="regex"
 			expression=".*Interceptor" />
 	</context:component-scan>

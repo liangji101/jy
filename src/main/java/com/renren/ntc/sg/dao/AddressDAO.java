@@ -27,8 +27,8 @@ CREATE TABLE `items` (
 @DAO(catalog = "ABC")
 public interface AddressDAO {
     static final String TABLE_NAME= "address";
-    static final String FIELDS = "id,type,user_id,city,province ,district,name,phone,address,create_time,update_time" ;
-    static final String INSERT_FIELDS = "type,user_id,city,province ,district,name,phone,address,update_time" ;
+    static final String FIELDS = "id,type,user_id,city,province ,district,phone,address,create_time,update_time" ;
+    static final String INSERT_FIELDS = "type,user_id,city,province ,district,phone,address,update_time" ;
 
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
     public Address getAddress(long id);
