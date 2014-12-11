@@ -30,4 +30,12 @@ public class RegistUserService {
         long  id  = userDAO.createUser(u)   ;
         return userDAO.getUser(id);
     }
+
+    public RegistUser getUserByName(String name) {
+        return userDAO.getUserbyName(name);
+    }
+
+    public RegistUser getUserByPhone  (String phone) {
+        return userDAO.getUserbyName(phone);
+    }
 }

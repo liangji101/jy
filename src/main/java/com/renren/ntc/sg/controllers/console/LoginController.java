@@ -60,7 +60,7 @@ public class LoginController  {
 			return "r:/";
 		}
 		inv.addModel("origURL", origURL);
-		inv.addModel("msg", "");
+		inv.addModel("msg", "abc");
 		return "login";
 	}
 

@@ -16,6 +16,12 @@ public interface RegistUserDAO {
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
 	public RegistUser getUser(long user_id);
 
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where name =:1")
+    public RegistUser getUserbyName(String name);
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where phone =:1")
+    public RegistUser getUserbyPhone(String phone);
+
     @ReturnGeneratedKeys
     @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1.enable,:1.type,:1.pwd)")
     public long  createUser(RegistUser user);
