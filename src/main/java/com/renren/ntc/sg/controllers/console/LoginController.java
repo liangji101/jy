@@ -1,5 +1,6 @@
 package com.renren.ntc.sg.controllers.console;
 
+import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.bean.RegistUser;
 import com.renren.ntc.sg.dao.RegistUserDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  * 
  * yunming.zhu
  */
+@DenyCommonAccess
 @Path("login")
 public class LoginController  {
 

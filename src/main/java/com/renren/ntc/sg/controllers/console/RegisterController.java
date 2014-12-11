@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.bean.RegistUser;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.RegistUserService;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Regist
  */
 
+@DenyCommonAccess
 @Path("regist")
 public class RegisterController  {
 

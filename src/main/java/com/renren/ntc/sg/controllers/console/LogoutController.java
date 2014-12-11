@@ -1,5 +1,6 @@
 package com.renren.ntc.sg.controllers.console;
 
+import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.annotations.LoginRequired;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.util.Constants;
@@ -10,6 +11,7 @@ import net.paoding.rose.web.annotation.rest.Get;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+@DenyCommonAccess
 @LoginRequired
 @Path("logout")
 public class LogoutController {
