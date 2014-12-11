@@ -38,8 +38,6 @@ public class ShopCarController {
     @Autowired
     public ShopCategoryDAO shopCategoryDAO;
 
-    @Autowired
-    public SWPOrderDAO swpOrderDAO ;
 
     @Get("confirm")
     public String hot (Invocation inv,@Param("shop_id") long shop_id,@Param("items") String items){

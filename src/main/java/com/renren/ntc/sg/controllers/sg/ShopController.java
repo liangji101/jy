@@ -21,17 +21,12 @@ public class ShopController {
 
     @Autowired
     public ShopDAO shopDAO;
-    @Autowired
-    public SWPOrderDAO  orderDAO;
 
     @Autowired
     public ItemsDAO itemsDAO;
 
     @Autowired
     public ShopCategoryDAO shopCategoryDAO;
-
-    @Autowired
-    public SWPOrderDAO swpOrderDAO ;
 
     @Get("hot")
     public String hot (Invocation inv,@Param("shop_id") long shop_id ){
@@ -60,10 +55,10 @@ public class ShopController {
         }
         Shop shop = shopDAO.getShop(shop_id);
 
-         if(null == shop){
+        if(null == shop){
              LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
               shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
-         }
+        }
         List<ShopCategory> category  = shopCategoryDAO.getCategory(shop.getId());
 
         if (null != category  &&  category.size() > 0){
@@ -73,9 +68,13 @@ public class ShopController {
             List <Item> items = itemsDAO.getItems(shop_id,cateId,0,20)  ;
             inv.addModel("items", items);
         }
-         inv.addModel("categoryls",category);
-         inv.addModel("shop",shop);
-          return "shop" ;
+        List<Item> itemls = itemsDAO.hot(shop_id,0,20);
+
+
+        inv.addModel("items", itemls);
+        inv.addModel("categoryls",category);
+        inv.addModel("shop",shop);
+        return "shop" ;
         }
 
 
