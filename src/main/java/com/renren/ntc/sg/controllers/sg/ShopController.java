@@ -1,5 +1,7 @@
 package com.renren.ntc.sg.controllers.sg;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
@@ -77,7 +79,43 @@ public class ShopController {
         return "shop" ;
         }
 
+    @Get("getitems")
+    public String getitems (Invocation inv,@Param("shop_id") long shop_id ,@Param("category_id") int category_id,
+                             @Param("from") int from ,@Param("offset") int offset){
+        // 校验合法性
+        if (0  >= shop_id){
+            shop_id = Constants.DEFAULT_SHOP ;
+        }
+        Shop shop = shopDAO.getShop(shop_id);
 
+        if(null == shop){
+            LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
+            shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
+        }
+        List<Item> itemls = itemsDAO.getItems(shop_id, category_id, from, offset);
+        inv.addModel("items", itemls);
+
+        JSONObject jb =  new JSONObject() ;
+        jb.put("code",0);
+        JSONArray jarr =  new JSONArray() ;
+        for (Item i : itemls ){
+            JSONObject it =  new JSONObject() ;
+            it.put("id" ,i.getId()) ;
+            it.put("score" ,i.getScore()) ;
+            it.put("price_new" ,i.getPrice_new()) ;
+            it.put("price" ,i.getPrice()) ;
+            it.put("count" ,i.getCount()) ;
+            it.put("pic_url" ,i.getPic_url()) ;
+            it.put("category_id" ,i.getCategory_id()) ;
+            it.put("name" ,i.getName()) ;
+            it.put("shop_id" ,i.getShop_id()) ;
+            jarr.add(it);
+        }
+
+        jb.put("code",0);
+        jb.put("data",jarr);
+        return "@" + jb.toJSONString() ;
+    }
 
 
     @Get("create")
