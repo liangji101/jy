@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Path("shop")
+@Path("search")
 public class SearchController {
 
     private static int DEFAULT_SHOP_ID = 1;

@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("shop")
+@Path("shopCar")
 public class ShopCarController {
 
     private static int DEFAULT_SHOP_ID = 1;

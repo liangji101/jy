@@ -6,11 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.OrderInfo;
 import org.apache.commons.lang.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -133,4 +136,45 @@ public class SUtils {
         sb.append("%") ;
         return sb.toString();
     }
+
+    public static  String getResourceFullLocation(HttpServletRequest request) {
+        StringBuffer sb = request.getRequestURL();
+        String url = sb.toString();
+        String queryString = request.getQueryString();
+        if (queryString != null) {
+            url = url + "?" + queryString;
+        }
+        try {
+            return URLEncoder.encode(url, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return url;
+        }
+    }
+
+    public  static long unwrapper(String uid) {
+        String [] arr = uid.split("_");
+        long id = 0;
+        if ( 2 != arr.length){
+            return id ;
+        }
+        String u =  arr[1];
+        try {
+            id = Long.valueOf(u);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return id ;
+    }
+
+    public  static String wrapper(long uid) {
+
+        StringBuffer sb = new  StringBuffer();
+        UUID uuid = UUID.randomUUID();
+        String u = uuid.toString().replace("-","") ;
+        sb.append(u);
+        sb.append("_");
+        sb.append(uid) ;
+        return sb.toString();
+    }
+
 }

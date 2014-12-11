@@ -9,31 +9,18 @@ import java.util.Date;
  * Time: 下午12:08
  * To change this template use File | Settings | File Templates.
  */
-public class User {
+public class RegistUser {
 
 
     private long   id  ;
     private String  name;
-
-
-
-    private String phome ;
     private String pwd ;
 
-
+    private String phome  ;
     private int  type ;
     private int enable;
     private Date create_time;
     private Date update_time;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
     public String getPhome() {
@@ -43,6 +30,15 @@ public class User {
     public void setPhome(String phome) {
         this.phome = phome;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public int getType() {
         return type;

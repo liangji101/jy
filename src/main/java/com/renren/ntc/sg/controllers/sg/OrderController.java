@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Path("")
+@Path("order")
 public class OrderController {
 
     private static int DEFAULT_SHOP_ID = 1;
