@@ -169,25 +169,6 @@ CREATE TABLE `ver` (
    PRIMARY KEY (`id`),
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-| address | CREATE TABLE `address` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `shop_id` bigint(20) NOT NULL DEFAULT '0',
-  `user_id` bigint(20) NOT NULL DEFAULT '0',
-  `city` varchar(24) NOT NULL DEFAULT '',
-  `province` varchar(24) NOT NULL DEFAULT '',
-  `district` varchar(24) NOT NULL DEFAULT '',
-  `name`  varchar(32) NOT NULL DEFAULT '',
-  `phone`  varchar(20) NOT NULL DEFAULT '',
-  `address` varchar(245) NOT NULL DEFAULT '',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `shop_id` (`shop_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 
-
-
-=======================
 
 测试数据做成
 
@@ -221,5 +202,6 @@ insert into  shop_category (shop_id,category_id,name,score) value(1,3,'啤酒',1
 
 
 insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,10,1000,2000,'http://www.baidu.com');
+insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,14,1000,2000,'http://www.baidu.com');
 insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,14,1000,2000,'http://www.baidu.com');
 insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,14,1000,2000,'http://www.baidu.com');
