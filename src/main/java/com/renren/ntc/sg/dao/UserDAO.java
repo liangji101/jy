@@ -35,6 +35,6 @@ public interface UserDAO {
 	public User getUser(long user_id);
 
     @ReturnGeneratedKeys
-    @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1phome,:1.enable,:1.type,:1.pwd)")
+    @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1.phome,:1.enable,:1.type,:1.pwd)")
     public long  createUser(User user);
 }
