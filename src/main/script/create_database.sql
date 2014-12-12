@@ -23,7 +23,7 @@ CREATE TABLE `category` (
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT ,
   `name` varchar(24) NOT NULL DEFAULT '' ,
-  `phome`varchar(24) NOT NULL DEFAULT '' ,
+  `phone`varchar(24) NOT NULL DEFAULT '' ,
   `pwd` varchar(24) NOT NULL DEFAULT '', 
   `enable` tinyint(4) DEFAULT 0 ,
   `type` tinyint(4) DEFAULT 0  ,

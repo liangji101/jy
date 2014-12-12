@@ -22,6 +22,7 @@ public class UserService {
     public User createUser(String name ,int type,  String pwd, int enable  ) {
         User u =  new User ();
         u.setEnable(enable);
+        u.setPhone("186");
         u.setType(type);
         u.setName(name);
         u.setPwd(pwd);
