@@ -17,7 +17,7 @@ public class User {
 
 
 
-    private String phome ;
+    private String phone ;
     private String pwd ;
 
 
@@ -36,12 +36,12 @@ public class User {
     }
 
 
-    public String getPhome() {
-        return phome;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhome(String phome) {
-        this.phome = phome;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getType() {

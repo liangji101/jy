@@ -28,13 +28,13 @@ CREATE TABLE `items` (
 @DAO(catalog = "ABC")
 public interface UserDAO {
     static final String TABLE_NAME= "user";
-    static final String FIELDS = "id, name,phome,enable,type,pwd ,create_time,update_time" ;
-    static final String INSERT_FIELDS = "name,phome,enable,type,pwd " ;
+    static final String FIELDS = "id, name,phone,enable,type,pwd ,create_time,update_time" ;
+    static final String INSERT_FIELDS = "name,phone,enable,type,pwd " ;
 
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
 	public User getUser(long user_id);
 
     @ReturnGeneratedKeys
-    @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1.phome,:1.enable,:1.type,:1.pwd)")
+    @SQL("insert into  "  + TABLE_NAME + " (" + INSERT_FIELDS  +") values (:1.name,:1.phone,:1.enable,:1.type,:1.pwd)")
     public long  createUser(User user);
 }
