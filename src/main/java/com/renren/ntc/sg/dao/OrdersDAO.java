@@ -30,12 +30,12 @@ public interface OrdersDAO {
     static final String FIELDS = "id, order_id,shop_id,user_id,phone,address_id,remarks ,snapshot,status,price,create_time,update_time" ;
     static final String INSERT_FIELDS = " order_id,shop_id,user_id,phone,address_id,remarks ,snapshot,status,price" ;
 
-	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1")
-	public List<Order> getOrder(long user_id);
+	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 order by create_time desc limit :2,:3")
+	public List<Order> getOrder(long user_id ,int start, int offset);
 
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
-    public List<Order> getOrderByShop(long shop_id);
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 order by create_time desc limit :2,:3")
+    public List<Order> getOrderByShop(long shop_id,int start, int offset);
 
 
     @SQL("insert into  " + TABLE_NAME + "(" + INSERT_FIELDS + ") values(:1.order_id,:1.shop_id," +
