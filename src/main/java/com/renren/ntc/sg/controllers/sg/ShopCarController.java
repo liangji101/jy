@@ -12,6 +12,7 @@ import com.renren.ntc.sg.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
+import com.renren.ntc.sg.util.SUtils;
 import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
@@ -63,7 +64,7 @@ public class ShopCarController {
             JSONObject jb = (JSONObject) jbarr.get(i);
             long item_id = jb.getLong("item_id");
             int count = jb.getInteger("count");
-            Item item = itemsDAO.getItem(shop_id, item_id);
+            Item item = itemsDAO.getItem(SUtils.generTableName(shop_id),shop_id, item_id);
             //计算库存是否足够
             Item4V i4v = new Item4V();
             i4v.setExt(count);

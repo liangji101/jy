@@ -8,6 +8,7 @@ import com.renren.ntc.sg.bean.ShopCategory;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
+import com.renren.ntc.sg.util.SUtils;
 import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
@@ -43,7 +44,7 @@ public class ShopController {
             shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
         //获取 热门分类
-        List<Item> itemls = itemsDAO.hot(shop_id,0,20);
+        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
         inv.addModel("items", itemls);
         return "hot";
     }
@@ -67,10 +68,10 @@ public class ShopController {
 
             ShopCategory cate  = category.get(0);
             int cateId = cate.getCategory_id();
-            List <Item> items = itemsDAO.getItems(shop_id,cateId,0,20)  ;
+            List <Item> items = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,cateId,0,20)  ;
             inv.addModel("items", items);
         }
-        List<Item> itemls = itemsDAO.hot(shop_id,0,20);
+        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
 
 
         inv.addModel("items", itemls);
@@ -92,7 +93,7 @@ public class ShopController {
             LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
             shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
-        List<Item> itemls = itemsDAO.getItems(shop_id, category_id, from, offset);
+        List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id, category_id, from, offset);
         inv.addModel("items", itemls);
 
         JSONObject jb =  new JSONObject() ;

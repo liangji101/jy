@@ -82,7 +82,7 @@ public class OrderController {
             JSONObject jb = (JSONObject) jbarr.get(i);
             long item_id = jb.getLong("item_id");
             int count = jb.getInteger("count");
-            Item item = itemsDAO.getItem(shop_id, item_id);
+            Item item = itemsDAO.getItem(SUtils.generTableName(shop_id),shop_id, item_id);
             //计算库存是否足够
             Item4V i4v = new Item4V();
             i4v.setExt(count);
@@ -116,7 +116,7 @@ public class OrderController {
             int  count  = it.getCount() ;
             long s_id = it.getShop_id();
             long i_id  =  it.getId();
-            itemsDAO.decr(s_id,i_id,count) ;
+            itemsDAO.decr(SUtils.generTableName(s_id),s_id,i_id,count) ;
             LoggerUtils.getInstance().log(String.format(" item  %d   decr %d" , i_id , count));
         }
         Order order = new Order();

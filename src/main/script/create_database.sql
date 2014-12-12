@@ -93,6 +93,7 @@ CREATE TABLE `shop_category` (
 
  CREATE TABLE `items` (                          
   `id` bigint(20) NOT NULL AUTO_INCREMENT ,
+  `serialNo` varchar(24) NOT NULL DEFAULT '' ,
   `shop_id` bigint(20) NOT NULL DEFAULT 0 ,
   `name` varchar(24) NOT NULL DEFAULT '' ,
   `category_id` int(11) NOT NULL DEFAULT 0 ,
@@ -172,7 +173,7 @@ CREATE TABLE `ver` (
 
 测试数据做成
 
-
+insert into  shop (id,name,owner,owner_phone,lng,lat ) value (1,'name','owner','18600326217',116.300003051758,39.00000095367);
 insert into  shop (id,name,owner,owner_phone,lng,lat ) value (2,'name','owner','18600326217',116.300003051758,39.00000095367);
 
 

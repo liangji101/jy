@@ -12,6 +12,7 @@ import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
+import com.renren.ntc.sg.util.SUtils;
 import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
@@ -56,7 +57,7 @@ public class HomeController {
             shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
         //获取 热门分类
-        List<Item> itemls = itemsDAO.hot(shop_id,0,20);
+        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
         inv.addModel("items", itemls);
         return "hot";
     }
@@ -82,7 +83,7 @@ public class HomeController {
 
             ShopCategory cate  = category.get(0);
             int cateId = cate.getCategory_id();
-            List <Item> items = itemsDAO.getItems(shop_id,cateId,0,20)  ;
+            List <Item> items = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,cateId,0,20)  ;
             inv.addModel("items", items);
         }
          inv.addModel("categoryls",category);
