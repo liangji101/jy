@@ -2,25 +2,35 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
-    <script src="/js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/js/appframework/appframework.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../js/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+
+    <script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body >
 
-<div id="afui">
-
-    <div id="header">
-        <a id="backButton" href="javascript:;" class="button" style="visibility: hidden; ">Back</a>
-        <h1 id="pageTitle">$shop.name</h1>
-    </div>
+<div>
+    <header>
+        <a id="backButton" class="button backButton">Back...</a>
+        <h1>$shop.name</h1>
+    </header>
 
     <div id="content">
-        <p>$shop.Id</p>
+
+        <div class="searchBar">
+            <form>
+                 <input type="search" name="search-products" class="searchBar-input" value="" placeholder="搜索你想要的商品...">
+            </form>
+        </div>
+
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-xs-3">
-                    <div id="sidebar" data-title="" class="panel" selected="false">
+                    <div id="sidebar">
                         <ul class="list">
                             #foreach($category in $categoryls)
                             <li>
@@ -33,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-xs-9">
-                    <div id="contentDetail" data-title="" class="panel" selected="false">
+                    <div id="contentDetail">
 
                         <ul class="list">
                             #foreach($item in  $items)
