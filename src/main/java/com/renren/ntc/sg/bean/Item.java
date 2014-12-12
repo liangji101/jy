@@ -28,6 +28,9 @@ CREATE TABLE `items` (
 public class Item {
 
     private  long id = 0;
+
+
+    private  String serialNo = "" ;
     private  long  shop_id  = 0;
     private  String  name   = "";
 
@@ -48,6 +51,14 @@ public class Item {
     private  int  price_new;
     private  Date  create_time  ;
     private  Date  update_time  ;
+
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
+    }
 
 
     public String getPic_url() {

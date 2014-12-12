@@ -4,6 +4,7 @@ import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Shop;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
+import net.paoding.rose.jade.annotation.SQLParam;
 
 import java.util.List;
 
@@ -27,26 +28,33 @@ CREATE TABLE `items` (
 @DAO(catalog = "ABC")
 public interface ItemsDAO {
     static final String TABLE_NAME= "items";
-    static final String FIELDS = "id, shop_id,name,category_id,category_sub_id,score ,price,price_new ,count,pic_url,create_time,update_time" ;
-    static final String INSERT_FIELDS = "shop_id,name,category_id,category_sub_id,score, price,price_new,count,pic_url,create_time,update_time" ;
+    static final String FIELDS = "id,serialNo, shop_id,name,category_id,category_sub_id,score ,price,price_new ,count,pic_url,create_time,update_time" ;
+    static final String INSERT_FIELDS = "serialNo,shop_id,name,category_id,category_sub_id,score, price,price_new,count,pic_url" ;
 
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1")
     public List<Item> getItems(long shop_id);
 
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:2")
-    public  Item getItem(long shop_id, long id );
+    @SQL("select "+ FIELDS +" from ##(:tableName)   where id =:3")
+    public  Item getItem(@SQLParam("tableName") String tableName,long shop_id, long id );
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 and category_id=:2 order by score asc limit :3 , :4")
-    public List<Item> getItems(long shop_id, int category_id ,int from, int offset );
+    @SQL("select "+ FIELDS +" from ##(:tableName)   where shop_id =:2 and category_id=:3 order by score asc limit :4 , :5")
+    public List<Item> getItems(@SQLParam("tableName") String tableName,long shop_id, int category_id ,int from, int offset );
 
-    @SQL("update " + TABLE_NAME + " set count = count-:3  where id =:2")
-    public void decr(long s_id, long i_id, int count);
+    @SQL("update ##(:tableName)  set count = count-:4  where id =:3")
+    public void insert(@SQLParam("tableName") String tableName, long s_id, long i_id, int count);
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where  shop_id=:1  order by score  desc limit :2,:3")
-    public  List<Item> hot(long shop_id, int flag ,int offset );
+    @SQL("update  ##(:tableName) set count = count-:4  where id =:3")
+    public void decr(@SQLParam("tableName") String tableName, long s_id, long i_id, int count);
+
+    @SQL("insert into ##(:tableName) (" + INSERT_FIELDS + ")" +" value (:2.serialNo,:2.shop_id,:2.name," +
+            ":2.category_id,:2.category_sub_id,:2.score,:2.price,:2.price_new,:2.count,:2.pic_url)")
+    public  int insert(@SQLParam("tableName") String tableName, Item item);
+
+    @SQL("select "+ FIELDS +" from ##(:tableName)  where  shop_id=:2  order by score  desc limit :3,:4")
+    public  List<Item> hot(@SQLParam("tableName") String tableName,long shop_id, int flag ,int offset );
 
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where  shop_id=:1 and name like =:2")
-    public  List<Item> search(long shop_id, String key);
+    @SQL("select "+ FIELDS +" from  ##(:tableName)   where  shop_id=:2 and name like =:3")
+    public  List<Item> search(@SQLParam("tableName") String tableName,long shop_id, String key);
 }

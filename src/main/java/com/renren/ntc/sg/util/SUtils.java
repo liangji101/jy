@@ -114,9 +114,6 @@ public class SUtils {
         return true;
     }
 
-    public static  void  main (String [] args) {
-           System.out.println(getOrderId());
-    }
 
 
     public static String generName() {
@@ -177,4 +174,16 @@ public class SUtils {
         return sb.toString();
     }
 
+    public static String generTableName(long shop_id) {
+        StringBuffer sb  = new StringBuffer("items_");
+        long mod = shop_id % 1000;
+        return sb.append(mod).toString();
+    }
+
+    public static void  main(String [] args){
+
+        System.out.println(generTableName(1000));
+        System.out.println(generTableName(1));
+        System.out.println(generTableName(10));
+    }
 }
