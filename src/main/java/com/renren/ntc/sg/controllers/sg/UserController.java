@@ -41,7 +41,7 @@ public class UserController {
     // 检查库存
     // 判断地址是否Ok
 
-    @Get("profile")
+    @Get("")
     public String save(Invocation inv) {
 
         User u = holder.getUser();

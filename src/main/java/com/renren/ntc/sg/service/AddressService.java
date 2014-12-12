@@ -23,7 +23,7 @@ public class AddressService {
 
 
     public List<Address> getAddresses(long user_id   ) {
-        return addressDAO.getAddresses(user_id);
+        return addressDAO.getAddresses(user_id,0,20);
     }
 
     public int  addAddress(Address address) {
