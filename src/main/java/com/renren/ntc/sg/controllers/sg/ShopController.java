@@ -13,6 +13,7 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -81,6 +82,7 @@ public class ShopController {
         }
 
     @Get("getitems")
+    @Post("getitems")
     public String getitems (Invocation inv,@Param("shop_id") long shop_id ,@Param("category_id") int category_id,
                              @Param("from") int from ,@Param("offset") int offset){
         // 校验合法性

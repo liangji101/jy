@@ -17,6 +17,7 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,6 +42,7 @@ public class ShopCarController {
 
 
     @Get("confirm")
+    @Post("confirm")
     public String hot (Invocation inv,@Param("shop_id") long shop_id,@Param("items") String items){
         if (0  >= shop_id){
             shop_id = Constants.DEFAULT_SHOP ;
