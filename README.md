@@ -17,10 +17,17 @@ jy
 /sg/shop?shop_id=&category_id=&from=&offset=
 返回 json
 ======================================
+购物车页面
+××××××××××××××××××
+/sg/shopCar/confirm?shop_id=&items=
+返回 检查库存 库存OK ， 点击确认提交到 /sg/order/save?入口生成订单
+
+=============================
 生成订单页面
 ××××××××××××××××××
-/sg/shop?shop_id=&category_id=&from=&offset=
-返回 订单完成页面
+/sg/order/save?shop_id=&items=
+返回 检查库存 返回个人页面/sg/user 展示已下订单列表
+
 ==========================================
 用户首页入口
 ×××××××××××××××××
