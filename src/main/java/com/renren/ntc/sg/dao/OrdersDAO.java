@@ -39,7 +39,7 @@ public interface OrdersDAO {
 
 
     @SQL("insert into  " + TABLE_NAME + "(" + INSERT_FIELDS + ") values(:1.order_id,:1.shop_id," +
-            ":1.user_id,:1.phone,:1.address_id,:1,remarks,:1.snapshot,:1.status,:1.price)  ")
+            ":1.user_id,:1.phone,:1.address_id,:1.remarks,:1.snapshot,:1.status,:1.price)  ")
     public int  insertUpdate(Order o);
 
 }

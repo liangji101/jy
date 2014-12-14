@@ -36,6 +36,8 @@ public class ShopConsoleController {
     @Get("")
 	public String inde(Invocation inv, @Param("shop_id") long shop_id){
 
+
+
          return "items";
 	}
 
@@ -52,4 +54,11 @@ public class ShopConsoleController {
 
         return  "@" ;
     }
+
+    @Post("edit")
+    public String edit(Invocation inv,@Param("item") String item){
+
+        return  "@" ;
+    }
+
 }
