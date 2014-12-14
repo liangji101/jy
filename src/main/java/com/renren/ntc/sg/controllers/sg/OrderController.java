@@ -96,8 +96,10 @@ public class OrderController {
             i4v.setShop_id(item.getShop_id());
 
             if (item.getCount() < count) {
+                //库存剩余
                 i4v.setExt(item.getCount());
                 i4v.setCount(count);
+                i4v.setInfo ("只剩这些了,正在通知店家补货");
                 ok = false;
             }
             itemls.add(i4v);
