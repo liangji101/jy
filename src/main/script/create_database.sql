@@ -147,7 +147,6 @@ CREATE TABLE `orders` (
   `order_id` varchar(32) NOT NULL DEFAULT '' ,
   `shop_id` bigint(20) NOT NULL DEFAULT 0,
   `user_id` bigint(20) NOT NULL DEFAULT 0,
-  `phone` varchar(20) NOT NULL DEFAULT '' ,
   `address_id`  varchar(245) NOT NULL DEFAULT '' ,
   `remarks`  varchar(245) NOT NULL DEFAULT '' ,
   `snapshot` varchar(8192)  NOT NULL DEFAULT '' ,
