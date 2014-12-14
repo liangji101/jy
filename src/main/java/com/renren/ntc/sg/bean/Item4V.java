@@ -31,6 +31,11 @@ public class Item4V {
     private  long   shop_id  = 0;
     private  String  name   = "";
 
+    public String getInfo() {
+        return info;
+    }
+
+    private  String info ="";
 
     private int  category_id;
     private int  category_sub_id;
@@ -155,9 +160,7 @@ public class Item4V {
     }
 
 
-
-
-
-
-
+    public void setInfo(String info) {
+        this.info = info;
+    }
 }
