@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import com.renren.ntc.sg.dao.ItemsDAO;
@@ -21,8 +22,8 @@ public class ReadExcel {
         xwb = new XSSFWorkbook("E:\\lelin.xlsx");
     }
 
-    public XSSFSheet get() {
-        return xwb.getSheetAt(0);
+    public XSSFSheet get(int i) {
+        return xwb.getSheetAt(i);
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +31,33 @@ public class ReadExcel {
         ItemsDAO itemDao = rose.getBean(ItemsDAO.class);
         // 读取第一章表格内容
         ReadExcel xwb = new ReadExcel();
-        XSSFSheet sheet = xwb.get();
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        map.put(0,22);
+        map.put(1,18);
+        map.put(2,16);
+        map.put(3,16);
+        map.put(4,19);
+        map.put(5,20);
+        map.put(6,24);
+        map.put(7,25);
+        map.put(8,28);
+        map.put(9,0);
+        map.put(10,23)   ;
+        map.put(11,16);
+        map.put(12,0);
+        map.put(13,22);
+        map.put(14,17);
+        map.put(15,22);
+        map.put(16,28);
+        map.put(17,28);
+        map.put(18,26);
+        map.put(19,0);
+        map.put(20,0);
+        map.put(21,0);
+        map.put(22,0);
+        map.put(23,15);
+        for (int k =0 ; k < 24 ; k ++){
+        XSSFSheet sheet = xwb.get(k);
         // 定义 row、cell
         XSSFRow row;
         String cell;
@@ -44,7 +71,7 @@ public class ReadExcel {
             Item it  = new Item() ;
             long  shop_id = 1;
             it.setShop_id(shop_id);
-            it.setCategory_id(22);
+            it.setCategory_id(map.get((Integer)k));
             for (int j = row.getFirstCellNum(); j < row.getPhysicalNumberOfCells(); j++) {
                 // 通过 row.getCell(j).toString() 获取单元格内容，
                 cell = row.getCell(j).toString().trim();
@@ -71,6 +98,7 @@ public class ReadExcel {
             if (!StringUtils.isEmpty(it.getName()) && !StringUtils.isEmpty(it.getSerialNo()) ) {
                 itemDao.insert(SUtils.generTableName(shop_id) ,it);
             }
+         }
         }
     }
 

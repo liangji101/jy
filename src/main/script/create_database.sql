@@ -197,10 +197,16 @@ insert into product (serialNo,name,pic_url,category_id)  values('12121213123','�
 insert into product (serialNo,name,pic_url,category_id)  values('12121213123','金龙鱼食用油500ml','http://www.baidu.com',12);
 insert into product (serialNo,name,pic_url,category_id)  values('12121213123','金龙鱼食用油500ml','http://www.baidu.com',12);
 
-insert into  shop_category (shop_id,category_id,name,score) value(1,1,'方便面',1);
-insert into  shop_category (shop_id,category_id,name,score) value(1,2,'香烟',1);
-insert into  shop_category (shop_id,category_id,name,score) value(1,3,'啤酒',1);
-
+insert into  shop_category (shop_id,category_id,name,score) value(1,24,'方便面',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,20,'香烟',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,19,'酒水',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,16,'牛奶',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,25,'火腿肠',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,23,'面包',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,15,'哈哈镜',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,17,'速冻',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,26,'日用品',1);
+insert into  shop_category (shop_id,category_id,name,score) value(1,28,'火腿肠',1);
 
 insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,10,1000,2000,'http://www.baidu.com');
 insert into  items (shop_id,name,category_id,score,count,price,price_new,pic_url) value(1,'玉米',1,10,14,1000,2000,'http://www.baidu.com');
