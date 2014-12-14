@@ -110,9 +110,9 @@ public class OrderController {
         }
 
         if (!SUtils.islegal(order_id)) {
-            String orderId = SUtils.getOrderId();
-            LoggerUtils.getInstance().log(String.format("re error order %s,  items %s  ", orderId, items));
-            LoggerUtils.getInstance().log(String.format("create new  order %s ", orderId, order_id));
+            order_id = SUtils.getOrderId();
+            LoggerUtils.getInstance().log(String.format("re error order %s,  items %s  ", order_id, items));
+            LoggerUtils.getInstance().log(String.format("create new  order %s ", order_id));
         }
         //库存变化 TODO
         for (Item4V it : itemls ){
