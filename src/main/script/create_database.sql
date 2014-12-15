@@ -155,6 +155,7 @@ CREATE TABLE `orders` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL ,
    PRIMARY KEY (`id`),
+   UNIQUE KEY order_id (`order_id`),
    UNIQUE  KEY order_id (`order_id`),
    KEY user_id(`user_id`),
    KEY shop_id(`shop_id`)

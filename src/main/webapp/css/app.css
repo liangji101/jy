@@ -1,0 +1,109 @@
+
+html, body {
+    height:100%
+}
+#main {
+    height:100%
+}
+
+#header {
+    width: 100%;
+    height: 45px;
+    position: fixed;
+    top: 0;
+}
+#content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 45px 0;
+}
+#footer {
+    width: 100%;
+    height: 45px;
+    position: fixed;
+    bottom: 0;
+}
+
+.searchBar{
+    width: 100%;
+    text-align: center;
+}
+.searchBar-input{
+    margin-right: 5px;
+}
+
+
+.content-container{
+    width: 100%;
+}
+
+.content-category{
+    width: 25%;
+}
+
+.content-details{
+    width: 75%;
+}
+
+
+.ui-tabs{
+    padding: 0em;
+}
+
+.shop-container{
+    border: solid 1px #a2a2a2;
+}
+
+.shop-categray-list-container{
+    border-right: solid 1px #a2a2a2;
+    border-bottom: solid 1px #a2a2a2;
+    padding-left: 0em;
+    padding-right: 0em;
+}
+
+.shop-categray-list a::after{
+    display: none;
+}
+
+
+.oneline {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+
+.item_name{
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.item_price{
+    font-size: 0.6em;
+    font-weight: normal;
+    float: left;
+    padding-top: 2em;
+}
+
+.item_add{
+    float: right;
+}
+
+.item_add .ui-controlgroup-controls{
+    zoom: 0.5;
+}
+
+/*for stepper*/
+
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+}
+
+input.qtyplus {
+    width:25px; height:25px;
+}
+input.qtyminus {
+    width:25px; height:25px;
+}
