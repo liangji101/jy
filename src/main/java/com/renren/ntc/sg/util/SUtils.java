@@ -3,6 +3,7 @@ package com.renren.ntc.sg.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.OrderInfo;
 import org.apache.commons.lang.StringUtils;
 
@@ -180,10 +181,18 @@ public class SUtils {
         return sb.append(mod).toString();
     }
 
-    public static void  main(String [] args){
 
-        System.out.println(generTableName(1000));
-        System.out.println(generTableName(1));
-        System.out.println(generTableName(10));
+    public static JSONObject parse(Item item) {
+        JSONObject jb =  new JSONObject();
+        jb  = (JSONObject)JSON.toJSON(item);
+        return jb;
     }
+
+    public static void  main(String [] args){
+        Item it = new Item();
+        it.setPic_url("1212") ;
+        System.out.println(parse(it).toJSONString());
+    }
+
+
 }

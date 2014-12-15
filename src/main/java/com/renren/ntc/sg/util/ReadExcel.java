@@ -78,7 +78,11 @@ public class ReadExcel {
                 cell = row.getCell(j).toString().trim();
                 System.out.print(cell + "-" );
                 if(j == 2){
-
+                    int flag = cell.indexOf("E");
+                    if ( -1 != flag) {
+                      cell = cell.substring(0,flag);
+                      cell =  cell.replace(".","");
+                    }
                    it.setSerialNo(cell);
                 }
                 if(j == 3){
