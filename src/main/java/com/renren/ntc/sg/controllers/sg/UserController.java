@@ -41,7 +41,7 @@ public class UserController {
     // 检查库存
     // 判断地址是否Ok
 
-    @Get("")
+    @Get("profile")
     public String save(Invocation inv) {
 
         User u = holder.getUser();
@@ -51,7 +51,7 @@ public class UserController {
         }
 
 
-        List<Address>  addressls = addressDAO.getAddresses(user_id,0,20);
+        List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
         inv.addModel( "address",addressls);
         inv.addModel( "orders",orders);

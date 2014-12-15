@@ -65,15 +65,7 @@ public class ShopController {
         }
         List<ShopCategory> category  = shopCategoryDAO.getCategory(shop.getId());
 
-        if (null != category  &&  category.size() > 0){
-
-            ShopCategory cate  = category.get(0);
-            int cateId = cate.getCategory_id();
-            List <Item> items = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,cateId,0,20)  ;
-            inv.addModel("items", items);
-        }
         List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
-
 
         inv.addModel("items", itemls);
         inv.addModel("categoryls",category);

@@ -13,5 +13,8 @@ public class Test {
 
     public static void main(String [] args){
         System.out.println(URLEncoder.encode("[{\"item_id\":5173,\"count\":10},{\"item_id\":5174,\"count\":10}]"));
+        String str = "4.894375000514E12";
+        long va = Long.valueOf(str);
+        System.out.println(va);
     }
 }

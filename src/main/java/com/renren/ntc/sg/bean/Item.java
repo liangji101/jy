@@ -32,7 +32,7 @@ public class Item {
 
     private  String serialNo = "" ;
     private  long  shop_id  = 0;
-    private  String  name   = "";
+    private  String  name  ;
 
 
 

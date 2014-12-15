@@ -57,4 +57,8 @@ public interface ItemsDAO {
 
     @SQL("select "+ FIELDS +" from  ##(:tableName)   where  shop_id=:2 and name like =:3")
     public  List<Item> search(@SQLParam("tableName") String tableName,long shop_id, String key);
+
+
+    @SQL("update  ##(:tableName) set ##(:key) = :4  where id =:2")
+    void update(@SQLParam("tableName") String tableName , long id ,@SQLParam("key")  String key, String value);
 }
