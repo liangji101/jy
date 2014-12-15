@@ -53,6 +53,7 @@ public class OrderController {
     // 判断地址是否Ok
 
     @Get("save")
+    @Post("save")
     public String save(Invocation inv, @Param("shop_id") long shop_id, @Param("items") String items, @Param("order_id") String order_id) {
 
         User u = holder.getUser();
