@@ -15,7 +15,6 @@ public class Order {
     private String order_id  ;
     private long   shop_id ;
     private long   user_id;
-    private String phone;
     private int address_id ;
     private String remarks ;
     private String snapshot ;
@@ -51,14 +50,6 @@ public class Order {
 
     public void setUser_id(long user_id) {
         this.user_id = user_id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public int getAddress_id() {
