@@ -78,6 +78,7 @@ public class OrderController {
 
         boolean ok = true;
         JSONArray jbarr = (JSONArray) JSONArray.parse(items);
+        int price = 0;
         List<Item4V> itemls = new ArrayList<Item4V>();
         for (int i = 0; i < jbarr.size(); i++) {
             JSONObject jb = (JSONObject) jbarr.get(i);
@@ -103,6 +104,7 @@ public class OrderController {
                 ok = false;
             }
             itemls.add(i4v);
+            price += i4v.getPrice() * i4v.getExt();
         }
         inv.addModel("itemls", itemls);
         if (!ok) {
@@ -125,6 +127,7 @@ public class OrderController {
         Order order = new Order();
         order.setOrder_id(order_id);
         order.setShop_id(shop_id);
+        order.setPrice(price);
         order.setRemarks("remarks");
         order.setSnapshot(items);
         order.setStatus(1);         //已经确认的状态
@@ -133,7 +136,7 @@ public class OrderController {
         if (re == 1) {
             return "error";
         }
-        return "order";
+        return "r:/user/profile";
     }
 
 
