@@ -92,6 +92,7 @@ public class ShopConsoleController {
         List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category_id,0,100);
         inv.addModel("itemls", itemls);
         inv.addModel("categoryls",categoryls);
+        inv.addModel("curr_cate_id",category_id);
         return "shop";
 	}
 
