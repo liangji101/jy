@@ -97,7 +97,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-3" style=";text-align: center;height: 100%;padding: 0em;">
-                    <form action="me/" method="get" data-ajax="true">
+                    <form action="user/profile" method="get" data-ajax="true">
                         <button type="submit" class="shopping_cart_empty" style="width: 100%;height:100%; margin:0em">我的(现在点我清除购物车)<span> <br><br></span></button>
                     </form>
                 </div>

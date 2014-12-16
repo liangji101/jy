@@ -81,7 +81,7 @@
 
                             <input type="hidden" id="order_shop_id" name="shop_id" value="$shop.id"/>
                             <input type="hidden" id="order_items" name="items" value=''/>
-                            <input type="hidden" id="order_id" name="order_id" value=''/>
+                            <input type="hidden" id="order_id" name="order_id" value="$order_id"/>
 
                             <button id="submit_shop" style="width: 100%;margin:0em">确定<span> <br>
                             总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span id="js-shop-total-count"
