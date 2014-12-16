@@ -90,6 +90,18 @@ public class AddressController {
         addressService.updateAddress(add) ;
         return Constants.DONE;
     }
+
+    //更新默认地址
+    @Get("update")
+    public String update (Invocation inv ,@Param("address_id") long address_id ){
+        User u = ntcHostHolder.getUser();
+        if ( null ==u ||  0 >= u.getId()){
+            inv.addModel("msg" ,"请刷新后再试");
+            return "error";
+        }
+        addressService.defaultAddress(address_id) ;
+        return Constants.DONE;
+    }
 }
 
 

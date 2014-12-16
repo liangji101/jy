@@ -43,4 +43,7 @@ public class AddressService {
     }
 
 
+    public int defaultAddress(long address_id) {
+        return addressDAO.defaultAddress(address_id);
+    }
 }

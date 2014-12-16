@@ -44,4 +44,7 @@ public interface AddressDAO {
 
     @SQL("del  "  + TABLE_NAME + " where id = :1.id")
     public int  delAddress(long address_id);
+
+    @SQL("update  "  + TABLE_NAME +  "set type=1 where id = :1")
+    public int defaultAddress(long address_id);
 }
