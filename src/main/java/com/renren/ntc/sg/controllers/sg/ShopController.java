@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
+import com.renren.ntc.sg.bean.ShopCategory4v;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
@@ -16,6 +17,7 @@ import net.paoding.rose.web.annotation.rest.Get;
 import net.paoding.rose.web.annotation.rest.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("shop")
@@ -63,13 +65,18 @@ public class ShopController {
              LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
               shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
-        List<ShopCategory> category  = shopCategoryDAO.getCategory(shop.getId());
+        List<ShopCategory> categoryls  = shopCategoryDAO.getCategory(shop.getId());
+        List<ShopCategory4v> shopCategoryls =  new ArrayList< ShopCategory4v >() ;
+        for (ShopCategory category : categoryls)  {
+            ShopCategory4v s  =  new ShopCategory4v();
+            s.setName(category.getName());
+            s.setCategory_id(category.getCategory_id());
+            List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
+            s.setItemls(itemls);
+            shopCategoryls.add(s);
+        }
 
-//        for (Shop Category category : category)
-        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
-
-        inv.addModel("items", itemls);
-        inv.addModel("categoryls",category);
+        inv.addModel("categoryls",shopCategoryls);
         inv.addModel("shop",shop);
         return "shop" ;
         }
