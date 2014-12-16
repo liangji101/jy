@@ -33,7 +33,7 @@ public interface AddressDAO {
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
     public Address getAddress(long id);
 
-	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 and type=0  limit :2,:3")
+	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 and type=1  limit :2,:3")
 	public List<Address> getAddresses(long user_id , int start,int offset);
 
     @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.type,:1.user_id,:1,city,1:province,:1.district,:1.name,:1.phone,:1.address,:1.update_time)")
