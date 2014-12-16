@@ -49,8 +49,6 @@ public class UserController {
         if (null != u) {
             user_id = u.getId();
         }
-
-
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
         inv.addModel( "addressls",addressls);
