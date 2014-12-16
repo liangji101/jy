@@ -64,7 +64,8 @@ public class AddressController {
 
     @Get("add")
     @Post ("add")
-    public String add (Invocation inv ,@Param("phone") String phone,@Param("name") String name ,@Param("address") String address){
+    //添加并设置为默认地址
+    public String add (Invocation inv ,@Param("phone") String phone ,@Param("address") String address){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             inv.addModel("msg" ,"请刷新后再试");
@@ -74,8 +75,9 @@ public class AddressController {
         add.setUser_id(u.getId());
         add.setAddress(address);
         add.setPhone(phone);
-        addressService.addAddress(add) ;
-
+        long  address_id = addressService.addAddress(add) ;
+        addressService.cleanDefaultAddress(u.getId());
+        addressService.defaultAddress(address_id) ;
         return Constants.DONE;
     }
 
