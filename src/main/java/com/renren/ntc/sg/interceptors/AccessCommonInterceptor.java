@@ -56,12 +56,15 @@ public class AccessCommonInterceptor extends ControllerInterceptorAdapter {
         if( null == u ) {
             String userName = SUtils.generName();
             u  = userService.createUser(userName , 0,  "pwd", 1 );
-            CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.COOKIE_KEY_USER,SUtils.wrapper(u.getId()) , -1 , "/");
+            CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.COOKIE_KEY_USER,SUtils.wrapper(u.getId()) ,year() , "/");
         }
         hostHolder.setUser(u);
         return true;
 	}
-
+    private final static int YEAR =  36000*24*365 ;
+    private int year() {
+        return  YEAR ;
+    }
 
 
     protected Object after(Invocation inv, Object instruction) throws Exception {
