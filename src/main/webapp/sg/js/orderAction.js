@@ -7,20 +7,19 @@ $(document).ready(function(){
 
     shoppingCart.updateTotal();
 
-    $( document ).on( "vclick", "#submit_shop", function() {
+    $( document ).on( "click", "#submit_order", function() {
 
         var items = [];
         for(var idx = 0 ;idx < shoppingCart.shoppingItemsArray.length;idx++){
             items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id ,"count":shoppingCart.shoppingItemsArray[idx].quantity});
         }
-        $('#form_items').val(JSON.stringify(items));
+        $('#order_items').val(JSON.stringify(items));
+
     });
 
-
-    $("#shopConfirm").submit(function( event ) {
+    $("#orderConfirm").submit(function( event ) {
 
         var values = $(this).serialize();
-        shoppingCart.saveShoppingCart();
 
         return true;
     });

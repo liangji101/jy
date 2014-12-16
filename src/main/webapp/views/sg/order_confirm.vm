@@ -10,9 +10,10 @@
     <script src="../../js/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="../../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     <script src="../../js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../sg/js/simpleCart.js" type="text/javascript"></script>
-    <script src="../../js/jqm-spinbox.min.js" type="text/javascript"></script>
-    <script src="../../sg/js/shopAction.js" type="text/javascript"></script>
+    <!--<script src="../../sg/js/simpleCart.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jqm-spinbox.min.js" type="text/javascript"></script>-->
+    <script src="../../sg/js/ShoppingCart.js" type="text/javascript"></script>
+    <script src="../../sg/js/orderAction.js" type="text/javascript"></script>
 
     <!--for tomcat-->
     <link rel="stylesheet" href="/js/bootstrap/dist/css/bootstrap.min.css">
@@ -22,9 +23,10 @@
     <script src="/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     <script src="/js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/sg/js/simpleCart.js" type="text/javascript"></script>
-    <script src="/js/jqm-spinbox.min.js" type="text/javascript"></script>
-    <script src="/sg/js/shopAction.js" type="text/javascript"></script>
+    <!--<script src="/sg/js/simpleCart.js" type="text/javascript"></script>-->
+    <!--<script src="/js/jqm-spinbox.min.js" type="text/javascript"></script>-->
+    <script src="/sg/js/ShoppingCart.js" type="text/javascript"></script>
+    <script src="/sg/js/orderAction.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -41,31 +43,29 @@
                 <div class="row">
                     <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
                         <div id="shop-product-list">
-                            <ul data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-shadow"
-                                data-inset="true"
-                                role="listbox"
-                                style="margin: 0.1em 0.0em;">
+
+                            <ul style="margin: 0.1em 0.0em;">
                                 #foreach($item in $itemls)
-                                <li class="ui-li-has-thumb simpleCart_shelfItem">
-                                    <input type="text" class="item_original" value="$item.id" style="display: none"/>
-                                    <a href="" class="ui-btn" style="padding-left: 85px;padding-right: 2px;">
-                                        <img src="$item.pic_url">
-                                        #set($item.price = $item.price/100)
-                                        <div class="ui-li-heading item_name oneline">$item.name</div>
-                                        <div>
-                                            <div class="ui-li-desc item_price">$item.price 元
-                                            </div>
-                                            <div>
-                                                <input type="button" class="item_minues" value="-"/>
-                                                <input type="text" class="item_count" value="0"/>
-                                                <input type="button" class="item_add" value="+"/>
-                                            </div>
+                                <li class="product-item js-product-item" id="$item.id">
+                                    <input type="hidden" class="js-product-item-id" value="$item.id" data-value="$item.id"/>
+                                    <img src="$item.pic_url" style="width: 20px">
+                                    #set($item.price = $item.price/100)
+                                    <div class="item_name oneline js-product-item-name" data-value="$item.name">$item.name</div>
+                                    <div>
+                                        <div class="item_price js-product-item-price" data-value="$item.price">$item.price 元
                                         </div>
-                                    </a>
+                                        <div>
+                                            <button class="countChangeAction countChangeActionMinus hidden">-</button>
+                                            <input type="text" class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity" value="$item.count" data-value="0">
+                                            <button class="countChangeAction countChangeActionAdd">+</button>
+                                        </div>
+                                    </div>
                                 </li>
                                 #end
                             </ul>
+
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -79,13 +79,13 @@
                     <form id="orderConfirm" action="shopCar/confirm" method="get" data-ajax="false">
                         <fieldset>
 
-                            <input type="hidden" id="form_shop_id" name="shop_id" value="$shop.id"/>
-                            <input type="hidden" id="form_items" name="items" value=''/>
-                            <input type="hidden" id="order_id" name="items" value=''/>
+                            <input type="hidden" id="order_shop_id" name="shop_id" value="$shop.id"/>
+                            <input type="hidden" id="order_items" name="items" value=''/>
+                            <input type="hidden" id="order_id" name="order_id" value=''/>
 
-                            <button id="submit_order" style="width: 100%;margin:0em">确定<span> <br>
-                            总计: <span class="simpleCart_total">0</span> (<span id="simpleCart_quantity"
-                                                                               class="simpleCart_quantity">0</span> items)</span></button>
+                            <button id="submit_shop" style="width: 100%;margin:0em">确定<span> <br>
+                            总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span id="js-shop-total-count"
+                                                                                                             class="js-shop-total-count">0</span> 个商品)</span></button>
 
                         </fieldset>
                     </form>

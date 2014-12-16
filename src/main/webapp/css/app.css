@@ -79,31 +79,20 @@ html, body {
 }
 
 .item_price{
-    font-size: 0.6em;
-    font-weight: normal;
-    float: left;
-    padding-top: 2em;
+    /*font-size: 0.6em;*/
+    /*font-weight: normal;*/
+    /*float: left;*/
+    /*padding-top: 2em;*/
 }
 
 .item_add{
-    float: right;
+    /*float: right;*/
 }
 
 .item_add .ui-controlgroup-controls{
     zoom: 0.5;
 }
 
-/*for stepper*/
-
-.qty {
-    width: 40px;
-    height: 25px;
-    text-align: center;
-}
-
-input.qtyplus {
-    width:25px; height:25px;
-}
-input.qtyminus {
-    width:25px; height:25px;
+.hidden{
+    display: none;
 }

@@ -1522,7 +1522,7 @@
 												case "textarea":
 												case "select":
 													type = $item.attr("type");
-													if (!type || ((type.toLowerCase() === "checkbox" || type.toLowerCase() === "radio") && $item.attr("checked")) || type.toLowerCase() === "text" || type.toLowerCase() === "number") {
+													if (!type || ((type.toLowerCase() === "checkbox" || type.toLowerCase() === "radio") && $item.attr("checked")) || type.toLowerCase() === "text" || type.toLowerCase() === "number" || type.toLowerCase() === "hidden") {
 														val = $item.val();
 													}				
 													break;
