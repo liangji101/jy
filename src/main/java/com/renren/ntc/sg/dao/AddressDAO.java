@@ -3,6 +3,7 @@ package com.renren.ntc.sg.dao;
 import com.renren.ntc.sg.bean.Address;
 import com.renren.ntc.sg.bean.User;
 import net.paoding.rose.jade.annotation.DAO;
+import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
 import net.paoding.rose.jade.annotation.SQL;
 
 import java.util.List;
@@ -33,9 +34,10 @@ public interface AddressDAO {
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
     public Address getAddress(long id);
 
-	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 and type=0  limit :2,:3")
+	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 order by type desc  limit :2,:3")
 	public List<Address> getAddresses(long user_id , int start,int offset);
 
+    @ReturnGeneratedKeys
     @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.type,:1.user_id,:1,city,1:province,:1.district,:1.name,:1.phone,:1.address,:1.update_time)")
     public int  addAddress(Address address);
 
@@ -44,4 +46,11 @@ public interface AddressDAO {
 
     @SQL("del  "  + TABLE_NAME + " where id = :1.id")
     public int  delAddress(long address_id);
+
+    @SQL("update  "  + TABLE_NAME +  "set type=1 where id = :1")
+    public int defaultAddress(long address_id);
+
+    @SQL("update  "  + TABLE_NAME +  "set type=0 where user_id = :1")
+    public int cleanDefaultAddress(long user_id);
+
 }

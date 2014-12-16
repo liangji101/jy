@@ -2,14 +2,9 @@ package com.renren.ntc.sg.controllers.sg;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.renren.ntc.sg.bean.Item;
-import com.renren.ntc.sg.bean.Item4V;
-import com.renren.ntc.sg.bean.Shop;
-import com.renren.ntc.sg.bean.ShopCategory;
-import com.renren.ntc.sg.dao.ItemsDAO;
-import com.renren.ntc.sg.dao.SWPOrderDAO;
-import com.renren.ntc.sg.dao.ShopCategoryDAO;
-import com.renren.ntc.sg.dao.ShopDAO;
+import com.renren.ntc.sg.bean.*;
+import com.renren.ntc.sg.dao.*;
+import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.SUtils;
@@ -30,9 +25,13 @@ public class ShopCarController {
     private static int DEFAULT_SHOP_ID = 1;
 
     @Autowired
-    public ShopDAO shopDAO;
+    public NtcHostHolder holder;
+
     @Autowired
-    public SWPOrderDAO  orderDAO;
+    public ShopDAO shopDAO;
+
+    @Autowired
+    public AddressDAO addressDAO;
 
     @Autowired
     public ItemsDAO itemsDAO;
@@ -44,6 +43,12 @@ public class ShopCarController {
     @Get("confirm")
     @Post("confirm")
     public String hot (Invocation inv,@Param("shop_id") long shop_id,@Param("items") String items){
+
+        User u = holder.getUser();
+        long user_id = 0;
+        if (null != u) {
+            user_id = u.getId();
+        }
         if (0  >= shop_id){
             shop_id = Constants.DEFAULT_SHOP ;
         }
@@ -85,6 +90,9 @@ public class ShopCarController {
             }
             itemls.add(i4v);
         }
+        List<Address>  addressls = addressDAO.getAddresses(user_id, 0, 1);
+
+        inv.addModel( "addressls",addressls);
         inv.addModel("shop", shop);
         inv.addModel("itemls", itemls);
         if (!ok) {

@@ -43,4 +43,11 @@ public class AddressService {
     }
 
 
+    public int defaultAddress(long address_id) {
+        return addressDAO.defaultAddress(address_id);
+    }
+
+    public int cleanDefaultAddress(long address_id) {
+        return addressDAO.cleanDefaultAddress(address_id);
+    }
 }
