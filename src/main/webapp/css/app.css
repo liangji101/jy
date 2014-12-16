@@ -89,3 +89,47 @@ html, body {
 .hidden{
     display: none;
 }
+
+.prod_icon{
+    position: relative;
+    width: 80px;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 80px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    float: left;
+    border: none;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+li{
+    display: list-item;
+    border-bottom: 1px solid #E0E3EF;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.countContainer{
+    display: inline-block;
+}
+.countminusContainer{
+
+}
+
+.countinputContainer{
+
+}
+
+.countaddContainer{
+
+}
+
+.countChangeActionSet{
+
+    width: 30px;
+
+}
+                                                                                                                                                                                                                                                                                           <span class="countaddContainer"

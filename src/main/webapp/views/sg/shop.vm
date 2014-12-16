@@ -59,20 +59,43 @@
                             <ul style="margin: 0.1em 0.0em;" id="$category.id">
                                 #foreach($item in $category.getItemls())
                                 <li class="product-item js-product-item" id="$item.id">
-                                    <input type="hidden" class="js-product-item-id" value="$item.id" data-value="$item.id"/>
-                                    <img src="$item.pic_url" style="width: 20px">
-                                    #set($itempricemain = $item.price/100)
-                                    #set($itempriceleft = $item.price%100)
-                                    <div class="item_name oneline js-product-item-name" data-value="$item.name">$item.name</div>
-                                    <div>
-                                        <div class="item_price js-product-item-price" data-value="$item.price">$itempricemain<span>.$itempriceleft</span> 元
-                                        </div>
-                                        <div>
-                                            <button class="countChangeAction countChangeActionMinus hidden">-</button>
-                                            <input type="text" class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity" value="0" data-value="0">
-                                            <button class="countChangeAction countChangeActionAdd">+</button>
-                                        </div>
+
+                                    <input type="hidden" class="js-product-item-id" value="$item.id"
+                                           data-value="$item.id"/>
+                                    <div class="prod_icon" style='background-image: url("$item.pic_url")'>
+
                                     </div>
+
+                                    <div>
+                                        <span class="item_name oneline js-product-item-name" data-value="$item.name">$item.name </span>
+
+                                        #set($itempricemain = $item.price/100)
+                                        #set($itempriceleft = $item.price%100)
+                                        <div class="prod_info">
+                                            <span class="item_price js-product-item-price" data-value="$item.price">$itempricemain<span>.$itempriceleft</span> 元</span>
+
+                                         <span style="float: right;">
+                                             <span class="countContainer countminusContainer">
+                                                 <button
+                                                         class="countChangeAction countChangeActionMinus hidden">-
+                                                 </button>
+                                             </span>
+                                                <span class="countContainer countinputContainer">
+                                                    <input type="text"
+                                                           class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
+                                                           value="0"
+                                                           data-value="0">
+                                                </span>
+                                                <span class="countContainer countaddContainer">
+                                                    <button
+                                                            class="countChangeAction countChangeActionAdd">+
+                                                    </button>
+                                                </span>
+                                        </span>
+                                        </div>
+
+                                    </div>
+
                                 </li>
                                 #end
                             </ul>
@@ -89,8 +112,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-3" style=";text-align: center;height: 100%;padding: 0em;">
-                    <form action="user/profile" method="get" data-ajax="true">
-                        <button type="submit" style="width: 100%;height:100%; margin:0em">我的<span> <br><br></span></button>
+                    <form action="user/profile" method="get" data-ajax="false">
+                        <button type="submit" style="width: 100%;height:100%; margin:0em">我的<span> <br><br></span>
+                        </button>
                     </form>
                 </div>
                 <div class="col-xs-9" style="text-align: center;height: 100%;padding: 0em;">
@@ -101,8 +125,9 @@
                             <input type="hidden" id="form_items" name="items" value=''/>
 
                             <button id="submit_shop" style="width: 100%;margin:0em">去结算<span> <br>
-                            总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span id="js-shop-total-count"
-                                                                               class="js-shop-total-count">0</span> 个商品)</span></button>
+                            总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span
+                                        id="js-shop-total-count"
+                                        class="js-shop-total-count">0</span> 个商品)</span></button>
 
                         </fieldset>
                     </form>
