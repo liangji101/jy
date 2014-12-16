@@ -56,7 +56,7 @@ public class ShopCarController {
 
         if (StringUtils.isBlank(items)) {
             LoggerUtils.getInstance().log(String.format("can't find shop  %d  items %s", shop_id, items));
-            return "@ error";
+            return "error";
         }
 
         boolean ok = true;
@@ -92,9 +92,6 @@ public class ShopCarController {
         }
         return "order_confirm";
     }
-
-
-
 }
 
 

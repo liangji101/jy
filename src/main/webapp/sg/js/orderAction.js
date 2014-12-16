@@ -7,21 +7,21 @@ $(document).ready(function(){
 
     shoppingCart.updateTotal();
 
-    $( document ).on( "vclick", "#submit_shop", function() {
+    $( document ).on( "click", "#submit_order", function() {
 
         var items = [];
         for(var idx = 0 ;idx < shoppingCart.shoppingItemsArray.length;idx++){
             items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id ,"count":shoppingCart.shoppingItemsArray[idx].quantity});
         }
-        $('#form_items').val(JSON.stringify(items));
+        $('#order_items').val(JSON.stringify(items));
+
     });
 
+    $("#orderConfirm").submit(function( event ) {
 
-    $("#shopConfirm").submit(function( event ) {
-
-        var values = $(this).serialize();
         shoppingCart.saveShoppingCart();
 
+        var values = $(this).serialize();
         return true;
     });
 

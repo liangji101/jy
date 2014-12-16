@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../js/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+
+    <script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!--for tomcat-->
+    <link rel="stylesheet" href="/js/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+
+    <script src="/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+<div id="main" role="page">
+
+    <div id="content" data-role="content" class="ui-content">
+
+        <div class="content-container shop-container">
+            <div class="container-fluid">
+                <div class="row" data-role="tabs">
+                    <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
+                        #foreach($addr in $address)
+                            <div>$addr.getAddress()</div>
+                            <div>$addr.getPhone</div>
+                        #end
+                    </div>
+                    <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
+                        #foreach($order in $orders)
+                        <div>$order.getCreate_time()</div>
+                        <div>$order.getAddress_id()</div>
+                        <div>$order.getRemarks()</div>
+                        <div>$order.getSnapshot()</div>
+                        <div>$order.getStatus()</div>
+                        #end
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
