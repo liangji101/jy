@@ -53,7 +53,7 @@ public class UserController {
 
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
-        inv.addModel( "address",addressls);
+        inv.addModel( "addressls",addressls);
         inv.addModel( "orders",orders);
         return "user";
     }

@@ -44,7 +44,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
 
-                <li class="active"><a href="#">Overview</a></li>
+                <li class="active"><a href="#">    </a></li>
                 #foreach($category in $categoryls)
                 <li #if($category.category_id == $curr_cate_id ) class="active" #end><a href="/jy-1/console/shop?shop_id=${shop.id}&category_id=${category.category_id}"> $category.name</a></li>
                 #end
@@ -80,8 +80,13 @@
                 </table>
                 <nav>
                     <ul class="pager">
-                        <li><a href="#">Previous</a></li>
-                        <li><a href="#">Next</a></li>
+                       #set($r=($from - ${offset})
+                        #if ( $r > 0 )
+                        <li>
+                          <a href="/jy-1/console/shop?shop_id=${shop_id}&category_id=${curr_cate_id}&from=$r&offset=100">Previous</a></li>
+                        #end
+                        #set($r=($from + ${offset})  #end
+                        <li><a href="/jy-1/console/shop?shop_id=${shop_id}&category_id=${curr_cate_id}&from=${r}&offset=100">Next</a></li>
                     </ul>
                 </nav>
             </div>
