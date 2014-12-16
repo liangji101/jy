@@ -13,6 +13,7 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class AddressController {
 
 
     @Get("")
+    @Post ("")
     public String get (Invocation inv){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
@@ -43,6 +45,7 @@ public class AddressController {
         }
 
     @Get("del")
+    @Post ("del")
     public String del (Invocation inv , long address_id){
 
         User u = ntcHostHolder.getUser();
@@ -60,6 +63,7 @@ public class AddressController {
 
 
     @Get("add")
+    @Post ("add")
     public String add (Invocation inv ,@Param("phone") String phone,@Param("name") String name ,@Param("address") String address){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
@@ -76,6 +80,7 @@ public class AddressController {
     }
 
     @Get("update")
+    @Post ("update")
     public String update (Invocation inv ,@Param("address_id") long address_id ,@Param("phone") String phone,@Param("name") String name ,@Param("address") String address){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
@@ -92,13 +97,15 @@ public class AddressController {
     }
 
     //更新默认地址
-    @Get("update")
+    @Get("default")
+    @Post("default")
     public String update (Invocation inv ,@Param("address_id") long address_id ){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             inv.addModel("msg" ,"请刷新后再试");
             return "error";
         }
+        addressService.cleanDefaultAddress(u.getId());
         addressService.defaultAddress(address_id) ;
         return Constants.DONE;
     }
