@@ -19,8 +19,9 @@ $(document).ready(function(){
 
     $("#orderConfirm").submit(function( event ) {
 
-        var values = $(this).serialize();
+        shoppingCart.saveShoppingCart();
 
+        var values = $(this).serialize();
         return true;
     });
 

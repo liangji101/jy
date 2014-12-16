@@ -49,6 +49,9 @@
                                 <li class="product-item js-product-item" id="$item.id">
                                     <input type="hidden" class="js-product-item-id" value="$item.id" data-value="$item.id"/>
                                     <img src="$item.pic_url" style="width: 20px">
+                                    #if($msg)
+                                        <strong>$msg</strong>
+                                    #end
                                     #set($item.price = $item.price/100)
                                     <div class="item_name oneline js-product-item-name" data-value="$item.name">$item.name</div>
                                     <div>
@@ -76,14 +79,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12" style="text-align: center;height: 100%;padding: 0em;">
-                    <form id="orderConfirm" action="shopCar/confirm" method="get" data-ajax="false">
+                    <form id="orderConfirm" action="../order/save" method="post" data-ajax="false">
                         <fieldset>
 
                             <input type="hidden" id="order_shop_id" name="shop_id" value="$shop.id"/>
                             <input type="hidden" id="order_items" name="items" value=''/>
                             <input type="hidden" id="order_id" name="order_id" value="$order_id"/>
 
-                            <button id="submit_shop" style="width: 100%;margin:0em">确定<span> <br>
+                            <button id="submit_order" style="width: 100%;margin:0em">确定<span> <br>
                             总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span id="js-shop-total-count"
                                                                                                              class="js-shop-total-count">0</span> 个商品)</span></button>
 
