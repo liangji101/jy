@@ -43,7 +43,6 @@
                 <div class="row">
                     <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
                         <div id="shop-product-list">
-
                             <ul style="margin: 0.1em 0.0em;">
                                 #foreach($item in $itemls)
                                 <li class="product-item js-product-item" id="$item.id">
