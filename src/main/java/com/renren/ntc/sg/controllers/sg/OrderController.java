@@ -139,7 +139,7 @@ public class OrderController {
         if (re == 1) {
             return "error";
         }
-        return "r:/jy-1/sg/user/profile";
+        return "r:/sg/user/profile";
     }
 
 
