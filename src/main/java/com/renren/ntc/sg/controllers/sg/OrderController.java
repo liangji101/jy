@@ -106,16 +106,18 @@ public class OrderController {
             itemls.add(i4v);
             price += i4v.getPrice() * i4v.getExt();
         }
-        inv.addModel("itemls", itemls);
-        if (!ok) {
-            return "order_confirm";
-        }
-
         if (!SUtils.islegal(order_id)) {
             order_id = SUtils.getOrderId();
             LoggerUtils.getInstance().log(String.format("re error order %s,  items %s  ", order_id, items));
             LoggerUtils.getInstance().log(String.format("create new  order %s ", order_id));
         }
+        inv.addModel("order_id", order_id);
+        inv.addModel("itemls", itemls);
+        if (!ok) {
+            return "order_confirm";
+        }
+
+
         //库存变化 TODO
         for (Item4V it : itemls ){
             int  count  = it.getCount() ;

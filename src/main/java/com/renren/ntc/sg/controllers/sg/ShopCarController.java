@@ -85,6 +85,7 @@ public class ShopCarController {
             }
             itemls.add(i4v);
         }
+        inv.addModel("shop", shop);
         inv.addModel("itemls", itemls);
         if (!ok) {
           inv.addModel("msg", "部分商品库存不足");
