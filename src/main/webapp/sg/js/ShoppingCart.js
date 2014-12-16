@@ -78,7 +78,7 @@
         $.each(this.shoppingItemsArray, function (idx,item) {
             total += parseFloat(item.price) * parseInt(item.quantity);
         });
-        return total;
+        return total/100.0;
     },
 
     shoppingCart.getTotalQuantity = function(){

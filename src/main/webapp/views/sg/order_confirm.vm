@@ -42,6 +42,18 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
+                        #if($addressls && ! $addressls.isEmpty())
+                            #foreach($addr in $addressls)
+                            <div>$addr.getAddress()</div>
+                            <div>$addr.getPhone</div>
+                            #end
+                        #else
+                            <input type="text" placeholder="收货地址:">
+                            <input type="text" placeholder="联系电话:">
+                        #end
+
+                    </div>
+                    <div class="col-xs-12" style="padding-left: 0em;padding-right: 0em">
                         <div id="shop-product-list">
                             <ul style="margin: 0.1em 0.0em;">
                                 #foreach($item in $itemls)
