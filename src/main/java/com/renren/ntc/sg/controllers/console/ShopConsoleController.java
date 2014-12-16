@@ -66,7 +66,8 @@ public class ShopConsoleController {
     //注册的时候ajax校验用户名，违禁词和嫌疑词不让注册
 	@Post("")
     @Get("")
-	public String index(Invocation inv, @Param("shop_id") long shop_id ,@Param("category_id") int category_id){
+	public String index(Invocation inv, @Param("shop_id") long shop_id ,@Param("category_id") int category_id ,
+                        @Param("from") int from, @Param("offset") int offset){
         if (0  >= shop_id){
             shop_id = Constants.DEFAULT_SHOP ;
         }
@@ -77,6 +78,12 @@ public class ShopConsoleController {
             shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
 
+        if ( 0 == from){
+            from = 0;
+        }
+        if ( 0 == offset){
+            offset = 100 ;
+        }
         List<ShopCategory> categoryls  = shopCategoryDAO.getCategory(shop.getId());
         inv.addModel("shop",shop) ;
 
@@ -89,9 +96,12 @@ public class ShopConsoleController {
                 return "shop";
             }
         }
-        List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category_id,0,100);
+        List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category_id,from,offset);
+        inv.addModel("from", from);
+        inv.addModel("offset", offset);
         inv.addModel("itemls", itemls);
         inv.addModel("categoryls",categoryls);
+        inv.addModel("curr_cate_id",category_id);
         return "shop";
 	}
 
