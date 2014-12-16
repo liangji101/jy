@@ -136,7 +136,7 @@ public class OrderController {
         order.setStatus(1);         //已经确认的状态
         order.setUser_id(user_id);
         int re = orderDAO.insertUpdate(order);
-        if (re == 1) {
+        if (re != 1) {
             return "error";
         }
         return "r:/sg/user/profile";
