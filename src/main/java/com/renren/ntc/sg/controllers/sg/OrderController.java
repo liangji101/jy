@@ -111,6 +111,7 @@ public class OrderController {
             LoggerUtils.getInstance().log(String.format("re error order %s,  items %s  ", order_id, items));
             LoggerUtils.getInstance().log(String.format("create new  order %s ", order_id));
         }
+        inv.addModel("shop", shop);
         inv.addModel("order_id", order_id);
         inv.addModel("itemls", itemls);
         if (!ok) {

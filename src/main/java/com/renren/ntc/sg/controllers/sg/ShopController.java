@@ -65,6 +65,7 @@ public class ShopController {
         }
         List<ShopCategory> category  = shopCategoryDAO.getCategory(shop.getId());
 
+//        for (Shop Category category : category)
         List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
 
         inv.addModel("items", itemls);
