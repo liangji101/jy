@@ -91,6 +91,7 @@ public class ShopCarController {
             itemls.add(i4v);
         }
         List<Address>  addressls = addressDAO.getAddresses(user_id, 0, 1);
+
         inv.addModel( "addressls",addressls);
         inv.addModel("shop", shop);
         inv.addModel("itemls", itemls);
