@@ -15,6 +15,7 @@ $(document).ready(function(){
                         'price':shoppingCart.shoppingItemsArray[idx].price ,'name':shoppingCart.shoppingItemsArray[idx].name});
         }
         $('#form_items').val(JSON.stringify(items));
+
     });
 
 
@@ -22,6 +23,10 @@ $(document).ready(function(){
 
         var values = $(this).serialize();
         shoppingCart.saveShoppingCart();
+
+        if(!shoppingCart.productsEnoughtToShip()){
+            return false; // can't submit
+        }
 
         return true;
     });

@@ -111,6 +111,12 @@
         return data;
     },
 
+    shoppingCart.empty = function(){
+
+        this.shoppingItemsArray = [];
+        this.saveShoppingCart();
+
+    }
     // storage
     shoppingCart.saveShoppingCart = function () {
 
@@ -142,17 +148,27 @@
     },
 
 
-        shoppingCart.updateTotal = function (){
+
+        shoppingCart.productsEnoughtToShip = function(){
 
             var definedMinFreeDelivery = 20;
 
             var totolp = parseFloat(shoppingCart.getTotalPrice());
+
+            return totolp >= definedMinFreeDelivery;
+        }
+
+        shoppingCart.updateTotal = function (){
+
+            var definedMinFreeDelivery = 20;
+            var totolp = parseFloat(shoppingCart.getTotalPrice());
+
             if(totolp < definedMinFreeDelivery){
                 var number = definedMinFreeDelivery - totolp;
                 $(".js-checkout-hit").html('差 <span style="font-weight: bold;padding-left: 0.3em;padding-right: 0.3em;font-size: 2em">' + number + ' </span> 元起送');
                 $(".js-cart-checkout").css({'background-color':'#7c7d80'});
             }else{
-                $(".js-checkout-hit").text('去结算');
+                $(".js-checkout-hit").html('<span style="font-weight: bold;padding-left: 0.3em;padding-right: 0.3em;font-size: 2em">去结算</span>');
                 $(".js-cart-checkout").css({'background-color':'red'});
             }
             $("#js-shop-total-price").text(totolp);

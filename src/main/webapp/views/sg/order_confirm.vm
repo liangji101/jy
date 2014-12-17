@@ -37,13 +37,23 @@
             <div class="shop-container" style="margin-bottom : 60px;">
                 <div class="">
                     #if($addressls && ! $addressls.isEmpty())
-                    #foreach($addr in $addressls)
-                    <div>$addr.getAddress()</div>
-                    <div>$addr.getPhone</div>
-                    #end
+                        #foreach($addr in $addressls)
+                        <div style="background-color: #878D98;color: #ffffff">
+                            <div style="float: left">
+                                <div>收货地址: $addr.getAddress()</div>
+                                <div>联系电话: $addr.getPhone</div>
+                            </div>
+                            <div style="float: right">
+                                <div style="color: #ffffff">\>/div>
+                            </div>
+                        </div>
+                        #end
                     #else
-                    <input type="text" placeholder="收货地址:">
-                    <input type="text" placeholder="联系电话:">
+                        <div style="background-color: #878D98;color: #ffffff;padding: 1em;">
+                            您还没有添加收货人信息,请添加
+                        </div>
+                        <input type="text" placeholder="收货地址:">
+                        <input type="text" placeholder="联系电话:">
                     #end
 
                 </div>
