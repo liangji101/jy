@@ -37,7 +37,7 @@ public interface AddressDAO {
 	public List<Address> getAddresses(long user_id, int start, int offset);
 
     @ReturnGeneratedKeys
-    @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.type,:1.user_id,:1,city,1:province,:1.district,:1.name,:1.phone,:1.address,:1.update_time)")
+    @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.type,:1.user_id,:1,city,:1.province,:1.district,:1.name,:1.phone,:1.address,:1.update_time)")
     public int  addAddress(Address address);
 
     @SQL("update  "  + TABLE_NAME +  "set city=:1.city,name= :1.name,phone =:1.phone, address = :1.address ,update_time=:1.update_time" + " where id = :1.id")
