@@ -55,10 +55,15 @@ public class UserController {
         if (null != u) {
             user_id = u.getId();
         }
+
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
+        System.out.println( "addressls" + addressls.size()  );
+
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
+
         inv.addModel( "addressls",addressls);
 
+        System.out.println( "get orders " + orders.size()  );
 
         orders = forV(orders)  ;
         inv.addModel( "orders",orders);
@@ -70,6 +75,7 @@ public class UserController {
         for (Order o : orders) {
              Address adr = addressService.getAddress(o.getAddress_id());
             if( null == adr ) {
+                System.out.println(String.format("Miss address drop order %s " ,o.getOrder_id()) );
                 continue;
             }
             o.setPhone(adr.getPhone());

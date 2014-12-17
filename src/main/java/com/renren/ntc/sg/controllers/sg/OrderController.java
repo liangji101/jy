@@ -87,6 +87,9 @@ public class OrderController {
             add.setPhone(phone);
             add.setAddress(address);
             address_id =  sddressService.addAddress(add);
+            //设置成默认 地址
+            sddressService.cleanDefaultAddress(user_id);
+            sddressService.defaultAddress(address_id);
         }
 
         if (StringUtils.isBlank(items)) {
