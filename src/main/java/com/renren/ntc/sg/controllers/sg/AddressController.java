@@ -1,5 +1,6 @@
 package com.renren.ntc.sg.controllers.sg;
 
+import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.*;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
@@ -76,7 +77,15 @@ public class AddressController {
         long  address_id = addressService.addAddress(add) ;
         addressService.cleanDefaultAddress(u.getId());
         addressService.defaultAddress(address_id) ;
-        return Constants.DONE;
+        Address adrs = addressService.getAddress(address_id) ;
+        JSONObject  j=  new JSONObject() ;
+        j.put("address_id",address_id) ;
+        j.put("address",adrs.getAddress());
+        j.put("phone",adrs.getPhone());
+        JSONObject respone =  new JSONObject();
+        respone.put("code" ,0);
+        respone.put("data" ,j);
+        return "@" + respone.toJSONString();
     }
 
     @Get("update")

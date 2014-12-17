@@ -7,6 +7,7 @@ import com.renren.ntc.sg.biz.dao.AddressDAO;
 import com.renren.ntc.sg.biz.dao.OrdersDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
+import com.renren.ntc.sg.service.AddressService;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.SUtils;
@@ -39,6 +40,9 @@ public class UserController {
     @Autowired
     public AddressDAO addressDAO;
 
+    @Autowired
+    public AddressService addressService;
+
 
     // 检查库存
     // 判断地址是否Ok
@@ -54,11 +58,28 @@ public class UserController {
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
         inv.addModel( "addressls",addressls);
+
+
+        orders = forV(orders)  ;
         inv.addModel( "orders",orders);
         return "user";
     }
 
+    private List<Order> forV(List<Order> orders) {
+        List<Order> oo =   new ArrayList<Order>();
+        for (Order o : orders) {
+             Address adr = addressService.getAddress(o.getAddress_id());
+            o.setPhone(adr.getPhone());
+            o.setAddress(adr.getAddress());
+            o.setStatus4V(toStr(o.getStatus()));
+            oo.add(o);
+        }
+        return oo;
+    }
 
+    private String toStr(int status) {
+        return "配送中" ;
+    }
 
 }
 
