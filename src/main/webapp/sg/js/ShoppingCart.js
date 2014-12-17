@@ -165,11 +165,11 @@
 
             if(totolp < definedMinFreeDelivery){
                 var number = definedMinFreeDelivery - totolp;
-                $(".js-checkout-hit").html('差 <span style="font-weight: bold;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">' + number + ' </span> 元起送');
+                $(".js-checkout-hit").html('差 <span style="font-weight: 100;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">' + number + ' </span> 元起送');
                 $(".js-cart-checkout").css({'background-color':'#7c7d80'});
             }else{
-                $(".js-checkout-hit").html('<span style="font-weight: bold;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">去结算</span>');
-                $(".js-cart-checkout").css({'background-color':'red'});
+                $(".js-checkout-hit").html('<span style="font-weight: 100;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">去结算</span>');
+                $(".js-cart-checkout").css({'background-color':'#F54447'});
             }
             $("#js-shop-total-price").text(totolp);
             $("#js-shop-total-count").text(shoppingCart.getTotalQuantity());

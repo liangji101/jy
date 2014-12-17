@@ -61,7 +61,10 @@ html, body {
     padding-left: 0px;
     padding-right: 0px;
 }
+.footer-container{
 
+    border-top: solid 1px lightgray;
+}
 .footer-container-left {
 
     padding-left: 0em;
@@ -263,4 +266,8 @@ html, body {
     font-size: 14px;
     color: #000000;
     padding: 0.5em 0em 0.5em 0em;
+}
+.base-font{
+    font-size: 10px;
+    font-weight: normal;
 }
