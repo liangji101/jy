@@ -80,14 +80,18 @@ public class OrderController {
 
         if(address_id == 0 ){
             Address add =  new Address();
+            if (null == phone ||null == address )    {
+                inv.addModel("msg"," phone or adderes is null");
+                return "error";
+            }
             add.setPhone(phone);
-            add.setPhone(address);
+            add.setAddress(address);
             address_id =  sddressService.addAddress(add);
         }
 
         if (StringUtils.isBlank(items)) {
             LoggerUtils.getInstance().log(String.format("can't find shop  %d  items %s", shop_id, items));
-            return "@ error";
+            return "error";
         }
         inv.addModel("remarks",remarks);
         boolean ok = true;
