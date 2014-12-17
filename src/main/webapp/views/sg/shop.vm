@@ -29,16 +29,18 @@
     <input type="search" name="search-products" class="searchBar-input" value="" placeholder="搜索商品...">
 </div>
 
-<div data-role="tabs" style="width: 100%">
-
+<div data-role="" style="width: 100%">
+    <!--<div data-role="tabs" style="width: 100%">-->
     <div id="leftCol">
         <div class="shop-categray-list">
-            <ul data-role="listview" class="ui-listview" role="listbox" style="margin: 0.0em 0.1em;">
+            <!--<ul data-role="listview"  role="listbox" style="margin: 0.0em 0.1em;">-->
+                <ul style="margin: 0.0em 0.0em;padding: 0em 0em 80px 0em">
                 #foreach($category in $categoryls)
-                <li class="shop-categray" data-theme="c" data-item-id="$category.category_id">
-                    <a href="#SHOP_CATEGORY_$category.category_id" data-ajax="false">
-                        <div>$category.name</div>
-                    </a>
+                <!--<li class="shop-categray" data-theme="c" data-item-id="$category.category_id">-->
+                    <li class="shop-categray" data-item-id="$category.category_id">
+                    <!--<a href="#SHOP_CATEGORY_$category.category_id" data-ajax="false">-->
+                        <div class="shop-categray-item" style="">$category.name</div>
+                    <!--</a>-->
                 </li>
                 #end
             </ul>
@@ -46,9 +48,9 @@
     </div>
 
     <div id="mianContent">
-        <div id="shop-product-list">
+        <div class="shop-product-list">
             #foreach($category in $categoryls)
-            <ul style="margin: 0.0em;padding: 0em; " id="SHOP_CATEGORY_$category.category_id">
+            <ul class="shop-product-categray-list" id="SHOP_CATEGORY_$category.category_id">
                 #foreach($item in $category.getItemls())
                 <li class="product-item js-product-item" id="SHOP_ITEM_$item.id">
 
@@ -101,11 +103,11 @@
 
 </div>
 
-<div id="footer" data-role="footer" style="z-index: 100">
+<div id="footer" style="z-index: 100">
     <div class="shop-container">
         <div class="footer-container-left base-sidebar-me js-cart-me">
             <form action="user/profile" method="get" data-ajax="false">
-                <button class="sidebar-me-submit" type="submit" style="width: 100%;height:100%; margin:0em">
+                <button class="sidebar-me-submit" type="submit" style="width: 100%;height:100%; margin:0em;border-radius:0;padding: 20px;border-top: lightgray">
                     我的<span> <br><br></span>
                 </button>
             </form>
