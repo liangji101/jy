@@ -1,10 +1,9 @@
-package com.renren.ntc.sg.dao;
+package com.renren.ntc.sg.biz.dao;
 
 import com.renren.ntc.sg.bean.RegistUser;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
 import net.paoding.rose.jade.annotation.SQL;
-
 
 
 @DAO(catalog = "ABC")

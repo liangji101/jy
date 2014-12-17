@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Device;
 import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.dao.DeviceDAO;
-import com.renren.ntc.sg.dao.ItemsDAO;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import net.paoding.rose.web.Invocation;

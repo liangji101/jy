@@ -1,7 +1,6 @@
-package com.renren.ntc.sg.dao;
+package com.renren.ntc.sg.biz.dao;
 
 import com.renren.ntc.sg.bean.Category;
-import com.renren.ntc.sg.bean.Device;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 

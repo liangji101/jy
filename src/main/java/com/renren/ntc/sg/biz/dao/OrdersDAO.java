@@ -1,6 +1,5 @@
-package com.renren.ntc.sg.dao;
+package com.renren.ntc.sg.biz.dao;
 
-import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Order;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
@@ -31,11 +30,11 @@ public interface OrdersDAO {
     static final String INSERT_FIELDS = " order_id,shop_id,user_id,address_id,remarks ,snapshot,status,price" ;
 
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 order by create_time desc limit :2,:3")
-	public List<Order> getOrder(long user_id ,int start, int offset);
+	public List<Order> getOrder(long user_id, int start, int offset);
 
 
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 order by create_time desc limit :2,:3")
-    public List<Order> getOrderByShop(long shop_id,int start, int offset);
+    public List<Order> getOrderByShop(long shop_id, int start, int offset);
 
 
     @SQL("insert into  " + TABLE_NAME + "(" + INSERT_FIELDS + ") values(:1.order_id,:1.shop_id," +

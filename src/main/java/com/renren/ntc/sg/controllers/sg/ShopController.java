@@ -6,6 +6,8 @@ import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
 import com.renren.ntc.sg.bean.ShopCategory4v;
+import com.renren.ntc.sg.biz.dao.ItemsDAO;
+import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;

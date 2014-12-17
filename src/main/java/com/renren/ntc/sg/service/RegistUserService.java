@@ -2,8 +2,7 @@ package com.renren.ntc.sg.service;
 
 import com.renren.ntc.sg.bean.RegistUser;
 import com.renren.ntc.sg.bean.User;
-import com.renren.ntc.sg.dao.RegistUserDAO;
-import com.renren.ntc.sg.dao.UserDAO;
+import com.renren.ntc.sg.biz.dao.RegistUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

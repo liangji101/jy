@@ -3,6 +3,8 @@ package com.renren.ntc.sg.controllers.sg;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.*;
+import com.renren.ntc.sg.biz.dao.AddressDAO;
+import com.renren.ntc.sg.biz.dao.OrdersDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;

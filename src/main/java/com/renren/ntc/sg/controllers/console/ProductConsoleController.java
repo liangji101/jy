@@ -3,7 +3,7 @@ package com.renren.ntc.sg.controllers.console;
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
-import com.renren.ntc.sg.dao.ShopCategoryDAO;
+import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;

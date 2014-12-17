@@ -1,12 +1,9 @@
-package com.renren.ntc.sg.dao;
+package com.renren.ntc.sg.biz.dao;
 
-import com.renren.ntc.sg.bean.Order;
 import com.renren.ntc.sg.bean.User;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.ReturnGeneratedKeys;
 import net.paoding.rose.jade.annotation.SQL;
-
-import java.util.List;
 
 /*
 CREATE TABLE `items` (

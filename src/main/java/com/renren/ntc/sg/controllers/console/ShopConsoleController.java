@@ -6,8 +6,8 @@ import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.RegistUser;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
-import com.renren.ntc.sg.dao.ShopCategoryDAO;
-import com.renren.ntc.sg.dao.ItemsDAO;
+import com.renren.ntc.sg.biz.dao.ItemsDAO;
+import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
@@ -45,7 +45,7 @@ public class ShopConsoleController {
 
 
     @Autowired
-    private  ItemsDAO itemsDAO ;
+    private ItemsDAO itemsDAO ;
 
 	@Autowired
 	private RegistHostHolder hostHolder;

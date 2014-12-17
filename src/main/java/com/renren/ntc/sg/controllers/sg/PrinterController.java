@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.controllers.sg;
 
 import com.alibaba.fastjson.JSONObject;
+import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.bean.Device;
 import com.renren.ntc.sg.bean.OrderInfo;
 import com.renren.ntc.sg.dao.DeviceDAO;
@@ -22,6 +23,7 @@ import java.net.URLEncoder;
 import java.security.Certificate;
 import java.util.List;
 
+@DenyCommonAccess
 @Path("p")
 public class PrinterController {
 
@@ -76,12 +78,12 @@ public class PrinterController {
         // 验证
         LoggerUtils.getInstance().log(String.format("fb request param  %d ,%s  ,re: %s , msg : %s ", pid, token, re, msg));
         if (0 > pid) {
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token));
+            LoggerUtils.getInstance().log(String.format("error param pid <0  %d ,%s", pid, token));
             return "@" + Constants.PARATERERROR;
         }
         Device dev = deviceDAO.getDev(pid);
         if (null == dev) {
-            LoggerUtils.getInstance().log(String.format("error param  %d ,%s", pid, token));
+            LoggerUtils.getInstance().log(String.format("error param  dev = null %d ,%s", pid, token));
             return "@" + Constants.PARATERERROR;
         }
         if (!dev.getToken().equals(token)) {
@@ -111,7 +113,7 @@ public class PrinterController {
             String ro = response.replace("=", "").replace("&", "");
             String message = "#address#=" + vv + "&#status#=" + ro + "&#orderDetail#=" + orde;
             message = SUtils.span(message);
-            message = URLEncoder.encode(message);
+            message = URLEncoder.encode(message,"utf-8");
             url = forURL(SMSURL, APPKEY, TID, "18612274066", message);
             System.out.println(String.format("Send  SMS mobile %s %s ,%s ", mobile, value.getOrder_id(), url));
             t = SHttpClient.getURLData(url, "");

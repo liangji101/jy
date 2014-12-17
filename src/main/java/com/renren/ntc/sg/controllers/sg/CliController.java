@@ -2,6 +2,7 @@ package com.renren.ntc.sg.controllers.sg;
 
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.*;
+import com.renren.ntc.sg.biz.dao.VerDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
@@ -19,7 +20,7 @@ public class CliController {
     private static int DEFAULT_SHOP_ID = 1;
 
     private DeviceDAO deviceDAO   ;
-    private VerDAO  verDAO  ;
+    private VerDAO verDAO  ;
 
 
     @Get("uck")
