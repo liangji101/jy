@@ -3,6 +3,8 @@ package com.renren.ntc.sg.controllers.sg;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.*;
+import com.renren.ntc.sg.biz.dao.ItemsDAO;
+import com.renren.ntc.sg.biz.dao.OrdersDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
@@ -136,10 +138,10 @@ public class OrderController {
         order.setStatus(1);         //已经确认的状态
         order.setUser_id(user_id);
         int re = orderDAO.insertUpdate(order);
-        if (re == 1) {
+        if (re != 1) {
             return "error";
         }
-        return "r:/jy-1/sg/user/profile";
+        return "r:/sg/user/profile";
     }
 
 

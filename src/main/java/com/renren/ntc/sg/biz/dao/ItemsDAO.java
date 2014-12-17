@@ -1,7 +1,6 @@
-package com.renren.ntc.sg.dao;
+package com.renren.ntc.sg.biz.dao;
 
 import com.renren.ntc.sg.bean.Item;
-import com.renren.ntc.sg.bean.Shop;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 import net.paoding.rose.jade.annotation.SQLParam;
@@ -36,10 +35,10 @@ public interface ItemsDAO {
 
 
     @SQL("select "+ FIELDS +" from ##(:tableName)   where id =:3")
-    public  Item getItem(@SQLParam("tableName") String tableName,long shop_id, long id );
+    public  Item getItem(@SQLParam("tableName") String tableName, long shop_id, long id);
 
     @SQL("select "+ FIELDS +" from ##(:tableName)   where shop_id =:2 and category_id=:3 order by score asc limit :4 , :5")
-    public List<Item> getItems(@SQLParam("tableName") String tableName,long shop_id, int category_id ,int from, int offset );
+    public List<Item> getItems(@SQLParam("tableName") String tableName, long shop_id, int category_id, int from, int offset);
 
     @SQL("update ##(:tableName)  set count = count-:4  where id =:3")
     public void insert(@SQLParam("tableName") String tableName, long s_id, long i_id, int count);
@@ -52,13 +51,13 @@ public interface ItemsDAO {
     public  int insert(@SQLParam("tableName") String tableName, Item item);
 
     @SQL("select "+ FIELDS +" from ##(:tableName)  where  shop_id=:2  order by score  desc limit :3,:4")
-    public  List<Item> hot(@SQLParam("tableName") String tableName,long shop_id, int flag ,int offset );
+    public  List<Item> hot(@SQLParam("tableName") String tableName, long shop_id, int flag, int offset);
 
 
     @SQL("select "+ FIELDS +" from  ##(:tableName)   where  shop_id=:2 and name like =:3")
-    public  List<Item> search(@SQLParam("tableName") String tableName,long shop_id, String key);
+    public  List<Item> search(@SQLParam("tableName") String tableName, long shop_id, String key);
 
 
     @SQL("update  ##(:tableName) set ##(:key) = :4  where id =:2")
-    void update(@SQLParam("tableName") String tableName , long id ,@SQLParam("key")  String key, String value);
+    void update(@SQLParam("tableName") String tableName, long id, @SQLParam("key") String key, String value);
 }

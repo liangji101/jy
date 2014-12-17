@@ -1,9 +1,7 @@
 package com.renren.ntc.sg.controllers.sg;
 
 import com.renren.ntc.sg.bean.*;
-import com.renren.ntc.sg.dao.ItemsDAO;
 import com.renren.ntc.sg.dao.SWPOrderDAO;
-import com.renren.ntc.sg.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.AddressService;

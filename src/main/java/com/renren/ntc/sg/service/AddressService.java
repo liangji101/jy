@@ -1,7 +1,7 @@
 package com.renren.ntc.sg.service;
 
 import com.renren.ntc.sg.bean.Address;
-import com.renren.ntc.sg.dao.AddressDAO;
+import com.renren.ntc.sg.biz.dao.AddressDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

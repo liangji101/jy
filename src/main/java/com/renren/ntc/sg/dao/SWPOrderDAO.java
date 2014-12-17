@@ -18,6 +18,9 @@ public interface SWPOrderDAO {
 	@SQL("select order_id, info from "  + TABLE_NAME + " where status =1")
 	public List<OrderInfo> getSMSNo();
 
+    @SQL("select order_id, info from "  + TABLE_NAME + " where order_id =:1")
+    public OrderInfo getOrder(String order_id);
+
     @SQL("select id, order_id, info ,create_time from "  + TABLE_NAME + " where status = 1")
     public List<OrderInfo> getPrintNo();
 	

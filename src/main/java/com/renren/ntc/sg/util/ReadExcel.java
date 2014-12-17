@@ -12,7 +12,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.renren.ntc.sg.dao.ItemsDAO;
 
 
 public class ReadExcel {
