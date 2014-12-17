@@ -80,7 +80,7 @@ public class OrderController {
 
         if(address_id == 0 ){
             Address add =  new Address();
-            if (null == phone ||null == address )    {
+            if (StringUtils.isBlank(phone) || StringUtils.isBlank(address) )    {
                 inv.addModel("msg"," phone or adderes is null");
                 return "error";
             }
@@ -148,6 +148,7 @@ public class OrderController {
         Order order = new Order();
         order.setOrder_id(order_id);
         order.setShop_id(shop_id);
+        order.setAddress_id(address_id);
         order.setPrice(price);
         order.setRemarks(remarks);
         order.setSnapshot(items);
