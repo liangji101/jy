@@ -20,6 +20,36 @@ public class Order {
     private String snapshot ;
     private int status    ;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    private String address  ;
+    private String phone  ;
+
+
+    public String getStatus4V() {
+        return status4V;
+    }
+
+    public void setStatus4V(String status4V ) {
+        this.status4V = status4V;
+    }
+
+    private String status4V ;
+
     public long getId() {
         return id;
     }
@@ -111,6 +141,5 @@ public class Order {
     private int  price  ;
     private Date create_time ;
     private Date update_time   ;
-
 
 }

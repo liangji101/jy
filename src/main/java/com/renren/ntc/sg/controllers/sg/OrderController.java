@@ -7,6 +7,7 @@ import com.renren.ntc.sg.biz.dao.ItemsDAO;
 import com.renren.ntc.sg.biz.dao.OrdersDAO;
 import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
+import com.renren.ntc.sg.service.AddressService;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.SUtils;
@@ -42,7 +43,7 @@ public class OrderController {
     public DeviceDAO deviceDAO;
 
     @Autowired
-    public SWPOrderDAO swpOrderDAO;
+    public AddressService sddressService;
 
 
     @Get("loading")
@@ -56,7 +57,10 @@ public class OrderController {
 
     @Get("save")
     @Post("save")
-    public String save(Invocation inv, @Param("shop_id") long shop_id,@Param("remarks") String remarks,
+    public String save(Invocation inv, @Param("shop_id") long shop_id,@Param("address_id") long address_id,
+                       @Param("address") String address,
+                       @Param("phone") String phone,
+                       @Param("remarks") String remarks,
                        @Param("items") String items, @Param("order_id") String order_id) {
 
         User u = holder.getUser();
@@ -71,7 +75,14 @@ public class OrderController {
 
         if (null == shop) {
             LoggerUtils.getInstance().log(String.format("can't find shop  %d  ", shop_id));
-            return "@ error";
+            return "error";
+        }
+
+        if(address_id == 0 ){
+            Address add =  new Address();
+            add.setPhone(phone);
+            add.setPhone(address);
+            address_id =  sddressService.addAddress(add);
         }
 
         if (StringUtils.isBlank(items)) {
