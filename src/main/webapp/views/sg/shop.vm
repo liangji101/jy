@@ -77,10 +77,10 @@
                             <div class="product_stepper">
                                              <span class="countContainer countContainer-minus">
                                                  <a href="javascript:;"
-                                                    class="countChangeAction countChangeActionMinus hidden">-
+                                                    class="countChangeAction countChangeActionMinus">-
                                                  </a>
                                              </span>
-                                                <span class="countContainer countContainer-input hidden">
+                                                <span class="countContainer countContainer-input">
                                                     <input type="text"
                                                            class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
                                                            style="width: 30px;"

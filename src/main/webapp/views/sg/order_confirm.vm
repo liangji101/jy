@@ -34,7 +34,7 @@
 <div id="main" role="page">
     <div id="content" data-role="content" class="ui-content">
         <div class="content-container ">
-            <div class="shop-container">
+            <div class="shop-container" style="margin-bottom : 60px;">
                 <div class="">
                     #if($addressls && ! $addressls.isEmpty())
                     #foreach($addr in $addressls)
@@ -74,10 +74,10 @@
                                         <div class="product_stepper">
                                              <span class="countContainer countContainer-minus">
                                                  <a href="javascript:;"
-                                                    class="countChangeAction countChangeActionMinus hidden">-
+                                                    class="countChangeAction countChangeActionMinus ">-
                                                  </a>
                                              </span>
-                                                <span class="countContainer countContainer-input hidden">
+                                                <span class="countContainer countContainer-input ">
                                                     <input type="text"
                                                            class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
                                                            style="width: 30px;"
@@ -94,6 +94,11 @@
                                 </div>
                             </li>
                             #end
+
+                            <li>
+                                <input type="text" placeholder="给卖家留言">
+                                <div style="color: #808080">付款方式:<span>货到付款</span></div>
+                            </li>
                         </ul>
 
                     </div>
@@ -103,23 +108,21 @@
     </div>
 
     <div id="footer" data-role="footer" style="z-index: 100">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12" style="text-align: center;height: 100%;padding: 0em;">
-                    <form id="orderConfirm" action="../order/save" method="post" data-ajax="false">
-                        <fieldset>
+        <div class="shop-container">
+            <div style="text-align: center;height: 100%; width: 100%; padding: 0em;">
+                <form id="orderConfirm" action="../order/save" method="post" data-ajax="false">
+                    <fieldset>
 
-                            <input type="hidden" id="order_shop_id" name="shop_id" value="$shop.id"/>
-                            <input type="hidden" id="order_items" name="items" value=''/>
-                            <input type="hidden" id="order_id" name="order_id" value="$order_id"/>
+                        <input type="hidden" id="order_shop_id" name="shop_id" value="$shop.id"/>
+                        <input type="hidden" id="order_items" name="items" value=''/>
+                        <input type="hidden" id="order_id" name="order_id" value="$order_id"/>
 
-                            <button id="submit_order" style="background-color: red; width: 100%;margin: 0em;color: white; border: none;">确定<span> <br>
+                        <button id="submit_order" style="background-color: red; width: 100%; height: 100%;margin: 0em;color: white; border: none;">确定<span> <br>
                             总计: <span id="js-shop-total-price" class="js-shop-total-price">0</span> 元 (<span id="js-shop-total-count"
                                                                                                              class="js-shop-total-count">0</span> 个商品)</span></button>
 
-                        </fieldset>
-                    </form>
-                </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>

@@ -191,7 +191,7 @@
 				</configuration>
 	        </plugin>
 
-            <!--<plugin>
+            <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.2</version>
@@ -203,7 +203,7 @@
                     </connectors>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                 </configuration>
-            </plugin>-->
+            </plugin>
 
 	       </plugins> 
 	</build>
