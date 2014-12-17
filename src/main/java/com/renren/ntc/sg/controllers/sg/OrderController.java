@@ -56,7 +56,8 @@ public class OrderController {
 
     @Get("save")
     @Post("save")
-    public String save(Invocation inv, @Param("shop_id") long shop_id, @Param("items") String items, @Param("order_id") String order_id) {
+    public String save(Invocation inv, @Param("shop_id") long shop_id,@Param("remarks") String remarks,
+                       @Param("items") String items, @Param("order_id") String order_id) {
 
         User u = holder.getUser();
         long user_id = 0;
@@ -77,7 +78,7 @@ public class OrderController {
             LoggerUtils.getInstance().log(String.format("can't find shop  %d  items %s", shop_id, items));
             return "@ error";
         }
-
+        inv.addModel("remarks",remarks);
         boolean ok = true;
         JSONArray jbarr = (JSONArray) JSONArray.parse(items);
         int price = 0;
@@ -133,7 +134,7 @@ public class OrderController {
         order.setOrder_id(order_id);
         order.setShop_id(shop_id);
         order.setPrice(price);
-        order.setRemarks("remarks");
+        order.setRemarks(remarks);
         order.setSnapshot(items);
         order.setStatus(1);         //已经确认的状态
         order.setUser_id(user_id);
