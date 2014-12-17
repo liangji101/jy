@@ -69,6 +69,9 @@ public class UserController {
         List<Order> oo =   new ArrayList<Order>();
         for (Order o : orders) {
              Address adr = addressService.getAddress(o.getAddress_id());
+            if( null == adr ) {
+                continue;
+            }
             o.setPhone(adr.getPhone());
             o.setAddress(adr.getAddress());
             o.setStatus4V(toStr(o.getStatus()));
