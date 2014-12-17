@@ -10,11 +10,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ShopCategory4v {
-    private long  id  ;
+    private long  id  ;              //这个自增序号，
     private int   type  ;
     private String name;
 
-    private int   category_id;
+    private int   category_id;     //分类id
 
     public int getCategory_id() {
         return category_id;
