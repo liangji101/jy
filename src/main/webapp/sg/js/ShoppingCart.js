@@ -144,7 +144,18 @@
 
         shoppingCart.updateTotal = function (){
 
-            $("#js-shop-total-price").text(shoppingCart.getTotalPrice());
+            var definedMinFreeDelivery = 20;
+
+            var totolp = parseFloat(shoppingCart.getTotalPrice());
+            if(totolp < definedMinFreeDelivery){
+                var number = definedMinFreeDelivery - totolp;
+                $(".js-checkout-hit").html('差 <span style="font-weight: bold;padding-left: 0.3em;padding-right: 0.3em;font-size: 2em">' + number + ' </span> 元起送');
+                $(".js-cart-checkout").css({'background-color':'#7c7d80'});
+            }else{
+                $(".js-checkout-hit").text('去结算');
+                $(".js-cart-checkout").css({'background-color':'red'});
+            }
+            $("#js-shop-total-price").text(totolp);
             $("#js-shop-total-count").text(shoppingCart.getTotalQuantity());
         }
 
@@ -178,6 +189,8 @@
             $('.countChangeAction',prodcut).removeClass('hidden');
 
             shoppingCart.updateTotal();
+
+
 
         });
 
