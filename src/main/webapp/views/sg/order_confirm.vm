@@ -32,12 +32,7 @@
 <body>
 
 <div id="main" role="page">
-
     <div id="content" data-role="content" class="ui-content">
-        <div class="searchBar">
-            <input type="search" name="search-products" class="searchBar-input" value="" placeholder="搜索商品...">
-        </div>
-
         <div class="content-container shop-container">
             <div class="container-fluid">
                 <div class="row">
@@ -58,20 +53,42 @@
                             <ul style="margin: 0.1em 0.0em;">
                                 #foreach($item in $itemls)
                                 <li class="product-item js-product-item" id="$item.id">
-                                    <input type="hidden" class="js-product-item-id" value="$item.id" data-value="$item.id"/>
-                                    <img src="$item.pic_url" style="width: 20px">
-                                    #if($msg)
-                                        <strong>$msg</strong>
-                                    #end
-                                    #set($item.price = $item.price/100)
-                                    <div class="item_name oneline js-product-item-name" data-value="$item.name">$item.name</div>
+
+                                    <input type="hidden" class="js-product-item-id" value="$item.id"
+                                           data-value="$item.id"/>
+                                    <div class="prod_icon" style='background-image: url("$item.pic_url")'>
+                                    </div>
+
                                     <div>
-                                        <div class="item_price js-product-item-price" data-value="$item.price">$item.price 元
-                                        </div>
-                                        <div>
-                                            <button class="countChangeAction countChangeActionMinus hidden">-</button>
-                                            <input type="text" class="item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity" value="$item.count" data-value="0">
-                                            <button class="countChangeAction countChangeActionAdd">+</button>
+                                        #if($msg)
+                                        <strong>$msg</strong>
+                                        #end
+
+                                        <span class="item_name oneline js-product-item-name" data-value="$item.name">$item.name </span>
+
+                                        #set($itempricemain = $item.price/100)
+                                        #set($itempriceleft = $item.price%100)
+                                        <div class="prod_info">
+                                            <span class="item_price js-product-item-price" data-value="$item.price">$itempricemain<span>.$itempriceleft</span> 元</span>
+
+                                         <span style="float: right;">
+                                             <span class="countContainer countminusContainer">
+                                                 <button
+                                                         class="countChangeAction countChangeActionMinus">-
+                                                 </button>
+                                             </span>
+                                                <span class="countContainer countinputContainer">
+                                                    <input type="text"
+                                                           class="countChangeAction countChangeActionSet js-product-item-quantity"
+                                                           value="$item.count"
+                                                           data-value="$item.count">
+                                                </span>
+                                                <span class="countContainer countaddContainer">
+                                                    <button
+                                                            class="countChangeAction countChangeActionAdd">+
+                                                    </button>
+                                                </span>
+                                        </span>
                                         </div>
                                     </div>
                                 </li>
