@@ -16,6 +16,15 @@ $(document).ready(function(){
         }
         $('#order_items').val(JSON.stringify(items));
 
+        if($('#newOrderAddress').val() && $('#newOrderAddress').val()!= ""){
+            $('#order_address').val($('#newOrderAddress').val());
+        }
+
+        if($('#newOrderPhone').val() && $('#newOrderPhone').val()!= ""){
+            $('#order_phone').val($('#newOrderPhone').val())
+        }
+        $('#order_remarks').val($('#orderRemarks').val())
+        
     });
 
     $("#orderConfirm").submit(function( event ) {

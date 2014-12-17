@@ -40,7 +40,7 @@
 
                     <div style="display: inline-block;background-color: #EFF0F4; border: solid 1px;width: 98%;padding: 0.8em">
                         <div style="float: left">$order.getCreate_time()</div>
-                        <div style="float: right">$order.getStatus()</div>
+                        <div style="float: right">$order.getStatus4V()</div>
                     </div>
 
                     <div style="padding: 0.8em">

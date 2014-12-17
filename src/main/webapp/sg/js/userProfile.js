@@ -21,7 +21,7 @@ $(document).ready(function () {
                             order.name +
                             '   </div>' +
                             '   <div style="float: right">' +
-                            '       <span>￥</span> ' + parseFloat(order.price/100.0) + '<span>X</span>' + order.count +
+                            '       <span>￥</span> ' + parseFloat(order.price/100.0) + '<span style="padding: 0.2em">X</span>' + order.count +
                             '   </div>' +
                             ' </div>'
                      );

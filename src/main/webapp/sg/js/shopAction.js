@@ -16,6 +16,8 @@ $(document).ready(function(){
         }
         $('#form_items').val(JSON.stringify(items));
 
+
+
     });
 
 
