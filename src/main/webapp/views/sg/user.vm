@@ -38,8 +38,8 @@
 
                 <div class="order-item" style="margin: 1em;border: solid 1px #808080 ; border-radius: 2px">
 
-                    <div style="display: inline-block;background-color: #EFF0F4;width: 98%;padding: 0.8em">
-                        <div style="float: left">$order.getCreate_time()</div>
+                    <div style="display: inline-block;background-color: #EFF0F4;width: 100%;">
+                        <div style="float: left;padding: 0.8em">$order.getCreate_time()</div>
                         <div style="float: right;color: #ffffff;background-color: #F54447;text-shadow: none;padding:2px 10px 2px 10px ;font-size: 18px;">$order.getStatus4V()</div>
                     </div>
 

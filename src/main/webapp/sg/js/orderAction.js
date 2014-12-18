@@ -38,12 +38,14 @@ $(document).ready(function(){
 
     $("#orderConfirm").submit(function( event ) {
 
-        if($('#newOrderAddress') && !$('#newOrderAddress').val()){
+        // exist the element and have no value
+        if($('#newOrderAddress') && $('#newOrderAddress').length &&  !$('#newOrderAddress').val()){
             warningOfNeccessInput($('#newOrderAddress'));
             return false;
         }
 
-        if($('#newOrderPhone') && !$('#newOrderPhone').val()){
+        // exist the element and have no value
+        if($('#newOrderPhone') && $('#newOrderPhone').length && !$('#newOrderPhone').val()){
             warningOfNeccessInput($('#newOrderPhone'));
             return false;
         }
