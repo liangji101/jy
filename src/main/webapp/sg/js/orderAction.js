@@ -3,10 +3,18 @@ $.mobile.page.prototype.options.domCache = true;
 
 $(document).ready(function(){
 
-    shoppingCart.loadShoppingCart();
+    function warningOfNeccessInput(input){
+        $(input).css({'border':'solid 1px red'});
+    }
 
-    shoppingCart.updateTotal();
-
+    $('.js-addAddress input').blur(function()          //whenever you click off an input element
+    {
+        if( !$(this).val() ) {                      //if it is blank.
+            $(this).css({'border':'solid 1px red'});
+        }else{
+            $(this).css({'border':0});
+        }
+    });
 
     $( document ).on( "click", "#submit_order", function() {
 
@@ -23,19 +31,10 @@ $(document).ready(function(){
 
     });
 
-    function warningOfNeccessInput(input){
-        $(input).css({'border':'solid 1px red'});
-    }
+    $('.addressHint').on( "click", "#submit_order", function() {
 
-
-    $('.js-addAddress input').blur(function()          //whenever you click off an input element
-    {
-        if( !$(this).val() ) {                      //if it is blank.
-            $(this).css({'border':'solid 1px red'});
-        }else{
-            $(this).css({'border':0});
-        }
     });
+
 
     $("#orderConfirm").submit(function( event ) {
 
@@ -55,6 +54,9 @@ $(document).ready(function(){
 
         return true;
     });
+
+    shoppingCart.loadShoppingCart();
+    shoppingCart.updateTotal();
 
 });
 

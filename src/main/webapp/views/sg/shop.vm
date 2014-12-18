@@ -104,7 +104,7 @@
         <div class="footer-container-left base-sidebar-me js-cart-me">
             <form action="user/profile" method="get" data-ajax="false">
                 <button class="sidebar-me-submit" type="submit" style="width: 100%;height:100%; margin:0em;border-radius:0;padding: 20px;border-top: lightgray">
-                    我的<span> <br><br></span>
+                    我的<span class="glyphicon glyphicon-search"> <br><br> </span>
                 </button>
             </form>
         </div>

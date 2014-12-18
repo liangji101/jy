@@ -31,13 +31,13 @@
                 <div class="">
                     #if($addressls && ! $addressls.isEmpty())
                     #set($DEFAULT_ADDR = $addressls[0])
-                        <div class="addressHint" style="">
+                        <div class="addressHint" style="display: inline-block;width: 100%;text-shadow: none;">
                             <div style="float: left">
                                 <div>收货地址: $DEFAULT_ADDR.getAddress()</div>
-                                <div>联系电话: $DEFAULT_ADDR.getPhone</div>
+                                <div>联系电话: $DEFAULT_ADDR.getPhone()</div>
                             </div>
-                            <div style="float: right">
-                                <div style="color: #ffffff">\>/div>
+                            <div style="float: right;padding-right: 12px">
+                                <div style="color: #ffffff"> >
                                 </div>
                             </div>
                         </div>

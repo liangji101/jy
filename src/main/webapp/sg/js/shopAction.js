@@ -32,7 +32,7 @@ $(document).ready(function(){
         })
     }
 
-    $( document ).on( "click", ".shop-categray", function() {
+    $( document ).on( "vclick", ".shop-categray", function() {
         var me = this;
         $('.shop-categray').each(function(idx,item){
             toggleSelectOnCategray(item, me == item ? true: false);

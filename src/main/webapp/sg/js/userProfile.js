@@ -28,7 +28,7 @@ $(document).ready(function () {
                 });
                 $('.order-snapshots', item).append(
 
-                    '<div style="display: block;width: 90%;text-align: right">' +
+                    '<div style="display: block;width: 90%;text-align: right;margin-top: 20px">' +
                         '  共计: ' + totalCount +
                         ' 件 <span style="color: red">￥ ' +  parseFloat(totalPrice/100.0)  +
                         '</span>' +
