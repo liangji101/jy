@@ -28,6 +28,7 @@ html, body {
     overflow-y: scroll;
     top: 45;
     bottom: 0;
+    background-color: #f8f8f8;
 }
 
 #mianContent {

@@ -7,6 +7,7 @@ $(document).ready(function(){
 
     shoppingCart.updateTotal();
 
+
     $( document ).on( "click", "#submit_order", function() {
 
         var items = [];
@@ -16,22 +17,42 @@ $(document).ready(function(){
         }
         $('#order_items').val(JSON.stringify(items));
 
-        if($('#newOrderAddress').val() && $('#newOrderAddress').val()!= ""){
-            $('#order_address').val($('#newOrderAddress').val());
-        }
+        $('#order_address').val($('#newOrderAddress').val());
+        $('#order_phone').val($('#newOrderPhone').val());
+        $('#order_remarks').val($('#orderRemarks').val());
 
-        if($('#newOrderPhone').val() && $('#newOrderPhone').val()!= ""){
-            $('#order_phone').val($('#newOrderPhone').val())
+    });
+
+    function warningOfNeccessInput(input){
+        $(input).css({'border':'solid 1px red'});
+    }
+
+
+    $('.js-addAddress input').blur(function()          //whenever you click off an input element
+    {
+        if( !$(this).val() ) {                      //if it is blank.
+            $(this).css({'border':'solid 1px red'});
+        }else{
+            $(this).css({'border':0});
         }
-        $('#order_remarks').val($('#orderRemarks').val())
-        
     });
 
     $("#orderConfirm").submit(function( event ) {
 
-        shoppingCart.saveShoppingCart();
+        if($('#newOrderAddress') && !$('#newOrderAddress').val()){
+            warningOfNeccessInput($('#newOrderAddress'));
+            return false;
+        }
+
+        if($('#newOrderPhone') && !$('#newOrderPhone').val()){
+            warningOfNeccessInput($('#newOrderPhone'));
+            return false;
+        }
 
         var values = $(this).serialize();
+
+        shoppingCart.empty();
+
         return true;
     });
 
