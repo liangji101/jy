@@ -76,7 +76,7 @@
         var total = 0.0;
 
         $.each(this.shoppingItemsArray, function (idx,item) {
-            total += parseFloat(item.price) * parseInt(item.quantity);
+            total += parseFloat(item.price || 0.0) * parseInt(item.quantity || 0);
         });
         return total/100.0;
     },

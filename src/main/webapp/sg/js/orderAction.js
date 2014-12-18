@@ -31,10 +31,9 @@ $(document).ready(function(){
 
     });
 
-    $('.addressHint').on( "click", "#submit_order", function() {
+    $(document).on( "vclick", ".swithDefaultAddress", function() {
 
     });
-
 
     $("#orderConfirm").submit(function( event ) {
 
