@@ -28,20 +28,24 @@ public class AddressController {
     @Autowired
     NtcHostHolder  ntcHostHolder;
 
-
+    /**
+     * 地址入口
+     * @param inv
+     * @return
+     */
     @Get("")
     @Post ("")
     public String get (Invocation inv){
-        User u = ntcHostHolder.getUser();
-        if ( null ==u ||  0 >= u.getId()){
+         User u = ntcHostHolder.getUser();
+         if ( null ==u ||  0 >= u.getId()){
               return "error";
 
-        }
+          }
 
-        List<Address> ls  = addressService.getAddresses(u.getId());
+          List<Address> ls  = addressService.getAddresses(u.getId());
           inv.addModel("addressls",ls);
-          return "address" ;
-        }
+           return "address" ;
+    }
 
     @Get("del")
     @Post ("del")

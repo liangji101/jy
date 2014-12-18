@@ -40,16 +40,16 @@ public interface AddressDAO {
     @SQL("insert into  "  + TABLE_NAME + "(" + INSERT_FIELDS  +") values (:1.type,:1.user_id,:1.city,:1.province,:1.district,:1.phone,:1.address,:1.update_time)")
     public int  addAddress(Address address);
 
-    @SQL("update  "  + TABLE_NAME +  "set city=:1.city,name= :1.name,phone =:1.phone, address = :1.address ,update_time=:1.update_time" + " where id = :1.id")
+    @SQL("update  "  + TABLE_NAME +  " set city=:1.city,name= :1.name,phone =:1.phone, address = :1.address ,update_time=:1.update_time" + " where id = :1.id")
     public int  updateAddress(Address address);
 
     @SQL("del  "  + TABLE_NAME + " where id = :1.id")
     public int  delAddress(long address_id);
 
-    @SQL("update  "  + TABLE_NAME +  "set type=1 where id = :1")
+    @SQL("update  "  + TABLE_NAME +  " set type=1 where id = :1")
     public int defaultAddress(long address_id);
 
-    @SQL("update  "  + TABLE_NAME +  "set type=0 where user_id = :1")
+    @SQL("update  "  + TABLE_NAME +  " set type = 0 where user_id = :1")
     public int cleanDefaultAddress(long user_id);
 
 }
