@@ -3,6 +3,8 @@ $.mobile.page.prototype.options.domCache = true;
 
 $(document).ready(function(){
 
+    var submitAddressId, submitAddress,submitPhone, newAddedAddresss=[];
+
     function warningOfNeccessInput(input){
         $(input).css({'border':'solid 1px red'});
     }
@@ -16,6 +18,7 @@ $(document).ready(function(){
         }
     });
 
+
     $( document ).on( "click", "#submit_order", function() {
 
         var items = [];
@@ -23,11 +26,22 @@ $(document).ready(function(){
             items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id ,"count":shoppingCart.shoppingItemsArray[idx].quantity,
                 'price':shoppingCart.shoppingItemsArray[idx].price ,'name':shoppingCart.shoppingItemsArray[idx].name});
         }
-        $('#order_items').val(JSON.stringify(items));
 
-        $('#order_address').val($('#newOrderAddress').val());
-        $('#order_phone').val($('#newOrderPhone').val());
-        $('#order_remarks').val($('#orderRemarks').val());
+        if($('.firstTimeAddAddress') && $('.firstTimeAddAddress').length){
+            // first time add address, no address ID
+            updateSubmitInfo(JSON.stringify(items),
+                '' ,
+                $('#newOrderAddress').val(),
+                $('#newOrderPhone').val(),
+                $('#orderRemarks').val());
+        }else{
+            // already have it, just use default message
+            updateSubmitInfo(JSON.stringify(items),
+                $('.addressDefault-id').val(),
+                $('.addressDefault-address').data('default-address'),
+                $('.addressDefault-phone').data('default-phone'),
+                $('#orderRemarks').val());
+        }
 
     });
 
@@ -43,51 +57,98 @@ $(document).ready(function(){
         }
     });
 
+    function updateDefaultAddress(address, phone, id){
+        // update default item
+        $('.addressDefault-address').html('<span class="addressTitle">收货地址:</span>' + address);
+        $('.addressDefault-address').data('default-address' , address);
+
+        $('.addressDefault-phone').html('<span class="addressTitle">联系电话:</span>' + phone);
+        $('.addressDefault-phone').data('default-phone', phone);
+
+        $('.addressDefault-id').val(id);
+
+    }
+
+
+    function updateSubmitInfo(items, addressId, address,phone, remark){
+
+        if(items){
+            $('#order_items').val(items);
+        }
+        if(addressId){
+            $('#order_address_id').val(addressId);
+        }
+
+        if(address){
+            $('#order_address').val(address);
+        }
+
+        if(phone){
+            $('#order_phone').val(phone);
+        }
+
+        if(remark){
+            $('#order_remarks').val($('#orderRemarks').val());
+        }
+
+    }
     // make select listener
-    $(document).on( "vclick", ".addressItem", function() {
+    $(document).on( "vclick", ".addressListSelection .addressItem", function() {
 
         // clear current default or selected
-        $('.addressSelected').addClass('addressUnselected');
-        $('.addressSelected').removeClass('addressSelected');
-        $('.fa-check').removeClass('fa-check');
+        $('.addressListSelection .fa-check').removeClass('fa-check');
+        $('.js-address-checked',this).addClass('fa-check');
 
-        $(this).removeClass('addressUnselected');
-        $(this).addClass('addressSelected');
-        $('.js-fa-placeholder-icon',this).addClass('fa-check');
+        // update default item
+        updateDefaultAddress($('.addressItem-address',this).data('default-address'),
+            $('.addressItem-phone',this).data('default-phone'),
+            $('.addressItem-id',this).val());
 
     });
 
-    $(document).on( "vclick", ".useNewAddress", function() {
+    $(document).on( "vclick", " .addressListSelection .useNewAddress", function() {
         $('.addNewAddressIntoList').slideDown();
         $(this).fadeOut();
     });
+    $(document).on( "vclick", ".addNewAddressIntoList .cancelNewAddress", function() {
+        $('.addNewAddressIntoList').slideUp();
+        $(".addressListSelection .useNewAddress").fadeIn();
+    });
 
-
-    $(document).on( "vclick", ".confirmNewAddress", function() {
+    $(document).on( "vclick", ".addNewAddressIntoList .confirmNewAddress", function() {
         // append to
-        var addr = $('#addOrderAddress').val();
-        var phone = $('#addOrderPhone').val();
-        if(!addr || !phone){
-            alert('请填写详细的电话地址');
+        var addr = $('.addNewAddressIntoList .addOrderAddress').val();
+        if(!addr){
+            warningOfNeccessInput($('.addNewAddressIntoList .addOrderAddress'));
             return;
         }
-        $('.addNewAddressIntoList').slideUp();
-        $('.addressSelected').removeClass('addressSelected');
+        var phone = $('.addNewAddressIntoList .addOrderPhone').val();
+        if(!phone){
+            warningOfNeccessInput($('.addNewAddressIntoList .addOrderPhone'));
+            return;
+        }
 
+        $('.addNewAddressIntoList').slideUp();
+
+        updateDefaultAddress(addr,phone ,'');
+
+        $('.addressListSelection .fa-check').removeClass('fa-check');// remove all other check
         $('.addressListSelection').prepend(
-            '<div class="addressItem addressCandidate addressSelected" style="display: inline-block;width: 100%;text-shadow: none;"><div style="float: left">'+
-                '<div>收货地址:' + addr + '</div>'+
-                '<div>联系电话:'+  phone+ '</div>'+
+            '<div class="addressItem addressCandidate">' +
+                '<div style="float: left">'+
+                    '<div class="addressItem-address" data-default-address="'+ addr +'"><span class="addressTitle">收货地址:</span>' + addr + '</div>'+
+                    '<div class="addressItem-phone" data-default-phone="'+ phone +'"><span class="addressTitle">联系电话:</span>'+  phone+ '</div>'+
+                    '<input class="addressItem-id" type="hidden" value=""/>'+
                 '</div>'+
-                '<div class="addressItem-bage">'+
-                '<div class="swithDefaultAddress hidden" style="color: #ffffff">'+
-                '   <i class="fa fa-2x fa-check"></i></a>'+
-                '</div>'+
-                '</div>'+
+                    '<div class="addressItem-bage">'+
+                        '<div class="swithDefaultAddress">'+
+                        '   <i class="fa fa-2x fa-check js-address-checked"></i></a>'+
+                        '</div>'+
+                    '</div>'+
                 '</div>'
         )
 
-        $('.useNewAddress').fadeIn();
+        $(".addressListSelection .useNewAddress").fadeIn();
     });
 
 
