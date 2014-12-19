@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $(orders).each(function (o_indx, order) {
 
                     totalCount += parseInt(order.count);
-                    totalPrice += parseFloat(order.price) * parseInt(order.count);
+                    totalPrice += parseFloat(order.price || 0) * parseInt(order.count);
 
                         $('.order-snapshots', item).append(
 
@@ -21,7 +21,7 @@ $(document).ready(function () {
                             order.name +
                             '   </div>' +
                             '   <div style="float: right">' +
-                            '       <span>￥</span> ' + parseFloat(order.price/100.0) + '<span style="padding: 0.2em">X</span>' + order.count +
+                            '       <span>￥</span> ' + parseFloat(order.price ? order.price/100.0 : 0.0) + '<span style="padding: 0.2em">X</span>' + order.count +
                             '   </div>' +
                             ' </div>'
                      );
