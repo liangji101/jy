@@ -305,12 +305,38 @@ html, body {
     font-weight: normal;
 }
 
-.addressHint {
+.addressDefault{
+
     background-color: #878D98;
     color: #ffffff;
     font-size: 14px;
     padding: 12px;
 }
+
+.addressCandidate{
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.addressSelected {
+    background-color: #878D98;
+    color: #ffffff;
+}
+
+.addressUnselected {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+
+.addressItem {
+    display: inline-block;
+    width: 100%;
+    text-shadow: none;
+}
+
 
 .addNewAddressHint {
     background-color: #878D98;
@@ -318,11 +344,43 @@ html, body {
     padding: 1em;
 }
 
-.swithDefaultAddress{
+.addressItem-bage {
+
+    float: right;
+    padding-right: 20px;
+    padding-top: 5px;
+}
+
+.swithDefaultAddress {
 
 }
 
-.swithDefaultAddress:hover{
+.swithDefaultAddress:hover {
     cursor: pointer;
 }
 
+.useNewAddress {
+    color: #ffffff;
+    background-color: #F54447;
+    text-shadow: none;
+    font-size: 18px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: solid 1px #F54447;
+    border-radius: 2px;
+}
+
+.useNewAddress :hover {
+    cursor: pointer;
+}
+
+.confirmNewAddress{
+    color: #ffffff;
+    background-color: #F54447;
+    text-shadow: none;
+    font-size: 18px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: solid 1px #F54447;
+    border-radius: 2px;
+}

@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+
+    <script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="../sg/js/userProfile.js" type="text/javascript"></script>
+
+    <!--for tomcat-->
+    <link rel="stylesheet" href="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+
+    <script src="/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="/sg/js/userProfile.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+<div id="main" role="page">
+
+    <div id="content" data-role="content" class="ui-content">
+
+        <div class="shop-container">
+
+            #foreach($addr in $addressls)
+            <div class="addressHint" style="display: inline-block;width: 100%;text-shadow: none;padding: 12px; border-bottom: solid 1px lightgray">
+                <div style="float: left">
+                    <div>收货地址: $addr.getAddress()</div>
+                    <div>联系电话: $addr.getPhone()</div>
+                </div>
+                <div style="float: right;padding-right: 20px;padding-top: 5px;">
+                    <div class="defaultAddress" style="color: #ffffff">
+                        <i class="fa fa-2x fa-check"></i>
+                    </div>
+                </div>
+            </div>
+            #end
+
+           <div style="text-align: center;padding: 20px">
+               <div class="useNewAddress">使用其他地址</div>
+           </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

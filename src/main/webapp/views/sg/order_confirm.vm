@@ -33,17 +33,55 @@
                 <div class="">
                     #if($addressls && ! $addressls.isEmpty())
                     #set($DEFAULT_ADDR = $addressls[0])
-                        <div class="addressHint" style="display: inline-block;width: 100%;text-shadow: none;">
-                            <div style="float: left">
-                                <div>收货地址: $DEFAULT_ADDR.getAddress()</div>
-                                <div>联系电话: $DEFAULT_ADDR.getPhone()</div>
+                        <div class="">
+
+                            <div class="addressItem addressDefault addressSelected">
+                                <div style="float: left">
+                                    <div id="default">收货地址: $DEFAULT_ADDR.getAddress()</div>
+                                    <div>联系电话: $DEFAULT_ADDR.getPhone()</div>
+                                    <input type="hidden" value="$DEFAULT_ADDR.getId()"/>
+                                </div>
+                                <div class="addressItem-bage">
+                                    <div class="swithDefaultAddress" style="color: #ffffff">
+                                        <i class="fa fa-2x fa-chevron-right"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div style="float: right;padding-right: 20px;padding-top: 5px;">
-                                <div class="swithDefaultAddress" style="color: #ffffff">
-                                    <i class="fa fa-chevron-right"></i>
+
+                            <div class="addressListSelection hidden">
+                                #foreach($addr in $addressls)
+                                    #if( $addr == $addressls[0])
+                                           <div class="addressItem addressCandidate addressSelected">
+                                    #else
+                                           <div class="addressItem addressCandidate addressUnselected">
+                                    #end
+                                        <div style="float: left">
+                                            <div>收货地址: $addr.getAddress()</div>
+                                            <div>联系电话: $addr.getPhone()</div>
+                                        </div>
+                                        <div class="addressItem-bage">
+                                            <div class="swithDefaultAddress" style="color: #ffffff">
+                                                <i class="fa fa-2x js-fa-placeholder-icon"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                #end
+                                <div style="padding: 15px 9px;" class="addNewAddressIntoList hidden">
+                                    <input id="addOrderAddress" type="text" placeholder="收货地址:" value="">
+                                    <input id="addOrderPhone" type="text" placeholder="联系电话:" value="">
+
+                                    <div style="text-align: center;padding: 20px">
+                                        <div class="confirmNewAddress">确定</div>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: center;padding: 20px">
+                                    <div class="useNewAddress">使用其他地址</div>
                                 </div>
                             </div>
                         </div>
+
                     #else
                         <div class="js-addAddress" style="border-bottom: solid 1px lightgray">
                             <div class="addNewAddressHint" style="text-shadow:none">

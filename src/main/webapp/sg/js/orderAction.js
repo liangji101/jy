@@ -33,7 +33,63 @@ $(document).ready(function(){
 
     $(document).on( "vclick", ".swithDefaultAddress", function() {
 
+        if($('.fa-chevron-right',this) && $('.fa-chevron-right',this).hasClass('fa-rotate-90')){
+            $('.fa-chevron-right',this).removeClass('fa-rotate-90');
+            $('.addressListSelection').slideToggle();
+        }else{
+            $('.fa-chevron-right',this).addClass('fa-rotate-90');
+            $('.addressListSelection').slideToggle();
+
+        }
     });
+
+    // make select listener
+    $(document).on( "vclick", ".addressItem", function() {
+
+        // clear current default or selected
+        $('.addressSelected').addClass('addressUnselected');
+        $('.addressSelected').removeClass('addressSelected');
+        $('.fa-check').removeClass('fa-check');
+
+        $(this).removeClass('addressUnselected');
+        $(this).addClass('addressSelected');
+        $('.js-fa-placeholder-icon',this).addClass('fa-check');
+
+    });
+
+    $(document).on( "vclick", ".useNewAddress", function() {
+        $('.addNewAddressIntoList').slideDown();
+        $(this).fadeOut();
+    });
+
+
+    $(document).on( "vclick", ".confirmNewAddress", function() {
+        // append to
+        var addr = $('#addOrderAddress').val();
+        var phone = $('#addOrderPhone').val();
+        if(!addr || !phone){
+            alert('请填写详细的电话地址');
+            return;
+        }
+        $('.addNewAddressIntoList').slideUp();
+        $('.addressSelected').removeClass('addressSelected');
+
+        $('.addressListSelection').prepend(
+            '<div class="addressItem addressCandidate addressSelected" style="display: inline-block;width: 100%;text-shadow: none;"><div style="float: left">'+
+                '<div>收货地址:' + addr + '</div>'+
+                '<div>联系电话:'+  phone+ '</div>'+
+                '</div>'+
+                '<div class="addressItem-bage">'+
+                '<div class="swithDefaultAddress hidden" style="color: #ffffff">'+
+                '   <i class="fa fa-2x fa-check"></i></a>'+
+                '</div>'+
+                '</div>'+
+                '</div>'
+        )
+
+        $('.useNewAddress').fadeIn();
+    });
+
 
     $("#orderConfirm").submit(function( event ) {
 
