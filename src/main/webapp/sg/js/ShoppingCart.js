@@ -165,7 +165,7 @@
 
             if(totolp < definedMinFreeDelivery){
 
-                var number = definedMinFreeDelivery - totolp;
+                var number = Math.round( (definedMinFreeDelivery - totolp) * 100) / 100;
                 $(".js-checkout-hit").html('差 <span style="font-weight: 100;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">' + number + ' </span> 元起送');
                 $(".js-confirm-hit").html('差 <span style="font-weight: 100;padding-left: 0.3em;padding-right: 0.3em;font-size: 18px">' + number + ' </span> 元起送');
 
