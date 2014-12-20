@@ -30,7 +30,7 @@
     <div id="content" data-role="content" class="ui-content">
         <div class="content-container ">
             <div class="shop-container" style="margin-bottom : 60px;">
-                <div class="">
+                <div class="" style="overflow: hidden;">
                     #if($addressls && ! $addressls.isEmpty())
                     #set($DEFAULT_ADDR = $addressls[0])
                         <div class="">

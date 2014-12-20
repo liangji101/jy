@@ -74,6 +74,7 @@
                     <div style="padding: 15px 9px 15px;border-bottom: solid 1px lightgray;">
                         <div>收货地址: $order.getAddress()</div>
                         <div>联系电话: $order.getPhone()</div>
+                        <div style="margin-top: 10px;color: #808080">买家留言: $order.getRemarks()</div>
                     </div>
 
                     <div style="padding: 15px 9px 15px;" class="order-snapshots">

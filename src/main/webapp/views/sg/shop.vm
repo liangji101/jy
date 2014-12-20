@@ -27,63 +27,61 @@
 </head>
 <body>
 
-<div class="searchBar">
-    <input type="search" name="search-products" class="searchBar-input" value="" placeholder="搜索商品...">
+
+<div id="header" class="header">
+    <div class="searchBar">
+        <input type="search" name="search-products" class="searchBar-input" value="" placeholder="搜索商品...">
+    </div>
 </div>
 
-<div data-role="" style="width: 100%">
-    <div id="leftCol">
+<div id="mainContainer">
+    <div id="leftContainer">
         <div class="shop-categray-list">
-                <ul style="margin: 0.0em 0.0em;padding: 10px 0em 90px 0em">
+            <ul style="margin: 0.0em;padding: 0px 0em 90px 0em">
                 #foreach($category in $categoryls)
-                    <li class="shop-categray" data-categray-id="$category.category_id">
-                        <div class="shop-categray-item-decorate hidden"></div>
-                        <div class="shop-categray-item" style="">$category.name</div>
-                    </li>
+                <li class="shop-categray" data-categray-id="$category.category_id">
+                    <div class="shop-categray-item-decorate hidden"></div>
+                    <div class="shop-categray-item" style="">$category.name</div>
+                </li>
                 #end
             </ul>
         </div>
     </div>
-
-    <div id="mianContent">
+    <div id="mainContent">
+        <input type="hidden" value="$shop.id" name="shop_id" id="shop_id">
         <div class="shop-product-list">
             #foreach($category in $categoryls)
             <ul class="shop-product-categray-list" data-categray-id="$category.category_id">
                 #foreach($item in $category.getItemls())
-                <li class="product-item js-product-item" id="SHOP_ITEM_$item.id">
+                <li class="product-item js-product-item" id="$item.id">
 
                     <input type="hidden" class="js-product-item-id" value="$item.id"
                            data-value="$item.id"/>
-
                     <div class="prod_icon" style='background-image: url("$item.pic_url")'>
-
                     </div>
-
                     <div>
                         <span class="product-title oneline js-product-item-name"
                               data-value="$item.name">$item.name </span>
-
                         #set($itempricemain = $item.price/100)
                         #set($itempriceleft = $item.price%100)
                         <div class="prod_info">
                             <div class="product-price js-product-item-price" data-value="$item.price">
                                 $itempricemain<span>.$itempriceleft</span>
                             </div>
-
                             <div class="product_stepper">
-                                                <div class="product_stepper_minus countChangeAction countChangeActionMinus" style="">
-                                                    -
-                                                </div>
-                                                <div class="product_stepper_count">
-                                                    <input type="text"
-                                                           class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
-                                                           style="padding-top: 2px"
-                                                           value="0"
-                                                           data-value="0">
-                                                </div>
-                                                <div class="product_stepper_add countChangeAction countChangeActionAdd">
-                                                    +
-                                                </div>
+                                <div class="product_stepper_minus countChangeAction countChangeActionMinus" style="">
+                                    -
+                                </div>
+                                <div class="product_stepper_count">
+                                    <input type="text"
+                                           class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
+                                           style="padding-top: 2px"
+                                           value="0"
+                                           data-value="0">
+                                </div>
+                                <div class="product_stepper_add countChangeAction countChangeActionAdd">
+                                    +
+                                </div>
 
                             </div>
                         </div>
@@ -92,13 +90,13 @@
                 #end
             </ul>
             #end
-
+            <div style="text-align: center;height: 20px;" class="loadingMore">
+                <i class="">点击加载更多</i>
+            </div>
         </div>
     </div>
-
 </div>
-
-<div id="footer" style="z-index: 100">
+<div id="footer" class="footer">
     <div class="footer-container">
         <div class="footer-container-left base-sidebar-me js-cart-me">
             <form action="user/profile" method="get" data-ajax="false">
@@ -118,8 +116,8 @@
                         <span class=" base-font js-checkout-hit">去结算</span>
                         <span class="base-font"><br>
                             总计: <span
-                                id="js-shop-total-count"
-                                class="js-shop-total-count base-font ">0</span> 件</span>
+                                    id="js-shop-total-count"
+                                    class="js-shop-total-count base-font ">0</span> 件</span>
                         ￥<span id="js-shop-total-price" class="js-shop-total-price base-font">0</span>
                     </button>
 

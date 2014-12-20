@@ -1,46 +1,77 @@
 
-html, body {
+html {
     height: 100%
 }
 
-#main {
-    height: 100%
+body
+{
+    height:100%;
+    max-height:100%;
+    overflow:hidden;
+    padding:0px;
+    margin:0px;
+    border:0px;
 }
 
-#content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0px;
+#header
+{
+    position:absolute;
+    margin:0;
+    top:0;
+    left:0;
+    width:100%;
+    height:45px;
+    background:#e0e0e0;
+    overflow:hidden;
+    z-index: 100;
 }
 
-#footer {
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    bottom: 0;
+
+#mainContainer
+{
+    position:absolute;
+    top:45px;
+    width:100%;
+    height: 100%;
+    bottom:20px;
+    overflow:scroll;
+    left:0px;
+    background:#fff;
 }
 
-#leftCol {
-    position: fixed;
+#leftContainer
+{
     width: 27%;
-    background-color: #DDD;
+    top:0;
+    left:0;
+    height:100%;
     font-size: 21px;
-    overflow-y: scroll;
-    top: 45;
-    bottom: 0;
-    background-color: #f8f8f8;
+    position:absolute;
+    overflow:auto;
+
 }
 
-@font-face {
-    font-family: 'Glyphicons Halflings';
-    src: url('../fonts/glyphicons-halflings-regular.eot');
-    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+#mainContent
+{
+    width:auto;
+    position:absolute;
+    height:100%;
+    left:27%;
+    right:0;
+    overflow:auto;
 }
 
-#mianContent {
-    position: relative;
-    margin-left: 27%;
-    padding-top: 45px;
+#footer
+{
+    position:fixed;
+    margin:0px;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:60px;
+    overflow:hidden;
+    background:#eee;
+    z-index: 100;
 }
 
 .searchBar {
@@ -95,22 +126,6 @@ html, body {
     min-height: 1px;
     display: inline-block;
 
-}
-
-.shop-categray-list a::after {
-    display: none;
-}
-
-.content-category {
-    width: 25%;
-}
-
-.content-details {
-    width: 75%;
-}
-
-.ui-tabs {
-    padding: 0em;
 }
 
 .shop-container {
@@ -287,6 +302,7 @@ html, body {
 
 .shop-product-list {
     background-color: #ffffff;
+    padding-bottom: 80px;
 }
 
 .shop-product-categray-list {
