@@ -62,7 +62,7 @@ $(document).ready(function(){
             var from = $('.js-product-item',visiableCate).last().attr('id');
             var offset = 20;
 
-            $(me).html('<i class="fa fa-spinner fa-spin">点击加载更多</i>');
+            $(me).html('<i class="fa fa-spinner fa-spin"></i>');
             $.getJSON(
                 "shop/getitems?shop_id=" + parseInt(shop_id) +
                     "&category_id="+ parseInt(cateId)+ "&from="+ parseInt(from) +
@@ -94,12 +94,12 @@ $(document).ready(function(){
                             )
                         });
 
-                        $(me).html('<i class="fa">点击加载更多</i>');
+                        $(me).html('点击加载更多');
 
                     }else{
                         // code not 0
-                        $(me).html('<i class="fa">没有更多商品了</i>');
-                        $(me).fadeOut();
+                        $(me).html('点击加载更多');
+                        $(me).hide();
                     }
                 }
             );
