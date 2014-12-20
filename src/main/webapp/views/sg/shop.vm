@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="product_stepper_count">
                                     <input type="text"
-                                           class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet hidden js-product-item-quantity"
+                                           class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet js-product-item-quantity"
                                            style="padding-top: 2px"
                                            value="0"
                                            data-value="0">

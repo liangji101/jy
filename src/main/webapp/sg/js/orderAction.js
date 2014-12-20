@@ -168,6 +168,8 @@ $(document).ready(function(){
 
         var values = $(this).serialize();
 
+        $('#submit_order').attr('disabled',"true");
+
         shoppingCart.empty();
 
         return true;

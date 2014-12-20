@@ -85,6 +85,10 @@ body
     padding: 0em;
 }
 
+.searchBar .ui-input-search{
+    margin: 0em;
+}
+
 .searchBar-input {
     margin-right: 5px;
 }
@@ -314,6 +318,7 @@ body
 
     background-color: #f8f8f8;
     border-left: solid 1px #7c7d80;
+    padding-bottom: 60px;
 }
 
 .shop-categray {

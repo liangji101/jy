@@ -3,6 +3,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+
     <!--<link rel="stylesheet" href="../../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">-->
     <!--<link rel="stylesheet" href="../../css/app.css">-->
 
@@ -21,7 +22,7 @@
 </head>
 <body>
 
-<div id="main" role="page">
+<div id="mainContainer" role="page" style="top: 0">
 
     <div id="content" data-role="content" class="ui-content">
 
