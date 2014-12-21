@@ -27,7 +27,7 @@
 <body>
 
 <div id="main" role="page">
-    <div id="content" data-role="content" class="ui-content">
+    <div id="content" data-role="content" class="" style="padding: 0em">
         <div class="content-container ">
             <div class="shop-container" style="margin-bottom : 60px;">
                 <div class="" style="overflow: hidden;">

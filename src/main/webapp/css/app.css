@@ -132,6 +132,9 @@ body
 
 }
 
+.ui-mobile .ui-page{
+    min-height: 100%;
+}
 .shop-container {
 
 }
