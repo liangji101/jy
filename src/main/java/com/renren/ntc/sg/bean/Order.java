@@ -19,6 +19,14 @@ public class Order {
     private String remarks ;
     private String snapshot ;
     private int status    ;
+    private String info ;
+
+
+    private String address  ;
+    private String phone  ;
+    private int  price  ;
+    private Date create_time ;
+    private Date update_time   ;
 
     public String getAddress() {
         return address;
@@ -28,6 +36,14 @@ public class Order {
         this.address = address;
     }
 
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
     public String getPhone() {
         return phone;
     }
@@ -36,8 +52,6 @@ public class Order {
         this.phone = phone;
     }
 
-    private String address  ;
-    private String phone  ;
 
 
     public String getStatus4V() {
@@ -138,8 +152,6 @@ public class Order {
         this.update_time = update_time;
     }
 
-    private int  price  ;
-    private Date create_time ;
-    private Date update_time   ;
+
 
 }

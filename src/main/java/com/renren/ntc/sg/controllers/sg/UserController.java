@@ -9,6 +9,7 @@ import com.renren.ntc.sg.dao.*;
 import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
 import com.renren.ntc.sg.service.AddressService;
 import com.renren.ntc.sg.service.LoggerUtils;
+import com.renren.ntc.sg.service.OrderService;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.SUtils;
 import net.paoding.rose.web.Invocation;
@@ -27,6 +28,10 @@ public class UserController {
     private static int DEFAULT_SHOP_ID = 1;
     @Autowired
     public ShopDAO shopDAO;
+
+
+    @Autowired
+    OrderService orderService ;
 
     @Autowired
     public OrdersDAO orderDAO;
@@ -62,33 +67,14 @@ public class UserController {
         List<Order>  orders = orderDAO.getOrder(user_id,0,20);
 
         inv.addModel( "addressls",addressls);
-
-        System.out.println( "get orders " + orders.size()  );
-
-        orders = forV(orders)  ;
+        orders = orderService.forV(orders)  ;
         inv.addModel( "orders",orders);
+
         return "user";
     }
 
-    private List<Order> forV(List<Order> orders) {
-        List<Order> oo =   new ArrayList<Order>();
-        for (Order o : orders) {
-             Address adr = addressService.getAddress(o.getAddress_id());
-            if( null == adr ) {
-                System.out.println(String.format("Miss address drop order %s " ,o.getOrder_id()) );
-                continue;
-            }
-            o.setPhone(adr.getPhone());
-            o.setAddress(adr.getAddress());
-            o.setStatus4V(toStr(o.getStatus()));
-            oo.add(o);
-        }
-        return oo;
-    }
 
-    private String toStr(int status) {
-        return "配送中" ;
-    }
+
 
 }
 

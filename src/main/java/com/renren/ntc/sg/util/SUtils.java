@@ -3,18 +3,18 @@ package com.renren.ntc.sg.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.renren.ntc.sg.bean.Address;
 import com.renren.ntc.sg.bean.Item;
+import com.renren.ntc.sg.bean.Order;
 import com.renren.ntc.sg.bean.OrderInfo;
+import com.renren.ntc.sg.service.PrinterService;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -72,6 +72,10 @@ public class SUtils {
 
     }
 
+
+
+
+
     public static  JSONArray from (List<OrderInfo> ls){
         JSONArray jarry =   new JSONArray();
         if (null == ls )  {
@@ -86,6 +90,15 @@ public class SUtils {
         }
         return jarry;
     }
+
+//    private static String del(String info) {
+//        info = info.replaceAll("</tr>","") ;
+//        info = info.replaceAll("</td>","") ;
+//        info = info.replaceAll("</td>","") ;
+//        info = info.replaceAll("<tr>","") ;
+//        info = info.replaceAll("  ","");
+//        return info;
+//    }
 
     public static String getOrderId() {
 
