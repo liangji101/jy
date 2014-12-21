@@ -1,5 +1,6 @@
 package com.renren.ntc.sg.controllers.sg;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.*;
@@ -101,6 +102,7 @@ public class OrderController {
         boolean ok = true;
         JSONArray jbarr = (JSONArray) JSONArray.parse(items);
         int price = 0;
+        JSONArray infos = new JSONArray();
         List<Item4V> itemls = new ArrayList<Item4V>();
         for (int i = 0; i < jbarr.size(); i++) {
             JSONObject jb = (JSONObject) jbarr.get(i);
@@ -125,13 +127,13 @@ public class OrderController {
                 i4v.setInfo ("只剩这些了,正在通知店家补货");
                 ok = false;
             }
+            infos.add( JSON.toJSON(i4v));
             itemls.add(i4v);
             price += i4v.getPrice() * i4v.getExt();
         }
         if (!SUtils.islegal(order_id)) {
             order_id = SUtils.getOrderId();
-            LoggerUtils.getInstance().log(String.format("re error order %s,  items %s  ", order_id, items));
-            LoggerUtils.getInstance().log(String.format("create new  order %s ", order_id));
+            LoggerUtils.getInstance().log(String.format("create new  order %s,  items %s  ", order_id, items));
         }
         inv.addModel("shop", shop);
         inv.addModel("order_id", order_id);
@@ -142,10 +144,13 @@ public class OrderController {
 
 
         //库存变化 TODO
+
         for (Item4V it : itemls ){
             int  count  = it.getCount() ;
             long s_id = it.getShop_id();
             long i_id  =  it.getId();
+            JSONObject jb = new JSONObject();
+
             itemsDAO.decr(SUtils.generTableName(s_id),s_id,i_id,count) ;
             LoggerUtils.getInstance().log(String.format(" item  %d   decr %d" , i_id , count));
         }
@@ -155,6 +160,7 @@ public class OrderController {
         order.setAddress_id(address_id);
         order.setPrice(price);
         order.setRemarks(remarks);
+        order.setInfo(infos.toJSONString());
         order.setSnapshot(items);
         order.setStatus(1);         //已经确认的状态
         order.setUser_id(user_id);

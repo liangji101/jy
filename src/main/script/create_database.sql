@@ -149,6 +149,7 @@ CREATE TABLE `orders` (
   `user_id` bigint(20) NOT NULL DEFAULT 0,
   `address_id`  varchar(245) NOT NULL DEFAULT '' ,
   `remarks`  varchar(245) NOT NULL DEFAULT '' ,
+   `info` varchar(8192)  NOT NULL DEFAULT '' ,
   `snapshot` varchar(8192)  NOT NULL DEFAULT '' ,
   `status` tinyint(4) NOT NULL DEFAULT 0 ,
   `price` int(11) NOT NULL DEFAULT 0 ,
@@ -156,7 +157,6 @@ CREATE TABLE `orders` (
   `update_time` timestamp NULL ,
    PRIMARY KEY (`id`),
    UNIQUE KEY order_id (`order_id`),
-   UNIQUE  KEY order_id (`order_id`),
    KEY user_id(`user_id`),
    KEY shop_id(`shop_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

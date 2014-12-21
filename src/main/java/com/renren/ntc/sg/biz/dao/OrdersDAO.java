@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.biz.dao;
 
 import com.renren.ntc.sg.bean.Order;
+import com.renren.ntc.sg.bean.OrderInfo;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
 
@@ -26,8 +27,8 @@ CREATE TABLE `items` (
 @DAO(catalog = "ABC")
 public interface OrdersDAO {
     static final String TABLE_NAME= "orders";
-    static final String FIELDS = "id, order_id,shop_id,user_id,address_id,remarks ,snapshot,status,price,create_time,update_time" ;
-    static final String INSERT_FIELDS = " order_id,shop_id,user_id,address_id,remarks ,snapshot,status,price" ;
+    static final String FIELDS = "id, order_id,shop_id,user_id,address_id,remarks ,info ,snapshot,status,price,create_time,update_time" ;
+    static final String INSERT_FIELDS = " order_id,shop_id,user_id,address_id,remarks ,info,snapshot,status,price" ;
 
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where user_id =:1 order by create_time desc limit :2,:3")
 	public List<Order> getOrder(long user_id, int start, int offset);
@@ -38,7 +39,21 @@ public interface OrdersDAO {
 
 
     @SQL("insert into  " + TABLE_NAME + "(" + INSERT_FIELDS + ") values(:1.order_id,:1.shop_id," +
-            ":1.user_id,:1.address_id,:1.remarks,:1.snapshot,:1.status,:1.price)  ")
+            ":1.user_id,:1.address_id,:1.remarks,:1.info,:1.snapshot,:1.status,:1.price)  ")
     public int  insertUpdate(Order o);
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where shop_id =:1 and status = 1 ")
+    public List<Order> getOrder2Print(long shop_id);
+
+
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + " order by create_time desc limit 0,100 ")
+    List<Order> get10Orders();
+
+    @SQL("update " + TABLE_NAME + "   set status=:1 where order_id = :2 ")
+    int update(int i, String orderId);
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where order_id =:1 ")
+    public Order getOrder(String orderId);
 
 }
