@@ -252,6 +252,9 @@
 
             shoppingCart.updateTotal();
 
+            $(this).siblings( ".product_stepper_count").removeClass('hidden');
+            $(this).siblings( ".product_stepper_minus").removeClass('hidden');
+
         });
 
         $( document ).on( "click", ".countChangeActionMinus", function() {
@@ -272,6 +275,11 @@
             shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'minus');
 
             shoppingCart.updateTotal();
+
+            if(qauntity == 0 ){
+                $(this).siblings(".product_stepper_count").addClass('hidden');
+                $(this).addClass('hidden');
+            }
 
         });
 

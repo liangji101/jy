@@ -4,15 +4,16 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
 
-    <!--<link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">-->
-    <!--<link rel="stylesheet" href="../fonts/font-awesome/css/font-awesome.min.css">-->
-    <!--<link rel="stylesheet" href="../css/app.css">-->
+    <!--<link rel="stylesheet" href="../../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">-->
+    <!--<link rel="stylesheet" href="../../fonts/font-awesome/css/font-awesome.min.css">-->
+    <!--<link rel="stylesheet" href="../../css/app.css">-->
 
-    <!--<script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>-->
-    <!--<script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jquery/dist/jquery.min.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>-->
 
-    <!--<script src="../sg/js/ShoppingCart.js" type="text/javascript"></script>-->
-    <!--<script src="../sg/js/shopAction.js" type="text/javascript"></script>-->
+    <!--<script src="../../sg/js/search.js" type="text/javascript"></script>-->
+    <!--<script src="../../sg/js/ShoppingCart.js" type="text/javascript"></script>-->
+    <!--<script src="../../sg/js/shopAction.js" type="text/javascript"></script>-->
 
     <!--for tomcat-->
     <link rel="stylesheet" href="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
@@ -21,15 +22,15 @@
 
     <script src="/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="/sg/js/search.js" type="text/javascript"></script>
     <script src="/sg/js/ShoppingCart.js" type="text/javascript"></script>
-    <script src="/sg/js/shopAction.js" type="text/javascript"></script>
 
 </head>
 <body>
 
 
 <div id="header" class="header">
-    <form id="searchForm" action="search/q?shop_id=$shop.id" method="get" data-ajax="false">
+    <form id="searchForm" action="" method="get" data-ajax="false">
         <input type="hidden" value="$shop.id" name="shop_id">
         <div class="searchBar">
             <input type="search" name="key" class="searchBar-input" value="" placeholder="搜索商品..." results="100">
@@ -38,25 +39,12 @@
 </div>
 
 <div id="mainContainer">
-    <div id="leftContainer">
-        <div class="shop-categray-list">
-            <ul style="margin: 0.0em;padding: 0px 0em 90px 0em">
-                #foreach($category in $categoryls)
-                <li class="shop-categray" data-categray-id="$category.category_id">
-                    <div class="shop-categray-item-decorate hidden"></div>
-                    <div class="shop-categray-item" style="">$category.name</div>
-                    <div class="shop-categray-item-edge hidden"></div>
-                </li>
-                #end
-            </ul>
-        </div>
-    </div>
-    <div id="mainContent">
+    <div style=" width:100%;position:absolute;height:100%;left:0;overflow:auto;">
+
         <input type="hidden" value="$shop.id" name="shop_id" id="shop_id">
         <div class="shop-product-list">
-            #foreach($category in $categoryls)
-            <ul class="shop-product-categray-list js-shop-product-categray-list" data-categray-id="$category.category_id">
-                #foreach($item in $category.getItemls())
+            <ul style="margin: 0.0em; padding:0px 9px">
+                #foreach($item in $itemls)
                 <li class="product-item js-product-item" id="$item.id">
 
                     <input type="hidden" class="js-product-item-id" value="$item.id"
@@ -73,10 +61,10 @@
                                 $itempricemain<span>.$itempriceleft</span>
                             </div>
                             <div class="product_stepper">
-                                <div class="product_stepper_minus countChangeAction countChangeActionMinus hidden">
+                                <div class="product_stepper_minus countChangeAction countChangeActionMinus" style="">
                                     -
                                 </div>
-                                <div class="product_stepper_count hidden">
+                                <div class="product_stepper_count">
                                     <input type="text"
                                            class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet js-product-item-quantity"
                                            style="padding-top: 2px"
@@ -93,21 +81,20 @@
                 </li>
                 #end
             </ul>
-            #end
         </div>
     </div>
 </div>
 <div id="footer" class="footer">
     <div class="footer-container">
         <div class="footer-container-left base-sidebar-me js-cart-me">
-            <form action="user/profile" method="get" data-ajax="false">
+            <form action="../user/profile" method="get" data-ajax="false">
                 <button class="sidebar-me-submit" type="submit" style="width: 100%;height:100%; margin:0em;border-radius:0;padding: 20px;border-top: lightgray">
                     我的<span> <br><br> </span>
                 </button>
             </form>
         </div>
         <div class="footer-container-right base-cart-prepare js-cart-checkout" style="">
-            <form id="shopConfirm" action="shopCar/confirm?shop_id=$shop.id" method="post" data-ajax="false">
+            <form id="shopConfirm" action="../shopCar/confirm?shop_id=$shop.id" method="post" data-ajax="false">
                 <fieldset>
 
                     <input type="hidden" id="form_items" name="items" value=''/>

@@ -147,7 +147,7 @@ body
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .prod_icon {
@@ -360,14 +360,14 @@ body
 .shop-categray-item-edge {
     background-color: #F54447;
     color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
     position: absolute;
-    top: 2;
-    right: 1;
+    top: 20%;
+    right: 2;
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: lighter;
 }
 

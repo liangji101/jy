@@ -3,8 +3,6 @@ $.mobile.page.prototype.options.domCache = true;
 
 $(document).ready(function(){
 
-
-
     function toggleSelectOnCategray(categray,selected){
 
         if(selected){
@@ -99,8 +97,8 @@ $(document).ready(function(){
                                  item.price/100 + '<span>.'+ item.price%100 + '</span>'+
                                 '</div>'+
                                 '<div class="product_stepper">'+
-                                '<div class="product_stepper_minus countChangeAction countChangeActionMinus" style="">-</div>'+
-                                '<div class="product_stepper_count">'+
+                                '<div class="product_stepper_minus countChangeAction countChangeActionMinus hidden" >-</div>'+
+                                '<div class="product_stepper_count hidden">'+
                                 '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">'+
                                 '<input type="text" class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet js-product-item-quantity" style="padding-top: 2px" value="0" data-value="0">'+ '</div>'+
                                 '</div>'+
@@ -110,7 +108,6 @@ $(document).ready(function(){
                             '</div>'+
                             '</li>'
                             )
-
 
                         });
 
