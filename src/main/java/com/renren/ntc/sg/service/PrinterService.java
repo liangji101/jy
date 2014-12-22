@@ -107,7 +107,7 @@ public class PrinterService {
                 sb.append(" ");
         }
         sb.append(count);
-        a = 6 - count+"".length();
+        a = 8 - (count+"").length();
         if (a < 0 || length(sb.toString()) > 25) {
             sb.append(" ");
         } else {

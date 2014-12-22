@@ -87,7 +87,7 @@ public class SearchController {
             job.put( "name",it.getName()) ;
             job.put( "price",it.getPrice()) ;
             job.put( "category_id",it.getCategory_id()) ;
-            job.put( "pic_ur",it.getPic_url()) ;
+            job.put( "pic_url",it.getPic_url()) ;
             job.put( "count",it.getCount());
             job.put( "price_new",it.getPrice_new());
             job.put( "shop_id",it.getShop_id());
