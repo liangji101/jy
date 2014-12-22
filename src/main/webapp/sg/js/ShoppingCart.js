@@ -6,6 +6,7 @@
     };
 
     shoppingCart.shoppingItemsArray = [];
+    shoppingCart.shoppingItemsCategraysDict = {};
     // special fields for items
     shoppingCart.reservedFields = ['quantity', 'id', 'price', 'name', 'shipping', 'tax', 'taxRate'];
 
@@ -114,6 +115,8 @@
     shoppingCart.empty = function(){
 
         this.shoppingItemsArray = [];
+        this.shoppingItemsCategraysDict = {};
+
         this.saveShoppingCart();
 
     }
@@ -122,13 +125,14 @@
 
         var items = {},me = this;
         localStorage.setItem("shopping_items", JSON.stringify(me.shoppingItemsArray));
-
+        localStorage.setItem("categray_dict", JSON.stringify(me.shoppingItemsCategraysDict));
     },
 
      shoppingCart.loadShoppingCart = function () {
 
         // empty without the update
         var items = localStorage.getItem("shopping_items");
+         var categraies = localStorage.getItem("categray_dict");
 
         if (!items) {
             return;
@@ -141,6 +145,7 @@
         try {
 
             this.shoppingItemsArray = JSON.parse(items);
+            this.shoppingItemsCategraysDict = JSON.parse(categraies);
 
         } catch (e){
             console.error( "Error Loading data: " + e );
@@ -181,9 +186,40 @@
             }
             $("#js-shop-total-price").text(totolp);
             $("#js-shop-total-count").text(shoppingCart.getTotalQuantity());
+
+            // update categray shop list
+            var me = this;
+            $('.shop-categray').each(function(idx,item){
+
+                var cid = $(item).data('categray-id');
+                if(cid && me.shoppingItemsCategraysDict && me.shoppingItemsCategraysDict[cid+'']){
+                    var total = 0;
+                    for(var prop in me.shoppingItemsCategraysDict[cid+'']){
+                        total += me.shoppingItemsCategraysDict[cid+''][prop];
+                    }
+                    if(total >0){
+                        $('.shop-categray-item-edge',item).removeClass('hidden');
+                        $('.shop-categray-item-edge',item).text(parseInt(total));
+                    }else{
+                        $('.shop-categray-item-edge',item).addClass('hidden');
+                    }
+                }
+            })
         }
 
 
+    shoppingCart.updateCategrayDictOnProductCountChange = function(product,id,qauntity,action){
+
+        // update categray list
+        var categray = $(product).closest(".js-shop-product-categray-list");
+        if(!categray)return;
+        var cateId = categray.data('categray-id');
+        this.shoppingItemsCategraysDict = this.shoppingItemsCategraysDict || {};
+
+        this.shoppingItemsCategraysDict[cateId+''] = this.shoppingItemsCategraysDict[cateId+''] || {};
+        this.shoppingItemsCategraysDict[cateId+''][id+''] = parseInt(qauntity);
+
+    }
    // events listed here
 
     $(document).ready(function(){
@@ -212,9 +248,9 @@
 
             $('.countChangeAction',prodcut).removeClass('hidden');
 
+            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'add');
+
             shoppingCart.updateTotal();
-
-
 
         });
 
@@ -233,12 +269,44 @@
 
             shoppingCart.decrementShoppingItemById(id);
 
+            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'minus');
+
+            shoppingCart.updateTotal();
+
+        });
+
+        $(".countChangeActionSet").change(function() {
+            // Check input( $( this ).val() ) for validity here
+
+            var prodcut = $(this).closest( ".js-product-item");
+
+            if(!prodcut)return;
+
+            var id = $('.js-product-item-id',prodcut).data('value'),
+                qauntity = parseInt($(this).val()),
+                name = $('.js-product-item-name',prodcut).data('value'),
+                price = $('.js-product-item-price',prodcut).data('value');
+
+            // in case this is the first set count
+            shoppingCart.addNewItem({
+                'quantity': qauntity,
+                'id': id,
+                'price': price,
+                'name':name
+            });
+
+            shoppingCart.setAmountOfShoppingItemById(id, qauntity);
+
+            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'set');
+
             shoppingCart.updateTotal();
         });
 
         $( document ).on( "click", ".shopping_cart_empty", function() {
 
             shoppingCart.shoppingItemsArray = [];
+            shoppingCart.shoppingItemsCategraysDict = {};
+
             shoppingCart.saveShoppingCart();
             shoppingCart.updateTotal();
         });
