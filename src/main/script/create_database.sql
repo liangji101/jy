@@ -167,7 +167,7 @@ CREATE TABLE `ver` (
   `url` varchar(256) NOT NULL DEFAULT '' ,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL ,
-   PRIMARY KEY (`id`),
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 

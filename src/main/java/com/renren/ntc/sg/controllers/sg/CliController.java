@@ -18,8 +18,10 @@ import java.util.List;
 public class CliController {
 
     private static int DEFAULT_SHOP_ID = 1;
-
+    @Autowired
     private DeviceDAO deviceDAO   ;
+
+    @Autowired
     private VerDAO verDAO  ;
 
 
@@ -49,7 +51,6 @@ public class CliController {
            jb.put("url",v.getUrl());
            return "@" + jb.toJSONString();
        }
-
         return "@" +Constants.ALLREADYNEW;
     }
 

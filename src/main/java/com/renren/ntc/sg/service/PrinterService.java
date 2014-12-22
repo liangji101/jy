@@ -26,7 +26,7 @@ public class PrinterService {
           return jarr.toJSONString();
     }
 
-    public  String getString(Order o ) {
+    public  String getString(Order o) {
         String order_id  = o.getOrder_id();
         StringBuffer sb = new StringBuffer();
 
@@ -63,6 +63,9 @@ public class PrinterService {
         sb.append("商品名称             数量   价格\n");
         JSONArray jarr   = (JSONArray) JSONArray.parse(o.getInfo());;
         int sum = 0;
+        if ( null == jarr){
+              return "" ;
+        }
         int size = jarr.size();
         for (int i = 0;i < size ;i++) {
             JSONObject ob = jarr.getJSONObject(i);
@@ -78,9 +81,7 @@ public class PrinterService {
         //0b00111000
         sb.append((char)56);
         sb.append("总价       :"+ (sum/100) +"\n");
-        sb.append("\n");
-        sb.append("\n");
-        sb.append("\n");
+        sb.append("\n\n\n");
         return sb.toString();
     }
 
