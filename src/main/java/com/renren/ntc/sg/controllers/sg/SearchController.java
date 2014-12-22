@@ -33,7 +33,7 @@ public class SearchController {
     public ItemsDAO itemsDAO;
 
 
-    @Get("q")
+    @Get("qvm")
     public String query (Invocation inv,@Param("shop_id") long shop_id, @Param("key")  String  key){
         // 校验合法性
         JSONObject o = new JSONObject();
@@ -54,6 +54,29 @@ public class SearchController {
 //        JSONArray jarr = form(itemls) ;
 //        o.put("data",jarr);
         return "search";
+    }
+
+    @Get("query")
+    public String query2 (Invocation inv,@Param("shop_id") long shop_id, @Param("key")  String  key){
+        // 校验合法性
+        JSONObject o = new JSONObject();
+        if (0  >= shop_id){
+            shop_id = Constants.DEFAULT_SHOP ;
+        }
+        Shop shop = shopDAO.getShop(shop_id);
+
+        if(null == shop){
+            LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
+            shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
+        }
+        key = SUtils.wrap(key);
+        List<Item>  itemls =  itemsDAO.search(SUtils.generTableName(shop_id),shop_id,key);
+
+        inv.addModel("shop",shop);
+        inv.addModel("itemls",itemls);
+        JSONArray jarr = form(itemls) ;
+        o.put("data",jarr);
+        return "@" + o.toJSONString();
     }
 
     private JSONArray form(List<Item> itemls) {
