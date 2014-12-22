@@ -97,6 +97,7 @@ public class PrinterService {
         String name = od.getString("name");
         int count = od.getIntValue("count");
         int price = od.getIntValue("price");
+        float pp = price /100 ;
         sb.append(name);
         int a = 22 - length(name);
         if (a <= 0) {
@@ -113,7 +114,7 @@ public class PrinterService {
             for (int i = 0; i < a; i++)
                 sb.append(" ");
         }
-        sb.append(price);
+        sb.append(pp);
         return sb.toString();
     }
 
