@@ -48,6 +48,8 @@ public class SearchController {
         }
         key = SUtils.wrap(key);
         List<Item>  itemls =  itemsDAO.search(SUtils.generTableName(shop_id),shop_id,key);
+
+        inv.addModel("shop",shop);
         inv.addModel("itemls",itemls);
 //        JSONArray jarr = form(itemls) ;
 //        o.put("data",jarr);
