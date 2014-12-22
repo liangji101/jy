@@ -132,6 +132,9 @@ body
 
 }
 
+.ui-mobile .ui-page{
+    min-height: 100%;
+}
 .shop-container {
 
 }
@@ -347,11 +350,25 @@ body
 
 .shop-categray-item-decorate {
 
-    background-color: red;
+    background-color: #F54447;
     width: 4px;
     height: 100%;
     position: absolute;
     left: 0;
+}
+
+.shop-categray-item-edge {
+    background-color: #F54447;
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 2;
+    right: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: lighter;
 }
 
 .shop-categray-item-selected {

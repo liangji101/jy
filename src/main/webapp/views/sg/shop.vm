@@ -42,6 +42,7 @@
                 <li class="shop-categray" data-categray-id="$category.category_id">
                     <div class="shop-categray-item-decorate hidden"></div>
                     <div class="shop-categray-item" style="">$category.name</div>
+                    <div class="shop-categray-item-edge hidden"></div>
                 </li>
                 #end
             </ul>
@@ -51,7 +52,7 @@
         <input type="hidden" value="$shop.id" name="shop_id" id="shop_id">
         <div class="shop-product-list">
             #foreach($category in $categoryls)
-            <ul class="shop-product-categray-list" data-categray-id="$category.category_id">
+            <ul class="shop-product-categray-list js-shop-product-categray-list" data-categray-id="$category.category_id">
                 #foreach($item in $category.getItemls())
                 <li class="product-item js-product-item" id="$item.id">
 
