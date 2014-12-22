@@ -29,7 +29,7 @@
 
 
 <div id="header" class="header">
-    <form id="searchForm" action="search/q?shop_id=$shop.id" method="get" data-ajax="false">
+    <form id="searchForm" action="search/qvm?shop_id=$shop.id" method="get" data-ajax="false">
         <input type="hidden" value="$shop.id" name="shop_id">
         <div class="searchBar">
             <input type="search" name="key" class="searchBar-input" value="" placeholder="搜索商品..." results="100">
@@ -58,7 +58,6 @@
             <ul class="shop-product-categray-list js-shop-product-categray-list" data-categray-id="$category.category_id">
                 #foreach($item in $category.getItemls())
                 <li class="product-item js-product-item" id="$item.id">
-
                     <input type="hidden" class="js-product-item-id" value="$item.id"
                            data-value="$item.id"/>
                     <div class="prod_icon" style='background-image: url("$item.pic_url")'>
@@ -86,7 +85,6 @@
                                 <div class="product_stepper_add countChangeAction countChangeActionAdd">
                                     +
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -94,6 +92,9 @@
                 #end
             </ul>
             #end
+            <div style="text-align: center;height: 20px;" class="loadingMore">
+                <i class="">点击加载更多</i>
+            </div>
         </div>
     </div>
 </div>
@@ -109,9 +110,7 @@
         <div class="footer-container-right base-cart-prepare js-cart-checkout" style="">
             <form id="shopConfirm" action="shopCar/confirm?shop_id=$shop.id" method="post" data-ajax="false">
                 <fieldset>
-
                     <input type="hidden" id="form_items" name="items" value=''/>
-
                     <button id="submit_shop" class="sidebar-cart-checkout js-cart-checkout"
                             style="background-color: #7c7d80;width: 100%;height: 100% ; margin: 0em;color: white; border: none;border-radius:0;text-shadow: none;">
                         <span class=" base-font js-checkout-hit">去结算</span>
@@ -121,7 +120,6 @@
                                     class="js-shop-total-count base-font ">0</span> 件</span>
                         ￥<span id="js-shop-total-price" class="js-shop-total-price base-font">0</span>
                     </button>
-
                 </fieldset>
             </form>
         </div>

@@ -23,9 +23,7 @@
 <body>
 
 <div id="mainContainer" role="page" style="top: 0">
-
     <div id="content" data-role="content" class="ui-content">
-
         <div class="shop-container">
 
             <!--#if(!$addressls || $addressls.isEmpty())-->

@@ -31,7 +31,6 @@
 
 <div id="header" class="header">
     <form id="searchForm" action="" method="get" data-ajax="false">
-        <input type="hidden" value="$shop.id" name="shop_id">
         <div class="searchBar">
             <input type="search" name="key" class="searchBar-input" value="" placeholder="搜索商品..." results="100">
         </div>
@@ -42,8 +41,15 @@
     <div style=" width:100%;position:absolute;height:100%;left:0;overflow:auto;">
 
         <input type="hidden" value="$shop.id" name="shop_id" id="shop_id">
+
+        <div id="searchSpinner" class="searchSpinner hidden">
+            <div class="overlay">
+                <div class="spinner"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+            </div>
+        </div>
+
         <div class="shop-product-list">
-            <ul style="margin: 0.0em; padding:0px 9px">
+            <ul style="margin: 0.0em; padding:0px 9px" class="js-search-result-list">
                 #foreach($item in $itemls)
                 <li class="product-item js-product-item" id="$item.id">
 
