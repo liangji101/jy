@@ -49,7 +49,7 @@ public class ShopController {
             shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
         }
         //获取 热门分类
-        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,20);
+        List<Item> itemls = itemsDAO.hot(SUtils.generTableName(shop_id),shop_id,0,10);
         inv.addModel("items", itemls);
         return "hot";
     }
@@ -73,7 +73,7 @@ public class ShopController {
             ShopCategory4v s  =  new ShopCategory4v();
             s.setName(category.getName());
             s.setCategory_id(category.getCategory_id());
-            List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category.getCategory_id(),0,20);
+            List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category.getCategory_id(),0,10);
             s.setItemls(itemls);
             shopCategoryls.add(s);
         }
