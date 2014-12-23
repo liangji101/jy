@@ -114,10 +114,17 @@ public class AddressController {
     @Post("default")
     public String update (Invocation inv ,@Param("address_id") long address_id ,
                           @Param("phone") String phone ,@Param("address") String address){
+        //追加这个量个参数的支持
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             inv.addModel("msg" ,"请刷新后再试");
             return "error";
+        }
+        if (0 == address_id){
+            Address addre =   new Address();
+            addre.setPhone(phone)  ;
+            addre.setAddress(address);
+            address_id = addressService.addAddress(addre);
         }
         addressService.cleanDefaultAddress(u.getId());
         addressService.defaultAddress(address_id) ;
