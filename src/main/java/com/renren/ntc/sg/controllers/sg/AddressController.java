@@ -124,6 +124,7 @@ public class AddressController {
             Address addre =   new Address();
             addre.setPhone(phone)  ;
             addre.setAddress(address);
+            addre.setUser_id(u.getId());
             address_id = addressService.addAddress(addre);
         }
         addressService.cleanDefaultAddress(u.getId());
