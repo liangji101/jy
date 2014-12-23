@@ -35,7 +35,8 @@ public class AddressController {
      */
     @Get("")
     @Post ("")
-    public String get (Invocation inv){
+    public String get (Invocation inv,@Param("address_id") String address_id ,
+                       @Param("phone") String phone ,@Param("address") String address){
          User u = ntcHostHolder.getUser();
          if ( null ==u ||  0 >= u.getId()){
               return "error";
