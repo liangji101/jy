@@ -62,8 +62,6 @@
                         <th>产品条形码</th>
                         <th>商品名</th>
                         <th>分类</th>
-                        <th>库存</th>
-                        <th>价格</th>
                         <th>图片</th>
                     </tr>
                     </thead>
@@ -73,8 +71,6 @@
                         <td class="edit" id="e-${item.shop_id}-serialNo-$item.id">$item.serialNo</td>
                         <td class="edit" id="e-{$item.shop_id}-name-$item.id">$item.name</td>
                         <td class="edit" id="e-{$item.category_id}-category_id-$item.id">$item.category_id</td>
-                        <td class="edit" id="e-${item.shop_id}-count-$item.id">$item.count</td>
-                        <td class="edit" id="e-${item.shop_id}-price-$item.id">$item.price</td>
                         <td class="edit" id="e-${item.shop_id}-pic_url-$item.id">$item.pic_url</td>
                     </tr>
                     #end
