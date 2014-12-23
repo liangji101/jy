@@ -10,6 +10,7 @@ body {
     padding: 0px;
     margin: 0px;
     border: 0px;
+    font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"黑体";
 }
 
 #header {
@@ -18,7 +19,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 45px;
+    height: 46px;
     background: #e0e0e0;
     overflow: hidden;
     z-index: 100;
@@ -124,9 +125,9 @@ body {
     position: fixed;
     background-color: #f8f8f8;
     top: 0;
-    height: 45px;
+    height: 46px;
     z-index: 100;
-    padding: 0em;
+    padding: 3px 9px;
 }
 
 .searchBar .ui-input-search {
