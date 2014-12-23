@@ -85,6 +85,20 @@ public class ProductConsoleController {
         return "product";
     }
 
+    @Post("query")
+    @Get("query")
+    public String query(Invocation inv, @Param("query") String query){
+        List<Category> categoryls  = categoryDAO.getCategory();
+        long category_id =  categoryls.get(0).getId();
+        query = SUtils.wrap(query);
+        List<Product> pdls = productDAO.geProducts(query);
+
+        inv.addModel("curr_cate_id",category_id);
+        inv.addModel("categoryls",categoryls);
+        inv.addModel("itemls", pdls);
+        return "product";
+    }
+
     @Post("del")
     @Get("del")
     public String del(Invocation inv, @Param("id") long id){

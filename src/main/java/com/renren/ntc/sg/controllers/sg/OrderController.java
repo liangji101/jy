@@ -168,7 +168,7 @@ public class OrderController {
         if (re != 1) {
             return "error";
         }
-        return "r:/sg/user/profile?shop_id= " + shop_id;
+        return "r:/sg/user/profile?shop_id=" + shop_id;
     }
 
 

@@ -61,15 +61,8 @@ public class UserController {
             user_id = u.getId();
         }
 
-        if (0 >= shop_id) {
-            shop_id = Constants.DEFAULT_SHOP;
-        }
         Shop shop = shopDAO.getShop(shop_id);
 
-        if (null == shop) {
-            LoggerUtils.getInstance().log(String.format("can't find shop  %d  ", shop_id));
-            return "error";
-        }
 
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
         System.out.println( "addressls" + addressls.size()  );

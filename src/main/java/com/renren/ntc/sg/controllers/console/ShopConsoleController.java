@@ -2,10 +2,7 @@ package com.renren.ntc.sg.controllers.console;
 
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
-import com.renren.ntc.sg.bean.Item;
-import com.renren.ntc.sg.bean.RegistUser;
-import com.renren.ntc.sg.bean.Shop;
-import com.renren.ntc.sg.bean.ShopCategory;
+import com.renren.ntc.sg.bean.*;
 import com.renren.ntc.sg.biz.dao.ItemsDAO;
 import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
@@ -147,4 +144,29 @@ public class ShopConsoleController {
         return  "@"+Constants.DONE ;
     }
 
+
+    @Post("query")
+    @Get("query")
+    public String query(Invocation inv, @Param("query") String query, @Param("shop_id") long shop_id){
+
+        if (0  >= shop_id){
+            shop_id = Constants.DEFAULT_SHOP ;
+        }
+        Shop shop = shopDAO.getShop(shop_id);
+
+        if(null == shop){
+            LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
+            shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
+        }
+        List<ShopCategory> categoryls  = shopCategoryDAO.getCategory(shop.getId());
+        long category_id =  categoryls.get(0).getId();
+        query = SUtils.wrap(query);
+        query = SUtils.wrap(query);
+        List<Item>  itemls =  itemsDAO.search(SUtils.generTableName(shop_id),shop_id,query);
+
+        inv.addModel("curr_cate_id",category_id);
+        inv.addModel("categoryls",categoryls);
+        inv.addModel("itemls", itemls);
+        return "shop";
+    }
 }
