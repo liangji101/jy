@@ -129,17 +129,10 @@ public class PrinterV2Controller {
             String message = "#address#=" + vv + "&#status#=" + ro + "&#orderDetail#=" + orde;
             message = SUtils.span(message);
             message = URLEncoder.encode(message,"utf-8");
-//            url = forURL(SMSURL, APPKEY, TID, "18612274066", message);
-//            System.out.println(String.format("Send  SMS mobile %s %s ,%s ", mobile, value.getOrder_id(), url));
-//            t = SHttpClient.getURLData(url, "");
-//            response = SUtils.toString(t);
-//            System.out.println(String.format("Post Shop SMS message No. %s : %s , %s  %s ", value.getOrder_id(), response, mobile, url));
 
             url = forURL(SMSURL, APPKEY, TID, "18600326217", message);
             System.out.println(String.format("Send  SMS mobile %s %s ,%s ", mobile, value.getOrder_id(), url));
-
             t = SHttpClient.getURLData(url, "");
-
             response = SUtils.toString(t);
             System.out.println(String.format("Post Shop SMS message No. %s : %s , %s  %s ", value.getOrder_id(), response, mobile, url));
         } catch (Throwable e) {

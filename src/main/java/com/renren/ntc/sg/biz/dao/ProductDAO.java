@@ -25,6 +25,10 @@ public interface ProductDAO {
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + " where category_id=:1 limit :2,:3 ")
     public List<Product> geProducts(long category_id ,int from ,int offset );
 
+
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + " where name like :1 ")
+    public List<Product> geProducts(String query );
+
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  limit :1,:2 ")
     public List<Product> geProducts(int from ,int offset );
 
