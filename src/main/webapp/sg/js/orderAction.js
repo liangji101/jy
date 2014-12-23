@@ -1,26 +1,26 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
 
-    $(document).on( "vclick", ".addressItem", function() {
-        document.location.href = '../address?shop_id='+ getParameterByName('shop_id');
+    $(document).on("vclick", ".addressItem", function () {
+        document.location.href = '../address?shop_id=' + getParameterByName('shop_id');
     });
 
-    $( document ).on( "click", "#submit_order", function() {
+    $(document).on("click", "#submit_order", function () {
 
         var items = [];
-        for(var idx = 0 ;idx < shoppingCart.shoppingItemsArray.length;idx++){
-            items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id ,"count":shoppingCart.shoppingItemsArray[idx].quantity,
-                'price':shoppingCart.shoppingItemsArray[idx].price ,'name':shoppingCart.shoppingItemsArray[idx].name});
+        for (var idx = 0; idx < shoppingCart.shoppingItemsArray.length; idx++) {
+            items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id, "count": shoppingCart.shoppingItemsArray[idx].quantity,
+                'price': shoppingCart.shoppingItemsArray[idx].price, 'name': shoppingCart.shoppingItemsArray[idx].name});
         }
 
-        if($('.firstTimeAddAddress') && $('.firstTimeAddAddress').length){
+        if ($('.firstTimeAddAddress') && $('.firstTimeAddAddress').length) {
             // first time add address, no address ID
             updateSubmitInfo(JSON.stringify(items),
-                '' ,
+                '',
                 $('#newOrderAddress').val(),
                 $('#newOrderPhone').val(),
                 $('#orderRemarks').val());
-        }else{
+        } else {
             // already have it, just use default message
             updateSubmitInfo(JSON.stringify(items),
                 $('.addressDefault-id').val(),
@@ -32,47 +32,47 @@ $(document).ready(function(){
     });
 
 
-    function updateSubmitInfo(items, addressId, address,phone, remark){
+    function updateSubmitInfo(items, addressId, address, phone, remark) {
 
-        if(items){
+        if (items) {
             $('#order_items').val(items);
         }
-        if(addressId){
+        if (addressId) {
             $('#order_address_id').val(addressId);
         }
 
-        if(address){
+        if (address) {
             $('#order_address').val(address);
         }
 
-        if(phone){
+        if (phone) {
             $('#order_phone').val(phone);
         }
 
-        if(remark){
+        if (remark) {
             $('#order_remarks').val($('#orderRemarks').val());
         }
 
     }
 
 
-    $("#orderConfirm").submit(function( event ) {
+    $("#orderConfirm").submit(function (event) {
 
         // exist the element and have no value
-        if($('#newOrderAddress') && $('#newOrderAddress').length &&  !$('#newOrderAddress').val()){
+        if ($('#newOrderAddress') && $('#newOrderAddress').length && !$('#newOrderAddress').val()) {
             warningOfNeccessInput($('#newOrderAddress'));
             return false;
         }
 
         // exist the element and have no value
-        if($('#newOrderPhone') && $('#newOrderPhone').length && !$('#newOrderPhone').val()){
+        if ($('#newOrderPhone') && $('#newOrderPhone').length && !$('#newOrderPhone').val()) {
             warningOfNeccessInput($('#newOrderPhone'));
             return false;
         }
 
         var values = $(this).serialize();
 
-        $('#submit_order').attr('disabled',"true");
+        $('#submit_order').attr('disabled', "true");
 
         shoppingCart.empty();
 
@@ -81,19 +81,17 @@ $(document).ready(function(){
 
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();
+    $('#submit_order').removeAttr('disabled');
 
-    $('.js-product-item' ).click(function(){
-        shoppingCart.countChangeAddHanlder($('.countChangeActionAdd',this));
-    });
-
-    $('.countChangeActionAdd' ).click(function(){
+    $('.countChangeActionAdd').click(function (e) {
+        e.stopPropagation();
         shoppingCart.countChangeAddHanlder(this);
     });
 
-    $('.countChangeActionMinus' ).click(function(){
+    $('.countChangeActionMinus').click(function (e) {
+        e.stopPropagation();
         shoppingCart.countChangeMinusHanlder(this);
     });
-
 });
 
 

@@ -21,6 +21,15 @@ $(document).ready(function () {
 
             if ($(item).data('categray-id') == cateId) {
                 $(item).removeClass('hidden');
+
+                // update photo url
+                $('.js-product-item',item).each(function(itemIdx,itemItem){
+                    var icon = $('.prod_icon',itemItem);
+                    if(icon && icon.data('imageurl')){
+                        icon.css({'background-image':"url(" + icon.data('imageurl') +")"});
+                    }
+                });
+
                 $('.loadingMore').show();
             } else {
                 $(item).addClass('hidden');
@@ -52,7 +61,7 @@ $(document).ready(function () {
             var from = $('.js-product-item', visiableCate).length;
             var offset = 20;
 
-            $(me).html('<i class="fa fa-spinner fa-spin"></i>');
+            $(me).html('<i class="fa  fa-2x fa-spinner fa-spin"></i>');
             $.getJSON(
                 "shop/getitems?shop_id=" + parseInt(shop_id) +
                     "&category_id=" + parseInt(cateId) + "&from=" + parseInt(from) +
@@ -103,6 +112,8 @@ $(document).ready(function () {
             return false; // can't submit
         }
 
+        $('#submit_shop').attr('disabled', "disabled");
+
         return true;
     });
 
@@ -114,11 +125,20 @@ $(document).ready(function () {
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();
 
-    $('.countChangeActionAdd' ).click(function(){
+    $('#submit_shop').removeAttr('disabled');
+
+    $('.js-product-item' ).click(function(e){
+        e.stopPropagation();
+        shoppingCart.countChangeAddHanlder($('.countChangeActionAdd',this));
+    });
+
+    $('.countChangeActionAdd' ).click(function(e){
+        e.stopPropagation();
         shoppingCart.countChangeAddHanlder(this);
     });
 
-    $('.countChangeActionMinus' ).click(function(){
+    $('.countChangeActionMinus' ).click(function(e){
+        e.stopPropagation();
         shoppingCart.countChangeMinusHanlder(this);
     });
 

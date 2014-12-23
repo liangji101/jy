@@ -3,75 +3,97 @@ html {
     height: 100%
 }
 
-body
-{
-    height:100%;
-    max-height:100%;
-    overflow:hidden;
-    padding:0px;
-    margin:0px;
-    border:0px;
-}
-
-#header
-{
-    position:absolute;
-    margin:0;
-    top:0;
-    left:0;
-    width:100%;
-    height:45px;
-    background:#e0e0e0;
-    overflow:hidden;
-    z-index: 100;
-}
-
-
-#mainContainer
-{
-    position:absolute;
-    top:45px;
-    width:100%;
+body {
     height: 100%;
-    bottom:20px;
-    overflow:scroll;
-    left:0px;
-    background:#fff;
+    max-height: 100%;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
 }
 
-#leftContainer
-{
-    width: 27%;
-    top:0;
-    left:0;
-    height:100%;
-    font-size: 21px;
-    position:absolute;
-    overflow:auto;
-
-}
-
-#mainContent
-{
-    width:auto;
-    position:absolute;
-    height:100%;
-    left:27%;
-    right:0;
-    overflow:auto;
-}
-
-#footer
-{
-    position:fixed;
-    margin:0px;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:60px;
-    overflow:hidden;
-    background:#eee;
+#header {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    background: #e0e0e0;
+    overflow: hidden;
     z-index: 100;
+}
+
+#mainContainer {
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    height: 100%;
+    bottom: 20px;
+    overflow: scroll;
+    left: 0px;
+    background: #fff;
+}
+
+#leftContainer {
+    width: 27%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    font-size: 21px;
+    position: absolute;
+    overflow: auto;
+}
+
+#mainContent {
+    width: auto;
+    position: absolute;
+    height: 100%;
+    left: 27%;
+    right: 0;
+    overflow: auto;
+}
+
+
+#commonContainer {
+    width: 100%;
+    height: 100%;
+    bottom: 60px;
+    overflow: scroll;
+    left: 0px;
+    background: #fff;
+}
+
+.commonContent {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+
+#footer {
+    position: fixed;
+    margin: 0px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    background: #eee;
+    z-index: 100;
+}
+
+.scroll {
+    position: absolute;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0
 }
 
 .spinner {
@@ -80,7 +102,11 @@ body
     width: 90px;
     margin: auto;
     position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
 }
 
 .overlay {
@@ -103,7 +129,7 @@ body
     padding: 0em;
 }
 
-.searchBar .ui-input-search{
+.searchBar .ui-input-search {
     margin: 0em;
 }
 
@@ -113,6 +139,8 @@ body
 
 .content-container {
     width: 100%;
+    height: 100%;
+    overflow: scroll;
 }
 
 .shop-container {
@@ -150,9 +178,10 @@ body
 
 }
 
-.ui-mobile .ui-page{
+.ui-mobile .ui-page {
     min-height: 100%;
 }
+
 .shop-container {
 
 }
@@ -252,7 +281,7 @@ body
     font-weight: normal;
 }
 
-.prod_info{
+.prod_info {
     margin-top: 10px;
 }
 
@@ -472,7 +501,7 @@ body
     cursor: pointer;
 }
 
-.addressButton{
+.addressButton {
     color: #ffffff;
     background-color: #F54447;
     border: solid 1px #F54447;
@@ -489,7 +518,7 @@ body
 
 }
 
-.useThisAddress{
+.useThisAddress {
     text-shadow: none;
     font-size: 18px;
     display: inline-block;

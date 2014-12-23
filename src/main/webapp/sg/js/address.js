@@ -106,8 +106,9 @@ $(document).ready(function () {
                     var oldaddr = $('#shopConfirm').attr('action');
                     $('#shopConfirm').attr('action',oldaddr.replace(/shop_id=*/,'shop_id='+getParameterByName('shop_id')));
 
-                    var data = $('#shopConfirm').serialize();
+                    $('.useThisAddress').attr('disabled','disabled');
 
+                    var data = $('#shopConfirm').serialize();
                     $('#shopConfirm').submit();
 
                 }else{
@@ -119,5 +120,7 @@ $(document).ready(function () {
     $(document).on("vclick", ".useThisAddress", function () {
         updateDefaultAddress();
     });
+
+    $('.useThisAddress').removeAttr('disabled');
 
 });
