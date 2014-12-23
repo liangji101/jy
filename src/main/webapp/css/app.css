@@ -127,7 +127,7 @@ body {
     top: 0;
     height: 46px;
     z-index: 100;
-    padding: 3px 9px;
+    padding: 0px;
 }
 
 .searchBar .ui-input-search {
