@@ -35,16 +35,16 @@ public class AddressController {
      */
     @Get("")
     @Post ("")
-    public String get (Invocation inv){
-         User u = ntcHostHolder.getUser();
-         if ( null ==u ||  0 >= u.getId()){
-              return "error";
+    public String get (Invocation inv, @Param("shop_id") long shop_id ){
+        User u = ntcHostHolder.getUser();
+        if ( null ==u ||  0 >= u.getId()){
+            return "error";
 
-          }
+        }
 
-          List<Address> ls  = addressService.getAddresses(u.getId());
-          inv.addModel("addressls",ls);
-           return "address" ;
+        List<Address> ls  = addressService.getAddresses(u.getId());
+        inv.addModel("addressls",ls);
+        return "address" ;
     }
 
     @Get("del")
@@ -94,7 +94,7 @@ public class AddressController {
 
     @Get("update")
     @Post ("update")
-    public String update (Invocation inv ,@Param("address_id") long address_id ,@Param("phone") String phone,@Param("name") String name ,@Param("address") String address){
+    public String update (Invocation inv ,@Param("shop_id") long shop_id ,@Param("address_id") long address_id ,@Param("phone") String phone,@Param("name") String name ,@Param("address") String address){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             inv.addModel("msg" ,"请刷新后再试");
@@ -112,7 +112,7 @@ public class AddressController {
     //更新默认地址
     @Get("default")
     @Post("default")
-    public String update (Invocation inv ,@Param("address_id") long address_id ,
+    public String update (Invocation inv,@Param("shop_id") long shop_id ,@Param("address_id") long address_id ,
                           @Param("phone") String phone ,@Param("address") String address){
         //追加这个量个参数的支持
         User u = ntcHostHolder.getUser();

@@ -53,12 +53,22 @@ public class UserController {
     // 判断地址是否Ok
 
     @Get("profile")
-    public String save(Invocation inv) {
+    public String save(Invocation inv,@Param("shop_id") long shop_id ) {
 
         User u = holder.getUser();
         long user_id = 0;
         if (null != u) {
             user_id = u.getId();
+        }
+
+        if (0 >= shop_id) {
+            shop_id = Constants.DEFAULT_SHOP;
+        }
+        Shop shop = shopDAO.getShop(shop_id);
+
+        if (null == shop) {
+            LoggerUtils.getInstance().log(String.format("can't find shop  %d  ", shop_id));
+            return "error";
         }
 
         List<Address>  addressls = addressDAO.getAddresses(user_id,0,1);
@@ -68,6 +78,7 @@ public class UserController {
 
         inv.addModel( "addressls",addressls);
         orders = orderService.forV(orders)  ;
+        inv.addModel("shop",shop);
         inv.addModel( "orders",orders);
 
         return "user";
