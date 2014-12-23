@@ -106,7 +106,7 @@ public class AddressController {
         add.setAddress(address);
         add.setPhone(phone);
         addressService.updateAddress(add) ;
-        return Constants.DONE;
+        return "@" + Constants.DONE;
     }
 
     //更新默认地址
@@ -128,7 +128,7 @@ public class AddressController {
         }
         addressService.cleanDefaultAddress(u.getId());
         addressService.defaultAddress(address_id) ;
-        return Constants.DONE;
+        return "@" + Constants.DONE;
     }
 }
 
