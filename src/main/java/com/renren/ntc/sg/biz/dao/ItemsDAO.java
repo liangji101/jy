@@ -59,5 +59,8 @@ public interface ItemsDAO {
 
 
     @SQL("update  ##(:tableName) set ##(:key) = :4  where id =:2")
-    void update(@SQLParam("tableName") String tableName, long id, @SQLParam("key") String key, String value);
+    public int update(@SQLParam("tableName") String tableName, long id, @SQLParam("key") String key, String value);
+
+    @SQL("update  ##(:tableName) set pic_url=:2 where serialNo =:3")
+    public  int updateforSerialNo(@SQLParam("tableName") String tableName,String key, String value);
 }

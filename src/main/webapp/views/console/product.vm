@@ -26,7 +26,7 @@
             <a class="navbar-brand" href="#"> Cat </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <!--<ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Profile</a></li>
@@ -34,7 +34,7 @@
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
-            </form>
+            </form>-->
         </div>
     </div>
 </nav>
@@ -71,7 +71,7 @@
                         <td class="edit" id="e-${item.shop_id}-serialNo-$item.id">$item.serialNo</td>
                         <td class="edit" id="e-{$item.shop_id}-name-$item.id">$item.name</td>
                         <td class="edit" id="e-{$item.category_id}-category_id-$item.id">$item.category_id</td>
-                        <td class="edit" id="e-${item.shop_id}-pic_url-$item.id">$item.pic_url</td>
+                        <td class="edit" id="e-${item.shop_id}-pic_url-$item.id"> #if($item.pic_url)<img style="width:60px" src="$item.pic_url"/>#end</td>
                     </tr>
                     #end
                     </tbody>
@@ -80,10 +80,10 @@
                     <ul class="pager">
                         #if($previous_f)
                         <li>
-                          <a href="/console/shop?shop_id=${shop_id}&category_id=${curr_cate_id}&from=$previous_f&offset=100">Previous</a></li>
+                          <a href="/console/product?category_id=${curr_cate_id}&from=$previous_f&offset=100">Previous</a></li>
                         #end
                         #if($next_f)
-                        <li><a href="/console/shop?shop_id=${shop_id}&category_id=${curr_cate_id}&from=$next_f&offset=100">Next</a></li>
+                        <li><a href="/console/product?category_id=${curr_cate_id}&from=$next_f&offset=100">Next</a></li>
                         #end
                     </ul>
                 </nav>

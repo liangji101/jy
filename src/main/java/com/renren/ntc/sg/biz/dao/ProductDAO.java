@@ -32,4 +32,8 @@ public interface ProductDAO {
     @SQL("insert into  " + TABLE_NAME  + " (" + INSERT_FIELDS + ")" +" value (:1.serialNo,:1.name," +
             ":1.pic_url,:1.category_id,:1.category_sub_id)")
     public  int insert(Product product);
+
+    @SQL("update " + TABLE_NAME + "  set pic_url=:1 where serialNo = :2 ")
+    public int update(String url, String serialNo);
+
 }

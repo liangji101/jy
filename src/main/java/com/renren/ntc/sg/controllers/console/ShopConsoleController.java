@@ -82,7 +82,7 @@ public class ShopConsoleController {
             from = 0;
         }
         if ( 0 == offset){
-            offset = 100 ;
+            offset = 50 ;
         }
         List<ShopCategory> categoryls  = shopCategoryDAO.getCategory(shop.getId());
         inv.addModel("shop",shop) ;
