@@ -35,8 +35,7 @@ public class AddressController {
      */
     @Get("")
     @Post ("")
-    public String get (Invocation inv,@Param("address_id") String address_id ,
-                       @Param("phone") String phone ,@Param("address") String address){
+    public String get (Invocation inv){
          User u = ntcHostHolder.getUser();
          if ( null ==u ||  0 >= u.getId()){
               return "error";
@@ -113,7 +112,8 @@ public class AddressController {
     //更新默认地址
     @Get("default")
     @Post("default")
-    public String update (Invocation inv ,@Param("address_id") long address_id ){
+    public String update (Invocation inv ,@Param("address_id") long address_id ,
+                          @Param("phone") String phone ,@Param("address") String address){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             inv.addModel("msg" ,"请刷新后再试");
