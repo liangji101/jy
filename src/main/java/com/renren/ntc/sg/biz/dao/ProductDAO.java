@@ -4,6 +4,7 @@ import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Product;
 import net.paoding.rose.jade.annotation.DAO;
 import net.paoding.rose.jade.annotation.SQL;
+import net.paoding.rose.jade.annotation.SQLParam;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface ProductDAO {
 
     static final String TABLE_NAME= "product";
     static final String FIELDS = "id, serialNo,name,pic_url,category_id,category_sub_id ,create_time ,update_time" ;
-    static final String INSERT_FIELDS = "serialNo,name,pic_url,category_id,category_sub_id ,create_time ,update_time" ;
+    static final String INSERT_FIELDS = "serialNo,name,pic_url,category_id,category_sub_id " ;
 
     @SQL("select "+ FIELDS +" from " + TABLE_NAME + " where category_id=:1 limit :2,:3 ")
     public List<Product> geProducts(long category_id ,int from ,int offset );
@@ -28,4 +29,7 @@ public interface ProductDAO {
     public List<Product> geProducts(int from ,int offset );
 
 
+    @SQL("insert into  " + TABLE_NAME  + " (" + INSERT_FIELDS + ")" +" value (:1.serialNo,:1.name," +
+            ":1.pic_url,:1.category_id,:1.category_sub_id)")
+    public  int insert(Product product);
 }
