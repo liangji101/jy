@@ -1,13 +1,16 @@
 package com.renren.ntc.sg.controllers.console;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
-import com.renren.ntc.sg.bean.Shop;
-import com.renren.ntc.sg.bean.ShopCategory;
+import com.renren.ntc.sg.bean.*;
+import com.renren.ntc.sg.biz.dao.CategoryDAO;
+import com.renren.ntc.sg.biz.dao.ItemsDAO;
+import com.renren.ntc.sg.biz.dao.ProductDAO;
 import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
 import com.renren.ntc.sg.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
+import com.renren.ntc.sg.util.SUtils;
 import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
@@ -26,34 +29,61 @@ import java.util.List;
 @Path("product")
 public class ProductConsoleController {
 
+
+
+    @Autowired
+    private ItemsDAO itemsDAO ;
+
 	@Autowired
-	private ShopDAO shopDAO;
+	private ProductDAO productDAO;
 
     @Autowired
     private ShopCategoryDAO shopCategoryDAO ;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
+
 
 	@Autowired
 	private RegistHostHolder hostHolder;
 
 
 	//注册的时候ajax校验用户名，违禁词和嫌疑词不让注册
-	@Post("")
+    //注册的时候ajax校验用户名，违禁词和嫌疑词不让注册
+    @Post("")
     @Get("")
-	public String index(Invocation inv, @Param("shop_id") long shop_id){
-        if (0  >= shop_id){
-            shop_id = Constants.DEFAULT_SHOP ;
+    public String index(Invocation inv ,@Param("category_id") long category_id ,
+                        @Param("from") int from, @Param("offset") int offset){
+
+        if ( 0 == from){
+            from = 0;
         }
-        Shop shop = shopDAO.getShop(shop_id);
-
-        if(null == shop){
-            LoggerUtils.getInstance().log(String.format("can't find shop  %d  " ,shop_id) );
-            shop = shopDAO.getShop( Constants.DEFAULT_SHOP);
+        if ( 0 == offset){
+            offset = 100 ;
         }
-        List<ShopCategory> category  = shopCategoryDAO.getCategory(shop.getId());
+        List<Category> categoryls  = categoryDAO.getCategory();
 
-
-         return "items";
-	}
+        if ( 0 == category_id ){
+            if (categoryls.size() > 0){
+                category_id =  categoryls.get(0).getId();
+            }
+            else{
+                LoggerUtils.getInstance().log(String.format(" category is 0  && no category find "));
+                return "product";
+            }
+        }
+        List<Product> pdls = productDAO.geProducts(category_id,from,offset);
+        if(from != 0){
+            inv.addModel("previous_f", from - offset);
+        }
+        if(pdls.size() >=  offset){
+            inv.addModel("next_f", from  + offset);
+        }
+        inv.addModel("itemls", pdls);
+        inv.addModel("categoryls",categoryls);
+        inv.addModel("curr_cate_id",category_id);
+        return "product";
+    }
 
     @Post("del")
     @Get("del")

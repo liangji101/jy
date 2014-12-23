@@ -5,10 +5,12 @@ CREATE TABLE `product` (
   `pic_url` varchar(256) DEFAULT 0 ,
   `category_id` int(11) DEFAULT 0  ,
   `category_sub_id` int(11) DEFAULT 0  ,
+ `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL ,
    PRIMARY KEY (`id`),
    KEY `name` (`name`),
    KEY category_id_category_sub_id (`category_id`,`category_sub_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT ,

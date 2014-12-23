@@ -6,11 +6,11 @@ import com.mongodb.DBObject;
 
 public class GeoMongodbService2dSphere extends AbstractGeoMongodbService {
 
-	protected GeoMongodbService2dSphere() {
+	public GeoMongodbService2dSphere() {
 	}
 
 	@Override
-	protected ShopLocation parseUserLocation(DBObject obj) {
+    public ShopLocation parseUserLocation(DBObject obj) {
 		ShopLocation ul = new ShopLocation();
 		ul.setShop_id((Long) obj.get("shop_id"));
 		DBObject loc = (DBObject) obj.get("loc");
@@ -21,7 +21,7 @@ public class GeoMongodbService2dSphere extends AbstractGeoMongodbService {
 	}
 	
 	@Override
-	protected DBObject makeLocationPoint(ShopLocation uloc) {
+    public DBObject makeLocationPoint(ShopLocation uloc) {
 		DBObject point = new BasicDBObject();
 		point.put("type", "Point");
 		point.put("coordinates", new double[]{uloc.getLongitude(), uloc.getLatitude()});
@@ -29,7 +29,7 @@ public class GeoMongodbService2dSphere extends AbstractGeoMongodbService {
 	}
 
 	@Override
-	protected DBObject makeLocationQuery(ShopLocation uloc, int maxDistance) {
+    public DBObject makeLocationQuery(ShopLocation uloc, int maxDistance) {
 		DBObject locQuery = new BasicDBObject();
 		locQuery.put("$nearSphere", makeLocationPoint(uloc));
 		locQuery.put("$maxDistance", maxDistance);

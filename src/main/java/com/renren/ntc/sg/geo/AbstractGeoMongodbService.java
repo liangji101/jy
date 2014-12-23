@@ -19,12 +19,12 @@ import com.mongodb.WriteResult;
 
 public abstract class AbstractGeoMongodbService {
 
-	protected final Logger logger = Logger.getLogger(getClass());
-	
-	protected DB geoDb;
-	protected DBCollection geoTable;
-	
-	protected AbstractGeoMongodbService() {
+    public final Logger logger = Logger.getLogger(getClass());
+
+    public DB geoDb;
+    public DBCollection geoTable;
+
+    public AbstractGeoMongodbService() {
 		try {
 
 			geoDb = MongoDBUtil.getInstance().getDB();
@@ -35,14 +35,14 @@ public abstract class AbstractGeoMongodbService {
 			logger.error("init geo mongodb fail", e);
 		}
 	}
+
+    public abstract ShopLocation parseUserLocation(DBObject obj);
+
+    public abstract DBObject makeLocationPoint(ShopLocation uloc);
+
+    public abstract DBObject makeLocationQuery(ShopLocation uloc, int maxDistance);
 	
-	protected abstract ShopLocation parseUserLocation(DBObject obj);
-	
-	protected abstract DBObject makeLocationPoint(ShopLocation uloc);
-	
-	protected abstract DBObject makeLocationQuery(ShopLocation uloc, int maxDistance);
-	
-	protected boolean update(ShopLocation uloc) {
+	public boolean update(ShopLocation uloc) {
 		if(geoTable != null) {
 			DBObject user = new BasicDBObject();
 			user.put("shop_id", uloc.getShop_id());
@@ -55,8 +55,8 @@ public abstract class AbstractGeoMongodbService {
 			return false;
 		}
 	}
-	
-	protected boolean remove(long uid){
+
+    public boolean remove(long uid){
 		if(geoTable != null) {
 			WriteResult re = geoTable.remove(new BasicDBObject("uid", uid));
 			return re.getN() > 0 ;
@@ -65,9 +65,9 @@ public abstract class AbstractGeoMongodbService {
 			return false;
 		}
 	}
-	
-	
-	protected ShopLocation queryByUid(long uid) {
+
+
+    public ShopLocation queryByUid(long uid) {
 		if(geoTable == null) {
 			logger.error("can not queryByUid because geo mongodb not inited");
 			return null;
@@ -81,8 +81,8 @@ public abstract class AbstractGeoMongodbService {
 			return null;
 		}
 	}
-	
-	protected Map<Long, ShopLocation> queryLocationMap(List<Long> uids) {
+
+    public Map<Long, ShopLocation> queryLocationMap(List<Long> uids) {
 		if(geoTable == null) {
 			logger.error("can not queryLocationMap because geo mongodb not inited");
 			return Collections.emptyMap();
@@ -104,8 +104,8 @@ public abstract class AbstractGeoMongodbService {
 			cursor.close();
 		}
 	}
-	
-	protected List<GeoQueryResult> query(ShopLocation uloc, int maxDistance, int maxNum) {
+
+    public List<GeoQueryResult> query(ShopLocation uloc, int maxDistance, int maxNum) {
 		if(geoTable == null) {
 			logger.error("can not query because geo mongodb not inited");
 			return Collections.emptyList();
