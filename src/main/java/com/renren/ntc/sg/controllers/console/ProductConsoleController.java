@@ -59,7 +59,7 @@ public class ProductConsoleController {
             from = 0;
         }
         if ( 0 == offset){
-            offset = 100 ;
+            offset = 50 ;
         }
         List<Category> categoryls  = categoryDAO.getCategory();
 
