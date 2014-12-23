@@ -4,15 +4,15 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
 
-    <!--<link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">-->
-    <!--<link rel="stylesheet" href="../fonts/font-awesome/css/font-awesome.min.css">-->
-    <!--<link rel="stylesheet" href="../css/app.css">-->
+    <link rel="stylesheet" href="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/app.css">
 
-    <!--<script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>-->
-    <!--<script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>-->
+    <script src="../js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
 
-    <!--<script src="../sg/js/ShoppingCart.js" type="text/javascript"></script>-->
-    <!--<script src="../sg/js/shopAction.js" type="text/javascript"></script>-->
+    <script src="../sg/js/ShoppingCart.js" type="text/javascript"></script>
+    <script src="../sg/js/shopAction.js" type="text/javascript"></script>
 
     <!--for tomcat-->
     <link rel="stylesheet" href="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
@@ -29,7 +29,7 @@
 
 
 <div id="header" class="header">
-    <form id="searchForm" action="search/qvm?shop_id=$shop.id" method="get" data-ajax="false">
+    <form id="searchForm" action="search/q?shop_id=$shop.id" method="get" data-ajax="false">
         <input type="hidden" value="$shop.id" name="shop_id">
         <div class="searchBar">
             <input type="search" name="key" class="searchBar-input" value="" placeholder="搜索商品..." results="100">
@@ -75,12 +75,8 @@
                                 <div class="product_stepper_minus countChangeAction countChangeActionMinus hidden">
                                     -
                                 </div>
-                                <div class="product_stepper_count hidden">
-                                    <input type="text"
-                                           class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet js-product-item-quantity"
-                                           style="padding-top: 2px"
-                                           value="0"
-                                           data-value="0">
+                                <div class="product_stepper_count countChangeAction countChangeActionSet js-product-item-quantity hidden">
+                                 0
                                 </div>
                                 <div class="product_stepper_add countChangeAction countChangeActionAdd">
                                     +

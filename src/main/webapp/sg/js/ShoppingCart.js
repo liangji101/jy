@@ -220,106 +220,103 @@
         this.shoppingItemsCategraysDict[cateId+''][id+''] = parseInt(qauntity);
 
     }
+
+    shoppingCart.getItemString = function(){
+        var items = [];
+        for (var idx = 0; idx < shoppingCart.shoppingItemsArray.length; idx++) {
+            items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id, "count": shoppingCart.shoppingItemsArray[idx].quantity,
+                'price': shoppingCart.shoppingItemsArray[idx].price, 'name': shoppingCart.shoppingItemsArray[idx].name,
+                'pic_url': shoppingCart.shoppingItemsArray[idx].pic_url});
+        }
+        return JSON.stringify(items);
+    }
+
+
+
    // events listed here
 
-    $(document).ready(function(){
+    shoppingCart.countChangeAddHanlder = function(ele){
 
-        $( document ).on( "click", ".countChangeActionAdd", function() {
+        var prodcut = $(ele).closest( ".js-product-item");
 
-            var prodcut = $(this).closest( ".js-product-item");
+        if(!prodcut)return;
 
-            if(!prodcut)return;
+        var name = $('.js-product-item-name',prodcut).data('value'),
+            price = $('.js-product-item-price',prodcut).data('value'),
+            qauntity = $('.js-product-item-quantity',prodcut).text(),
+            id = $('.js-product-item-id',prodcut).data('value');
 
-            var name = $('.js-product-item-name',prodcut).data('value'),
-                price = $('.js-product-item-price',prodcut).data('value'),
-                qauntity = $('.js-product-item-quantity',prodcut).val(),
-                id = $('.js-product-item-id',prodcut).data('value');
+        qauntity = parseInt(qauntity) + 1;
 
-            qauntity = parseInt(qauntity) + 1;
+        $('.js-product-item-quantity',prodcut).text(qauntity);
 
-            $('.js-product-item-quantity',prodcut).val(qauntity);
-
-            shoppingCart.addNewItem({
-                'quantity': qauntity,
-                'id': id,
-                'price': price,
-                'name':name
-            });
-
-            $('.countChangeAction',prodcut).removeClass('hidden');
-
-            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'add');
-
-            shoppingCart.updateTotal();
-
-            $(this).siblings( ".product_stepper_count").removeClass('hidden');
-            $(this).siblings( ".product_stepper_minus").removeClass('hidden');
-
+        shoppingCart.addNewItem({
+            'quantity': qauntity,
+            'id': id,
+            'price': price,
+            'name':name
         });
 
-        $( document ).on( "click", ".countChangeActionMinus", function() {
+        $('.countChangeAction',prodcut).removeClass('hidden');
 
-            var prodcut = $(this).closest( ".js-product-item");
+        shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'add');
 
-            if(!prodcut)return;
+        shoppingCart.updateTotal();
 
-            var id = $('.js-product-item-id',prodcut).data('value'),
-                qauntity = $('.js-product-item-quantity',prodcut).val();
+        $(ele).siblings( ".product_stepper_count").removeClass('hidden');
+        $(ele).siblings( ".product_stepper_minus").removeClass('hidden');
+    }
 
-            qauntity = parseInt(qauntity) - 1 > 0 ? parseInt(qauntity) - 1:0;
+    shoppingCart.countChangeMinusHanlder = function(ele){
 
-            $('.js-product-item-quantity',prodcut).val(qauntity);
+        var prodcut = $(ele).closest( ".js-product-item");
 
-            shoppingCart.decrementShoppingItemById(id);
+        if(!prodcut)return;
 
-            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'minus');
+        var id = $('.js-product-item-id',prodcut).data('value'),
+            qauntity = $('.js-product-item-quantity',prodcut).text();
 
-            shoppingCart.updateTotal();
+        qauntity = parseInt(qauntity) - 1 > 0 ? parseInt(qauntity) - 1:0;
 
-            if(qauntity == 0 ){
-                $(this).siblings(".product_stepper_count").addClass('hidden');
-                $(this).addClass('hidden');
-            }
+        $('.js-product-item-quantity',prodcut).text(qauntity);
 
+        shoppingCart.decrementShoppingItemById(id);
+
+        shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'minus');
+
+        shoppingCart.updateTotal();
+
+        if(qauntity == 0 ){
+            $(ele).siblings(".product_stepper_count").addClass('hidden');
+            $(ele).addClass('hidden');
+        }
+    }
+
+    shoppingCart.countChangeResetHanlder = function(ele){
+
+        var prodcut = $(ele).closest( ".js-product-item");
+
+        if(!prodcut)return;
+
+        var id = $('.js-product-item-id',prodcut).data('value'),
+            qauntity = parseInt($(ele).text()),
+            name = $('.js-product-item-name',prodcut).data('value'),
+            price = $('.js-product-item-price',prodcut).data('value');
+
+        // in case this is the first set count
+        shoppingCart.addNewItem({
+            'quantity': qauntity,
+            'id': id,
+            'price': price,
+            'name':name
         });
 
-        $(".countChangeActionSet").change(function() {
-            // Check input( $( this ).val() ) for validity here
+        shoppingCart.setAmountOfShoppingItemById(id, qauntity);
 
-            var prodcut = $(this).closest( ".js-product-item");
+        shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'set');
 
-            if(!prodcut)return;
-
-            var id = $('.js-product-item-id',prodcut).data('value'),
-                qauntity = parseInt($(this).val()),
-                name = $('.js-product-item-name',prodcut).data('value'),
-                price = $('.js-product-item-price',prodcut).data('value');
-
-            // in case this is the first set count
-            shoppingCart.addNewItem({
-                'quantity': qauntity,
-                'id': id,
-                'price': price,
-                'name':name
-            });
-
-            shoppingCart.setAmountOfShoppingItemById(id, qauntity);
-
-            shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'set');
-
-            shoppingCart.updateTotal();
-        });
-
-        $( document ).on( "click", ".shopping_cart_empty", function() {
-
-            shoppingCart.shoppingItemsArray = [];
-            shoppingCart.shoppingItemsCategraysDict = {};
-
-            shoppingCart.saveShoppingCart();
-            shoppingCart.updateTotal();
-        });
-
-    });
+        shoppingCart.updateTotal();
+    }
 
     window.shoppingCart = shoppingCart;
 
@@ -329,3 +326,12 @@
 (function () {if (!this.localStorage)if (this.globalStorage)try {this.localStorage=this.globalStorage}catch(e) {}else{var a=document.createElement("div");a.style.display="none";document.getElementsByTagName("head")[0].appendChild(a);if (a.addBehavior) {a.addBehavior("#default#userdata");var d=this.localStorage={length:0,setItem:function (b,d) {a.load("localStorage");b=c(b);a.getAttribute(b)||this.length++;a.setAttribute(b,d);a.save("localStorage")},getItem:function (b) {a.load("localStorage");b=c(b);return a.getAttribute(b)},
     removeItem:function (b) {a.load("localStorage");b=c(b);a.removeAttribute(b);a.save("localStorage");this.length=0},clear:function () {a.load("localStorage");for (var b=0;attr=a.XMLDocument.documentElement.attributes[b++];)a.removeAttribute(attr.name);a.save("localStorage");this.length=0},key:function (b) {a.load("localStorage");return a.XMLDocument.documentElement.attributes[b]}},c=function (a) {return a.replace(/[^-._0-9A-Za-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u37f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f]/g,
     "-")};a.load("localStorage");d.length=a.XMLDocument.documentElement.attributes.length}}})();
+
+// util methods
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}

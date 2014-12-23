@@ -1,5 +1,3 @@
-$.mobile.page.prototype.options.domCache = true;
-
 $(document).ready(function () {
 
     function toggleSelectOnCategray(categray, selected) {
@@ -40,12 +38,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#submit_shop", function () {
 
-        var items = [];
-        for (var idx = 0; idx < shoppingCart.shoppingItemsArray.length; idx++) {
-            items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id, "count": shoppingCart.shoppingItemsArray[idx].quantity,
-                'price': shoppingCart.shoppingItemsArray[idx].price, 'name': shoppingCart.shoppingItemsArray[idx].name});
-        }
-        $('#form_items').val(JSON.stringify(items));
+        $('#form_items').val(shoppingCart.getItemString());
 
     });
 
@@ -68,10 +61,10 @@ $(document).ready(function () {
                     if (data.code == 0 && Array.isArray(data.data) && data.data.length > 0) {
 
 
-                        var tmpNode = $('.js-product-item', visiableCate).last().clone(false);
+                        var tmpNode = $('.js-product-item', visiableCate).last().clone(true);
 
                         $(data.data).each(function (idx, item) {
-                            var tmpl = tmpNode.clone(false);
+                            var tmpl = tmpNode.clone(true);
                             if (tmpl) {
                                 tmpl = tmpl.attr('id', item.id);
                                 $('.js-product-item-id', tmpl).val(item.id);
@@ -86,30 +79,6 @@ $(document).ready(function () {
 
                                 $(visiableCate).append(tmpl);
                             }
-
-//                            $(visiableCate).append(
-//                                '<li class="product-item js-product-item" id="'+ item.id +'">' +
-//                                 '<input type="hidden" class="js-product-item-id" value="'+ item.id +'"data-value="'+ item.id+ '"/>' +
-//                                '<div class="prod_icon" style="background-image: url("'+ item.pic_url + '")">'+ '</div>' +
-//                                '<div>'+
-//                                '<span class="product-title oneline js-product-item-name" data-value="'+ item.name+'">'+ item.name+ '</span>'+
-//                                '<div class="prod_info">'+
-//                                '<div class="product-price js-product-item-price" data-value="'+ item.price +'">'+
-//                                 item.price/100 + '<span>.'+ item.price%100 + '</span>'+
-//                                '</div>'+
-//                                '<div class="product_stepper">'+
-//                                '<div class="product_stepper_minus countChangeAction countChangeActionMinus hidden" >-</div>'+
-//                                '<div class="product_stepper_count hidden">'+
-//                                '<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">'+
-//                                '<input type="text" class="product_stepper_count_input item-quantity countChangeAction countChangeActionSet js-product-item-quantity" style="padding-top: 2px" value="0" data-value="0">'+ '</div>'+
-//                                '</div>'+
-//                                '<div class="product_stepper_add countChangeAction countChangeActionAdd">+</div>'+
-//                                '</div>'+
-//                                '</div>'+
-//                            '</div>'+
-//                            '</li>'
-//                            )
-
                         });
 
                         $(me).html('点击加载更多');
@@ -144,6 +113,14 @@ $(document).ready(function () {
 
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();
+
+    $('.countChangeActionAdd' ).click(function(){
+        shoppingCart.countChangeAddHanlder(this);
+    });
+
+    $('.countChangeActionMinus' ).click(function(){
+        shoppingCart.countChangeMinusHanlder(this);
+    });
 
 });
 

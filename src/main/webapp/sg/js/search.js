@@ -7,6 +7,13 @@ $(document).ready(function () {
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();
 
+    $('.countChangeActionAdd' ).click(function(){
+        shoppingCart.countChangeAddHanlder(this);
+    });
+
+    $('.countChangeActionMinus' ).click(function(){
+        shoppingCart.countChangeMinusHanlder(this);
+    });
 
     $('#searchForm').submit(function () {
 
@@ -22,13 +29,13 @@ $(document).ready(function () {
             // update search result
             if (!result || !result.data || !result.data.length)return;
 
-            var tmpNode = $('.js-product-item').last().clone(false);
+            var tmpNode = $('.js-product-item').last().clone(true);
 
             $('.js-product-item').remove();
 
             $(result.data).each(function (idx, item) {
 
-                var tmpl = tmpNode.clone(false);
+                var tmpl = tmpNode.clone(true);
 
                 if (tmpl) {
                     tmpl = tmpl.attr('id', item.id);
@@ -45,7 +52,6 @@ $(document).ready(function () {
                     $('.js-search-result-list').append(tmpl);
                 }
             });
-
         });
 
         return false;

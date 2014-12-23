@@ -1,5 +1,3 @@
-$.mobile.page.prototype.options.domCache = true;
-
 $(document).ready(function () {
 
     $('.order-item').each(function (idx, item) {
