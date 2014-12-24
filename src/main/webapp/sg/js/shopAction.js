@@ -30,6 +30,7 @@ $(document).ready(function () {
                     }
                 });
 
+                $('.loadingMore').html('点击加载更多');
                 $('.loadingMore').show();
             } else {
                 $(item).addClass('hidden');
@@ -85,6 +86,11 @@ $(document).ready(function () {
 
                                 $('.js-product-item-price', tmpl).attr('data-value', item.price);
                                 $('.js-product-item-price', tmpl).html(parseInt(item.price / 100) + '<span>.' + item.price % 100 + '</span>');
+
+                                $('.js-product-item-quantity', tmpl).text(0);
+
+                                $('.product_stepper_minus', tmpl).addClass('hidden');
+                                $('.product_stepper_count', tmpl).addClass('hidden');
 
                                 $(visiableCate).append(tmpl);
                             }

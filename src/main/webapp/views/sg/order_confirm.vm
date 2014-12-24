@@ -31,7 +31,7 @@
         <div class="commonContent">
             #if($addressls && ! $addressls.isEmpty())
             #set($DEFAULT_ADDR = $addressls[0])
-            <div class="">
+            <div class="" style="overflow: hidden">
                 <div class="addressItem addressDefault addressSelected">
                     <div style="float: left">
                         <div class="addressItem-address addressDefault-address"
@@ -55,7 +55,7 @@
 
             </div>
             #else
-            <div class="js-addAddress firstTimeAddAddress" style="border-bottom: solid 1px lightgray">
+            <div class="js-addAddress firstTimeAddAddress" style="border-bottom: solid 1px lightgray;overflow: hidden">
                 <div class="addNewAddressHint" style="text-shadow:none">
                     您还没有添加收货人信息,请添加
                 </div>
