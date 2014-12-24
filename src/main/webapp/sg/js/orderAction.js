@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    function warningOfNeccessInput(input) {
+        $(input).css({'border': 'solid 1px red'});
+    }
 
     $(document).on("vclick", ".addressItem", function () {
         document.location.href = '../address?shop_id=' + getParameterByName('shop_id');
