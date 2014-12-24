@@ -28,7 +28,7 @@ public interface SWPOrderDAO {
 	public int insert(OrderInfo o);
 	
 	
-	@SQL("update  " + TABLE_NAME + " where order_id = :2")
+	@SQL("update  " + TABLE_NAME + "set status = :1 where order_id = :2")
 	public int update(int status, String order_id);
 	
 	@SQL("update  " + TABLE_NAME + " set info=:1 ,status = 1 where order_id = :2")
