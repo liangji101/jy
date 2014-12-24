@@ -97,7 +97,8 @@ body {
     width: 73%;
     position: absolute;
     height: 100%;
-    left: 27%;
+    top: 0;
+    /*left: 27%;*/
     right: -10px;
     overflow: hidden;
 }
