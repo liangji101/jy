@@ -58,12 +58,10 @@ body {
 .mainContainer {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
     bottom: 0;
-    overflow: auto;
     left: 0;
     right: 0;
+    overflow: auto;
     background: #fff;
     -webkit-overflow-scrolling: touch;
 }
@@ -96,7 +94,7 @@ body {
 
 
 .rightContainer {
-    width: auto;
+    width: 73%;
     position: absolute;
     height: 100%;
     left: 27%;
@@ -468,7 +466,7 @@ body {
 
 .shop-product-list {
     background-color: #ffffff;
-    padding-bottom: 120px;
+    padding-bottom: 10px;
 }
 
 .shop-product-categray-list {
@@ -479,7 +477,7 @@ body {
 .shop-categray-list {
     background-color: #f8f8f8;
     border-left: solid 1px #7c7d80;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
 }
 
 .shop-categray {

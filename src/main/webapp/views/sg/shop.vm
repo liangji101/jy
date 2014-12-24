@@ -42,11 +42,11 @@
     </form>
 </div>
 
-<div class="mainContainer mainContainer-hasHeader mainContainer-hasFooter" style="overflow: hidden">
+<div class="mainContainer mainContainer-hasHeader mainContainer-hasFooter scroll">
     <div class="leftContainer">
         <div class="leftContent scroll">
             <div class="shop-categray-list" style="width: 90%">
-                <ul style="margin: 0.0em;padding: 0px 0em 90px 0em">
+                <ul style="margin: 0.0em;padding: 0px">
                     #foreach($category in $categoryls)
                     <li class="shop-categray" data-categray-id="$category.category_id">
                         <div class="shop-categray-item-decorate hidden"></div>
@@ -103,9 +103,8 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
 </div>
 
 <div class="footer">
