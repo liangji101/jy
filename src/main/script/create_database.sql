@@ -39,14 +39,15 @@ CREATE TABLE `user` (
 CREATE TABLE `regist_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT ,
   `name` varchar(24) NOT NULL DEFAULT '' ,
-  `phome`varchar(24) NOT NULL DEFAULT '' ,
+  `phone`varchar(24) NOT NULL DEFAULT '' ,
   `pwd` varchar(24) NOT NULL DEFAULT '', 
   `enable` tinyint(4) DEFAULT 0 ,
   `type` tinyint(4) DEFAULT 0  ,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL ,
    PRIMARY KEY (`id`),
-   KEY `name` (`name`)
+   UNIQUE KEY phone (`phone`),
+   KEY phone_pwd (`phone`,`pwd`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
 
 
@@ -65,7 +66,7 @@ CREATE TABLE `regist_user` (
 CREATE TABLE `shop` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT ,
   `name` varchar(24) NOT NULL DEFAULT '' ,
-  `owner_user_id`  varchar(24) NOT NULL DEFAULT '' ,  
+  `owner_user_id`  bigint(20) NOT NULL DEFAULT 0 ,
   `owner` varchar(24) NOT NULL DEFAULT '' ,
   `owner_phone` varchar(24) NOT NULL DEFAULT '' ,
   `head_url` varchar(256) NOT NULL DEFAULT '' ,

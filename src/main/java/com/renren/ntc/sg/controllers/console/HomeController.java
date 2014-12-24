@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.controllers.console;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
+import com.renren.ntc.sg.annotations.LoginRequired;
 import com.renren.ntc.sg.bean.Item;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.bean.ShopCategory;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @DenyCommonAccess
+@LoginRequired
 @Path("console")
 public class HomeController {
 

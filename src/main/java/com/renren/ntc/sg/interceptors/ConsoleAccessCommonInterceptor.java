@@ -1,10 +1,11 @@
 package com.renren.ntc.sg.interceptors;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
-import com.renren.ntc.sg.bean.User;
-import com.renren.ntc.sg.biz.dao.UserDAO;
-import com.renren.ntc.sg.interceptors.access.NtcHostHolder;
-import com.renren.ntc.sg.service.UserService;
+import com.renren.ntc.sg.annotations.DenyConsoleCommonAccess;
+import com.renren.ntc.sg.bean.RegistUser;
+import com.renren.ntc.sg.biz.dao.RegistUserDAO;
+import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
+import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
 import com.renren.ntc.sg.util.CookieManager;
 import com.renren.ntc.sg.util.SUtils;
@@ -21,13 +22,10 @@ import java.lang.annotation.Annotation;
 public class ConsoleAccessCommonInterceptor extends ControllerInterceptorAdapter {
 
     @Autowired
-    private NtcHostHolder hostHolder;
+    private RegistHostHolder hostHolder;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserDAO userDAO;
+    private RegistUserDAO registUserDAO;
 
 
     private static final Logger logger = LoggerFactory.getLogger(ConsoleAccessCommonInterceptor.class);
@@ -35,9 +33,9 @@ public class ConsoleAccessCommonInterceptor extends ControllerInterceptorAdapter
     public ConsoleAccessCommonInterceptor(){
     	setPriority(10000);
     }
-    
+
     protected Class<? extends Annotation> getDenyAnnotationClass() {
-        return DenyCommonAccess.class;
+        return DenyConsoleCommonAccess.class;
     }
 
     @Override
@@ -46,18 +44,13 @@ public class ConsoleAccessCommonInterceptor extends ControllerInterceptorAdapter
         if(!path.startsWith("/console")){
             return true;
         }
-        User u = null    ;
-        String uuid  = CookieManager.getInstance().getCookie(inv.getRequest(), Constants.COOKIE_KEY_USER);
+        RegistUser u = null    ;
+        String uuid  = CookieManager.getInstance().getCookie(inv.getRequest(), Constants.COOKIE_KEY_REGISTUSER);
+        LoggerUtils.getInstance().log("Console accesss " + "abc");
         if(null  != uuid) {
-            u = userDAO.getUser(SUtils.unwrapper(uuid));
+            u = registUserDAO.getUser(SUtils.unwrapper(uuid));
+            hostHolder.setUser(u);
         }
-        if( null == u ) {
-            String userName = SUtils.generName();
-            u  = userService.createUser(userName , 0,  "pwd", 1 );
-            CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.COOKIE_KEY_USER,SUtils.wrapper(u.getId())+ "" , -1 , "/");
-        }
-
-        hostHolder.setUser(u);
         return true;
 	}
     
