@@ -30,6 +30,7 @@ $(document).ready(function () {
                     }
                 });
 
+                $('.loadingMore').html('点击加载更多');
                 $('.loadingMore').show();
             } else {
                 $(item).addClass('hidden');

@@ -92,6 +92,11 @@ $(document).ready(function () {
         e.stopPropagation();
         shoppingCart.countChangeMinusHanlder(this);
     });
+
+    $(window).bind('beforeunload', function () {
+        shoppingCart.saveShoppingCart();
+    });
+
 });
 
 
