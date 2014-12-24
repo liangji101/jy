@@ -45,7 +45,7 @@ public class AuthorizeInterceptor extends ControllerInterceptorAdapter {
 
 
 	public AuthorizeInterceptor(){
-		setPriority(1100);
+		setPriority(1000);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class AuthorizeInterceptor extends ControllerInterceptorAdapter {
             String origURL = SUtils.getResourceFullLocation(inv.getRequest());
             LoggerUtils.getInstance().log("the origURL is " + origURL);
 
-            return "r:" + "/console/login?rf=r&domain="
+            return "r:" + "/console/login?rf=s&domain="
                     + Constants.DOMAIN_URL + "&origURL="
                     + origURL;
         }
@@ -79,10 +79,13 @@ public class AuthorizeInterceptor extends ControllerInterceptorAdapter {
         }catch (Exception e ){
                    e.printStackTrace();
         }
+        LoggerUtils.getInstance().log("shop  id  "  + shopId);
         Shop shop = shopDAO.getShop(shopId) ;
+        LoggerUtils.getInstance().log("shop owner id  "  +  shop.getOwner_user_id() + "user id  " +  user.getId());
         if (shop.getOwner_user_id() != user.getId()){
+
           inv.addModel("msg", "没有权限");
-           return "r:" + "/console/login?rf=r&domain="
+           return "r:" + "/console/login?rf=d&domain="
                 + Constants.DOMAIN_URL;
         }
         return true;

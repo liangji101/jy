@@ -9,7 +9,7 @@ import java.util.List;
 @DAO(catalog = "ABC")
 public interface ShopDAO {
     static final String TABLE_NAME= "shop";
-    static final String FIELDS = "id, owner_user_id name,owner_phone,head_url,shop_url,lng,lat" ;
+    static final String FIELDS = "id, owner_user_id, name,owner_phone,head_url,shop_url,lng,lat" ;
     static final String INSERT_FIELDS = "owner_user_id,name,owner_phone,head_url,shop_url,lng,lat" ;
 
 	@SQL("select " +FIELDS  + "  from "  + TABLE_NAME + " where  lat < :1 and lat > :2 and lng < :3 and lng > :4")
