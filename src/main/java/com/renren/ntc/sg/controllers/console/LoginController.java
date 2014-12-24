@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.controllers.console;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
+import com.renren.ntc.sg.annotations.DenyConsoleCommonAccess;
 import com.renren.ntc.sg.bean.RegistUser;
 import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.biz.dao.RegistUserDAO;
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit;
  * yunming.zhu
  */
 @DenyCommonAccess
+@DenyConsoleCommonAccess
 @Path("login")
 public class LoginController  {
 
@@ -100,6 +102,6 @@ public class LoginController  {
             return "login";
         }
         CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.COOKIE_KEY_REGISTUSER, SUtils.wrapper(u.getId()));
-        return "r:/conosle/shop?shop_id=" + shop.getId()     ;
+        return "r:/console/shop?shop_id=" + shop.getId()     ;
     }
 }
