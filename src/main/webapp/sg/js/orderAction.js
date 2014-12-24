@@ -87,6 +87,9 @@ $(document).ready(function () {
         shoppingCart.saveShoppingCart();
     });
 
+    $(function() {
+        FastClick.attach(document.body);
+    });
 
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();

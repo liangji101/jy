@@ -42,4 +42,8 @@ $(document).ready(function () {
     });
 
     $('.useThisAddress').removeAttr('disabled');
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
 });

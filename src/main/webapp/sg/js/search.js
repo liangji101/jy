@@ -54,6 +54,10 @@ $(document).ready(function () {
         return false;
     });
 
+    $(function() {
+        FastClick.attach(document.body);
+    });
+
     shoppingCart.loadShoppingCart();
     shoppingCart.updateTotal();
 

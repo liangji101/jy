@@ -140,6 +140,10 @@ $(document).ready(function () {
         shoppingCart.countChangeMinusHanlder(this);
     });
 
+    $(function() {
+        FastClick.attach(document.body);
+    });
+
     // default behavior
 
     var defaultCategray = $('.shop-categray')[0];

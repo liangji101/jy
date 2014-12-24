@@ -39,6 +39,9 @@ $(document).ready(function () {
         updateDefaultAddress();
     });
 
+    $(function() {
+        FastClick.attach(document.body);
+    });
     // load snapshot
     $('.order-item').each(function (idx, item) {
 
