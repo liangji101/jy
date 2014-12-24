@@ -147,7 +147,7 @@
                             总计: <span
                                         id="js-shop-total-count"
                                         class="js-shop-total-count base-font">0</span> 件</span>
-                        ￥<span id="js-shop-total-price" class="js-shop-total-price base-font">0</span>
+                        <span class="rmbFont rmbSpan">￥</span><span id="js-shop-total-price" class="js-shop-total-price base-font">0</span>
                     </button>
                 </fieldset>
             </form>

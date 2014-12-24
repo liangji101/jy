@@ -231,14 +231,12 @@ body {
 }
 
 .searchBar {
-    width: 100%;
+    width: auto;
     text-align: center;
-    position: fixed;
     background-color: #f8f8f8;
-    top: 0;
     height: 46px;
     z-index: 100;
-    padding: 0px;
+    padding: 3px 5px;
 }
 
 .searchBar .ui-input-search {
@@ -538,6 +536,15 @@ body {
 .base-font {
     font-size: 10px;
     font-weight: normal;
+}
+
+.rmbFont{
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.rmbSpan{
+    margin-right: 0px;
 }
 
 .addressDefault {

@@ -86,7 +86,8 @@ $(document).ready(function () {
                                 $('.js-product-item-name', tmpl).attr('data-value', item.name);
 
                                 $('.js-product-item-price', tmpl).attr('data-value', item.price);
-                                $('.js-product-item-price', tmpl).html(parseInt(item.price / 100) + '<span>.' + item.price % 100 + '</span>');
+
+                                $('.js-product-item-price', tmpl).html('<span style="font-weight: normal">¥</span>'+parseInt(item.price / 100) + '<span>.' + item.price % 100 + '</span>');
 
                                 $('.js-product-item-quantity', tmpl).text(0);
 
