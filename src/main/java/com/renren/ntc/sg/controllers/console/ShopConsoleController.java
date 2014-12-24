@@ -2,6 +2,7 @@ package com.renren.ntc.sg.controllers.console;
 
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
+import com.renren.ntc.sg.annotations.LoginRequired;
 import com.renren.ntc.sg.bean.*;
 import com.renren.ntc.sg.biz.dao.ItemsDAO;
 import com.renren.ntc.sg.biz.dao.ShopCategoryDAO;
@@ -31,6 +32,7 @@ import java.util.Map;
  */
 
 @DenyCommonAccess
+@LoginRequired
 @Path("shop")
 public class ShopConsoleController {
 

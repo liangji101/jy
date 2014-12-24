@@ -61,7 +61,7 @@ public class LoginRequiredInterceptor extends ControllerInterceptorAdapter {
         if (user == null) {
             String origURL = SUtils.getResourceFullLocation(inv.getRequest());
             logger.info("the origURL is " + origURL);
-            return "r:" + "/login?rf=r&domain="
+            return "r:" + "/console/login?rf=r&domain="
                     + Constants.DOMAIN_URL + "&origURL="
                     + origURL;
         }

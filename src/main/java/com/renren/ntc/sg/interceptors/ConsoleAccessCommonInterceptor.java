@@ -35,7 +35,7 @@ public class ConsoleAccessCommonInterceptor extends ControllerInterceptorAdapter
     public ConsoleAccessCommonInterceptor(){
     	setPriority(10000);
     }
-    
+
     protected Class<? extends Annotation> getDenyAnnotationClass() {
         return DenyCommonAccess.class;
     }

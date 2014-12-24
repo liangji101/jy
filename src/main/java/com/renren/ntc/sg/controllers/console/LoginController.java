@@ -2,7 +2,9 @@ package com.renren.ntc.sg.controllers.console;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
 import com.renren.ntc.sg.bean.RegistUser;
+import com.renren.ntc.sg.bean.Shop;
 import com.renren.ntc.sg.biz.dao.RegistUserDAO;
+import com.renren.ntc.sg.biz.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.RegistUserService;
 import com.renren.ntc.sg.util.Constants;
@@ -39,6 +41,9 @@ public class LoginController  {
     @Autowired
     private RegistUserDAO userDAO;
 
+    @Autowired
+    private ShopDAO shopDAO ;
+
 	@Autowired
 	private RegistUserService userService;
 
@@ -62,14 +67,13 @@ public class LoginController  {
 			return "r:/";
 		}
 		inv.addModel("origURL", origURL);
-		inv.addModel("msg", "abc");
 		return "login";
 	}
 
 
     @Get ("valid")
     @Post ("valid")
-    public String Login(Invocation inv,@Param("phome") String phone,@Param("pwd") String pwd, @Param("origURL") String origURL) {
+    public String Login(Invocation inv,@Param("phone") String phone,@Param("pwd") String pwd, @Param("origURL") String origURL) {
         RegistUser user = hostHolder.getUser();
         if (user != null) {
             return "r:" + origURL;
@@ -85,16 +89,17 @@ public class LoginController  {
         }
         inv.addModel("origURL", origURL);
         inv.addModel("msg", "");
-
         RegistUser u = userDAO.getUser(phone, pwd) ;
         if(null == u){
             inv.addModel("msg","用户名字或密码不正确");
             return "login";
         }
+        Shop shop =  shopDAO.getShopbyOwner_id(u.getId());
+        if (null == shop){
+            inv.addModel("msg","没有关联店铺");
+            return "login";
+        }
         CookieManager.getInstance().saveCookie(inv.getResponse(), Constants.COOKIE_KEY_REGISTUSER, SUtils.wrapper(u.getId()));
-        return "r:" + origURL    ;
+        return "r:/conosle/shop?shop_id=" + shop.getId()     ;
     }
-
-
-
 }

@@ -16,19 +16,19 @@ public class RegistUser {
     private String  name;
     private String pwd ;
 
-    private String phome  ;
+    private String phone  ;
     private int  type ;
     private int enable;
     private Date create_time;
     private Date update_time;
 
 
-    public String getPhome() {
-        return phome;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhome(String phome) {
-        this.phome = phome;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getName() {

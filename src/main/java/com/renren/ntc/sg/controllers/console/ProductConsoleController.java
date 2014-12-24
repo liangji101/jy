@@ -1,6 +1,7 @@
 package com.renren.ntc.sg.controllers.console;
 
 import com.renren.ntc.sg.annotations.DenyCommonAccess;
+import com.renren.ntc.sg.annotations.LoginRequired;
 import com.renren.ntc.sg.bean.*;
 import com.renren.ntc.sg.biz.dao.CategoryDAO;
 import com.renren.ntc.sg.biz.dao.ItemsDAO;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 
 @DenyCommonAccess
+@LoginRequired
 @Path("product")
 public class ProductConsoleController {
 

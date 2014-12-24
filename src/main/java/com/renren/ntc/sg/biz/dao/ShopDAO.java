@@ -17,6 +17,10 @@ public interface ShopDAO {
 	
 	@SQL("select " +FIELDS  + "  from "  + TABLE_NAME + " where  id = :1 ")
 	public Shop getShop(long id);
+
+
+    @SQL("select " +FIELDS  + "  from "  + TABLE_NAME + " where  owner_user_id = :1 ")
+    public Shop getShopbyOwner_id(long id);
 	
 	
 	@SQL("insert into " + TABLE_NAME + "(" + FIELDS +" ) values"  + " (:1.name,:1.owner_phone,:1.head_url,:1.shop_url,:1.lng,:1,lat)")

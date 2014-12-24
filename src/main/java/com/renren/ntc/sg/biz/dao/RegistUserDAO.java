@@ -8,9 +8,9 @@ import net.paoding.rose.jade.annotation.SQL;
 
 @DAO(catalog = "ABC")
 public interface RegistUserDAO {
-    static final String TABLE_NAME= "reg_user";
-    static final String FIELDS = "id, name,phome ,enable,type,pwd ,create_time,update_time" ;
-    static final String INSERT_FIELDS = "name,phome,enable,type,pwd " ;
+    static final String TABLE_NAME= "regist_user";
+    static final String FIELDS = "id, name,phone ,enable,type,pwd ,create_time,update_time" ;
+    static final String INSERT_FIELDS = "name,phone,enable,type,pwd " ;
 
 	@SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where id =:1")
 	public RegistUser getUser(long user_id);
@@ -26,6 +26,6 @@ public interface RegistUserDAO {
     public long  createUser(RegistUser user);
 
 
-    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where phome =:1 and pwd =;2")
+    @SQL("select "+ FIELDS +" from " + TABLE_NAME + "  where phone =:1 and pwd =:2")
     public RegistUser getUser(String phone, String pwd);
 }
