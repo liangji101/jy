@@ -38,7 +38,8 @@ $(document).ready(function () {
         })
     }
 
-    $(document).on("vclick", ".shop-categray", function () {
+    // events
+    $(".shop-categray").click(function () {
         var me = this;
         $('.shop-categray').each(function (idx, item) {
             toggleSelectOnCategray(item, me == item ? true : false);
@@ -46,13 +47,13 @@ $(document).ready(function () {
         toggleProductOnCategrayClick(me);
     });
 
-    $(document).on("click", "#submit_shop", function () {
+    $("#submit_shop").click(function () {
 
         $('#form_items').val(shoppingCart.getItemString());
 
     });
 
-    $(document).on("vclick", ".loadingMore", function () {
+    $(".loadingMore").click(function(){
 
         var me = this;
         var visiableCate = $('.shop-product-categray-list:not(.hidden)');
@@ -123,16 +124,6 @@ $(document).ready(function () {
         return true;
     });
 
-    var defaultCategray = $('.shop-categray')[0];
-    toggleSelectOnCategray(defaultCategray, true);
-    toggleProductOnCategrayClick(defaultCategray);
-
-
-    shoppingCart.loadShoppingCart();
-    shoppingCart.updateTotal();
-
-    $('#submit_shop').removeAttr('disabled');
-
     $('.js-product-item' ).click(function(e){
         e.stopPropagation();
         shoppingCart.countChangeAddHanlder($('.countChangeActionAdd',this));
@@ -147,6 +138,17 @@ $(document).ready(function () {
         e.stopPropagation();
         shoppingCart.countChangeMinusHanlder(this);
     });
+
+    // default behavior
+
+    var defaultCategray = $('.shop-categray')[0];
+    toggleSelectOnCategray(defaultCategray, true);
+    toggleProductOnCategrayClick(defaultCategray);
+
+    shoppingCart.loadShoppingCart();
+    shoppingCart.updateTotal();
+
+    $('#submit_shop').removeAttr('disabled');
 
 });
 

@@ -35,10 +35,11 @@ $(document).ready(function () {
             });
     }
 
-    $(document).on("vclick", ".useThisAddress", function () {
+    $(".useThisAddress").click(function () {
         updateDefaultAddress();
     });
 
+    // load snapshot
     $('.order-item').each(function (idx, item) {
 
         var string = $('.order-snapshots-string', item).val();

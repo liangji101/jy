@@ -37,7 +37,7 @@ $(document).ready(function () {
             });
     }
 
-    $(document).on("vclick", ".useThisAddress", function () {
+    $(".useThisAddress").click(function () {
         updateDefaultAddress();
     });
 

@@ -4,11 +4,11 @@ $(document).ready(function () {
         $(input).css({'border': 'solid 1px red'});
     }
 
-    $(document).on("vclick", ".addressItem", function () {
+    $(".addressItem").click( function () {
         document.location.href = '../address?shop_id=' + getParameterByName('shop_id');
     });
 
-    $(document).on("click", "#submit_order", function () {
+    $("#submit_order").click( function () {
 
         var items = [];
         for (var idx = 0; idx < shoppingCart.shoppingItemsArray.length; idx++) {
@@ -43,19 +43,15 @@ $(document).ready(function () {
         if (addressId) {
             $('#order_address_id').val(addressId);
         }
-
         if (address) {
             $('#order_address').val(address);
         }
-
         if (phone) {
             $('#order_phone').val(phone);
         }
-
         if (remark) {
             $('#order_remarks').val($('#orderRemarks').val());
         }
-
     }
 
 
@@ -66,25 +62,16 @@ $(document).ready(function () {
             warningOfNeccessInput($('#newOrderAddress'));
             return false;
         }
-
         // exist the element and have no value
         if ($('#newOrderPhone') && $('#newOrderPhone').length && !$('#newOrderPhone').val()) {
             warningOfNeccessInput($('#newOrderPhone'));
             return false;
         }
-
         var values = $(this).serialize();
-
         $('#submit_order').attr('disabled', "true");
-
         shoppingCart.empty();
-
         return true;
     });
-
-    shoppingCart.loadShoppingCart();
-    shoppingCart.updateTotal();
-    $('#submit_order').removeAttr('disabled');
 
     $('.countChangeActionAdd').click(function (e) {
         e.stopPropagation();
@@ -99,6 +86,12 @@ $(document).ready(function () {
     $(window).bind('beforeunload', function () {
         shoppingCart.saveShoppingCart();
     });
+
+
+    shoppingCart.loadShoppingCart();
+    shoppingCart.updateTotal();
+    $('#submit_order').removeAttr('disabled');
+
 
 });
 

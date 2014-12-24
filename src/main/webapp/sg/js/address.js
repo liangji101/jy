@@ -31,22 +31,22 @@ $(document).ready(function () {
         $('.js-address-checked', addressItem).addClass('fa-check');
     }
 
-    $(document).on("vclick", ".addressListSelection .addressItem", function () {
+    $(".addressListSelection .addressItem").click( function () {
 
         switchToDefaultAddress(this);
 
     });
 
-    $(document).on("vclick", " .addressListSelection .useNewAddress", function () {
+    $(" .addressListSelection .useNewAddress").click(function () {
         $('.addNewAddressIntoList ').slideDown();
         $('.useNewAddress').hide();
     });
-    $(document).on("vclick", ".addNewAddressIntoList .cancelNewAddress", function () {
+    $(".addNewAddressIntoList .cancelNewAddress").click(function () {
         $('.addNewAddressIntoList').slideUp();
         $('.useNewAddress').show();
     });
 
-    $(document).on("vclick", ".addNewAddressIntoList .confirmNewAddress", function () {
+    $(".addNewAddressIntoList .confirmNewAddress").click(function () {
         // append to
         var addr = $('.addNewAddressIntoList .addOrderAddress').val();
         if (!addr) {

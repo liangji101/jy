@@ -38,7 +38,7 @@
     </form>
 </div>
 
-<div class="mainContainer mainContainer-hasHeader mainContainer-hasFooter">
+<div class="mainContainer mainContainer-hasHeader mainContainer-hasFooter" style="overflow: hidden">
     <div class="leftContainer">
         <div class="leftContent">
             <div class="shop-categray-list" style="width: 90%">
@@ -95,7 +95,7 @@
                     #end
                 </ul>
                 #end
-                <div style="text-align: center;height: 20px;" class="loadingMore">
+                <div style="text-align: center;height: 20px;padding: 15px" class="loadingMore">
                     <i class="">点击加载更多</i>
                 </div>
             </div>

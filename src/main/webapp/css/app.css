@@ -292,6 +292,7 @@ body {
 
 .ui-mobile .ui-page {
     min-height: 100%;
+    overflow: hidden;
 }
 
 .shop-container {
@@ -469,7 +470,7 @@ body {
 
 .shop-product-list {
     background-color: #ffffff;
-    padding-bottom: 140px;
+    padding-bottom: 120px;
 }
 
 .shop-product-categray-list {
