@@ -1,8 +1,10 @@
 package com.renren.ntc.sg.interceptors;
 
-import com.alibaba.fastjson.JSONObject;
+import com.renren.ntc.sg.annotations.AuthorizeCheck;
 import com.renren.ntc.sg.annotations.LoginRequired;
 import com.renren.ntc.sg.bean.RegistUser;
+import com.renren.ntc.sg.bean.Shop;
+import com.renren.ntc.sg.biz.dao.ShopDAO;
 import com.renren.ntc.sg.interceptors.access.RegistHostHolder;
 import com.renren.ntc.sg.service.LoggerUtils;
 import com.renren.ntc.sg.util.Constants;
@@ -19,7 +21,7 @@ import java.util.List;
 
 /**
 *
-* 标注:{@link LoginRequiredInterceptor}
+* 标注:{@link com.renren.ntc.sg.interceptors.AuthorizeInterceptor}
 *
 * @author [yunming.zhu@opi-corp.com]
 *
@@ -27,25 +29,28 @@ import java.util.List;
 *
 */
 
-public class LoginRequiredInterceptor extends ControllerInterceptorAdapter {
+public class AuthorizeInterceptor extends ControllerInterceptorAdapter {
 
 	@Autowired
 	private RegistHostHolder hostHolder;
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginRequiredInterceptor.class);
+
+    @Autowired
+    private ShopDAO shopDAO;
 
 
-	private static enum displayMode  {
-		page, popup, mobile, touch, iframe, hidden
-	};
 
-	public LoginRequiredInterceptor(){
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizeInterceptor.class);
+
+
+
+	public AuthorizeInterceptor(){
 		setPriority(1100);
 	}
 
 	@Override
 	public Class<? extends Annotation> getRequiredAnnotationClass() {
-		return LoginRequired.class;
+		return AuthorizeCheck.class;
 	}
 
 	@Override
@@ -58,14 +63,27 @@ public class LoginRequiredInterceptor extends ControllerInterceptorAdapter {
 
 	@Override
 	public Object before(Invocation inv) throws Exception {
-
         RegistUser user = hostHolder.getUser();
         if (user == null) {
             String origURL = SUtils.getResourceFullLocation(inv.getRequest());
             LoggerUtils.getInstance().log("the origURL is " + origURL);
+
             return "r:" + "/console/login?rf=r&domain="
                     + Constants.DOMAIN_URL + "&origURL="
                     + origURL;
+        }
+        String  shop_id = inv.getRequest().getParameter("shop_id");
+        long shopId = 0 ;
+        try {
+            shopId = Long.valueOf(shop_id) ;
+        }catch (Exception e ){
+                   e.printStackTrace();
+        }
+        Shop shop = shopDAO.getShop(shopId) ;
+        if (shop.getOwner_user_id() != user.getId()){
+          inv.addModel("msg", "没有权限");
+           return "r:" + "/console/login?rf=r&domain="
+                + Constants.DOMAIN_URL;
         }
         return true;
 	}

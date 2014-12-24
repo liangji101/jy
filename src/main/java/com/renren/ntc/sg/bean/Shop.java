@@ -13,6 +13,8 @@ public class Shop {
 
 
     private  long id ;
+
+    private long owner_user_id = 0;
     private  String name = "";
     private  String  shop_url  = "";
     private Date create_time ;
@@ -23,6 +25,16 @@ public class Shop {
      * 
      */
     private  double  lng = 0;
+
+    public long getOwner_user_id() {
+        return owner_user_id;
+    }
+
+    public void setOwner_user_id(long owner_user_id) {
+        this.owner_user_id = owner_user_id;
+    }
+
+
     public double getLng() {
 		return lng;
 	}
