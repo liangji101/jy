@@ -1,5 +1,7 @@
 $(document).ready(function () {
+
     var overscroll = function (el) {
+        if(!el)return;
         el.addEventListener('touchstart', function () {
             var top = el.scrollTop
                 , totalScroll = el.scrollHeight
@@ -25,7 +27,9 @@ $(document).ready(function () {
         })
     }
 
-overscroll(document.querySelector('.scroll'));
+    $('.scroll').each(function(idx,item){
+        overscroll(this);
+    })
 
 document.body.addEventListener('touchmove', function (evt) {
     //In this case, the default behavior is scrolling the body, which
