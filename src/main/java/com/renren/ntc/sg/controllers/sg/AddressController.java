@@ -35,7 +35,7 @@ public class AddressController {
      */
     @Get("")
     @Post ("")
-    public String get (Invocation inv, @Param("shop_id") long shop_id ){
+    public String get (Invocation inv, @Param("shop_id") long shop_id , @Param("origUrl") long origUrl  ){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             return "error";
@@ -44,6 +44,7 @@ public class AddressController {
 
         List<Address> ls  = addressService.getAddresses(u.getId());
         inv.addModel("addressls",ls);
+        inv.addModel("origUrl",origUrl);
         return "address" ;
     }
 
