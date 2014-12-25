@@ -1,6 +1,8 @@
 
 html {
-    height: 100%
+    height: 100%;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }
 
 body {
@@ -58,12 +60,10 @@ body {
 .mainContainer {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
     bottom: 0;
-    overflow: auto;
     left: 0;
     right: 0;
+    overflow: auto;
     background: #fff;
     -webkit-overflow-scrolling: touch;
 }
@@ -96,16 +96,16 @@ body {
 
 
 .rightContainer {
-    width: auto;
+    width: 73%;
     position: absolute;
     height: 100%;
+    top: 0;
     left: 27%;
-    right: -10px;
     overflow: hidden;
 }
 
 .rightContent {
-    width: 100%;
+    width: 105%;
     height: 100%;
     overflow: auto;
 }
@@ -231,14 +231,12 @@ body {
 }
 
 .searchBar {
-    width: 100%;
+    width: auto;
     text-align: center;
-    position: fixed;
     background-color: #f8f8f8;
-    top: 0;
     height: 46px;
     z-index: 100;
-    padding: 0px;
+    padding: 3px 5px;
 }
 
 .searchBar .ui-input-search {
@@ -292,6 +290,7 @@ body {
 
 .ui-mobile .ui-page {
     min-height: 100%;
+    overflow: hidden;
 }
 
 .shop-container {
@@ -469,7 +468,7 @@ body {
 
 .shop-product-list {
     background-color: #ffffff;
-    padding-bottom: 140px;
+    padding-bottom: 10px;
 }
 
 .shop-product-categray-list {
@@ -480,7 +479,7 @@ body {
 .shop-categray-list {
     background-color: #f8f8f8;
     border-left: solid 1px #7c7d80;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
 }
 
 .shop-categray {
@@ -537,6 +536,15 @@ body {
 .base-font {
     font-size: 10px;
     font-weight: normal;
+}
+
+.rmbFont{
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.rmbSpan{
+    margin-right: 0px;
 }
 
 .addressDefault {

@@ -37,9 +37,13 @@ $(document).ready(function () {
             });
     }
 
-    $(document).on("vclick", ".useThisAddress", function () {
+    $(".useThisAddress").click(function () {
         updateDefaultAddress();
     });
 
     $('.useThisAddress').removeAttr('disabled');
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
 });

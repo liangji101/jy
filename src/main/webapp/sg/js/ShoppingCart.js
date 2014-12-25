@@ -250,6 +250,9 @@
 
         $('.js-product-item-quantity',prodcut).text(qauntity);
 
+        $(ele).siblings(".product_stepper_count").removeClass('hidden');
+        $(ele).siblings(".product_stepper_minus").removeClass('hidden');
+
         shoppingCart.addNewItem({
             'quantity': qauntity,
             'id': id,
@@ -257,14 +260,10 @@
             'name':name
         });
 
-        $('.countChangeAction',prodcut).removeClass('hidden');
-
         shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'add');
 
         shoppingCart.updateTotal();
 
-        $(ele).siblings( ".product_stepper_count").removeClass('hidden');
-        $(ele).siblings( ".product_stepper_minus").removeClass('hidden');
     }
 
     shoppingCart.countChangeMinusHanlder = function(ele){
@@ -280,16 +279,18 @@
 
         $('.js-product-item-quantity',prodcut).text(qauntity);
 
+        if(qauntity == 0 ){
+            $(ele).siblings(".product_stepper_count").addClass('hidden');
+            $(ele).addClass('hidden');
+        }
+
         shoppingCart.decrementShoppingItemById(id);
 
         shoppingCart.updateCategrayDictOnProductCountChange(prodcut,id,qauntity,'minus');
 
         shoppingCart.updateTotal();
 
-        if(qauntity == 0 ){
-            $(ele).siblings(".product_stepper_count").addClass('hidden');
-            $(ele).addClass('hidden');
-        }
+
     }
 
     shoppingCart.countChangeResetHanlder = function(ele){

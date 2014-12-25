@@ -4,9 +4,6 @@ $(document).ready(function () {
         shoppingCart.saveShoppingCart();
     });
 
-    shoppingCart.loadShoppingCart();
-    shoppingCart.updateTotal();
-
     $('.countChangeActionAdd' ).click(function(){
         shoppingCart.countChangeAddHanlder(this);
     });
@@ -56,4 +53,12 @@ $(document).ready(function () {
 
         return false;
     });
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
+
+    shoppingCart.loadShoppingCart();
+    shoppingCart.updateTotal();
+
 });
