@@ -3,6 +3,7 @@ package com.renren.ntc.sg.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.renren.ntc.sg.bean.Order;
+import com.renren.ntc.sg.bean.OrderInfo;
 import com.renren.ntc.sg.util.Constants;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Service
 public class PrinterService {
 
-    public  String getString(List<Order> ol )   {
+    public  String getString(List<Order> ol)   {
            JSONArray jarr = new JSONArray();
            for (Order o : ol){
                JSONObject jb = new JSONObject();
@@ -24,6 +25,95 @@ public class PrinterService {
                jarr.add(jb);
            }
           return jarr.toJSONString();
+    }
+
+
+    public  String getString2(List<OrderInfo> ol )   {
+        JSONArray jarr = new JSONArray();
+        for (OrderInfo o : ol){
+            JSONObject jb = new JSONObject();
+            jb.put("order_id",o.getOrder_id());
+            jb.put("info",getString(o));
+            jb.put("create_time",o.getCreate_time());
+            jarr.add(jb);
+        }
+        return jarr.toJSONString();
+    }
+
+    private static String getAddress(String address) {
+        int index = address.indexOf("#address#");
+        int index2 = address.indexOf("#orderDetail#");
+        if (-1 == index || -1 == index) {
+            return "";
+
+        }
+        return address.substring(index + 10, index2);
+    }
+
+    private static String[] getOrders(String address) {
+
+        int index = address.indexOf("#orderDetail#");
+        if (-1 == index) {
+            return new String[0];
+
+        }
+        String order = address.substring(index + 14, address.length());
+        String[] ords = order.split("r\\|");
+        return ords;
+    }
+
+    public  String getString(OrderInfo o) {
+        String order_id  = o.getOrder_id();
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("\n\n\n");
+
+        // esc/pos命令: ESC ! n
+        // 设置字体为: bold, 2倍高，2倍宽
+        sb.append((char)27);
+        sb.append((char)33);
+        //0b00111000
+        sb.append((char)56);
+
+        // esc/pos命令: ESC a 1
+        // 居中对齐
+        sb.append((char)27);
+        sb.append((char)97);
+        sb.append((char)1);
+        sb.append("乐邻便利店\n");
+
+        // esc/pos命令: ESC ! n
+        // 设置字体为正常字体
+        sb.append((char)27);
+        sb.append((char)33) ;
+        sb.append((char)0);
+        sb.append((char)27);
+        sb.append((char)97);
+        sb.append((char)0);
+        sb.append("================================\n");
+        sb.append("订单号 ： " + order_id +  "\n");
+        sb.append("下单时间 ： " + time(o.getCreate_time())  +  "\n");
+        sb.append("================================\n");
+        sb.append(getAddress(o.getInfo())  + "\n");
+        sb.append("================================\n");
+        sb.append("商品名称             数量   价格\n");
+        String[] ods = getOrders(o.getInfo());
+        int sum = 0;
+        for (String od : ods) {
+            int a = getItem(od);
+            sum += a;
+            sb.append(fomat(od));
+            sb.append(Constants.BR);
+        }
+        sb.append("================================\n");
+
+        sb.append((char)27);
+        sb.append((char)33);
+        //0b00111000
+        sb.append((char)56);
+        sb.append("总价       :"+ (sum/100) +"\n");
+        sb.append("\n\n\n");
+        return sb.toString();
     }
 
     public  String getString(Order o) {
@@ -166,6 +256,51 @@ public class PrinterService {
         }
         return a;
 
+    }
+
+    private static int getItem(String ob) {
+        String[] obs = ob.split("\\*\\|");
+        String sum = obs[obs.length - 1];
+        int a = 0;
+        try {
+            Float f = Float.valueOf(sum);
+            a = (int) ((f * 100) / 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
+
+    }
+
+    private  String fomat(String od) {
+        System.out.println("Print " + od);
+        StringBuffer sb = new StringBuffer();
+        String[] ss = od.split("\\*\\|");
+        int d = 0;
+        for (String s : ss) {
+            sb.append(s);
+            if (0 == d) {
+                String sbb = sb.toString();
+                int a = 22 - length(s);
+                if (a <= 0) {
+                    sb.append(" ");
+                } else {
+                    for (int i = 0; i < a; i++)
+                        sb.append(" ");
+                }
+            } else if (d == 1) {
+                String sbb = sb.toString();
+                int a = 6 - s.length();
+                if (a < 0 || length(sbb) > 25) {
+                    sb.append(" ");
+                } else {
+                    for (int i = 0; i < a; i++)
+                        sb.append(" ");
+                }
+            }
+            d++;
+        }
+        return sb.toString();
     }
 
 

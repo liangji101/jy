@@ -31,6 +31,10 @@ public class Item4V {
     private  long   shop_id  = 0;
     private  String  name   = "";
 
+
+
+    private  long  status = 0  ;
+
     public String getInfo() {
         return info;
     }
@@ -53,7 +57,13 @@ public class Item4V {
     private  Date  create_time  ;
     private  Date  update_time  ;
 
+    public long getStatus() {
+        return status;
+    }
 
+    public void setStatus(long status) {
+        this.status = status;
+    }
     public String getPic_url() {
         return pic_url;
     }

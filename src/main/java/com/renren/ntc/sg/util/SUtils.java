@@ -91,14 +91,7 @@ public class SUtils {
         return jarry;
     }
 
-//    private static String del(String info) {
-//        info = info.replaceAll("</tr>","") ;
-//        info = info.replaceAll("</td>","") ;
-//        info = info.replaceAll("</td>","") ;
-//        info = info.replaceAll("<tr>","") ;
-//        info = info.replaceAll("  ","");
-//        return info;
-//    }
+
 
     public static String getOrderId() {
 

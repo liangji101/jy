@@ -43,6 +43,9 @@ public class PrinterV2Controller {
     public OrderService orderService ;
 
     @Autowired
+    public SWPOrderDAO swpOrderDAO;
+
+    @Autowired
     public PrinterService printerService ;
 
     @Autowired
@@ -52,7 +55,7 @@ public class PrinterV2Controller {
     public static String SMSURL = "http://v.juhe.cn/sms/send";
     public static String APPKEY = "99209217f5a5a1ed2416e5e6d2af87fd";
     public static String TID = "1015";
-
+    public  boolean  nn = true;
     /**
      * 用于处理用户喜欢和不喜欢的ajax请求，成功返回1，失败返回0
      *
@@ -61,6 +64,7 @@ public class PrinterV2Controller {
     @Get("get")
     @Post("get")
     public String get(Invocation inv, @Param("pid") long pid, @Param("token") String token) {
+
         // 验证
         if (0 > pid) {
             LoggerUtils.getInstance().log(String.format("pid illegal error param  %d ,%s", pid, token));
@@ -74,6 +78,21 @@ public class PrinterV2Controller {
         if (!dev.getToken().equals(token)) {
             LoggerUtils.getInstance().log(String.format("token illegal error param  %d ,%s ,%s ", pid, token, dev.getToken()));
             return "@" + Constants.PARATERERROR;
+        }
+
+        // abc 测试用
+        if(!nn){
+            nn = true;
+            List<OrderInfo> orderinfo = swpOrderDAO.getOrder2Print();
+            JSONObject jb = new JSONObject();
+            jb.put("code", 0);
+            jb.put("data",printerService.getString2(orderinfo));
+            deviceDAO.update(pid, "looping");
+
+            return "@" + jb.toJSONString();
+
+        } else{
+            nn = false;
         }
 
         List<Order> orderls = ordersDAO.getOrder2Print(dev.getShop_id());
@@ -226,6 +245,20 @@ public class PrinterV2Controller {
         }
         String order = address.substring(index + 14, address.length());
         return order;
+    }
+
+    private static int getItem(String ob) {
+        String[] obs = ob.split("\\*\\|");
+        String sum = obs[obs.length - 1];
+        int a = 0;
+        try {
+            Float f = Float.valueOf(sum);
+            a = (int) ((f * 100) / 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
+
     }
 
     private static String forURL(String url, String appkey, String tid, String mobile, String value) {
