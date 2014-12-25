@@ -51,15 +51,6 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.7.3" level="project" />
     <orderEntry type="library" name="Maven: commons-configuration:commons-configuration:1.9" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.5-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.5-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:ooxml-schemas:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi-contrib:3.5-FINAL" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.poi:poi-scratchpad:3.5-FINAL" level="project" />
   </component>
 </module>
 

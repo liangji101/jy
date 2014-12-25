@@ -12,6 +12,7 @@
     <script src="../js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     <script src="../js/fastclick.min.js" type="text/javascript"></script>
 
+    <script src="../sg/js/utils.js" type="text/javascript"></script>
     <script src="../sg/js/prevent-scroll.js" type="text/javascript"></script>
     <script src="../sg/js/ShoppingCart.js" type="text/javascript"></script>
     <script src="../sg/js/address.js" type="text/javascript"></script>
@@ -26,6 +27,7 @@
     <script src="/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     <script src="/js/fastclick.min.js" type="text/javascript"></script>
 
+    <script src="/sg/js/utils.js" type="text/javascript"></script>
     <script src="/sg/js/prevent-scroll.js" type="text/javascript"></script>
     <script src="/sg/js/ShoppingCart.js" type="text/javascript"></script>
     <script src="/sg/js/address.js" type="text/javascript"></script>
@@ -34,6 +36,7 @@
 </head>
 <body>
 <div class="mainContainer scroll">
+
     <div class="shop-container" style="margin-bottom : 60px;">
 
         <div id="addressSpinner" class="searchSpinner hidden">
@@ -42,6 +45,7 @@
             </div>
         </div>
 
+        <input type="hidden" id="addressListOrigURL" value="$origUrl">
 
         <div class="" style="overflow: hidden;">
             <div class="">
@@ -51,10 +55,12 @@
                     <div class="addressItem addressCandidate addressSelected">
                         <div style="float: left">
                             <div class="addressItem-address" data-default-address="$addr.getAddress()"><span
-                                    class="addressTitle">收货地址:</span><span class="addressAddrValue">$addr.getAddress()</span>
+                                    class="addressTitle">收货地址:</span><span
+                                    class="addressAddrValue">$addr.getAddress()</span>
                             </div>
                             <div class="addressItem-phone" data-default-phone="$addr.getPhone()"><span
-                                    class="addressTitle">联系电话:</span><span class="addressPhoneValue">$addr.getPhone()</span>
+                                    class="addressTitle">联系电话:</span><span
+                                    class="addressPhoneValue">$addr.getPhone()</span>
                             </div>
                             <input class="addressItem-id" type="hidden" value="$addr.getId()"/>
                         </div>
@@ -68,10 +74,12 @@
                     <div class="addressItem addressCandidate">
                         <div style="float: left">
                             <div class="addressItem-address" data-default-address="$addr.getAddress()"><span
-                                    class="addressTitle">收货地址:</span><span class="addressAddrValue">$addr.getAddress()</span>
+                                    class="addressTitle">收货地址:</span><span
+                                    class="addressAddrValue">$addr.getAddress()</span>
                             </div>
                             <div class="addressItem-phone" data-default-phone="$addr.getPhone()"><span
-                                    class="addressTitle">联系电话:</span><span class="addressPhoneValue">$addr.getPhone()</span>
+                                    class="addressTitle">联系电话:</span><span
+                                    class="addressPhoneValue">$addr.getPhone()</span>
                             </div>
                             <input class="addressItem-id" type="hidden" value="$addr.getId()"/>
                         </div>
@@ -84,10 +92,14 @@
                     #end
 
                     #end
+
                     <div style="padding: 15px 9px;display: none"
                          class="addNewAddressIntoList js-addAddress">
-                        <input class="addOrderAddress" type="text" placeholder="收货地址:" value="">
-                        <input class="addOrderPhone" type="text" placeholder="联系电话:" value="">
+
+                        <div style="border-bottom: solid 1px lightgray;padding: 0px 0px 9px 0px">
+                            <input class="addOrderAddress" type="text" placeholder="收货地址:" value="">
+                            <input class="addOrderPhone" type="text" placeholder="联系电话:" value="">
+                        </div>
 
                         <div style="text-align: center;padding-top: 20px;display: inline-block;width: 100%">
                             <div class="newAddressButton confirmNewAddress" style="">确定</div>
@@ -97,16 +109,6 @@
                     </div>
 
                     <div style="text-align: center;padding-top: 30px;display: inline-block;width: 100%;">
-
-                        <div class="addressButton" style="display: inline-block;margin: 0">
-                            <form id="shopConfirm" action="shopCar/confirm?shop_id=" method="post"
-                                  data-ajax="false" style="margin: 0em">
-                                <!--<input type="hidden" id="form_shop_id" name="shop_id" value=''/>-->
-                                <input type="hidden" id="form_items" name="items" value=''/>
-
-                                <div class="addressButton useThisAddress">使用选中地址</div>
-                            </form>
-                        </div>
                         <div class="addressButton useNewAddress">使用其他地址</div>
                     </div>
                 </div>

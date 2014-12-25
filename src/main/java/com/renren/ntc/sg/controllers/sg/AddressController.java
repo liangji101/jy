@@ -35,7 +35,7 @@ public class AddressController {
      */
     @Get("")
     @Post ("")
-    public String get (Invocation inv, @Param("shop_id") long shop_id , @Param("origUrl") long origUrl  ){
+    public String get (Invocation inv, @Param("shop_id") long shop_id , @Param("origUrl") String origUrl  ){
         User u = ntcHostHolder.getUser();
         if ( null ==u ||  0 >= u.getId()){
             return "error";

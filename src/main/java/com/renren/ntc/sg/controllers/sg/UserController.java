@@ -16,6 +16,7 @@ import net.paoding.rose.web.Invocation;
 import net.paoding.rose.web.annotation.Param;
 import net.paoding.rose.web.annotation.Path;
 import net.paoding.rose.web.annotation.rest.Get;
+import net.paoding.rose.web.annotation.rest.Post;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -53,6 +54,7 @@ public class UserController {
     // 判断地址是否Ok
 
     @Get("profile")
+    @Post("profile")
     public String save(Invocation inv,@Param("shop_id") long shop_id ) {
 
         User u = holder.getUser();

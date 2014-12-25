@@ -28,12 +28,11 @@ $(document).ready(function () {
         var q = $('.searchBar-input', this).val();
         var destURL = location.origin + location.pathname.replace(/qvm/, 'query') + location.search.replace(/&key=[^&]*/g, '&key=' + q);
 
-        $('#searchSpinner').removeClass('hidden');
+        addSpinner();
 
         $.getJSON(destURL, function (result) {
 
-            $('#searchSpinner').addClass('hidden');
-
+            removeSpinner();
             // update search result
             if (!result || !result.data || !result.data.length)return;
 

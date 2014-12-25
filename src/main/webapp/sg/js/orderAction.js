@@ -1,11 +1,9 @@
 $(document).ready(function () {
 
-    function warningOfNeccessInput(input) {
-        $(input).css({'border': 'solid 1px red'});
-    }
-
     $(".addressItem").click( function () {
-        document.location.href = '../address?shop_id=' + getParameterByName('shop_id');
+        makePost('../address?shop_id='+getParameterByName('shop_id'),{
+            'origUrl':'shopCar/confirm?shop_id=' + getParameterByName('shop_id')
+        })
     });
 
     $("#submit_order").click( function () {

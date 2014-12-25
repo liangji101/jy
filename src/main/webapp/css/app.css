@@ -3,6 +3,7 @@ html {
     height: 100%;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
+    background-color: #fff;
 }
 
 body {
@@ -606,6 +607,16 @@ body {
     padding: 1em;
 }
 
+
+.addNewAddressConfirm {
+
+    text-shadow: none;
+    font-size: 18px;
+    display: inline-block;
+    padding: 10px 20px 10px 20px;
+
+}
+
 .addressTitle {
     margin-right: 10px;
 }
@@ -626,7 +637,7 @@ body {
 }
 
 .addNewAddressIntoList {
-    border-bottom: solid 1px lightgray;
+
 }
 
 .swithDefaultAddress {
@@ -644,6 +655,9 @@ body {
     border-radius: 2px;
 }
 
+. address-expand{
+    font-size: 30px;
+}
 .useNewAddress {
 
     text-shadow: none;

@@ -1,47 +1,60 @@
 $(document).ready(function () {
 
-    function updateDefaultAddress(){
-        var selected = $('.addressListSelection .addressSelected').first();
+    function addNewAddress() {
 
-        if(!selected)alert('没有选择任何地址');
+        // exist the element and have no value
+        if ($('#newOrderAddress') && $('#newOrderAddress').length && !$('#newOrderAddress').val()) {
+            warningOfNeccessInput($('#newOrderAddress'));
+            return false;
+        }
+        // exist the element and have no value
+        if ($('#newOrderPhone') && $('#newOrderPhone').length && !$('#newOrderPhone').val()) {
+            warningOfNeccessInput($('#newOrderPhone'));
+            return false;
+        }
 
-        var address = $('.addressItem-address', selected).data('default-address'),
-            phone = $('.addressItem-phone', selected).data('default-phone'),
-            id = $('.addressItem-id', selected).val();
+        var address = $('#newOrderAddress').val(),
+            phone = $('#newOrderPhone').val();
 
-        $('#addressSpinner').removeClass('hidden');
-        $.getJSON('address/default',{ 'address':  address,
-                'phone':phone,
-                'address_id': id},
-            function(status){
-                $('#addressSpinner').addClass('hidden');
+        addSpinner();
 
-                if(status.code == 0){
+        $.getJSON('../address/default',
+            { 'shop_id': getParameterByName('shop_id'),
+                'address': address,
+                'phone': phone,
+                'address_id': ''},
+            function (status) {
 
-                    $('#form_shop_id').val(getParameterByName('shop_id'));
-                    $('#form_items').val(shoppingCart.getItemString());
+                removeSpinner();
 
-                    var oldaddr = $('#shopConfirm').attr('action');
-                    $('#shopConfirm').attr('action',oldaddr.replace(/shop_id=*/,'shop_id='+getParameterByName('shop_id')));
+                if (status.code == 0) {
 
-                    $('.useThisAddress').attr('disabled','disabled');
+                    document.location.reload();
 
-                    var data = $('#shopConfirm').serialize();
-                    $('#shopConfirm').submit();
-
-                }else{
-                    alert('更改默认地址失败，请再次尝试');
+                } else {
+                    alert('添加新地址，请再次尝试');
                 }
             });
     }
 
-    $(".useThisAddress").click(function () {
-        updateDefaultAddress();
+    $(".addNewAddressConfirm").click(function () {
+        addNewAddress();
     });
 
-    $(function() {
+    $(".addressItem").click(function () {
+        makePost('../address?shop_id=' + getParameterByName('shop_id'), {
+            'origUrl': 'user/profile?shop_id='+getParameterByName('shop_id')
+        })
+    });
+
+    $('.backToShop').click(function(){
+        makeGo(' ../shop?shop_id=' + getParameterByName('shop_id'));
+    });
+
+    $(function () {
         FastClick.attach(document.body);
     });
+
     // load snapshot
     $('.order-item').each(function (idx, item) {
 
@@ -49,29 +62,29 @@ $(document).ready(function () {
         try {
             var orders = JSON.parse(string);
             if (orders && Array.isArray(orders)) {
-                var totalCount = 0,totalPrice = 0.0;
+                var totalCount = 0, totalPrice = 0.0;
                 $(orders).each(function (o_indx, order) {
 
                     totalCount += parseInt(order.count);
                     totalPrice += parseFloat(order.price || 0) * parseInt(order.count);
 
-                        $('.order-snapshots', item).append(
+                    $('.order-snapshots', item).append(
 
                         '<div style="display: inline-block;width: 90%">' +
                             '<div style="float: left">' +
                             order.name +
                             '   </div>' +
                             '   <div style="float: right">' +
-                            '       <span>￥</span> ' + parseFloat(order.price ? order.price/100.0 : 0.0) + '<span style="padding: 0.2em">X</span>' + order.count +
+                            '       <span>￥</span> ' + parseFloat(order.price ? order.price / 100.0 : 0.0) + '<span style="padding: 0.2em">X</span>' + order.count +
                             '   </div>' +
                             ' </div>'
-                     );
+                    );
                 });
                 $('.order-snapshots', item).append(
 
                     '<div style="display: block;width: 90%;text-align: right;margin-top: 20px">' +
                         '  共计: ' + totalCount +
-                        ' 件 <span style="color: red">￥ ' +  parseFloat(totalPrice/100.0)  +
+                        ' 件 <span style="color: red">￥ ' + parseFloat(totalPrice / 100.0) +
                         '</span>' +
                         ' </div>');
             }

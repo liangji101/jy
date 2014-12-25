@@ -2,46 +2,99 @@ $(document).ready(function () {
 
     shoppingCart.loadShoppingCart();
 
-    function updateDefaultAddress(){
-        var selected = $('.addressListSelection .addressSelected').first();
+    $(" .addressListSelection .useNewAddress").click(function () {
+        $('.addNewAddressIntoList ').slideDown();
+        $('.useNewAddress').hide();
+    });
+    $(".addNewAddressIntoList .cancelNewAddress").click(function () {
+        $('.addNewAddressIntoList').slideUp();
+        $('.useNewAddress').show();
+    });
 
-        if(!selected)alert('没有选择任何地址');
+    $(".addNewAddressIntoList .confirmNewAddress").click(function () {
+        // append to
+        var addr = $('.addNewAddressIntoList .addOrderAddress').val();
+        if (!addr) {
+            warningOfNeccessInput($('.addNewAddressIntoList .addOrderAddress'));
+            return;
+        }
+        var phone = $('.addNewAddressIntoList .addOrderPhone').val();
+        if (!phone) {
+            warningOfNeccessInput($('.addNewAddressIntoList .addOrderPhone'));
+            return;
+        }
 
-        var address = $('.addressItem-address', selected).data('default-address'),
-            phone = $('.addressItem-phone', selected).data('default-phone'),
-            id = $('.addressItem-id', selected).val();
+        $('.addNewAddressIntoList').slideUp();
 
-        $('#addressSpinner').removeClass('hidden');
-        $.getJSON('address/default',{ 'address':  address,
+        var addressItem = $('.addressListSelection .addressItem').last().clone(true);
+
+        if (addressItem) {
+            $('.addressItem-address', addressItem).attr('data-default-address', addr);
+            $('.addressItem-phone', addressItem).attr('data-default-phone', phone);
+
+            $('.addressAddrValue', addressItem).text(addr);
+            $('.addressPhoneValue', addressItem).text(phone);
+
+            $('.addressItem-id', addressItem).val('');
+
+            $('.addressListSelection').prepend(addressItem);
+
+            switchToDefaultAddress(addressItem,addr,phone,'');
+
+        }
+
+        $('.useNewAddress').show();
+
+    });
+
+    function switchToDefaultAddress(addressItem,address,phone,id) {
+
+        // clear current default or selected
+        $('.addressListSelection .addressSelected').removeClass('addressSelected');
+        $('.addressListSelection .fa-check').removeClass('fa-check');
+
+        $(addressItem).addClass('addressSelected');
+        $('.js-address-checked', addressItem).addClass('fa-check');
+
+        addSpinner();
+
+        $.getJSON('address/default',
+            { 'shop_id': getParameterByName('shop_id'),
+                'address':  address,
                 'phone':phone,
                 'address_id': id},
             function(status){
-                $('#addressSpinner').addClass('hidden');
+
+                removeSpinner();
 
                 if(status.code == 0){
 
-                    $('#form_shop_id').val(getParameterByName('shop_id'));
-                    $('#form_items').val(shoppingCart.getItemString());
-
-                    var oldaddr = $('#shopConfirm').attr('action');
-                    $('#shopConfirm').attr('action',oldaddr.replace(/shop_id=*/,'shop_id='+getParameterByName('shop_id')));
-
-                    $('.useThisAddress').attr('disabled','disabled');
-
-                    var data = $('#shopConfirm').serialize();
-                    $('#shopConfirm').submit();
+                    var origURL = $('#addressListOrigURL').val();
+                    if(origURL && origURL.length > 0 && origURL.indexOf('$')!= 0){
+                        makePost(origURL,{'items':shoppingCart.getItemString(),
+                            'address':address,
+                            'phone':phone,
+                            'address_id':id});
+                    }else{
+                        makePost('user/profile?shop_id='+ getParameterByName('shop_id'),{});
+                    }
 
                 }else{
-                    alert('更改默认地址失败，请再次尝试');
+                    alert('添加新地址失败，请再次尝试');
                 }
             });
+
     }
 
-    $(".useThisAddress").click(function () {
-        updateDefaultAddress();
-    });
+    $(".addressListSelection .addressItem").click( function () {
 
-    $('.useThisAddress').removeAttr('disabled');
+        var addr = $('.addressItem-address', this).data('default-address');
+        var phone =$('.addressItem-phone', this).data('default-phone');
+        var id = $('.addressItem-id', this).val();
+
+        switchToDefaultAddress(this,addr,phone,id);
+
+    });
 
     $(function() {
         FastClick.attach(document.body);
