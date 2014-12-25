@@ -81,20 +81,20 @@ public class PrinterV2Controller {
         }
 
         // abc 测试用
-        if(!nn){
-            nn = true;
+        if(nn){
+            nn = false;
+            LoggerUtils.getInstance().log("use  old order ");
             List<OrderInfo> orderinfo = swpOrderDAO.getOrder2Print();
             JSONObject jb = new JSONObject();
             jb.put("code", 0);
             jb.put("data",printerService.getString2(orderinfo));
             deviceDAO.update(pid, "looping");
-
             return "@" + jb.toJSONString();
 
         } else{
-            nn = false;
+            nn = true;
         }
-
+        LoggerUtils.getInstance().log("use  new order ");
         List<Order> orderls = ordersDAO.getOrder2Print(dev.getShop_id());
         orderls = orderService.forV(orderls) ;
         deviceDAO.update(pid, "looping");
