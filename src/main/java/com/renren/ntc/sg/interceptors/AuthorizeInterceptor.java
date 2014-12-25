@@ -83,13 +83,13 @@ public class AuthorizeInterceptor extends ControllerInterceptorAdapter {
         Shop shop = shopDAO.getShop(shopId) ;
         if (null == shop){
             inv.addModel("msg", "未知错误，请重试");
-            return "r:" + "/console/error";
+            return  "error";
         }
         LoggerUtils.getInstance().log("shop owner id  "  +  shop.getOwner_user_id() + "user id  " +  user.getId());
         if (shop.getOwner_user_id() != user.getId()){
 
           inv.addModel("msg", "没有权限");
-          return "r:" + "/console/error";
+          return "error";
         }
         return true;
 	}
