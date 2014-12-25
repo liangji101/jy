@@ -97,7 +97,7 @@ public class ShopConsoleController {
                 return "shop";
             }
         }
-        List<Item> itemls = itemsDAO.getItems(SUtils.generTableName(shop_id),shop_id,category_id,from,offset);
+        List<Item> itemls = itemsDAO.getItemsWithZero(SUtils.generTableName(shop_id),shop_id,category_id,from,offset);
         if(from != 0){
            inv.addModel("previous_f", from - offset);
         }

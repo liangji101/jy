@@ -36,6 +36,8 @@ public class Item {
 
 
 
+    private  long  status  ;
+
     private int  category_id;
     private int  category_sub_id;
     private int  score;
@@ -51,6 +53,14 @@ public class Item {
     private  int  price_new;
     private  Date  create_time  ;
     private  Date  update_time  ;
+
+    public long getStatus() {
+        return status;
+    }
+
+    public void setStatus(long status) {
+        this.status = status;
+    }
 
     public String getSerialNo() {
         return serialNo;

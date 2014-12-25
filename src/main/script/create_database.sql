@@ -101,6 +101,7 @@ CREATE TABLE `shop_category` (
   `name` varchar(24) NOT NULL DEFAULT '' ,
   `category_id` int(11) NOT NULL DEFAULT 0 ,
   `category_sub_id` int(11) NOT NULL DEFAULT 0 ,
+  `status` tinyint(4) NOT NULL DEFAULT 0 ,
   `score` int(11) NOT NULL DEFAULT 0 ,
   `count` int(11) NOT NULL DEFAULT 0 ,
   `price` int(11) NOT NULL DEFAULT 0 ,
