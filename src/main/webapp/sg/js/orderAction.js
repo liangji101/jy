@@ -8,22 +8,17 @@ $(document).ready(function () {
 
     $("#submit_order").click( function () {
 
-        var items = [];
-        for (var idx = 0; idx < shoppingCart.shoppingItemsArray.length; idx++) {
-            items.push({'item_id': shoppingCart.shoppingItemsArray[idx].id, "count": shoppingCart.shoppingItemsArray[idx].quantity,
-                'price': shoppingCart.shoppingItemsArray[idx].price, 'name': shoppingCart.shoppingItemsArray[idx].name});
-        }
 
         if ($('.firstTimeAddAddress') && $('.firstTimeAddAddress').length) {
             // first time add address, no address ID
-            updateSubmitInfo(JSON.stringify(items),
+            updateSubmitInfo(shoppingCart.getItemString(),
                 '',
                 $('#newOrderAddress').val(),
                 $('#newOrderPhone').val(),
                 $('#orderRemarks').val());
         } else {
             // already have it, just use default message
-            updateSubmitInfo(JSON.stringify(items),
+            updateSubmitInfo(shoppingCart.getItemString(),
                 $('.addressDefault-id').val(),
                 $('.addressDefault-address').data('default-address'),
                 $('.addressDefault-phone').data('default-phone'),
