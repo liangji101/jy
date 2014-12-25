@@ -57,7 +57,7 @@ public interface ItemsDAO {
     public  List<Item> hot(@SQLParam("tableName") String tableName, long shop_id, int flag, int offset);
 
 
-    @SQL("select "+ FIELDS +" from  ##(:tableName)   where  shop_id=:2 and name like :3")
+    @SQL("select "+ FIELDS +" from  ##(:tableName)   where  shop_id=:2 and name like :3 limit 0 , 20")
     public  List<Item> search(@SQLParam("tableName") String tableName, long shop_id, String key);
 
 
