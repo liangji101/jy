@@ -12,7 +12,18 @@ $(document).ready(function () {
         shoppingCart.countChangeMinusHanlder(this);
     });
 
+    $(".searchBar-input").bind( "focus", function(event, ui) {
+        $('.search-overlay').removeClass('hidden');
+        $(this).textinput({ clearSearchButtonText: "取消"});
+    });
+
+    $(".searchBar-input").bind( "blur", function(event, ui) {
+        $('.search-overlay').addClass('hidden');
+    });
+
     $('#searchForm').submit(function () {
+
+        document.activeElement.blur(); //hide keyboard
 
         var q = $('.searchBar-input', this).val();
         var destURL = location.origin + location.pathname.replace(/qvm/, 'query') + location.search.replace(/&key=[^&]*/g, '&key=' + q);

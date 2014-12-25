@@ -53,6 +53,16 @@ $(document).ready(function () {
 
     });
 
+    $(".searchBar-input").bind( "focus", function(event, ui) {
+        $('.search-overlay').removeClass('hidden');
+        $(this).textinput({ clearSearchButtonText: "取消"});
+    });
+
+    $(".searchBar-input").bind( "blur", function(event, ui) {
+        $('.search-overlay').addClass('hidden');
+    });
+
+
     $(".loadingMore").click(function(){
 
         var me = this;
@@ -142,6 +152,11 @@ $(document).ready(function () {
 
     $(function() {
         FastClick.attach(document.body);
+    });
+
+    $(document).on( "mobileinit", function() {
+
+        $.mobile.textinput.prototype.options.clearSearchButtonText = "取消";
     });
 
     // default behavior
