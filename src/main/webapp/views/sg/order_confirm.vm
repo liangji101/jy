@@ -115,15 +115,22 @@
                     </div>
                 </li>
                 #end
+            </ul>
 
-                <li style="padding: 10px 0px">
+            <ul class="no-item-hint hidden" style="margin: 0.0em; padding:0px 9px;text-align: center;">
+                <div style="font-size: 14px;padding-top: 50px;padding-bottom: 50px;">
+                    点击左上返回，重新下单
+                </div>
+            </ul>
+
+            <ul class="remarks" style="margin-top: 1.0em; padding:0px 9px;">
+                <li style="padding: 0px 0px">
                     <input id="orderRemarks" type="text" placeholder="给卖家留言"
                            style="background-color: lightgray">
 
                     <div style="color: #808080">付款方式:<span>货到付款</span></div>
                 </li>
             </ul>
-
         </div>
     </div>
 </div>

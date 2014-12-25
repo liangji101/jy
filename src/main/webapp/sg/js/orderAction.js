@@ -78,7 +78,12 @@ $(document).ready(function () {
 
     $('.countChangeActionMinus').click(function (e) {
         e.stopPropagation();
-        shoppingCart.countChangeMinusHanlder(this);
+        shoppingCart.countChangeMinusHanlder(this,{'deleteItemWhenMinusToZero':true});
+
+        if($(".js-product-item").length == 0){
+           $('.no-item-hint').removeClass('hidden');
+            $('.remarks').addClass('hidden');
+        }
     });
 
     $(window).bind('beforeunload', function () {
