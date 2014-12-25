@@ -125,7 +125,13 @@ public class PrinterV2Controller {
         }
         int r = 0;
         if ("true".equals(re)) {
-            r = ordersDAO.update(2, orderId);
+            // AB 测试
+            if (orderId.startsWith("C")){
+                r = ordersDAO.update(2, orderId);
+            }else{
+                r = swpOrderDAO.update(3, orderId);
+            }
+
         }
         if (r != 1) {
             LoggerUtils.getInstance().log(String.format("update order %s  pid  %d  token %s", orderId, pid, token));
